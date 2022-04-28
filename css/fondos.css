@@ -30,6 +30,15 @@
     background-position: center;
 }
 
+#fondoRegistroU{
+    background-image: url("https://images.pexels.com/photos/3434523/pexels-photo-3434523.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
+    width: 100%;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
 #fondoRegistroR{
     background-image: url("https://images.pexels.com/photos/7706593/pexels-photo-7706593.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
     width: 100%;
