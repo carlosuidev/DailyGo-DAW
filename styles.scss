@@ -1,7 +1,7 @@
 //COLORES
 $primary: #100E34;
 $dark: #100E34; 
-$body: #100E34; 
+$body: #100E34;
 $secondary: #4F48EC;
 $warning: #FFBF18;
 $success: #06C270;
@@ -16,6 +16,7 @@ $light: #FFFFFF;
 
 h1,h2,h3,h4,h5,h5,h6{
     font-weight: 700 !important;
+    color: #100E34 !important;
 }
 
 .font-weight-bold{
