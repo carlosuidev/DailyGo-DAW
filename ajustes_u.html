@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -41,7 +41,7 @@
 
     <section class="ps-5 pe-5 w-100 mb-5 min-vh-100" style="margin-top: 100px !important">
         <div class="d-flex flex-wrap">
-            <img src="svg/perfil_p.svg" alt="" class="me-3">
+            <img src="svg/perfil_u.svg" alt="" class="me-3">
             <h2 class="pt-1">Perfil</h2>
         </div>
         <hr>
@@ -51,66 +51,53 @@
                 <img src="img/Dunkin.png" class="rounded-circle" width="64" height="64">
             </div>
             <div class="col-lg-10 col-md-10 col-sm-6">
-                <h3>McDondald´s</h3>
-                <p>A-12451223</p>
+                <h3>Lucía Díaz</h3>
+                <p>Cuenta Pro</p>
                 <p class="font-weight-bold mt-4">Información de contacto</p>
                 <div class="d-flex flex-wrap">
-                    <p class="me-3">910023456</p>
-                    <p class="me-3">soporte@mcdonalds.com</p>
-                    <p>C/Dolores 4</p>
+                    <p class="me-3">610023456</p>
+                    <p>luci1999@gmail.com</p>
                 </div>
             </div>
             <div class="col">
-                <a href="#" class="me-2">
-                    <img src="svg/editar_cuenta.svg" alt="Editar Cuenta">
-                </a>
                 <a href="#">
                     <img src="svg/salir.svg" alt="Borrar Cuenta">
                 </a>
             </div>
         </div>
 
-        <h4>Pedidos realizados</h4>
-        <hr>
-        <div class="table-responsive">
-            <table class="table table-striped table-responsive">
-                <thead>
-                    <tr>
-                        <th scope="col">Nº Pedido</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Dirección</th>
-                        <th scope="col">Producto</th>
-                        <th scope="col">Cantidad</th>
-                        <th scope="col">Ganancias</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">13421</th>
-                        <td>12/04/2022</td>
-                        <td>C/ Av. General Díaz 8</td>
-                        <td>Menú Big Mac</td>
-                        <td>2</td>
-                        <td>12€</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">13421</th>
-                        <td>12/04/2022</td>
-                        <td>C/ Av. General Díaz 8</td>
-                        <td>Patatas</td>
-                        <td>4</td>
-                        <td>4€</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">234596</th>
-                        <td>12/04/2022</td>
-                        <td>C/ De la Luz 2</td>
-                        <td>Menú Big Mac</td>
-                        <td>1</td>
-                        <td>6€</td>
-                    </tr>
-                </tbody>
-            </table>
+        <h4>Modifica tus datos</h4>
+        <hr class="mb-5">
+        <div class="row">
+            <div class="col-md-4 col-sm-0"></div>
+            <div class="col-md-4">
+                <form>
+                    <div class="form-group mb-3">
+                        <label for="inputName">Nuevo nombre</label>
+                        <input type="text" class="form-control" id="inputName" placeholder="John">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="inputSurname">Nuevo apellido</label>
+                        <input type="text" class="form-control" id="inputSurname" placeholder="Doe Baroja">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="inputTlf">Nuevo teléfono</label>
+                        <input type="tel" class="form-control" id="inputTlf" placeholder="555555555">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="inputEmail">Nuevo correo electrónico</label>
+                        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword">Contraseña</label>
+                        <input type="password" class="form-control" id="inputPassword" placeholder="******">
+                    </div>
+                    <div class="d-flex mt-4">
+                        <button type="submit" class="btn btn-secondary w-50 me-3">GUARDAR CAMBIOS</button>
+                        <button type="button" class="btn btn-danger text-white w-50">BORRAR CUENTA</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </section>
 
