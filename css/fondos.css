@@ -4,11 +4,29 @@
 }
 
 #fondoRegistro{
-    background-image: url("https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
-    width: 100%;
-    background-repeat: no-repeat;
+    background-image: url("https://images.pexels.com/photos/1448721/pexels-photo-1448721.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat center fixed;
     background-size: cover;
-    background-position: center;
+}
+
+@media (max-width: 576px) {
+    #fondoIndex{
+        margin: 0px !important;
+    }
+
+    #fondoRegistro{
+        margin: 0px !important;
+    }
+}
+
+@media (max-width: 816px){
+    #enlaces{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #enlace{
+        grid
+    }
 }
 
 #fondoIniciarSesionU{
