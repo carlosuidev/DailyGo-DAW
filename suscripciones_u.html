@@ -12,8 +12,8 @@
 </head>
 
 <body>
-    <!--Navbar de arriba-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top ps-5 pe-5">
+    <!--Navbar de arriba--> 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5 shadow-sm fixed-top ps-5 pe-5">
         <div class="container-fluid p-2">
             <a href="#" class="navbar-brand">
                 <img src="svg/Logotype.svg" alt="DailyGo">
@@ -41,65 +41,19 @@
     </nav>
     <!--Fin de la navbar de arriba-->
 
-    <!--Empiece de la barra de progresión-->
-
-    <div class="d-flex" style="margin-top: 100px !important">
-        <a href="#" class="opacity-50 text-decoration-none ms-5 me-2 pe-none">Carrito de compra</a>
-        <a href="#" class="text-decoration-none ms-2 me-2" aria-disabled="true" tabindex="-1">Datos
-            de pago</a>
-        <a href="#" class="opacity-50 text-decoration-none ms-2 me-2 pe-none" aria-disabled="true"
-            tabindex="-1">Confirmación</a>
-    </div>
-    <div class="progress mt-4">
-        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"
-            style="width: 66.6%">
-            <span class="sr-only"></span>
-        </div>
-    </div>
-    <!--Fin progresión-->
-
     <!--Empiece de la section del body-->
-    <section class="min-vh-100">
-        <h3 class="ms-5 mt-5">Datos de pago</h3>
-        <hr class="mt-2 ms-5 me-5 opacity-100">
-        <div class="row w-100 ">
-            <div class="form-row align-items-center col-6">
-                <form class="form">
-                    <div class="col-12 ps-5">
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">Número de tarjeta (16 números)</div>
-                            </div>
-                            <input type="text" class="form-control" id="tarjeta" pattern="[0-9]{16}" required>
-                        </div>
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">Caducidad (mm/yy)</div>
-                            </div>
-                            <input type="text" class="form-control" id="caducidad" pattern="[/0-9]{5}" required>
-
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">Código de seguridad/CVV2</div>
-                            </div>
-                            <input type="text" class="form-control" id="cvv" pattern="[0-9]{3}" required>
-                        </div>
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">Titular de la tarjeta</div>
-                            </div>
-                            <input type="text" class="form-control" id="titular" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"
-                                required>
-                        </div>
-                        <button type="submit" class="btn btn-secondary mt-3 w-50">PAGAR</button>
-                    </div>
-                </form>
-               
-            </div>
+    <section class="min-vh-100 mt-5 d-flex align-items-center justify-content-center">
+        <div class="row col-12">
+            <div class="col-3"></div>
+            <div class="col-2"><img src="svg/workInProgress.svg" alt="en trabajo"></div>
             <div class="col-2"></div>
-            <div class="col-3 d-none d-sm-block ">
-                <img class ="img-fluid"src="svg/pagoMetodos.svg"></img>
+            <div class="col-3 d-flex align-items-start flex-column justify-content-center  ">
+                <h2>Work in progress</h2>
+                <p>Esta página web pertene a las suscripciones pero por falta de recursos la realizaremos en otro momento, disculpen las molestias.</p>
             </div>
         </div>
+           
+       
     </section>
     <!--Fin de la section del body-->
 
