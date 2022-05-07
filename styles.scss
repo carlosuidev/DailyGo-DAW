@@ -1,31 +1,90 @@
+//COLORES
 $primary: #100E34;
 $dark: #100E34; 
-$body: #100E34; 
+$body: #100E34;
 $secondary: #4F48EC;
 $warning: #FFBF18;
 $success: #06C270;
 $danger: #FF3A44;
 $light: #FFFFFF;
 
+
+//FUENTES Y TRATAMIENTOS DE TEXTO
 * {
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Work Sans', sans-serif !important;
 }
 
 h1,h2,h3,h4,h5,h5,h6{
     font-weight: 700 !important;
+    color: #100E34 !important;
 }
 
 .font-weight-bold{
     font-weight: 700 !important;
 }
 
-.btn{
-    font-weight: 600 !important;
-}
-
 a{
     text-decoration: none !important;
 }
 
+/*
+//RESPONSIVE
+@media (min-width: 960px) {
+    .w-lg-100 {
+        width:100% !important;
+    }
+
+    .w-lg-75 {
+        width:75% !important;
+    }
+
+    .w-lg-50 {
+        width:50% !important;
+    }
+
+    .w-lg-25 {
+        width:25% !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .w-md-100 {
+        width:100% !important;
+    }
+
+    .w-md-75 {
+        width:75% !important;
+    }
+
+    .w-md-50 {
+        width:50% !important;
+    }
+
+    .w-md-25 {
+        width:25% !important;
+    }
+}
+
+
+@media (min-width: 576px) {
+    .w-sm-100 {
+        width:100% !important;
+    }
+
+    .w-sm-75 {
+        width:75% !important;
+    }
+
+    .w-sm-50 {
+        width:50% !important;
+    }
+
+    .w-sm-25 {
+        width:25% !important;
+    }
+}
+*/
+
+//IMPORTACIONES DE BOOTSTRAP + GFONTS
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import "./node_modules/bootstrap/scss/bootstrap.scss";
