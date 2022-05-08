@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -14,24 +14,18 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top ps-5 pe-5">
         <div class="container-fluid p-2">
-            <a href="landing_page_u.html" class="navbar-brand">
+            <a href="inicio_p.html" class="navbar-brand">
                 <img src="svg/Logotype.svg" alt="DailyGo">
             </a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav">
-                    <a href="landing_page_u.html" class="nav-item nav-link ">Inicio</a>
-                    <a href="tienda_u.html" class="nav-item nav-link">Tienda</a>
-                    <a href="seguimientoPedido.html" class="nav-item nav-link">Pedidos</a>
-                    <a href="contacto_u.html" class="nav-item nav-link">Contacto</a>
-                </div>
                 <div class="navbar-nav ms-auto">
-                    <a href="carritoCompra_u.html" class="nav-item nav-link">
-                        <img src="svg/Carrito_Navbar.svg" alt="">
+                    <a href="productos_p.html" class="nav-item nav-link">
+                        <img src="svg/TIenda_P.svg" alt="">
                     </a>
-                    <a href="perfil_u.html" class="nav-item nav-link">
+                    <a href="perfil_p.html" class="nav-item nav-link">
                         <img src="svg/User_Icon_Navbar.svg" alt="">
                     </a>
                 </div>
@@ -41,7 +35,7 @@
 
     <section class="ps-5 pe-5 w-100 mb-5 min-vh-100" style="margin-top: 100px !important">
         <div class="d-flex flex-wrap">
-            <img src="svg/perfil_u.svg" alt="" class="me-3">
+            <img src="svg/perfil_p.svg" alt="" class="me-3">
             <h2 class="pt-1">Perfil</h2>
         </div>
         <hr>
@@ -51,15 +45,20 @@
                 <img src="img/Dunkin.png" class="rounded-circle" width="64" height="64">
             </div>
             <div class="col-lg-10 col-md-10 col-sm-6">
-                <h3>Lucía Díaz</h3>
-                <p class="opacity-50">Usuario de DailyGo</p>
+                <h3>McDonald´s</h3>
+                <p class="opacity-50">Proveedor de DailyGo</p>
                 <p class="font-weight-bold mt-4">Información de contacto</p>
                 <div class="d-flex flex-wrap">
-                    <p class="me-3">610023456</p>
-                    <p>luci1999@gmail.com</p>
+                    <p class="me-3">A-23452876</p>
+                    <p class="me-3">910023456</p>
+                    <p class="me-3">soporte@mcdonalds.com</p>
+                    <p>C/Dolores 4</p>
                 </div>
             </div>
             <div class="col">
+                <a href="ajustes_p.html" class="me-2">
+                    <img src="svg/editar_cuenta.svg" alt="Editar Cuenta">
+                </a>
                 <a href="#">
                     <img src="svg/salir.svg" alt="Borrar Cuenta">
                 </a>
@@ -73,30 +72,30 @@
             <div class="col-md-4">
                 <form class="was-validated">
                     <div class="form-group mb-2">
-                        <label class="mb-2" for="nombreU">Nuevo nombre</label>
-                        <input type="text" name="nombreU" id="nombreU" class="form-control"
-                            placeholder="Inserte su nombre" pattern="[A-Za-z]+{1,20}" required>
+                        <label class="mb-2" for="razonP">Nueva razón social</label>
+                        <input type="text" name="razonP" id="razonP" class="form-control"
+                            placeholder="Inserte su razón social" pattern="[A-Za-z]+{1,20}" required>
                         <div class="invalid-feedback">
-                            Por favor, escriba su nombre.
+                            Por favor, escriba su razón social.
                         </div>
                         <div class="valid-feedback">
                             Válido.
                         </div>
                     </div>
                     <div class="form-group mb-2">
-                        <label class="mb-2" for="apellidoU">Nuevos apellidos</label>
-                        <input type="text" name="apellidoU" id="apellidoU" class="form-control"
-                            placeholder="Inserte sus apellidos" pattern="[A-Za-z]+{1,20}" required>
+                        <label class="mb-2" for="nombreP">Nuevo CIF</label>
+                        <input type="text" name="dniP" id="nombreP" class="form-control"
+                            placeholder="Inserte su CIF" pattern="[A-Z]{1}[-]{1}[0-9]{8}" required>
                         <div class="invalid-feedback">
-                            Por favor, use apellidos correctos.
+                            Por favor, escriba su CIF.
                         </div>
                         <div class="valid-feedback">
                             Válido.
                         </div>
                     </div>
                     <div class="form-group mb-2">
-                        <label class="mb-2" for="correoU">Nuevo correo electrónico</label>
-                        <input type="mail" name="correoU" id="correoU" class="form-control"
+                        <label class="mb-2" for="correoP">Nuevo correo electrónico</label>
+                        <input type="mail" name="correoP" id="correoP" class="form-control"
                             placeholder="Inserte su correo" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
                         <div class="invalid-feedback">
                             Por favor, use un correo válido.
@@ -106,8 +105,8 @@
                         </div>
                     </div>
                     <div class="form-group mb-2">
-                        <label class="mb-2" for="telU">Nuevo teléfono</label>
-                        <input type="tel" name="telU" id="telU" class="form-control"
+                        <label class="mb-2" for="telP">Nuevo teléfono</label>
+                        <input type="tel" name="telP" id="telP" class="form-control"
                             placeholder="Inserte su teléfono" pattern="[0-9]{9}" required>
                         <div class="invalid-feedback">
                             Por favor, use un teléfono válido.
@@ -117,8 +116,19 @@
                         </div>
                     </div>
                     <div class="form-group mb-2">
-                        <label for="passwordU" class="for-label mb-2">Nueva contraseña</label>
-                        <input type="password" name="passwordU" id="passwordU" class="form-control"
+                        <label for="direccionP" class="for-label mb-2">Nueva dirección</label>
+                        <input type="text" name="direccionP" id="direccionP" class="form-control"
+                            placeholder="Inserte su dirección" pattern="[a-zA-Z0-9]+{20}" required>
+                        <div class="invalid-feedback">
+                            Por favor, inserte una dirección.
+                        </div>
+                        <div class="valid-feedback">
+                            Válido.
+                        </div>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="passwordP" class="for-label mb-2">Nueva contraseña</label>
+                        <input type="password" name="passwordP" id="passwordP" class="form-control"
                             placeholder="Inserte su contraseña" pattern="[a-zA-Z0-9]{6,20}" required>
                         <div class="invalid-feedback">
                             Por favor, inserte una contraseña.
@@ -128,20 +138,22 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="formFileU" class="form-label">Nueva imagen de perfil</label>
-                        <input class="form-control" type="file" id="formFileU" accept="image/png, image/jpeg" required>
+                        <label for="formFileP" class="form-label">Nueva imagen de perfil</label>
+                        <input class="form-control" type="file" id="formFileP" accept="image/png, image/jpeg" required>
                     </div>
                     <div class="d-flex mt-4">
                         <button type="submit" class="btn btn-secondary w-50 me-3">GUARDAR CAMBIOS</button>
                         <button type="button" class="btn btn-danger text-white w-50">BORRAR CUENTA</button>
                     </div>
                     <div class="w-100 mt-3">
-                        <a href="perfil_u.html" class="btn border-1 border-secondary text-secondary w-100">CANCELAR CAMBIOS</a>
+                        <a href="perfil_p.html" class="btn border-1 border-secondary text-secondary w-100">CANCELAR CAMBIOS</a>
                     </div>
                 </form>
             </div>
         </div>
     </section>
+
+
 
     <div>
         <footer class="bg-secondary text-center text-lg-start text-white">
@@ -171,16 +183,16 @@
                         <h5 class="text-uppercase mb-4">De interés</h5>
                         <ul class="list-unstyled">
                             <li class="mb-2">
-                                <a href="landing_page_u.html" class="text-white  text-decoration-none">Inicio</a>
+                                <a href="#!" class="text-white  text-decoration-none">Inicio</a>
                             </li>
                             <li class="mb-2">
-                                <a href="tienda_u.html" class="text-white text-decoration-none">Tienda</a>
+                                <a href="#!" class="text-white text-decoration-none">Tienda</a>
                             </li>
                             <li class="mb-2">
-                                <a href="contacto_u.html" class="text-white text-decoration-none">Contacto</a>
+                                <a href="#!" class="text-white text-decoration-none">Contacto</a>
                             </li>
                             <li class="mb-2">
-                                <a href="sobre_nosotros.html" class="text-white text-decoration-none">Sobre nosotros</a>
+                                <a href="#!" class="text-white text-decoration-none">Sobre nosotros</a>
                             </li>
                         </ul>
                     </div>
@@ -188,13 +200,13 @@
                         <h5 class="text-uppercase mb-4">Servicios</h5>
                         <ul class="list-unstyled">
                             <li class="mb-2">
-                                <a href="#" class="text-white text-decoration-none"></i>Pedidos</a>
+                                <a href="#!" class="text-white text-decoration-none"></i>Pedidos</a>
                             </li>
                             <li class="mb-2">
-                                <a href="#" class="text-white text-decoration-none"></i>Riders</a>
+                                <a href="#!" class="text-white text-decoration-none"></i>Riders</a>
                             </li>
                             <li class="mb-2">
-                                <a href="#" class="text-white text-decoration-none"></i>Venta de productos</a>
+                                <a href="#!" class="text-white text-decoration-none"></i>Venta de productos</a>
                             </li>
                         </ul>
                     </div>
@@ -203,11 +215,11 @@
 
                         <ul class="list-unstyled">
                             <li class="mb-2">
-                                <a href="privacidad.html" class="text-white text-decoration-none" target="_blank"> Politica de
+                                <a href="privacidad.html" class="text-white text-decoration-none"> Politica de
                                     privacidad</a>
                             </li>
                             <li class="mb-2">
-                                <a href="condiciones.html" class="text-white text-decoration-none" target="_blank"> Condiciones de
+                                <a href="condiciones.html" class="text-white text-decoration-none"> Condiciones de
                                     uso</a>
                             </li>
                         </ul>
