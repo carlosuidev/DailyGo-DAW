@@ -64,19 +64,25 @@
         <hr class="mt-2 ms-5 me-5 opacity-100">
         <div class="row w-100 ">
             <div class="form-row align-items-center col-6">
-                <form class="form">
+                <form class="was-validate">
                     <div class="col-12 ps-5">
                         <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">Número de tarjeta (16 números)</div>
+                            <div class="input-group-prepend" for="tarjeta">
+                                <label class="input-group-text" >Número de tarjeta (16 números)</label>
                             </div>
                             <input type="text" class="form-control" id="tarjeta" pattern="[0-9]{16}" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                no!
+                            </div>
                         </div>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">Caducidad (mm/yy)</div>
                             </div>
-                            <input type="text" class="form-control" id="caducidad" pattern="[/0-9]{5}" required>
+                            <input type="text" class="form-control" id="caducidad" pattern="^\d{2}\/\d{2}$" required>
 
                             <div class="input-group-prepend">
                                 <div class="input-group-text">Código de seguridad/CVV2</div>
@@ -93,11 +99,11 @@
                         <button type="submit" class="btn btn-secondary mt-3 w-50">PAGAR</button>
                     </div>
                 </form>
-               
+
             </div>
             <div class="col-2"></div>
             <div class="col-3 d-none d-sm-block ">
-                <img class ="img-fluid"src="svg/pagoMetodos.svg"></img>
+                <img class="img-fluid" src="svg/pagoMetodos.svg"></img>
             </div>
         </div>
     </section>
