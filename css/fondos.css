@@ -71,3 +71,11 @@
     background: url("https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg") no-repeat center;
     background-size: cover;
 }
+
+#LandingU{
+    background-image: url("/img/Fondo_Hero_Inicio.png");
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    background-repeat: no-repeat;
+}
