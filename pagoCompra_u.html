@@ -62,22 +62,21 @@
     <section class="min-vh-100">
         <h3 class="ms-5 mt-5">Datos de pago</h3>
         <hr class="mt-2 ms-5 me-5 opacity-100">
-        <div class="row w-100 ">
-            <div class="form-row align-items-center col-6">
+        <div class="row w-100">
+            <div class="form-row align-items-center col-md-7 col-sm-12 mt-4 mb-5">
                 <form class="form">
                     <div class="col-12 ps-5">
                         <div class="input-group mb-2">
-                            <div class="input-group-prepend" for="tarjeta">
-                                <label class="input-group-text" >Número de tarjeta (16 números)</label>
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Número de tarjeta (16 números)</div>
                             </div>
                             <input type="text" class="form-control" id="tarjeta" pattern="[0-9]{16}" required>
-
                         </div>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">Caducidad (mm/yy)</div>
                             </div>
-                            <input type="text" class="form-control" id="caducidad" pattern="^\d{2}\/\d{2}$" required>
+                            <input type="text" class="form-control" id="caducidad" pattern="[/0-9]{5}" required>
 
                             <div class="input-group-prepend">
                                 <div class="input-group-text">Código de seguridad/CVV2</div>
@@ -94,11 +93,11 @@
                         <button type="submit" class="btn btn-secondary mt-3 w-50">PAGAR</button>
                     </div>
                 </form>
-
+               
             </div>
-            <div class="col-2"></div>
             <div class="col-md-3 col-sm-10 mt-3 ms-5">
                 <img class ="img-fluid"src="svg/pagoMetodos.svg"></img>
+            </div>
         </div>
     </section>
     <!--Fin de la section del body-->
