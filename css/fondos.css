@@ -73,9 +73,5 @@
 }
 
 #LandingU{
-    background-image: url("/img/FondoHeroInicio.png");
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    background-repeat: no-repeat;
+    
 }
