@@ -37,6 +37,106 @@
         </div>
         <hr>
 
+        <!-- The Modal -->
+        <div class="modal fade" id="myModalUser">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Editar perfil</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form class="was-validated">
+                            <div class="form-group mb-2">
+                                <label class="mb-2" for="nombreR">Nuevo nombre</label>
+                                <input type="text" name="nombreR" id="nombreR" class="form-control"
+                                    placeholder="Inserte su nombre" pattern="[A-Za-z]+{1,20}" required>
+                                <div class="invalid-feedback">
+                                    Por favor, escriba su nombre.
+                                </div>
+                                <div class="valid-feedback">
+                                    Válido.
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="mb-2" for="apellidoR">Nuevos apellidos</label>
+                                <input type="text" name="apellidoR" id="apellidoR" class="form-control"
+                                    placeholder="Inserte sus apellidos" pattern="[A-Za-z]+{1,20}" required>
+                                <div class="invalid-feedback">
+                                    Por favor, use apellidos correctos.
+                                </div>
+                                <div class="valid-feedback">
+                                    Válido.
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="mb-2" for="nombreR">Nuevo DNI</label>
+                                <input type="text" name="dniR" id="nombreR" class="form-control"
+                                    placeholder="Inserte su DNI" pattern="[0-9]{8}[A-Z]{1}" required>
+                                <div class="invalid-feedback">
+                                    Por favor, escriba su DNI.
+                                </div>
+                                <div class="valid-feedback">
+                                    Válido.
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="mb-2" for="correoR">Nuevo correo electrónico</label>
+                                <input type="mail" name="correoR" id="correoR" class="form-control"
+                                    placeholder="Inserte su correo" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                                <div class="invalid-feedback">
+                                    Por favor, use un correo válido.
+                                </div>
+                                <div class="valid-feedback">
+                                    Válido.
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="mb-2" for="telRR">Nuevo teléfono</label>
+                                <input type="tel" name="telRR" id="telR" class="form-control"
+                                    placeholder="Inserte su teléfono" pattern="[0-9]{9}" required>
+                                <div class="invalid-feedback">
+                                    Por favor, use un teléfono válido.
+                                </div>
+                                <div class="valid-feedback">
+                                    Válido.
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="passwordR" class="for-label mb-2">Nueva contraseña</label>
+                                <input type="password" name="passwordR" id="passwordR" class="form-control"
+                                    placeholder="Inserte su contraseña" pattern="[a-zA-Z0-9]{6,20}" required>
+                                <div class="invalid-feedback">
+                                    Por favor, inserte una contraseña.
+                                </div>
+                                <div class="valid-feedback">
+                                    Válido.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="formFileR" class="form-label">Nueva imagen de perfil</label>
+                                <input class="form-control" type="file" id="formFileR" accept="image/png, image/jpeg" required>
+                            </div>
+                            <div class="d-flex mt-4">
+                                <button type="submit" class="btn btn-success text-white w-50 me-3">GUARDAR CAMBIOS</button>
+                                <button type="button" class="btn btn-danger text-white w-50">BORRAR CUENTA</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary w-100"
+                            data-bs-dismiss="modal">CANCELAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="bg-white shadow-lg mb-5 p-4 row">
             <div class="col mb-3">
                 <img src="img/Dunkin.png" class="rounded-circle" width="64" height="64">
@@ -51,9 +151,9 @@
                 </div>
             </div>
             <div class="col">
-                <a href="ajustes_r.html" class="me-2">
-                    <img src="svg/editar_cuenta.svg" alt="Editar Cuenta">
-                </a>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModalUser">
+                    <img src="svg/editar_cuenta.svg" alt="">
+                </button>
                 <a href="#">
                     <img src="svg/salir.svg" alt="Borrar Cuenta">
                 </a>

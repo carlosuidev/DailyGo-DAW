@@ -47,7 +47,7 @@
         <div class="d-flex align-items-center flex-wrap">
             <h2 class="me-4">Gestiona tus productos</h2>
             <!-- Button to Open the Modal -->
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModalAdd">
+            <button type="button" class="btn btn-success text-white" data-bs-toggle="modal" data-bs-target="#myModalAdd">
                 <i class="fa-solid fa-plus"></i> AGREGAR PRODUCTO
             </button>
         </div>
@@ -92,6 +92,10 @@
                                     Válido.
                                 </div>
                             </div>
+                            <div class="mb-2">
+                                <label for="formFileU" class="form-label">Imagen de producto</label>
+                                <input class="form-control" type="file" id="formFileU" accept="image/png, image/jpeg" required>
+                            </div>
 
                             <button type="submit" class=" mt-3 btn btn-secondary w-100">AÑADIR PRODUCTO</button>
                         </form>
@@ -135,13 +139,17 @@
                             <div class="form-group mb-2">
                                 <label for="productoPrecio" class="for-label mb-2">Precio</label>
                                 <input type="text" name="productoPrecio" id="productoPrecio" class="form-control"
-                                    placeholder="Inserte su precio" pattern="[0-9]{1,3}[,][0-9]{2}"">
+                                    placeholder="Inserte su precio" required pattern="[0-9]{1,3}[,][0-9]{2}">
                                 <div class="invalid-feedback">
                                     Use un precio válido.
                                 </div>
                                 <div class="valid-feedback">
                                     Válido.
                                 </div>
+                            </div>
+                            <div class="mb-2">
+                                <label for="formFileU" class="form-label">Imagen de producto</label>
+                                <input class="form-control" type="file" id="formFileU" accept="image/png, image/jpeg" required>
                             </div>
 
                             <button type="submit" class=" mt-3 btn btn-secondary w-100">GUARDAR PRODUCTO</button>

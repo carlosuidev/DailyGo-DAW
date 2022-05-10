@@ -56,12 +56,113 @@
                 </div>
             </div>
             <div class="col">
-                <a href="ajustes_p.html" class="me-2">
-                    <img src="svg/editar_cuenta.svg" alt="Editar Cuenta">
-                </a>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModalUser">
+                    <img src="svg/editar_cuenta.svg" alt="">
+                </button>
                 <a href="#">
                     <img src="svg/salir.svg" alt="Borrar Cuenta">
                 </a>
+            </div>
+        </div>
+
+
+        <!-- The Modal -->
+        <div class="modal fade" id="myModalUser">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Editar perfil</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form class="was-validated">
+                            <div class="form-group mb-2">
+                                <label class="mb-2" for="razonRP">Razón social</label>
+                                <input type="text" name="razonRP" id="razonRP" class="form-control"
+                                    placeholder="Inserte su razón social" pattern="[A-Za-z]+{1,20}" required>
+                                <div class="invalid-feedback">
+                                    Por favor, escriba su razón social.
+                                </div>
+                                <div class="valid-feedback">
+                                    Válido.
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="mb-2" for="nombreRP">CIF</label>
+                                <input type="text" name="dniRP" id="nombreRP" class="form-control"
+                                    placeholder="Inserte su CIF" pattern="[A-Z]{1}[-]{1}[0-9]{8}" required>
+                                <div class="invalid-feedback">
+                                    Por favor, escriba su CIF.
+                                </div>
+                                <div class="valid-feedback">
+                                    Válido.
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="mb-2" for="correoRP">Correo electrónico</label>
+                                <input type="mail" name="correoRP" id="correoRP" class="form-control"
+                                    placeholder="Inserte su correo" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                                <div class="invalid-feedback">
+                                    Por favor, use un correo válido.
+                                </div>
+                                <div class="valid-feedback">
+                                    Válido.
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="mb-2" for="telRP">Teléfono</label>
+                                <input type="tel" name="telRP" id="telRP" class="form-control"
+                                    placeholder="Inserte su teléfono" pattern="[0-9]{9}" required>
+                                <div class="invalid-feedback">
+                                    Por favor, use un teléfono válido.
+                                </div>
+                                <div class="valid-feedback">
+                                    Válido.
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="direccionRP" class="for-label mb-2">Dirección</label>
+                                <input type="text" name="direccionRP" id="direccionRP" class="form-control"
+                                    placeholder="Inserte su dirección" pattern="[a-zA-Z0-9]+{20}" required>
+                                <div class="invalid-feedback">
+                                    Por favor, inserte una dirección.
+                                </div>
+                                <div class="valid-feedback">
+                                    Válido.
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="passwordRP" class="for-label mb-2">Contraseña</label>
+                                <input type="password" name="passwordRP" id="passwordRP" class="form-control"
+                                    placeholder="Inserte su contraseña" pattern="[a-zA-Z0-9]{6,20}" required>
+                                <div class="invalid-feedback">
+                                    Por favor, inserte una contraseña.
+                                </div>
+                                <div class="valid-feedback">
+                                    Válido.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="formFileU" class="form-label">Nueva imagen de perfil</label>
+                                <input class="form-control" type="file" id="formFileU" accept="image/png, image/jpeg" required>
+                            </div>
+                            <div class="d-flex mt-4">
+                                <button type="submit" class="btn btn-success w-50 me-3 text-white">GUARDAR CAMBIOS</button>
+                                <button type="button" class="btn btn-danger text-white w-50">BORRAR CUENTA</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary w-100"
+                            data-bs-dismiss="modal">CANCELAR</button>
+                    </div>
+                </div>
             </div>
         </div>
 

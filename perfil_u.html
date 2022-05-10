@@ -45,7 +45,7 @@
             <h2 class="pt-1">Perfil</h2>
         </div>
         <hr>
-        
+
         <div class="bg-white shadow-lg mb-5 p-4 row">
             <div class="col mb-3">
                 <img src="img/Dunkin.png" class="rounded-circle" width="64" height="64">
@@ -59,19 +59,110 @@
                     <p>luci1999@gmail.com</p>
                 </div>
             </div>
-            <div class="col">
-                <a href="ajustes_u.html" class="me-2">
-                    <img src="svg/editar_cuenta.svg" alt="Editar Cuenta">
-                </a>
+            <div class="col-1">
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModalUser">
+                    <img src="svg/editar_cuenta.svg" alt="">
+                </button>
                 <a href="#">
                     <img src="svg/salir.svg" alt="Borrar Cuenta">
                 </a>
             </div>
         </div>
-        
+
+
+        <!-- The Modal -->
+        <div class="modal fade" id="myModalUser">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Editar perfil</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form class="was-validated">
+                            <div class="form-group mb-2">
+                                <label class="mb-2" for="nombreU">Nuevo nombre</label>
+                                <input type="text" name="nombreU" id="nombreU" class="form-control"
+                                    placeholder="Inserte su nombre" pattern="[A-Za-z]+{1,20}" required>
+                                <div class="invalid-feedback">
+                                    Por favor, escriba su nombre.
+                                </div>
+                                <div class="valid-feedback">
+                                    Válido.
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="mb-2" for="apellidoU">Nuevos apellidos</label>
+                                <input type="text" name="apellidoU" id="apellidoU" class="form-control"
+                                    placeholder="Inserte sus apellidos" pattern="[A-Za-z]+{1,20}" required>
+                                <div class="invalid-feedback">
+                                    Por favor, use apellidos correctos.
+                                </div>
+                                <div class="valid-feedback">
+                                    Válido.
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="mb-2" for="correoU">Nuevo correo electrónico</label>
+                                <input type="mail" name="correoU" id="correoU" class="form-control"
+                                    placeholder="Inserte su correo" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                                <div class="invalid-feedback">
+                                    Por favor, use un correo válido.
+                                </div>
+                                <div class="valid-feedback">
+                                    Válido.
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="mb-2" for="telU">Nuevo teléfono</label>
+                                <input type="tel" name="telU" id="telU" class="form-control"
+                                    placeholder="Inserte su teléfono" pattern="[0-9]{9}" required>
+                                <div class="invalid-feedback">
+                                    Por favor, use un teléfono válido.
+                                </div>
+                                <div class="valid-feedback">
+                                    Válido.
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="passwordU" class="for-label mb-2">Nueva contraseña</label>
+                                <input type="password" name="passwordU" id="passwordU" class="form-control"
+                                    placeholder="Inserte su contraseña" pattern="[a-zA-Z0-9]{6,20}" required>
+                                <div class="invalid-feedback">
+                                    Por favor, inserte una contraseña.
+                                </div>
+                                <div class="valid-feedback">
+                                    Válido.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="formFileU" class="form-label">Nueva imagen de perfil</label>
+                                <input class="form-control" type="file" id="formFileU" accept="image/png, image/jpeg" required>
+                            </div>
+                            <div class="d-flex mt-4">
+                                <button type="submit" class="btn btn-success w-50 me-3 text-white">GUARDAR CAMBIOS</button>
+                                <button type="button" class="btn btn-danger text-white w-50">BORRAR CUENTA</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary w-100"
+                            data-bs-dismiss="modal">CANCELAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <h4>Pedidos realizados</h4>
         <hr>
-        
+
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -113,7 +204,7 @@
             </table>
         </div>
     </section>
-    
+
     <div>
         <footer class="bg-secondary text-center text-lg-start text-white">
             <div class="container p-3">
@@ -174,11 +265,13 @@
 
                         <ul class="list-unstyled">
                             <li class="mb-2">
-                                <a href="privacidad.html" class="text-white text-decoration-none" target="_blank"> Politica de
+                                <a href="privacidad.html" class="text-white text-decoration-none" target="_blank">
+                                    Politica de
                                     privacidad</a>
                             </li>
                             <li class="mb-2">
-                                <a href="condiciones.html" class="text-white text-decoration-none" target="_blank"> Condiciones de
+                                <a href="condiciones.html" class="text-white text-decoration-none" target="_blank">
+                                    Condiciones de
                                     uso</a>
                             </li>
                         </ul>
