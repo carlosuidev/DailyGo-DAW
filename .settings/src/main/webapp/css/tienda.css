@@ -1,0 +1,8 @@
+#imagenArriba {
+  width: 100%;
+  height: 200px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("https://images.pexels.com/photos/3026808/pexels-photo-3026808.jpeg");
+ }
