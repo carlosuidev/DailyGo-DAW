@@ -1,0 +1,97 @@
+#fondoIndex{
+    background: url("https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg") no-repeat center fixed;
+    background-size: cover;
+}
+
+#fondoRegistro{
+    background: url("https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80") no-repeat center fixed;
+    background-size: cover;
+}
+
+@media (max-width: 576px) {
+    #fondoIndex{
+        margin: 0px !important;
+    }
+
+    #fondoRegistro{
+        margin: 0px !important;
+    }
+}
+
+@media (max-width: 816px){
+    #fondoIndex{
+        margin: 0px !important;
+    }
+
+    #fondoRegistro{
+        margin: 0px !important;
+    }
+}
+
+/*
+@media (max-width: 767px){
+    #fondoIniciarSesionU{
+        visibility: hidden !important;
+    }
+}*/
+
+
+#formulariosIR{
+    padding-left: 10% !important;
+    padding-right: 10% !important;
+}
+
+#fondoIniciarSesionU{
+    background: url("https://images.unsplash.com/photo-1622405207562-735fa49ff7f7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80") no-repeat center fixed;
+    background-size: cover;
+}
+
+#fondoRegistroU{
+    background: url("https://images.pexels.com/photos/3434523/pexels-photo-3434523.jpeg") no-repeat center;
+    background-size: cover;
+}
+
+#fondoRegistroR{
+    background: url("https://images.pexels.com/photos/7706593/pexels-photo-7706593.jpeg") no-repeat center;
+    background-size: cover;
+}
+
+#fondoIniciarSesionR{
+    background: url("https://images.pexels.com/photos/7706581/pexels-photo-7706581.jpeg") no-repeat center;
+    background-size: cover;
+}
+
+#fondoRegistroP{
+    background: url("https://images.pexels.com/photos/2814828/pexels-photo-2814828.jpeg") no-repeat center;
+    background-size: cover;
+}
+
+
+#fondoIniciarSesionP{
+    background: url("https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg") no-repeat center;
+    background-size: cover;
+}
+
+#LandingU{
+    background-image: linear-gradient(-90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.50) 100%), url("https://images.pexels.com/photos/6150423/pexels-photo-6150423.jpeg?") !important;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.ventanaEditar{
+    background-color: rgb(150, 112, 112);
+    width: 30%;
+    color: aliceblue;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    text-align: center;
+    padding: 33px;
+    min-height: 450px;
+    min-width: 1050px;
+    border-radius: 22px;
+    position: absolute;
+    left: 23%;
+    bottom: 30%;
+    display: none;
+}
