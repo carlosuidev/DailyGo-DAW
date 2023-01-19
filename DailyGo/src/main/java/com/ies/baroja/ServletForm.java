@@ -65,7 +65,6 @@ public class ServletForm extends HttpServlet {
 			System.out.println(request.getParameter("direccionEntrega"));
 			if (request.getParameter("correoIP") != null || request.getParameter("correoIU") != null
 					|| request.getParameter("correoIR") != null) {
-				System.out.println("Me cago");
 				loginUsuario(request, response);
 			} else if (request.getParameter("restauranteNombre") != null) {
 				buscarRestaurante(request, response);
@@ -169,21 +168,21 @@ public class ServletForm extends HttpServlet {
 		inicioSesCli = request.getParameter("correoIU");
 		inicioSesProv = request.getParameter("correoIP");
 		inicioSesRid = request.getParameter("correoIR");
-		// Podemos guardar informaciÛn en la sesiÛn del usuario
+		// Podemos guardar informaci√≥n en la sesi√≥n del usuario
 		if (inicioSesCli != null) {
 			HttpSession sesion = request.getSession();
 			String sPwd = request.getParameter("passwordIU");
-			// **** deberÌamos buscar el email en la base de datos, pero como es
-			// un ejemplo lo escribimos en el mismo cÛdigo
+			// **** deber√≠amos buscar el email en la base de datos, pero como es
+			// un ejemplo lo escribimos en el mismo c√≥digo
 			
 
 			// && sesion.getAttribute("emailIU") == null
 			if (Controller.comprobarInicioSesionCliente(inicioSesCli, sPwd) == true
 					&& sesion.getAttribute("emailIU") == null) {
-				// si coincide email y password y adem·s no hay sesiÛn iniciada
+				// si coincide email y password y adem√°s no hay sesi√≥n iniciada
 				sesion.setAttribute("emailIU", inicioSesCli);
 				request.setAttribute("errorInicio", "no");
-				// redirijo a p·gina con informaciÛn de login exitoso
+				// redirijo a p√°gina con informaci√≥n de login exitoso
 				Clientes cliente = Controller.getClienteS(inicioSesCli);
 				sesion.setAttribute("emailIU", cliente);
 				response.sendRedirect("inicio_u.jsp");
@@ -197,10 +196,10 @@ public class ServletForm extends HttpServlet {
 			// && sesion.getAttribute("emailIU") == null
 			if (Controller.comprobarInicioSesionRider(inicioSesRid, sPwd) == true
 					&& sesion.getAttribute("emailIR") == null) {
-				// si coincide email y password y adem·s no hay sesiÛn iniciada
+				// si coincide email y password y adem√°s no hay sesi√≥n iniciada
 				Riders rider = Controller.getRiderS(inicioSesRid);
 				sesion.setAttribute("emailIR", rider);
-				// redirijo a p·gina con informaciÛn de login exitoso
+				// redirijo a p√°gina con informaci√≥n de login exitoso
 				response.sendRedirect("inicio_r.jsp");
 			} else {
 				response.sendRedirect("error.html");
@@ -211,10 +210,10 @@ public class ServletForm extends HttpServlet {
 			// && sesion.getAttribute("emailIU") == null
 			if (Controller.comprobarInicioSesionProv(inicioSesProv, sPwd) == true
 					&& sesion.getAttribute("emailIP") == null) {
-				// si coincide email y password y adem·s no hay sesiÛn iniciada
+				// si coincide email y password y adem√°s no hay sesi√≥n iniciada
 				Proveedores proveedor = Controller.getProveedorS(inicioSesProv);
 				sesion.setAttribute("emailIP", proveedor);
-				// redirijo a p·gina con informaciÛn de login exitoso
+				// redirijo a p√°gina con informaci√≥n de login exitoso
 				response.sendRedirect("inicio_p.jsp");
 			} else {
 				response.sendRedirect("error.html");
@@ -235,7 +234,7 @@ public class ServletForm extends HttpServlet {
 		// en el caso de no ponga nombre la persona y solo le de a buscar salen todos
 		// los restaurantes que hay
 		if (!sNombreRestau.equals(null) && !sNombreRestau.contains("'")) {
-			System.out.println("Nombre restaurante cuando vale distinto de null viene por aquÌ");
+			System.out.println("Nombre restaurante cuando vale distinto de null viene por aqu√≠");
 			HttpSession sesion = request.getSession();
 			sesion.setAttribute("ListaBuscar", sNombreRestau);
 			response.sendRedirect("tienda_u.jsp");
@@ -446,7 +445,7 @@ public class ServletForm extends HttpServlet {
 			// SE ME GUARDA EL VALOR DEL NOMBRE DEL PRODUCTO
 
 			Ventas nuevaVenta = new Ventas(Controller.getCodCliente(cliente.getMail_cli()),
-					Controller.getRiderRandom().getDni_rid(), null, formatter.format(date), "Prepar·ndose", null);
+					Controller.getRiderRandom().getDni_rid(), null, formatter.format(date), "Prepar√°ndose", null);
 			Controller.introducirVentas(nuevaVenta);
 			detalleVentas nuevoDetalle = new detalleVentas(Controller.hayVenta(), codigoProduct, 1);
 			Controller.introducirDetalleCompra(nuevoDetalle);
