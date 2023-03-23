@@ -82,7 +82,16 @@ CREATE TABLE `detalle_ventas` (
     CONSTRAINT `detalle_ventas_ibfk_2` FOREIGN KEY (`COD_PROD_DET`) REFERENCES `productos` (`COD_PROD`) ON DELETE CASCADE
 );
 
-
+/*
+ ····INSERCIÓN DE PROVEEDORES····
+· CIF_PROV -> CIF del proveedor
+· RAZSOC -> Nombre comercial del proveedor
+· DIR_PROV -> Dirección del proveedor
+· TLF_PROV -> Teléfono del proveedor
+· MAIL_PROV -> Email del proveedor
+· PW_PROV -> PPPPPPPPPP
+· IMG_PROV -> imagen png del proveedor
+*/
     INSERT INTO PROVEEDORES (CIF_PROV, RAZSOC, DIR_PROV, TLF_PROV, MAIL_PROV, PW_PROV, IMG_PROV)
 VALUES 
 ('A-12344355', 'McDonald´s', 'Magdelena, 4', '555234312', 'hello@mcdonalds.es', '123456', 'img/macas.png'),
@@ -100,6 +109,14 @@ VALUES
 ('G-65654745', 'UDON', 'Magdalena, 7', '555099949', 'hello@udon.es', '123456', 'img/UDON.png'),
 ('A-55654626', 'Pans & Company', 'Av. Tomás, 12', '555667321', 'hello@pans.es', '123456', 'img/pansandcompany.png'),
 ('A-12347574', 'Tim Hortons', 'Vía libre, 4', '555671240', 'hello@timhortons.es', '123456', 'img/timHortons.png');
+
+/*
+ ····INSERCIÓN DE PRODUCTOS····
+· DEN_PROD -> Denominación comercial del producto
+· RPU_PROD -> Precio del producto
+· CIF_PROV_PROD -> CIF del proveedor correspondiente del producto *
+· IMG_PROD -> Imagen en png del producto.
+*/
  
 INSERT INTO PRODUCTOS(DEN_PROD, PU_PROD, CIF_PROV_PROD, IMG_PROD)
 VALUES
@@ -207,11 +224,30 @@ VALUES
 ('Bocadillo Serrano Brie','4.50','A-55654626','https://www.pansandcompany.com/files/products/es/bocadillos/premium/serrano-brie/images/25_10_2021_03_01_27.jpg'),
 ('Bocadillo Ibérico','4.50','A-55654626','https://www.pansandcompany.com/files/products/es/bocadillos/premium/iberico/images/25_10_2021_02_56_02.jpg');
 
+
+/*
+ ····INSERCIÓN DE CLIENTES····
+· NOM_CLI -> Nombre cliente
+· APE_CLI -> Apellido del cliente
+· TLF_CLI -> Teléfono del cliente 
+· MAIL_CLI -> Email del cliente.
+· PW_CLI -> contraseña del cliente.     PPPPPPPPPP cifrar contraseñas ppppppppppp
+*/
+
 INSERT INTO CLIENTES(NOM_CLI, APE_CLI, TLF_CLI, MAIL_CLI, PW_CLI)
 VALUES
 ('Carlos', 'Almendros Arellano', 608694312, 'carlos@gmail.com','123usuario'),
 ('Ignacio', 'Gil Torres', 775432842, 'nacho@gmail.com','123usuario'),
 ('Gonzalo', 'Oliver Alfonso', 690787526, 'gonzalo@gmail.com','123usuario');
+
+/*
+ ····INSERCIÓN DE RIDERS····
+· NOM_RID -> Nombre rider
+· APE_RID -> Apellido del rider
+· TLF_RID -> Teléfono del rider 
+· MAIL_RID -> Email del rider.
+· PW_RID -> contraseña del rider.     PPPPPPPPPP cifrar contraseñas ppppppppppp
+*/
 
 INSERT INTO RIDERS(DNI_RID, NOM_RID, APE_RID, TLF_RID, MAIL_RID, PW_RID) 
  VALUES
@@ -220,6 +256,16 @@ INSERT INTO RIDERS(DNI_RID, NOM_RID, APE_RID, TLF_RID, MAIL_RID, PW_RID)
 ('12345465X','Paula', 'Badosa Gibert', 600434523, 'paula@dailygo.com','123usuario'),
 ('12222345T','Amicus', 'Echo', 666342345, 'amicus@dailygo.com','123usuario'),
 ('16632387Y','Ibai', 'Llanos Garatea', 756454534, 'ibai@dailygo.com','123usuario');
+
+/*
+ ····INSERCIÓN DE VENTAS····
+· COD_CLI_VEN -> 
+· DNI_RID_VEN -> 
+· DIR_VEN -> 
+· FECH_VEN -> 
+· ESTADO_VEN -> 
+· COM_VEN -> 
+*/
 
 INSERT INTO VENTAS (COD_CLI_VEN, DNI_RID_VEN, DIR_VEN, FECH_VEN, ESTADO_VEN, COM_VEN) 
 VALUES
@@ -232,6 +278,13 @@ VALUES
 (3, '11234356G', 'General Ricardos 32', '20-03-2022', 'Entregado'),
 (3, '11264584L', 'General Ricardos 32', '11-05-2022', 'Entregado'),
 (3, '12345465X', 'General Ricardos 32', '28-05-2022', 'Entregado');
+
+/*
+ ····INSERCIÓN DE DETALLES DE VENTAS····
+· NUM_VEN_DET -> 
+· COD_PROD_DET -> 
+· CANT_DET -> 
+*/
 
 INSERT INTO detalle_ventas (NUM_VEN_DET, COD_PROD_DET, CANT_DET) 
 VALUES
@@ -251,3 +304,4 @@ VALUES
 (8, 23, 1),
 (8, 67, 4),
 (9, 48, 2);
+
