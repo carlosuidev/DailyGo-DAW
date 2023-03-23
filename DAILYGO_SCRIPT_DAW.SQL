@@ -1,6 +1,26 @@
+/*
+El código proporcionado comienza con un comando DROP DATABASE IF EXISTS DAILYGO;. Este comando elimina la base de datos DAILYGO,
+si ya existe, lo que permite crear una nueva base de datos con el mismo nombre sin conflictos.
+A continuación, el código crea la base de datos DAILYGO si no existe, utilizando la sentencia CREATE DATABASE IF NOT EXISTS.
+Luego, se utiliza USE DAILYGO; para indicar que las sentencias SQL que siguen afectarán a la base de datos DAILYGO.
+*/
+
 DROP DATABASE IF EXISTS DAILYGO;
 CREATE DATABASE IF NOT EXISTS DAILYGO;
 USE DAILYGO;
+
+ 
+/*
+ ····TABLA CLIENTES····
+Declaración de una tabla llamada clientes con siete columnas: COD_CLI, NOM_CLI, APE_CLI, TLF_CLI, MAIL_CLI, PW_CLI e IMG_CLI.
+La columna COD_CLI es la clave primaria de la tabla, que se incrementa automáticamente cada vez que se agrega un nuevo registro.
+NOM_CLI, APE_CLI, TLF_CLI, MAIL_CLI, y PW_CLI son columnas requeridas y deben tener un valor válido antes de que se pueda insertar un registro en la tabla.
+La columna IMG_CLI es opcional y se utiliza para almacenar la imagen del perfil del cliente.
+La tabla tiene una restricción única llamada ÚNIDCA en las columnas TLF_CLI y MAIL_CLI, lo que significa que no puede haber dos registros
+en la tabla con la misma combinación de valores en esas dos columnas.
+
+*/
+
 
 CREATE TABLE `clientes` (
     `COD_CLI` int(10) NOT NULL AUTO_INCREMENT COMMENT 'PK/Código Cliente',
@@ -14,6 +34,15 @@ CREATE TABLE `clientes` (
     UNIQUE KEY `ÚNIDCA` (`TLF_CLI`, `MAIL_CLI`)
 );
 
+/*
+ ····TABLA PROVEEDORES····
+Esta tabla almacena la información de los proveedores que ofrecen productos a la empresa. 
+Cada proveedor se identifica con un CIF único y se almacenan sus datos de contacto, incluyendo su dirección,
+teléfono y correo electrónico. Además, se incluye una imagen de la compañía para facilitar su identificación. 
+La contraseña se almacena para garantizar la seguridad del acceso a la información del proveedor.
+
+*/
+
 CREATE TABLE `proveedores` (
     `CIF_PROV` varchar(10) CHARACTER SET utf8mb4 NOT NULL COMMENT 'PK/CIF > A-00000000',
     `RAZSOC` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL COMMENT 'Razón Social - Nombre',
@@ -24,6 +53,14 @@ CREATE TABLE `proveedores` (
     `IMG_PROV` varchar(1000) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'Imagen de la compañía',
     PRIMARY KEY (`CIF_PROV`)
 );
+
+/*
+ ····TABLA RIDERS····
+Esta sentencia SQL crea una tabla llamada riders que almacena información sobre los repartidores o "riders".
+ Los campos de la tabla incluyen el DNI del rider,
+ su nombre, apellidos, teléfono, correo electrónico, contraseña e imagen de perfil.
+ La columna DNI_RID se define como la clave primaria de la tabla.
+*/
 
 CREATE TABLE `riders` (
     `DNI_RID` varchar(9) CHARACTER SET utf8mb4 NOT NULL COMMENT 'PK/DNI',
@@ -36,6 +73,21 @@ CREATE TABLE `riders` (
     PRIMARY KEY (`DNI_RID`)
 );
 
+/*
+ ····TABLA PRODUCTOS····
+
+creación de una tabla llamada productos. Esta tabla tiene siete columnas: COD_PROD, DEN_PROD, PU_PROD, CIF_PROV_PROD, IMG_PROD, PRIMARY KEY y FOREIGN KEY.
+La columna COD_PROD es el código del producto y es de tipo int y AUTO_INCREMENT, lo que significa que se generará automáticamente un valor único 
+para cada nuevo registro. La columna DEN_PROD es la denominación del producto y es de tipo varchar. La columna PU_PROD es el precio unitario y es de
+tipo DECIMAL con una precisión de 5 dígitos, 2 de ellos decimales. La columna CIF_PROV_PROD es el CIF del proveedor y es de tipo varchar. La columna 
+IMG_PROD es la imagen del producto y es de tipo varchar. La columna PRIMARY KEY establece que COD_PROD es la clave primaria de la tabla. La columna KEY 
+crea un índice para la columna CIF_PROV_PROD. La columna FOREIGN KEY establece una relación entre la tabla productos y la tabla proveedores, utilizando 
+la columna CIF_PROV_PROD como clave foránea, lo que significa que la columna CIF_PROV_PROD en la tabla productos hace referencia a la columna CIF_PROV en
+la tabla proveedores. La cláusula ON DELETE CASCADE indica que si un proveedor
+se elimina de la tabla proveedores, todos los productos asociados a ese proveedor también se eliminarán automáticamente de la tabla productos.
+
+*/
+
 CREATE TABLE `productos` (
     `COD_PROD` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Código de Producto',
     `DEN_PROD` varchar(40) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Denomincación de Producto',
@@ -47,6 +99,18 @@ CREATE TABLE `productos` (
     CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`CIF_PROV_PROD`) REFERENCES `proveedores` (`CIF_PROV`) ON DELETE CASCADE
 );
 
+/*
+ ····TABLA MENSAJES····
+
+crea una tabla llamada "mensajes" con varias columnas. Las columnas incluyen un campo de clave primaria llamado "COD_MEN" que se incrementa 
+automáticamente cada vez que se inserta un nuevo mensaje, un campo para el código del cliente que envía el mensaje, un campo para el asunto 
+del mensaje y otro campo para el contenido del mensaje. Además, hay una clave externa que establece una relación con la tabla "clientes" en 
+el campo "COD_CLI_MEN". Esto significa que cada mensaje en la tabla "mensajes" se relaciona con un cliente en la tabla "clientes". La clave externa
+se utiliza para mantener la integridad referencial de la base de datos, lo que garantiza que solo se puedan agregar mensajes para clientes que existen 
+en la tabla "clientes".
+
+*/
+
 CREATE TABLE `mensajes` (
     `COD_MEN` int(11) NOT NULL AUTO_INCREMENT COMMENT 'PK/Código de Mensaje',
     `COD_CLI_MEN` int(11) NOT NULL COMMENT 'Código Cliente',
@@ -56,6 +120,17 @@ CREATE TABLE `mensajes` (
     KEY `COD_CLI_MEN` (`COD_CLI_MEN`),
     CONSTRAINT `mensajes_ibfk_1` FOREIGN KEY (`COD_CLI_MEN`) REFERENCES `clientes` (`COD_CLI`) ON DELETE CASCADE
 );
+
+/*
+ ····TABLA VENTAS····
+rea una tabla que almacena información sobre ventas realizadas en un sistema de delivery. Esta tabla tiene varios campos, 
+como NUM_VEN que es un identificador único para cada venta y COD_CLI_VEN que indica el código del cliente que realizó la venta. 
+También incluye el campo DNI_RID_VEN que indica el DNI del rider encargado de entregar la venta y DIR_VEN que es la dirección a 
+la que se realizará la entrega. El campo FECH_VEN indica la fecha en que se realizó la venta y ESTADO_VEN indica el estado actual 
+de la venta. Finalmente, la tabla también incluye el campo COM_VEN que es un campo de texto para incluir comentarios adicionales sobre 
+la venta. La tabla tiene dos claves foráneas, una que hace referencia al código de cliente en la tabla clientes y otra que hace referencia 
+al DNI del rider en la tabla riders, ambas con la opción ON DELETE CASCADE para mantener la integridad referencial.
+*/
 
 CREATE TABLE `ventas` (
     `NUM_VEN` int(11) NOT NULL AUTO_INCREMENT COMMENT 'PK/Número de Venta',
@@ -71,6 +146,17 @@ CREATE TABLE `ventas` (
     CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`COD_CLI_VEN`) REFERENCES `clientes` (`COD_CLI`) ON DELETE CASCADE,
     CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`DNI_RID_VEN`) REFERENCES `riders` (`DNI_RID`) ON DELETE CASCADE
 );
+
+/*
+ ····TABLA DETALLE_VENTAS····
+
+ La tabla "detalle_ventas" se utiliza para almacenar los detalles de una venta, incluyendo los códigos de los productos vendidos 
+ y las cantidades correspondientes. Los campos "NUM_VEN_DET" y "COD_PROD_DET" se utilizan como claves primarias compuestas para 
+ garantizar que no se puedan agregar dos veces los mismos detalles de venta. La clave externa "NUM_VEN_DET" se utiliza para hacer 
+ referencia a la clave primaria de la tabla "ventas", mientras que la clave externa "COD_PROD_DET" se utiliza para hacer referencia 
+ a la clave primaria de la tabla "productos". Estas claves externas garantizan que no se puedan agregar detalles de venta para ventas 
+ o productos que no existen.
+*/
 
 CREATE TABLE `detalle_ventas` (
     `NUM_VEN_DET` int(11) NOT NULL COMMENT 'Código de la venta',
@@ -258,13 +344,13 @@ INSERT INTO RIDERS(DNI_RID, NOM_RID, APE_RID, TLF_RID, MAIL_RID, PW_RID)
 ('16632387Y','Ibai', 'Llanos Garatea', 756454534, 'ibai@dailygo.com','123usuario');
 
 /*
- ····INSERCIÓN DE VENTAS····
+ ····INSERCIÓN DE VENTAS····PPPPPPPPPPPPPPPP
 · COD_CLI_VEN -> 
 · DNI_RID_VEN -> 
 · DIR_VEN -> 
 · FECH_VEN -> 
 · ESTADO_VEN -> 
-· COM_VEN -> 
+· COM_VEN -> c
 */
 
 INSERT INTO VENTAS (COD_CLI_VEN, DNI_RID_VEN, DIR_VEN, FECH_VEN, ESTADO_VEN, COM_VEN) 
@@ -280,7 +366,7 @@ VALUES
 (3, '12345465X', 'General Ricardos 32', '28-05-2022', 'Entregado');
 
 /*
- ····INSERCIÓN DE DETALLES DE VENTAS····
+ ····INSERCIÓN DE DETALLES DE VENTAS····PPPPPPPPPPPPPPP
 · NUM_VEN_DET -> 
 · COD_PROD_DET -> 
 · CANT_DET -> 
