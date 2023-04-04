@@ -344,13 +344,13 @@ INSERT INTO RIDERS(DNI_RID, NOM_RID, APE_RID, TLF_RID, MAIL_RID, PW_RID)
 ('16632387Y','Ibai', 'Llanos Garatea', 756454534, 'ibai@dailygo.com','123usuario');
 
 /*
- ····INSERCIÓN DE VENTAS····PPPPPPPPPPPPPPPP
-· COD_CLI_VEN -> 
-· DNI_RID_VEN -> 
-· DIR_VEN -> 
-· FECH_VEN -> 
-· ESTADO_VEN -> 
-· COM_VEN -> c
+ ····INSERCIÓN DE VENTAS····
+· COD_CLI_VEN -> codigo del cliente y de la venta
+· DNI_RID_VEN -> dni del rider que hizo la venta
+· DIR_VEN -> direccion de la venta
+· FECH_VEN -> fecha
+· ESTADO_VEN -> estado
+· COM_VEN -> comentario de la venta proporcionado por el cliente
 */
 
 INSERT INTO VENTAS (COD_CLI_VEN, DNI_RID_VEN, DIR_VEN, FECH_VEN, ESTADO_VEN, COM_VEN) 
@@ -367,9 +367,9 @@ VALUES
 
 /*
  ····INSERCIÓN DE DETALLES DE VENTAS····PPPPPPPPPPPPPPP
-· NUM_VEN_DET -> 
-· COD_PROD_DET -> 
-· CANT_DET -> 
+· NUM_VEN_DET -> id de la venta unica puede tener un unico id de una venta de varios con locales distintos
+· COD_PROD_DET -> codigo del producto
+· CANT_DET -> cantidad 
 */
 
 INSERT INTO detalle_ventas (NUM_VEN_DET, COD_PROD_DET, CANT_DET) 
