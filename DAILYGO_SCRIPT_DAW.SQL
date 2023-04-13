@@ -175,7 +175,7 @@ CREATE TABLE `detalle_ventas` (
 · DIR_PROV -> Dirección del proveedor
 · TLF_PROV -> Teléfono del proveedor
 · MAIL_PROV -> Email del proveedor
-· PW_PROV -> PPPPPPPPPP
+· PW_PROV -> Contraseña del proveedor
 · IMG_PROV -> imagen png del proveedor
 */
     INSERT INTO PROVEEDORES (CIF_PROV, RAZSOC, DIR_PROV, TLF_PROV, MAIL_PROV, PW_PROV, IMG_PROV)
@@ -344,13 +344,13 @@ INSERT INTO RIDERS(DNI_RID, NOM_RID, APE_RID, TLF_RID, MAIL_RID, PW_RID)
 ('16632387Y','Ibai', 'Llanos Garatea', 756454534, 'ibai@dailygo.com','123usuario');
 
 /*
- ····INSERCIÓN DE VENTAS····PPPPPPPPPPPPPPPP
-· COD_CLI_VEN -> 
-· DNI_RID_VEN -> 
-· DIR_VEN -> 
-· FECH_VEN -> 
-· ESTADO_VEN -> 
-· COM_VEN -> c
+ ····INSERCIÓN DE VENTAS····
+· COD_CLI_VEN -> Código del cliente
+· DNI_RID_VEN -> dni del rider
+· DIR_VEN -> direccion 
+· FECH_VEN -> fecha
+· ESTADO_VEN -> estado entregado/no entregado
+· COM_VEN -> comentario
 */
 
 INSERT INTO VENTAS (COD_CLI_VEN, DNI_RID_VEN, DIR_VEN, FECH_VEN, ESTADO_VEN, COM_VEN) 
@@ -366,10 +366,10 @@ VALUES
 (3, '12345465X', 'General Ricardos 32', '28-05-2022', 'Entregado');
 
 /*
- ····INSERCIÓN DE DETALLES DE VENTAS····PPPPPPPPPPPPPPP
-· NUM_VEN_DET -> 
-· COD_PROD_DET -> 
-· CANT_DET -> 
+ ····INSERCIÓN DE DETALLES DE VENTAS····
+· NUM_VEN_DET -> numero venta detalle
+· COD_PROD_DET -> Código producto
+· CANT_DET -> Cantidad
 */
 
 INSERT INTO detalle_ventas (NUM_VEN_DET, COD_PROD_DET, CANT_DET) 
