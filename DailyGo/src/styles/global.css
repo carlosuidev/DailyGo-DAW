@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+    font-family: "Work Sans";
+    outline: none;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    input[type="range"]::-webkit-slider-thumb {
+        width: 12px;
+        -webkit-appearance: none;
+        appearance: none;
+        height: 15px;
+        background: white;
+        box-shadow: -405px 0 0 400px rgba(67, 56, 202, 1);
+        border-radius: 50%;
+    }
+}
+
+#body-index {
+    background-image: url(/src/assets/img/bg_inicio_registro/index.jpg);
+}
+
+#body-registro {
+    background-image: url(/src/assets/img/bg_inicio_registro/registro.jpg);
+}
+
+#sesion-usuario {
+    background-image: url(/src/assets/img/bg_inicio_registro/sesion_usuario.jpg);
+}
+
+#sesion-proveedor {
+    background-image: url(/src/assets/img/bg_inicio_registro/sesion_proveedor.jpg);
+}
+
+#sesion-rider {
+    background-image: url(/src/assets/img/bg_inicio_registro/sesion_rider.jpg);
+}
+
+#registro-usuario {
+    background-image: url(/src/assets/img/bg_inicio_registro/registro_usuario.jpg);
+}
+
+#registro-rider {
+    background-image: url(/src/assets/img/bg_inicio_registro/registro_rider.jpg);
+}
+
+#registro-proveedor {
+    background-image: url(/src/assets/img/bg_inicio_registro/registro_proveedor.jpg);
+}
+
+#fondo-app {
+    min-height: 200px;
+    background-image: url(/src/assets/img/mujer_usando_telefono.jpg);
+}
+
+#hero-prductos {
+    background-image: url(/src/assets/img/hero_productos.jpg);
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#hero-inicio-usuario {
+    background: linear-gradient(rgba(10, 10, 10, 0.3), rgba(10, 10, 10, 0.3)),
+        url(/src/assets/img/hero_inicio_usuario.jpeg);
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#fondo-pro-version {
+    background: url(/src/assets/svg/confeti.svg);
+    background-color: #100e34;
+}
+
+#fondo-restaurante {
+    background: linear-gradient(rgba(10, 10, 10, 0.3), rgba(10, 10, 10, 0.3)),
+        url(/src/assets/img/fondo_restaurante.jpg);
+    background-position: bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#body-index,
+#body-registro,
+#sesion-usuario,
+#sesion-proveedor,
+#sesion-rider,
+#registro-usuario,
+#registro-proveedor,
+#registro-rider,
+#fondo-app {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
