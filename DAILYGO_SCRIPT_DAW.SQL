@@ -351,19 +351,20 @@ INSERT INTO RIDERS(DNI_RID, NOM_RID, APE_RID, TLF_RID, MAIL_RID, PW_RID)
 · FECH_VEN -> fecha
 · ESTADO_VEN -> estado entregado/no entregado
 · COM_VEN -> comentario
+`COD_CLI_VEN` int(11) NOT NULL COMMENT 'Código Cliente',
 */
 
 INSERT INTO VENTAS (COD_CLI_VEN, DNI_RID_VEN, DIR_VEN, FECH_VEN, ESTADO_VEN, COM_VEN) 
 VALUES
 (1, '11234356G', 'Margaritas, 81', '18-03-2022', 'Entregado', 'Cuidado con el perro'),
 (1, '12345465X', 'Av. de Concha Espina, 14', '28-05-2022', 'Entregado', 'La entrada está en obras'),
-(1, '11264584L', 'Margaritas, 81, 14', '30-05-2022', 'Entregado'),
-(2, '12345465X', 'Lucecitas, 22', '12-01-2022', 'Entregado'),
-(2, '11264584L', 'Lucecitas, 22', '23-03-2022', 'Entregado'),
-(2, '11234356G', 'Don Juan, 14', '28-03-2022', 'Entregado'),
-(3, '11234356G', 'General Ricardos 32', '20-03-2022', 'Entregado'),
-(3, '11264584L', 'General Ricardos 32', '11-05-2022', 'Entregado'),
-(3, '12345465X', 'General Ricardos 32', '28-05-2022', 'Entregado');
+(1, '11264584L', 'Margaritas, 81, 14', '30-05-2022', 'Entregado', ''),
+(2, '12345465X', 'Lucecitas, 22', '12-01-2022', 'Entregado', ''),
+(2, '11264584L', 'Lucecitas, 22', '23-03-2022', 'Entregado', ''),
+(2, '11234356G', 'Don Juan, 14', '28-03-2022', 'Entregado', ''),
+(3, '11234356G', 'General Ricardos 32', '20-03-2022', 'Entregado', ''),
+(3, '11264584L', 'General Ricardos 32', '11-05-2022', 'Entregado', ''),
+(3, '12345465X', 'General Ricardos 32', '28-05-2022', 'Entregado', '');
 
 /*
  ····INSERCIÓN DE DETALLES DE VENTAS····
@@ -390,4 +391,3 @@ VALUES
 (8, 23, 1),
 (8, 67, 4),
 (9, 48, 2);
-
