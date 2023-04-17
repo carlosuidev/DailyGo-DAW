@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DailyGo | Pedidos ultrarrápidos</title>
-    <link href="/dist/output.css" rel="stylesheet">
+    <script src="../styles/tailwind.js"></script>
     <link rel="stylesheet" href="../styles/global.css">
     <link rel="shortcut icon" href="../assets/svg/favicon.svg" type="image/x-icon">
 </head>
@@ -103,9 +103,39 @@
             <div class="w-full grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-4">
                 <div class="col-span-1 lg:col-span-1 md:col-span-1 antialiased text-gray-900">
                     <div>
-                        <img src="https://source.unsplash.com/random/450x350" alt=" random imgee"
-                            class="w-full object-cover object-center rounded-lg shadow-md">
-                        <div class="relative px-4 -mt-16">
+                        <div class="w-full object-cover object-center rounded-lg shadow-sm border" style="height: 250px; background-size: cover; background-position: bottom; background-image: url('https://mcdonalds.es/api/cms/images/mcdonalds-es/2635e21b-9bae-4835-9efe-defc1ab25c1b_1080x943_App_Bundles_McMBM.png');">
+                        </div>
+                        <div class="relative px-4 -mt-12">
+                            <div class="bg-white p-5 rounded-lg shadow-lg hover:shadow-2xl duration-300 flex flex-col justify-between">
+                                <div>
+                                    <p class="font-bold mb-1">Big Mac Clásica</p>
+                                    <div class="flex text-sm mb-2 gap-3 flex-wrap">
+                                        <div class="cursor-pointer flex flex-wrap items-center gap-1.5">
+                                            <img src="../assets/svg/valoracion.svg" alt="restaurante" width="16">
+                                            <p>98%</p>
+                                        </div>
+                                        <p>|</p>
+                                        <div class="cursor-pointer flex flex-wrap items-center gap-1.5">
+                                            <img src="../assets/svg/tiempo.svg" alt="tiempo" width="16">
+                                            <p>15 min</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between gap-3 items-center mt-1">
+                                    <p class="text-xl font-semibold">9,99 €</p>
+                                    <button class="duration-300 text-white flex items-center justify-center bg-indigo-700 rounded-md hover:bg-indigo-800 w-10 h-10 text-xl">
+                                        <img src="../assets/svg/agregar.svg" alt="+">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-1 lg:col-span-1 md:col-span-1 antialiased text-gray-900">
+                    <div>
+                        <div class="w-full object-cover object-center rounded-lg shadow-sm border" style="height: 250px; background-size: cover; background-position: bottom; background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZVR67ucryugbnwRHybzEvj8tL4IyAyhPYXOH6Tuwpa0OLxHvGr0ZXJuv-ETAYMWm_YIY&usqp=CAU');">
+                        </div>
+                        <div class="relative px-4 -mt-12">
                             <div class="bg-white p-5 rounded-lg shadow-lg hover:shadow-2xl duration-300 flex flex-col justify-between">
                                 <div>
                                     <p class="font-bold mb-1">Big Mac Clásica</p>
