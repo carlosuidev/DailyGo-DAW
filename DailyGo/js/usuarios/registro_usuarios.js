@@ -328,12 +328,12 @@ function respuestaCrearUsuario() {
         if (xhrNuevoUsuario.readyState == 4 && xhrNuevoUsuario.status == 200) {
             let jsonCrearUsuario = JSON.parse(xhrNuevoUsuario.responseText);
             if (jsonCrearUsuario[0].msg === "creado") {
-                localStorage.setItem("id", jsonCrearUsuario[0].id);
                 localStorage.setItem("nombre", nombre.value);
                 localStorage.setItem("apellidos", apellidos.value);
                 localStorage.setItem("correo", correo.value);
                 localStorage.setItem("telefono", apellidos.value);
-                // Redirección
+                localStorage.setItem("tipoUsuario", "usuario");
+                window.location.href = "../../src/index.html";
             } else {
                 const errorCrear = document.getElementById("errorCrear");
                 errorCrear.setAttribute("class", "flex");

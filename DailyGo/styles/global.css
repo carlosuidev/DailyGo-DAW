@@ -17,6 +17,10 @@
     }
 }
 
+p,a,h1,h2,h3,h4,h5,h6,small,span{
+    text-wrap: balance !important;
+}
+
 #body-index {
     background-image: url(../assets/img/bg_inicio_registro/index.jpg);
 }

@@ -115,13 +115,20 @@ function respuestaEntrar() {
             let jsonEntrar = JSON.parse(xhrEntrar.responseText);
             if (jsonEntrar[0].msg === "dentro") {
                 switch (tipoUsuario.value) {
-                    case "cliente":
-                        localStorage.setItem("id", jsonEntrar[0].id);
+                    case "administrador":
                         localStorage.setItem("nombre", nombre.value);
                         localStorage.setItem("apellidos", apellidos.value);
                         localStorage.setItem("correo", correo.value);
-                        localStorage.setItem("telefono", apellidos.value);
-                        // Redirección
+                        localStorage.setItem("telefono", telefono.value);
+                        localStorage.setItem("tipoUsuario", "administrador");
+                        break;
+                        
+                    case "usuario":
+                        localStorage.setItem("nombre", nombre.value);
+                        localStorage.setItem("apellidos", apellidos.value);
+                        localStorage.setItem("correo", correo.value);
+                        localStorage.setItem("telefono", telefono.value);
+                        localStorage.setItem("tipoUsuario", "usuario");
                         break;
 
                     case "rider":
@@ -129,17 +136,17 @@ function respuestaEntrar() {
                         localStorage.setItem("apellidos", apellidos.value);
                         localStorage.setItem("correo", correo.value);
                         localStorage.setItem("dni", dni.value);
-                        localStorage.setItem("telefono", apellidos.value);
-                        // Redirección
+                        localStorage.setItem("telefono", telefono.value);
+                        localStorage.setItem("tipoUsuario", "rider");
                         break;
 
                     case "proveedor":
                         localStorage.setItem("razonSocial", razonSocial.value);
                         localStorage.setItem("nif", nif.value);
                         localStorage.setItem("correo", correo.value);
-                        localStorage.setItem("telefono", apellidos.value);
+                        localStorage.setItem("telefono", telefono.value);
                         localStorage.setItem("direccion", direccion.value);
-                        // Redirección
+                        localStorage.setItem("tipoUsuario", "proveedor");
                         break;
 
                     default:
@@ -149,6 +156,8 @@ function respuestaEntrar() {
             } else {
                 msgIncorrecto.setAttribute("class", "flex");
             }
+
+            window.location.href = "../../src/index.html";
         }
     } catch (error) {
         console.log(
