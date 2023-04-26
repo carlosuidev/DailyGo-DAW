@@ -7,9 +7,7 @@ const tipoUsuario = document.getElementById("tipoUsuario").value;
 const msgIncorrecto = document.getElementById("msgIncorrecto");
 const btnEntrar = document.getElementById("btnEntrar");
 const correo = document.getElementById("correo");
-const msgCorreo = document.getElementById("msgCorreo");
 const contrasena = document.getElementById("contrasena");
-const msgContrasena = document.getElementById("msgContrasena");
 
 function iniciarEventos() {
     correo.addEventListener("input", validarCorreo);
@@ -26,7 +24,6 @@ function validarCorreo() {
                 "class",
                 "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
-            msgCorreo.setAttribute("class", "hidden");
 
             return true;
         } else {
@@ -34,7 +31,6 @@ function validarCorreo() {
                 "class",
                 "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
-            msgCorreo.setAttribute("class", "flex");
 
             return false;
         }
@@ -53,7 +49,6 @@ function validarContrasena() {
                 "class",
                 "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
-            msgContrasena.setAttribute("class", "hidden");
 
             return true;
         } else {
@@ -61,7 +56,6 @@ function validarContrasena() {
                 "class",
                 "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
-            msgContrasena.setAttribute("class", "flex");
 
             return false;
         }

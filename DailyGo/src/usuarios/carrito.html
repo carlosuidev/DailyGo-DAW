@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DailyGo | Pedidos ultrarrápidos</title>
+    <script src="../../styles/tailwind.js"></script>
+    <link rel="stylesheet" href="../../styles/global.css">
+    <link rel="shortcut icon" href="../../assets/svg/favicon.svg" type="image/x-icon">
+</head>
+
+<body class="font-medium text-blue-800">
+    <div class="cursor-pointer hover:shadow-lg duration-300 fixed bottom-0 w-full bg-blue-800 text-white p-2"
+        id="contadorPedidos">
+        <div class="container mx-auto py-3 flex items-center gap-8 flex-shrink-0">
+            <div class="flex justify-start w-full gap-5 overflow-x-auto" id="listProductosBar">
+                <div class="shrink-0 bg-blue-700 rounded-md p-2">
+                    <p class="text-sm">Big Mac</p>
+                    <p class="text-sm font-normal text-blue-300"><span>1 ud.</span> | <span>3,75€</span></p>
+                </div>
+                <div class="shrink-0 bg-blue-700 rounded-md p-2">
+                    <p class="text-sm">Patatas</p>
+                    <p class="text-sm font-normal text-blue-300"><span>1 ud.</span> | <span>1,00€</span></p>
+                </div>
+                <div class="shrink-0 bg-blue-700 rounded-md p-2">
+                    <p class="text-sm">McFlurry Oreo</p>
+                    <p class="text-sm font-normal text-blue-300"><span>2 ud.</span> | <span>6,82€</span></p>
+                </div>
+            </div>
+            <div class="border-l pl-5">
+                <small>Total</small>
+                <p>10,50€</p>
+            </div>
+            <button class="shrink-0 bg-yellow-400 text-blue-800 font-bold hover:bg-yellow-500 duration-300 rounded px-3 py-4">Revisar pedido</button>
+        </div>
+    </div>
+    <!--
+    <div class="cursor-pointer hover:shadow-lg duration-300 fixed bottom-5 right-5 bg-blue-800 rounded-full text-white p-2"
+        id="contadorPedidos">
+        <div class="flex items-center bg-indigo-600 rounded-full">
+            <div class="rounded-full w-12 h-12 bg-white flex items-center justify-center">
+                <img src="../../assets/svg/bolsa_compra.svg" width="28">
+                <p class="absolute text-sm mt-1.5 font-bold">2</p>
+            </div>
+            <p class="bg-indigo-600 text-white font-semibold py-2 p-3 rounded-full">Pedir ahora</p>
+        </div>
+    </div>
+    -->
+
+    <nav class="bg-white shadow-lg fixed w-full z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between">
+                <a href="inicio.html" class="flex items-center py-5 px-2">
+                    <img src="../../assets/svg/logo.svg" alt="DailyGo" width="110">
+                </a>
+                <div class="hidden md:flex items-center space-x-3">
+                    <a href="inicio.html#info-ayuda">Ayuda</a>
+                    <a href="pedidos.html">Promociones</a>
+                    <a href="pedidos.html">Mis Pedidos</a>
+                    <a href="perfil.html">Mi Perfil</a>
+                </div>
+
+
+                <!-- Móvil -->
+                <div class="md:hidden flex items-center">
+                    <button class="outline-none mobile-menu-button">
+                        <svg class=" w-6 h-6" x-show="!showMenu" fill="none" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Menú móvil -->
+        <div class="hidden mobile-menu">
+            <div class="flex flex-col justify-center items-center">
+                <div
+                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
+                    <a href="inicio.html#info-ayuda">Ayuda</a>
+                </div>
+                <div
+                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
+                    <a href="pedidos.html">Promociones</a>
+                </div>
+                <div
+                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
+                    <a href="pedidos.html">Mis Pedidos</a>
+                </div>
+                <div
+                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
+                    <a href="perfil.html">Mi Perfil</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-36">
+        <div class="container mx-auto p-5">
+            <h3 class="text-2xl font-bold">Resumen de compra</h3>
+            <hr class="w-full my-2 mb-5">
+            <div class="grid grid-cols-6 gap-3">
+                <div class="col-span-4 bg-white p-5 rounded-lg shadow-sm border flex flex-col mt-6">
+                    <div class="overflow-x-auto">
+                        <div class="inline-block min-w-full align-middle">
+                            <div class="overflow-hidden border border-blue-100 md:rounded-lg">
+                                <table class="min-w-full divide-y divide-blue-100">
+                                    <thead class="bg-blue-100/20 text-left">
+                                        <tr>
+                                            <th scope="col" class="p-4 text-sm font-semibold text-blue-800">
+                                                Producto
+                                            </th>
+                                            <th scope="col" class="p-4 text-sm font-semibold text-blue-800">
+                                                Precio unidad<span class="text-xs">*</span>
+                                            </th>
+                                            <th scope="col" class="p-4 text-sm font-semibold text-blue-800">
+                                                Cantidad
+                                            </th>
+                                            <th scope="col" class="p-4 text-sm font-semibold text-blue-800">
+                                                Total
+                                            </th>
+                                            <th scope="col" class="p-4 text-sm font-semibold text-blue-800">
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-blue-200" id="listaProductosTabla">
+                                        <tr class="hover:bg-blue-100/20 duration-300">
+                                            <td class="p-4 text-sm font-medium">
+                                                <div>
+                                                    <p>Big Mac</p>
+                                                    <p class="text-sm font-normal text-blue-300">McDondald´s</p>
+                                                </div>
+                                            </td>
+                                            <td class="p-4 text-sm">
+                                                4,49€
+                                            </td>
+                                            <td class="p-4 text-sm text-center">
+                                                <div class="flex gap-2">
+                                                    <button
+                                                        class="cursor-pointer duration-300 bg-white border border-blue-200 hover:bg-green-500 w-5 h-5 font-bold rounded-full"
+                                                        onclick="aumentarCantidad(id)">
+                                                        <p class="relative bottom-0.5">+</p>
+                                                    </button>
+                                                    <p>2</p>
+                                                    <button
+                                                        class="cursor-pointer duration-300 bg-white border border-blue-200 hover:bg-red-500 w-5 h-5 font-bold rounded-full"
+                                                        onclick="reducirCantidad(id)">
+                                                        <p class="relative bottom-0.5">-</p>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                            <td class="p-4 text-sm">
+                                                8,98€
+                                            </td>
+                                            <td class="p-4 text-sm">
+                                                <button
+                                                    class="cursor-pointer duration-300 bg-white border border-red-500 text-red-500 hover:text-white hover:bg-red-500 w-5 h-5 rounded-full"
+                                                    onclick="elimianrProducto(id)">
+                                                    <p class="relative bottom-0.5">x</p>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <footer class="mt-16">
+
+    </footer>
+
+    <script src="../../js/global/navbar.js"></script>
+</body>
+
+</html>

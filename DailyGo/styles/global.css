@@ -17,6 +17,88 @@
     }
 }
 
+::-webkit-scrollbar {
+    border-radius: 100px;
+    height: 3px;
+    width: 5px;
+}
+
+::-webkit-scrollbar-track  {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    transition: 300ms;
+    background-color: rgb(78, 73, 168);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    transition: 300ms;
+    background-color: rgb(48, 45, 104);
+}
+
+h1{
+    font-size: 3.75rem !important;
+    line-height: 4.2rem !important;
+}
+
+h2{
+    font-size: 2.5rem !important;
+    line-height: 3rem !important;
+}
+
+h3{
+    font-size: 1.87rem !important;
+    line-height: 2.3rem !important;
+}
+
+h4{
+    font-size: 1.2rem !important;
+    line-height: 1.7rem !important;
+}
+
+h5{
+    font-size: 1rem !important;
+    line-height: 1.4rem !important;
+}
+
+h6{
+    font-size: 0.8rem !important;
+    line-height: 1.25rem !important;
+}
+
+@media (max-width: 640px) {
+    h1{
+        font-size: 2.5rem !important;
+        line-height: 3rem !important;
+    }
+    
+    h2{
+        font-size: 2rem !important;
+        line-height: 2.4rem !important;
+    }
+    
+    h3{
+        font-size: 1.5rem !important;
+        line-height: 2rem !important;
+    }
+    
+    h4{
+        font-size: 1.2rem !important;
+        line-height: 1.7rem !important;
+    }
+    
+    h5{
+        font-size: 1rem !important;
+        line-height: 1.5rem !important;
+    }
+    
+    h6{
+        font-size: 0.8rem !important;
+        line-height: 1.25rem !important;
+    }
+}
+
 p,a,h1,h2,h3,h4,h5,h6,small,span{
     text-wrap: balance !important;
 }
@@ -67,15 +149,10 @@ p,a,h1,h2,h3,h4,h5,h6,small,span{
 
 #hero-inicio-usuario {
     background: linear-gradient(rgba(10, 10, 10, 0.3), rgba(10, 10, 10, 0.3)),
-        url(../assets/img/hero_inicio_usuario.jpeg);
+        url(../assets/img/fondo_comida_hero.jpg);
     background-position: top;
     background-size: cover;
     background-repeat: no-repeat;
-}
-
-#fondo-pro-version {
-    background: url(../assets/svg/confeti.svg);
-    background-color: #100e34;
 }
 
 #fondo-restaurante {

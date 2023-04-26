@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DailyGo | Pedidos ultrarrápidos</title>
+    <script src="../../styles/tailwind.js"></script>
+    <link rel="stylesheet" href="../../styles/global.css">
+    <link rel="shortcut icon" href="../../assets/svg/favicon.svg" type="image/x-icon">
+</head>
+
+<body class="font-medium text-white bg-blue-900">
+    <nav class="bg-blue-800 text-white shadow-lg fixed w-full z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between">
+                <a href="#" class="flex items-center py-4 px-2">
+                    <img src="../../assets/svg/logo_white.svg" alt="DailyGo">
+                </a>
+                <div class="hidden md:flex items-center gap-3">
+                    <a href="#">Consultas</a>
+                    <a href="#">Pedidos</a>
+                    <a href="#">Proveedores</a>
+                    <a href="#">Riders</a>
+                    <a href="#">Usuarios</a>
+                </div>
+
+                <!-- Móvil -->
+                <div class="md:hidden flex items-center">
+                    <button class="outline-none mobile-menu-button">
+                        <svg class=" w-6 h-6" x-show="!showMenu" fill="none" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Menú móvil -->
+        <div class="hidden mobile-menu">
+            <div class="flex flex-col justify-center items-center">
+                <div
+                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-white hover:text-blue-800 focus:text-blue-800 focus:bg-white">
+                    <a href="#">Consultas</a></div>
+                <div
+                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-white hover:text-blue-800 focus:text-blue-800 focus:bg-white">
+                    <a href="#">Pedidos</a></div>
+                <div
+                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-white hover:text-blue-800 focus:text-blue-800 focus:bg-white">
+                    <a href="#">Proveedores</a></div>
+                <div
+                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-white hover:text-blue-800 focus:text-blue-800 focus:bg-white">
+                    <a href="#">Riders</a></div>
+                <div
+                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-white hover:text-blue-800 focus:text-blue-800 focus:bg-white">
+                    <a href="#">Usuarios</a></div>
+                <button>Salir</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="lg:py-36 md:py-24 py-24">
+        <div class="container mx-auto p-5 lg:p-0 md:p-5">
+            <h2 class="text-xl lg:text-3xl md:text-3xl font-bold">Gestión de usuarios</h2>
+            <hr class="mt-4 mb-12">
+            <div>
+                
+            </div>
+            <table class="w-full table-auto">
+                <thead class="bg-blue-600 text-left">
+                    <tr class="border-b border-blue-700">
+                        <th class="p-4">Nombre</th>
+                        <th class="p-4">Apellidos</th>
+                        <th class="p-4">Teléfono</th>
+                        <th class="p-4">Correo electrónico</th>
+                        <th class="p-4">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="listaUsuarios">
+                    
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+
+</html>

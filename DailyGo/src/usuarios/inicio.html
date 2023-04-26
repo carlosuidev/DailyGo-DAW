@@ -1,92 +1,171 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DailyGo | Pedidos ultrarrápidos</title>
-    <script src="../styles/tailwind.js"></script>
-    <link rel="stylesheet" href="../styles/global.css">
-    <link rel="shortcut icon" href="../assets/svg/favicon.svg" type="image/x-icon">
+    <script src="../../styles/tailwind.js"></script>
+    <link rel="stylesheet" href="../../styles/global.css">
+    <link rel="shortcut icon" href="../../assets/svg/favicon.svg" type="image/x-icon">
 </head>
+
 <body class="font-medium text-blue-800">
-    <nav class="bg-white fixed z-50 w-full py-4 px-5 lg:px-0 md:px-5 shadow">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#"><img src="../assets/svg/logo.svg" alt=""></a>
-            <div class="flex gap-3 items-center">
-                <a href="#" class="text-sm rounded px-2 py-1.5 bg-yellow-400 text-blue-900 duration-300 hover:bg-yellow-500">Pasar a <span class="font-bold">PRO</span></a>
-                <a href="#">Carrito</a>
-                <a href="#">Pedidos</a>
-                <a href="#">Perfil</a>
+    <div class="cursor-pointer hover:shadow-lg duration-300 fixed bottom-5 right-5 bg-blue-800 rounded-full text-white p-2"
+    id="contadorPedidos">
+    <div class="flex items-center bg-indigo-600 rounded-full">
+        <div class="rounded-full w-12 h-12 bg-white flex items-center justify-center">
+            <img src="../../assets/svg/bolsa_compra.svg" width="28">
+            <p class="absolute text-sm mt-1.5 font-bold">2</p>
+        </div>
+        <p class="bg-indigo-600 text-white font-semibold py-2 p-3 rounded-full">Pedir ahora</p>
+    </div>
+</div>
+
+<nav class="bg-white shadow-lg fixed w-full z-40">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between">
+            <a href="inicio.html" class="flex items-center py-5 px-2">
+                <img src="../../assets/svg/logo.svg" alt="DailyGo" width="110">
+            </a>
+            <div class="hidden md:flex items-center space-x-3">
+                <a href="inicio.html#info-ayuda">Ayuda</a>
+                <a href="pedidos.html">Promociones</a>
+                <a href="pedidos.html">Mis Pedidos</a>
+                <a href="perfil.html">Mi Perfil</a>
+            </div>
+
+
+            <!-- Móvil -->
+            <div class="md:hidden flex items-center">
+                <button class="outline-none mobile-menu-button">
+                    <svg class=" w-6 h-6" x-show="!showMenu" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
             </div>
         </div>
-    </nav>
+    </div>
+    <!-- Menú móvil -->
+    <div class="hidden mobile-menu">
+        <div class="flex flex-col justify-center items-center">
+            <div
+                class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
+                <a href="inicio.html#info-ayuda">Ayuda</a></div>
+                <div
+                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
+                    <a href="pedidos.html">Promociones</a>
+                </div>
+                <div
+                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
+                    <a href="pedidos.html">Mis Pedidos</a>
+                </div>
+                <div
+                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
+                    <a href="perfil.html">Mi Perfil</a>
+                </div>
+            </div>
+        </div>
+</nav>
 
     <section class="bg-indigo-700 pt-36 pb-36" id="hero-inicio-usuario">
         <div class="container mx-auto flex flex-col justify-center items-center p-5 lg:p-0 md:p-5">
-            <h1 class="text-6xl font-bold text-white text-center mb-8">Pedidos y comidas a <br class="hidden lg:block md:hidden"> domicilio en minutos</h1>
+            <h1 class="font-bold text-white text-center mb-8">Pedidos y comidas a <br
+                    class="hidden lg:block md:hidden"> domicilio en minutos</h1>
             <div class="bg-white z-10 p-5 rounded-lg flex justify-center items-center gap-3 w-full lg:w-1/2 md:w-full">
-                <input type="text" name="dni" id="dni" class="w-full rounded-md border border-blue-100 focus:border-indigo-700 p-4 bg-blue-100/10 focus:bg-blue-100/30 duration-300" placeholder="¿Qué te apetece? Escribe el local que desees">
-                <button class="duration-300 text-white bg-indigo-700 rounded-md font-semibold hover:bg-indigo-800 p-4 w-fit">Buscar</button>
+                <input type="text" name="dni" id="dni"
+                    class="w-full rounded-md border border-blue-100 focus:border-indigo-700 p-4 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                    placeholder="¿Qué te apetece? Escribe el local que desees">
+                <button
+                    class="duration-300 text-white bg-indigo-700 rounded-md font-semibold hover:bg-indigo-800 p-4 w-fit">Buscar</button>
             </div>
-            
+
         </div>
     </section>
 
-    <section class="p-5 mt-16">
+    <section class="mt-12 lg:mt-20 md:mt-18 p-5 lg:p-3 md:p-5">
         <div class="container bg-blue-900 mx-auto rounded-lg">
             <div class="grid grid-cols-2 items-center justify-center gap-8">
-                <div class="col-span-2 lg:col-span-1 md:col-span-1 bg-blue-900 p-16 rounded-lg">
-                    <h2 class="text-3xl text-white font-bold">Descarga nuestra aplicación <br class="hidden lg:block md:hidden"> y pide desde tu teléfono</h2>
+                <div class="col-span-2 lg:col-span-1 md:col-span-1 bg-blue-900 p-8 lg:p-16 rounded-lg">
+                    <h2 class="text-white font-bold">Descarga nuestra aplicación <br
+                            class="hidden lg:block md:hidden"> y pide desde tu teléfono</h2>
                     <div class="flex gap-3 mt-5">
                         <a href="https://www.apple.com/es/app-store/">
-                            <img src="../assets/svg/app_store_logo.svg" alt="App Store">
+                            <img src="../../assets/svg/app_store_logo.svg" alt="App Store">
                         </a>
                         <a href="https://play.google.com/store/games?hl=es&gl=US&pli=1">
-                            <img src="../assets/svg/google_play_logo.svg" alt="Google Play">
+                            <img src="../../assets/svg/google_play_logo.svg" alt="Google Play">
                         </a>
                     </div>
                 </div>
-                <div class="hidden lg:block md:block col-span-2 lg:col-span-1 md:col-span-1 w-full h-full lg:rounded-r-lg" id="fondo-app">
+                <div class="hidden lg:block md:block col-span-2 lg:col-span-1 md:col-span-1 w-full h-full lg:rounded-r-lg"
+                    id="fondo-app">
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="mt-20 p-5 lg:p-3 md:p-5">
-        <div class="container mx-auto grid grid-cols-2 gap-8">
-            <div>
-                <h5 class="text-lg font-bold text-indigo-700">TUS LOCALES DE SIEMPRE</h5>
-                <h3 class="text-3xl font-bold">Del restaruante a tu puerta</h3>
-                <p class="w-full lg:w-2/3 md:w-full mt-5">Encuentra tus restaurantes favoritos con los descuentos más atractivos para pedir comida. Date de alta en nuestra newsletter y recibe los mejores descuentos en comida a domicilio</p>
+    <section class="mt-12 lg:mt-20 md:mt-18 p-5 lg:p-3 md:p-5">
+        <div class="container mx-auto flex flex-col items-center">
+            <div class="text-center items-center">
+                <h5 class="font-bold text-indigo-700">TUS LOCALES DE SIEMPRE</h5>
+                <h3 class="font-bold">Del restaruante a tu puerta</h3>
+                <p class="px-0 lg:px-64 md:px-5 mt-5">Encuentra tus restaurantes favoritos con los descuentos más
+                    atractivos para pedir comida. Date de alta en nuestra newsletter y recibe los mejores descuentos en
+                    comida a domicilio</p>
             </div>
-            <div>
-                <img src="" alt="">
+            <div class="mt-8">
+                <img src="" alt="">Vídeo
             </div>
         </div>
     </section>
 
 
-    <section class="mt-20 p-5 lg:p-3 md:p-5">
+    <section class="mt-12 lg:mt-20 md:mt-18 p-5 lg:p-3 md:p-5" id="info-ayuda">
         <div class="container mx-auto">
-            <h5 class="text-lg font-bold text-indigo-700">INFORMACIÓN Y AYUDA</h5>
-            <h2 class="text-3xl font-bold">Contacta con nosotros</h2>
+            <h5 class="font-bold text-indigo-700 lg:text-left md:text-center text-center">INFORMACIÓN Y AYUDA</h5>
+            <h3 class="font-bold lg:text-left md:text-center text-center">Contacta con nosotros</h3>
             <div class="grid grid-cols-2 gap-8 mt-8">
-                <div class="col-span-2 lg:col-span-1 md:col-span-1 flex flex-col gap-5 pt-5">
-                    <div class="flex gap-5"><img width="20" src="../assets/svg/telefono.svg" alt="teléfono"> +34 604 34 23 12</div>
-                    <div class="flex gap-5"><img width="20" src="../assets/svg/correo.svg" alt="correo"> hello@dailygo.com</div>
-                    <div class="flex gap-5"><img width="20" src="../assets/svg/calle.svg" alt="calle"> C/ Tolosa, 2, 4, 28041 Madrid</div>
+                <div
+                    class="mb-5 items-center md:items-start lg:items-start col-span-2 lg:col-span-1 md:col-span-1 flex flex-col gap-5 pt-5">
+                    <div class="flex gap-5"><img width="20" src="../../assets/svg/telefono.svg" alt="teléfono"> +34 604
+                        34
+                        23 12</div>
+                    <div class="flex gap-5"><img width="20" src="../../assets/svg/correo.svg" alt="correo">
+                        hello@dailygo.com</div>
+                    <div class="flex gap-5"><img width="20" src="../../assets/svg/calle.svg" alt="calle"> C/ Tolosa, 2,
+                        4,
+                        28041 Madrid</div>
                 </div>
                 <form class="col-span-2 lg:col-span-1 md:col-span-1">
+                    <div id="respuestaPeticion" class="mb-4">
+                    </div>
                     <div class="flex flex-col mb-4">
                         <label for="asunto" class="mb-2">Asunto</label>
-                        <input type="text" name="asunto" id="asunto" class="rounded-md border border-blue-100 focus:border-blue-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300 " placeholder="¿Por qué contactas con nosotros?">
+                        <input type="text" name="asunto" id="asunto"
+                            class="rounded-md border border-blue-100 focus:border-blue-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                            placeholder="¿Por qué contactas con nosotros?">
+                        <div id="msgAsunto" class="hidden">
+                            <small class="text-xs text-red-500 mt-1">Use un asunto corto y evitando caracteres
+                                especiales</small>
+                        </div>
                     </div>
                     <div class="flex flex-col mb-4">
                         <label for="descripcion" class="mb-2">Descripción</label>
-                        <textarea name="descripcion" id="descripcion" class="rounded-md border border-blue-100 focus:border-blue-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300" rows="8"></textarea>
+                        <textarea name="descripcion" id="descripcion"
+                            class="rounded-md border border-blue-100 focus:border-blue-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                            rows="8"></textarea>
+                        <div id="msgDescripcion" class="hidden">
+                            <small class="text-xs text-red-500 mt-1"> Use una descripción detallada y evitando caracteres
+                                especiales</small>
+                        </div>
                     </div>
-                    <button class="duration-300 text-white bg-indigo-700 rounded-md mt-3 font-semibold hover:bg-indigo-800 py-2 w-full">Enviar</button>
+                    <input type="button"
+                    id="btnEnviar"
+                        class="duration-300 text-white bg-indigo-700 rounded-md mt-3 font-semibold hover:bg-indigo-800 py-2 w-full cursor-pointer"
+                        value="Enviar" />
                 </form>
             </div>
         </div>
@@ -95,5 +174,8 @@
     <footer class="mt-16">
 
     </footer>
+    <script src="../../js/usuarios/crear_peticion.js"></script>
+    <script src="../../js/global/navbar.js"></script>
 </body>
+
 </html>

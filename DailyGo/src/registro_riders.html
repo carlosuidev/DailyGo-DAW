@@ -14,14 +14,12 @@
 
 <body class="font-medium min-h-screen flex justify-center items-center text-blue-800">
     <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-3 w-full h-full">
-        <div class="col-span-1 hidden lg:block md:block min-h-screen" id="registro-rider">
-        </div>
         <div class="col-span-1 bg-white flex justify-center items-center px-5 py-16">
             <form class="text-left w-full lg:w-3/4 md:w-3/4">
                 <a href="registro.html">
                     <img src="../assets/svg/logo.svg" alt="DailyGo" width="74">
                 </a>
-                <h3 class="text-3xl font-bold text-blue-800 my-2">Registrarse como rider</h3>
+                <h3 class="font-bold text-blue-800 my-2">Registrarse como rider</h3>
                 <p class="mb-12">¿Ya dispones de una cuenta? <a href="inicio_sesion_riders.html"
                         class="font-semibold text-indigo-600">Inicia sesión</a></p>
                 <div id="errorCrear" class="hidden">
@@ -120,6 +118,8 @@
                 <input type="button" id="crearCuenta"
                     class="duration-300 text-white bg-indigo-700 rounded-md mt-3 font-semibold hover:bg-indigo-800 py-2 w-full cursor-pointer" value="Crear cuenta" />
             </form>
+        </div>
+        <div class="col-span-1 hidden lg:block md:block min-h-screen" id="registro-rider">
         </div>
     </div>
     <script src="../js/riders/registro_rider.js"></script>
