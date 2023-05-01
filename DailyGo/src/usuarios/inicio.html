@@ -11,52 +11,83 @@
     <link rel="shortcut icon" href="../../assets/svg/favicon.svg" type="image/x-icon">
 </head>
 
-<body class="font-medium text-blue-800">
-    <div class="cursor-pointer hover:shadow-lg duration-300 fixed bottom-5 right-5 bg-blue-800 rounded-full text-white p-2"
-    id="contadorPedidos">
-    <div class="flex items-center bg-indigo-600 rounded-full">
-        <div class="rounded-full w-12 h-12 bg-white flex items-center justify-center">
-            <img src="../../assets/svg/bolsa_compra.svg" width="28">
-            <p class="absolute text-sm mt-1.5 font-bold">2</p>
-        </div>
-        <p class="bg-indigo-600 text-white font-semibold py-2 p-3 rounded-full">Pedir ahora</p>
-    </div>
-</div>
-
-<nav class="bg-white shadow-lg fixed w-full z-40">
-    <div class="container mx-auto px-4">
-        <div class="flex justify-between">
-            <a href="inicio.html" class="flex items-center py-5 px-2">
-                <img src="../../assets/svg/logo.svg" alt="DailyGo" width="110">
-            </a>
-            <div class="hidden md:flex items-center space-x-3">
-                <a href="inicio.html#info-ayuda">Ayuda</a>
-                <a href="pedidos.html">Promociones</a>
-                <a href="pedidos.html">Mis Pedidos</a>
-                <a href="perfil.html">Mi Perfil</a>
+<body class="font-medium text-blue-800 pb-36">
+    <!--Resumen pedido PC Y TABLET-->
+    <div class="hover:shadow-lg duration-300 border border-b-0 border-x-0 border-t-1 border-white fixed lg:flex md:flex hidden bottom-0 w-full bg-blue-800 text-white p-2 z-50"
+        id="contadorPedidos">
+        <div class="container mx-auto py-3 flex justify-between items-center gap-8 flex-shrink-0">
+            <div class="flex flex justify-start w-full gap-5 overflow-x-auto" id="listProductosBar">
+                <div class="shrink-0 bg-blue-700 rounded-md p-2">
+                    <p class="text-sm">Big Mac</p>
+                    <p class="text-sm font-normal text-blue-300"><span>1 ud.</span> | <span>3,75€</span></p>
+                </div>
+                <div class="shrink-0 bg-blue-700 rounded-md p-2">
+                    <p class="text-sm">Patatas</p>
+                    <p class="text-sm font-normal text-blue-300"><span>1 ud.</span> | <span>1,00€</span></p>
+                </div>
+                <div class="shrink-0 bg-blue-700 rounded-md p-2">
+                    <p class="text-sm">McFlurry Oreo</p>
+                    <p class="text-sm font-normal text-blue-300"><span>2 ud.</span> | <span>6,82€</span></p>
+                </div>
             </div>
-
-
-            <!-- Móvil -->
-            <div class="md:hidden flex items-center">
-                <button class="outline-none mobile-menu-button">
-                    <svg class=" w-6 h-6" x-show="!showMenu" fill="none" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                        <path d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
+            <div class="border-l pl-5">
+                <small>Total</small>
+                <p id="totalBar"></p>
             </div>
+            <a href="carrito.html"
+                class="shrink-0 bg-yellow-400 text-blue-800 font-bold hover:bg-yellow-500 duration-300 rounded px-3 py-4">Revisar
+                pedido</a>
         </div>
     </div>
-    <!-- Menú móvil -->
-    <div class="hidden mobile-menu">
-        <div class="flex flex-col justify-center items-center">
-            <div
-                class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
-                <a href="inicio.html#info-ayuda">Ayuda</a></div>
+
+    <!--CARRITO MÓVIL-->
+    <a href="carrito.html" class="border border-1 z-50 lg:hidden md:hidden flex cursor-pointer hover:shadow-lg duration-300 fixed bottom-2 right-2 bg-blue-800 rounded-full text-white p-2"
+        id="contadorPedidos">
+        <div class="flex items-center bg-yellow-400 rounded-full">
+            <div class="rounded-full w-12 h-12 bg-white flex items-center justify-center">
+                <img src="../../assets/svg/bolsa_compra.svg" width="28">
+                <p class="absolute text-sm mt-1.5 font-bold">2</p>
+            </div>
+            <p class="bg-yellow-400 text-blue-800 font-bold py-2 pl-2 pr-3 rounded-full">Pedir ahora</p>
+        </div>
+    </a>
+
+    <!--NAVBAR-->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between">
+                <a href="inicio.html" class="flex items-center py-5 px-2">
+                    <img src="../../assets/svg/logo.svg" alt="DailyGo" width="110">
+                </a>
+                <div class="hidden md:flex items-center space-x-3">
+                    <a href="inicio.html#info-ayuda">Ayuda</a>
+                    <a href="promociones.html">Promociones</a>
+                    <a href="pedidos.html">Mis Pedidos</a>
+                    <a href="perfil.html">Mi Perfil</a>
+                </div>
+
+
+                <!-- Móvil -->
+                <div class="md:hidden flex items-center">
+                    <button class="outline-none mobile-menu-button">
+                        <svg class=" w-6 h-6" x-show="!showMenu" fill="none" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Menú móvil -->
+        <div class="hidden mobile-menu">
+            <div class="flex flex-col justify-center items-center">
                 <div
                     class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
-                    <a href="pedidos.html">Promociones</a>
+                    <a href="inicio.html#info-ayuda">Ayuda</a>
+                </div>
+                <div
+                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
+                    <a href="promociones.html">Promociones</a>
                 </div>
                 <div
                     class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
@@ -68,18 +99,19 @@
                 </div>
             </div>
         </div>
-</nav>
+    </nav>
 
     <section class="bg-indigo-700 pt-36 pb-36" id="hero-inicio-usuario">
         <div class="container mx-auto flex flex-col justify-center items-center p-5 lg:p-0 md:p-5">
-            <h1 class="font-bold text-white text-center mb-8">Pedidos y comidas a <br
-                    class="hidden lg:block md:hidden"> domicilio en minutos</h1>
-            <div class="bg-white z-10 p-5 rounded-lg flex justify-center items-center gap-3 w-full lg:w-1/2 md:w-full">
+            <h1 class="font-bold text-white text-center mb-8">Pedidos y comidas a <br class="hidden lg:block md:hidden">
+                domicilio en minutos</h1>
+            <div
+                class="bg-white z-10 p-5 rounded-lg flex lg:flex-row md:flex-row flex-col justify-center items-center gap-3 w-full lg:w-1/2 md:w-full">
                 <input type="text" name="dni" id="dni"
                     class="w-full rounded-md border border-blue-100 focus:border-indigo-700 p-4 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
                     placeholder="¿Qué te apetece? Escribe el local que desees">
                 <button
-                    class="duration-300 text-white bg-indigo-700 rounded-md font-semibold hover:bg-indigo-800 p-4 w-fit">Buscar</button>
+                    class="duration-300 text-white bg-indigo-700 rounded-md font-semibold hover:bg-indigo-800 p-4 lg:w-fit md:w-fit w-full">Buscar</button>
             </div>
 
         </div>
@@ -89,8 +121,7 @@
         <div class="container bg-blue-900 mx-auto rounded-lg">
             <div class="grid grid-cols-2 items-center justify-center gap-8">
                 <div class="col-span-2 lg:col-span-1 md:col-span-1 bg-blue-900 p-8 lg:p-16 rounded-lg">
-                    <h2 class="text-white font-bold">Descarga nuestra aplicación <br
-                            class="hidden lg:block md:hidden"> y pide desde tu teléfono</h2>
+                    <h2 class="text-white font-bold">Descarga nuestra aplicación y pide desde tu teléfono</h2>
                     <div class="flex gap-3 mt-5">
                         <a href="https://www.apple.com/es/app-store/">
                             <img src="../../assets/svg/app_store_logo.svg" alt="App Store">
@@ -113,11 +144,13 @@
                 <h5 class="font-bold text-indigo-700">TUS LOCALES DE SIEMPRE</h5>
                 <h3 class="font-bold">Del restaruante a tu puerta</h3>
                 <p class="px-0 lg:px-64 md:px-5 mt-5">Encuentra tus restaurantes favoritos con los descuentos más
-                    atractivos para pedir comida. Date de alta en nuestra newsletter y recibe los mejores descuentos en
-                    comida a domicilio</p>
+                    atractivos para pedir comida. Disponemos del mayor catálogo de framquicias y restaurantes locales de Madrid.</p>
             </div>
             <div class="mt-8">
-                <img src="" alt="">Vídeo
+                <video width="520" height="10" controls class="rounded-lg" autoplay loop>
+                    <source src="../../assets/video/comida_inicio.mp4" type="video/mp4">
+                    Tu navegador no soporta vídeos 😢
+                </video>
             </div>
         </div>
     </section>
@@ -171,11 +204,44 @@
         </div>
     </section>
 
-    <footer class="mt-16">
-
+    <footer class="mt-24 relative bottom-0">
+        <div class="container mx-auto lg:p-2 md:p-3 p-5">
+            <img src="../../assets/svg/logo.svg" alt="DailyGo" width="128">
+            <div class="grid grid-cols-4 gap-8 mt-8">
+                <div class="lg:col-span-1 md:col-span-1 col-span-2 flex flex-col gap-3">
+                    <p class="font-bold">Sitios</p>
+                    <a href="inicio.html">Inicio</a>
+                    <a href="promociones.html">Promociones</a>
+                    <a href="pedidos.html">Pedidos</a>
+                    <a href="perfil.html">Perfil</a>
+                </div>
+                <div class="lg:col-span-1 md:col-span-1 col-span-2 flex flex-col gap-3">
+                    <p class="font-bold">Información</p>
+                    <a href="../politica_privacidad.html" target="_blank">Política de privacidad</a>
+                    <a href="../terminos_condiciones.html" target="_blank">Términos y condiciones</a>
+                </div>
+                <div class="lg:col-span-1 md:col-span-1 col-span-2 flex flex-col gap-3">
+                    <p class="font-bold">Soporte</p>
+                    <a href="ayuda.html">Ayuda</a>
+                </div>
+            </div>
+            <hr class="my-12">
+            <div class="flex flex-col lg:flex-row md:flex-row lg:justify-between md:justify-between justify-center gap-5 flex-wrap items-center">
+                <small>&copy; DailyGo 2023</small>
+                <div class="flex gap-3 flex-wrap lg:flex-row md:flex-row lg:justify-between md:justify-between justify-center">
+                    <a href="https://www.apple.com/es/app-store/">
+                        <img src="../../assets/svg/app_store_logo.svg" alt="App Store">
+                    </a>
+                    <a href="https://play.google.com/store/games?hl=es&gl=US&pli=1">
+                        <img src="../../assets/svg/google_play_logo.svg" alt="Google Play">
+                    </a>
+                </div>
+            </div>
+        </div>
     </footer>
     <script src="../../js/usuarios/crear_peticion.js"></script>
     <script src="../../js/global/navbar.js"></script>
+    <script src="../../js/usuarios/carrito.js"></script>
 </body>
 
 </html>

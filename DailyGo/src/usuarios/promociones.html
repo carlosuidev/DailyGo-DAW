@@ -41,8 +41,7 @@
     </div>
 
     <!--CARRITO MÓVIL-->
-    <a href="carrito.html"
-        class="border border-1 z-50 lg:hidden md:hidden flex cursor-pointer hover:shadow-lg duration-300 fixed bottom-2 right-2 bg-blue-800 rounded-full text-white p-2"
+    <a href="carrito.html" class="border border-1 z-50 lg:hidden md:hidden flex cursor-pointer hover:shadow-lg duration-300 fixed bottom-2 right-2 bg-blue-800 rounded-full text-white p-2"
         id="contadorPedidos">
         <div class="flex items-center bg-yellow-400 rounded-full">
             <div class="rounded-full w-12 h-12 bg-white flex items-center justify-center">
@@ -105,29 +104,34 @@
 
     <section class="mt-24 p-5 lg:p-3 md:p-5" id="info-ayuda">
         <div class="container mx-auto">
-            <h3 class="font-bold">Seguimiento de pedidos</h3>
+            <h3 class="font-bold lg:text-left md:text-center text-center">Descubre nuestras promociones</h3>
             <hr class="mt-2 mb-5">
-            <div class="grid lg:grid-cols-2 grid-cols-1 gap-4">
-                <div class="bg-white border rounded-lg p-5">
-                    <div class="flex gap-3 justify-content-between">
-                        <div>
-                            <h4 class="font-bold">ID: 43242</h4>
-                            <p class="text-sm text-blue-300">McDonald´s</p>
-                        </div>
-                        
-                        <p>En proceso</p>
+            <div class="grid grid-cols-8 gap-8 mt-8 gap-1">
+                <div class="lg:col-span-2 md:col-span-4 col-span-8 rounded-md p-3 border border-4 border-dashed">
+                    <div class="flex justify-between">
+                        <h4 class="font-bold">10% de descuento</h4>
                     </div>
-                    <iframe class="mt-5 rounded-md"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12151.590089366286!2d-3.7235650448706523!3d40.41112093456269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4227f1d340750d%3A0x309dbf533eaa95b4!2sMcDonald&#39;s!5e0!3m2!1ses!2ses!4v1682864013430!5m2!1ses!2ses"
-                        width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    <button class="w-full">Confirmar recepción</button>
+                    <p class="text-sm mt-1.5 mb-3">Recibe un 10% de descuento en tu compra. Promoción válida para todos los usuarios de DailyGo.</p>
+                    <h4 class="bg-blue-100/50 rounded w-fit px-3 py-2 font-bold">DAILY10</h4>
+                </div>
+                <div class="lg:col-span-2 md:col-span-4 col-span-8 rounded-md p-3 border border-4 border-dashed">
+                    <div class="flex justify-between">
+                        <h4 class="font-bold">20% de descuento</h4>
+                    </div>
+                    <p class="text-sm mt-1.5 mb-3">Recibe un 20% de descuento en tu compra. Promoción válida para todos los usuarios de DailyGo.</p>
+                    <h4 class="bg-blue-100/50 rounded w-fit px-3 py-2 font-bold">DAILY20</h4>
+                </div>
+                <div class="lg:col-span-2 md:col-span-4 col-span-8 rounded-md p-3 border border-4 border-dashed">
+                    <div class="flex justify-between">
+                        <h4 class="font-bold">Envío gratis</h4>
+                    </div>
+                    <p class="text-sm mt-1.5 mb-3">No pagues gastos de envío con el código ENVIO23. Promoción válida para todos los usuarios de DailyGo.</p>
+                    <h4 class="bg-blue-100/50 rounded w-fit px-3 py-2 font-bold">ENVIO23</h4>
                 </div>
             </div>
-
         </div>
     </section>
-
+    
 
     <footer class="mt-24 bottom-0">
         <div class="container mx-auto lg:p-2 md:p-3 p-5">
@@ -151,11 +155,9 @@
                 </div>
             </div>
             <hr class="my-12">
-            <div
-                class="flex flex-col lg:flex-row md:flex-row lg:justify-between md:justify-between justify-center gap-5 flex-wrap items-center">
+            <div class="flex flex-col lg:flex-row md:flex-row lg:justify-between md:justify-between justify-center gap-5 flex-wrap items-center">
                 <small>&copy; DailyGo 2023</small>
-                <div
-                    class="flex gap-3 flex-wrap lg:flex-row md:flex-row lg:justify-between md:justify-between justify-center">
+                <div class="flex gap-3 flex-wrap lg:flex-row md:flex-row lg:justify-between md:justify-between justify-center">
                     <a href="https://www.apple.com/es/app-store/">
                         <img src="../../assets/svg/app_store_logo.svg" alt="App Store">
                     </a>
