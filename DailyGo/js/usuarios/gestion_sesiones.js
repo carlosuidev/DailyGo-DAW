@@ -1,5 +1,5 @@
 const sesionUsuario = localStorage.getItem("tipo");
-document.addEventListener('DOMContentLoaded', comprobarSesionUsuario(sesionUsuario));
+document.addEventListener('DOMContentLoaded', comprobarSesion(sesionUsuario));
 
 function comprobarSesion(tipoUsuario){
     if(tipoUsuario !== "usuario"){

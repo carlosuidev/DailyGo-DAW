@@ -72,16 +72,18 @@ function peticionEntrar() {
         let direccionServer = "";
 
         if (validarCorreo() && validarContrasena()) {
+
             xhrEntrar.onreadystatechange = respuestaEntrar;
+            
             switch (tipoUsuario) {
                 case "rider":
-                    direccionServer = "...";
+                    direccionServer = "../php/inicio_sesion_rider.php";
                     break;
                 case "proveedor":
-                    direccionServer = "...";
+                    direccionServer = "../php/inicio_sesion_proveedor.php";
                     break;
                 case "cliente":
-                    direccionServer = "...";
+                    direccionServer = "../php/inicio_sesion_usuario.php";
                     break;
                 default:
                     direccionServer = "...";
@@ -106,9 +108,10 @@ function peticionEntrar() {
 function respuestaEntrar() {
     try {
         if (xhrEntrar.readyState == 4 && xhrEntrar.status == 200) {
-            let jsonEntrar = JSON.parse(xhrEntrar.responseText);
-            if (jsonEntrar[0].msg === "dentro") {
-                switch (tipoUsuario.value) {
+            console.log(xhrEntrar.responseText)
+            if (xhrEntrar.responseText != 'False') {
+                let jsonEntrar = JSON.parse(xhrEntrar.responseText);
+                switch (tipoUsuario) {
                     case "administrador":
                         localStorage.setItem("nombre", nombre.value);
                         localStorage.setItem("apellidos", apellidos.value);
@@ -117,30 +120,33 @@ function respuestaEntrar() {
                         localStorage.setItem("tipoUsuario", "administrador");
                         break;
                         
-                    case "usuario":
-                        localStorage.setItem("nombre", nombre.value);
-                        localStorage.setItem("apellidos", apellidos.value);
-                        localStorage.setItem("correo", correo.value);
-                        localStorage.setItem("telefono", telefono.value);
+                    case "cliente":
+                        localStorage.setItem("nombre", jsonEntrar.NOM_CLI.value);
+                        localStorage.setItem("apellidos", jsonEntrar.APE_CLI.value);
+                        localStorage.setItem("correo", jsonEntrar.MAIL_CLI.value);
+                        localStorage.setItem("telefono", jsonEntrar.TLF_CLI.value);
                         localStorage.setItem("tipoUsuario", "usuario");
+                        window.location.href = "../src/usuarios/inicio.html";
                         break;
 
                     case "rider":
-                        localStorage.setItem("nombre", nombre.value);
-                        localStorage.setItem("apellidos", apellidos.value);
-                        localStorage.setItem("correo", correo.value);
-                        localStorage.setItem("dni", dni.value);
-                        localStorage.setItem("telefono", telefono.value);
+                        localStorage.setItem("nombre", jsonEntrar.NOM_RID.value);
+                        localStorage.setItem("apellidos", jsonEntrar.APE_RID.value);
+                        localStorage.setItem("correo", jsonEntrar.MAIL_RID.value);
+                        localStorage.setItem("dni", jsonEntrar.DNI_RID.value);
+                        localStorage.setItem("telefono", jsonEntrar.TLF_RID.value);
                         localStorage.setItem("tipoUsuario", "rider");
+                        window.location.href = "../src/riders/inicio.html";
                         break;
 
                     case "proveedor":
-                        localStorage.setItem("razonSocial", razonSocial.value);
-                        localStorage.setItem("nif", nif.value);
-                        localStorage.setItem("correo", correo.value);
-                        localStorage.setItem("telefono", telefono.value);
-                        localStorage.setItem("direccion", direccion.value);
+                        localStorage.setItem("razonSocial", jsonEntrar.RAZSOC.value);
+                        localStorage.setItem("cif", jsonEntrar.CIF_PROV.value);
+                        localStorage.setItem("correo", jsonEntrar.MAIL_PROV.value);
+                        localStorage.setItem("telefono", jsonEntrar.TLF_PROV.value);
+                        localStorage.setItem("direccion", jsonEntrar.DIR_PROV.value);
                         localStorage.setItem("tipoUsuario", "proveedor");
+                        window.location.href = "../src/proveedores/inicio.html";
                         break;
 
                     default:
@@ -151,7 +157,6 @@ function respuestaEntrar() {
                 msgIncorrecto.setAttribute("class", "flex");
             }
 
-            window.location.href = "../../src/index.html";
         }
     } catch (error) {
         console.log(

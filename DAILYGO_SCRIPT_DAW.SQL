@@ -180,21 +180,21 @@ CREATE TABLE `detalle_ventas` (
 */
     INSERT INTO PROVEEDORES (CIF_PROV, RAZSOC, DIR_PROV, TLF_PROV, MAIL_PROV, PW_PROV, IMG_PROV)
 VALUES 
-('A-12344355', 'McDonald´s', 'Magdelena, 4', '555234312', 'hello@mcdonalds.es', '123456', 'img/macas.png'),
-('A-10384850', 'KFC', 'Águila, 28', '555123454', 'hello@kfc.es', '123456', 'img/KFC.png'),
-('B-54364364', 'La Tagliatella', 'Av. General Pérez, 128', '555325675', 'hello@latagliatella.es', '123456', 'img/Tagliatella.png'),
-('A-12342342', 'Domino´s', 'Magdalena, 4', '555553235', 'hello@dominos.es', '123456', 'img/Dominos.png'),
-('A-43242314', 'El Corte Inglés', 'Preciados, 23', '555097874', 'hello@elcorteingles.es', '123456', 'img/ElCorteIngles.png'),
-('A-65623643', 'Starbucks', 'Gran Vía, 234', '555123214', 'hello@starbucks.es', '123456', 'img/Starbucks.png'),
-('G-96865455', 'Bar La Reja', 'Padre Amigo, 23', '555887333', 'hello@barlareja.es', '123456', 'img/LaReja.png'),
-('A-65747547', 'Dunkin Coffee', 'Luces blancas, 1', '555234434', 'hello@dunkincoffee.es', '123456', 'img/Dunkin.png'),
-('A-85743853', 'Gran Nemrut', 'Oporto, 4', '555023821', 'hello@grannemrut.es', '123456', 'img/Nemrut.png'),
-('B-12340090', 'VIPS', 'Av. Paz, 2', '555342398', 'hello@vips.es', '123456', 'img/vips.png'),
-('A-12344365', 'Farmacias Trébol', 'Oca, 33', '555099883', 'hello@farmaciastrebol.es', '123456', 'img/fTrebol.png'),
-('A-12676789', 'Goiko Grill','Tembleque, 8', '555099830',  'hello@goikogrill.es','123456', 'img/goiko.png'),
-('G-65654745', 'UDON', 'Magdalena, 7', '555099949', 'hello@udon.es', '123456', 'img/UDON.png'),
-('A-55654626', 'Pans & Company', 'Av. Tomás, 12', '555667321', 'hello@pans.es', '123456', 'img/pansandcompany.png'),
-('A-12347574', 'Tim Hortons', 'Vía libre, 4', '555671240', 'hello@timhortons.es', '123456', 'img/timHortons.png');
+('A-12344355', 'McDonald´s', 'Magdelena, 4', '555234312', 'hello@mcdonalds.es', '123456Ar', 'img/macas.png'),
+('A-10384850', 'KFC', 'Águila, 28', '555123454', 'hello@kfc.es', '123456Ar', 'img/KFC.png'),
+('B-54364364', 'La Tagliatella', 'Av. General Pérez, 128', '555325675', 'hello@latagliatella.es', '123456Ar', 'img/Tagliatella.png'),
+('A-12342342', 'Domino´s', 'Magdalena, 4', '555553235', 'hello@dominos.es', '123456Ar', 'img/Dominos.png'),
+('A-43242314', 'El Corte Inglés', 'Preciados, 23', '555097874', 'hello@elcorteingles.es', '123456Ar', 'img/ElCorteIngles.png'),
+('A-65623643', 'Starbucks', 'Gran Vía, 234', '555123214', 'hello@starbucks.es', '123456Ar', 'img/Starbucks.png'),
+('G-96865455', 'Bar La Reja', 'Padre Amigo, 23', '555887333', 'hello@barlareja.es', '123456Ar', 'img/LaReja.png'),
+('A-65747547', 'Dunkin Coffee', 'Luces blancas, 1', '555234434', 'hello@dunkincoffee.es', '123456Ar', 'img/Dunkin.png'),
+('A-85743853', 'Gran Nemrut', 'Oporto, 4', '555023821', 'hello@grannemrut.es', '123456Ar', 'img/Nemrut.png'),
+('B-12340090', 'VIPS', 'Av. Paz, 2', '555342398', 'hello@vips.es', '123456Ar', 'img/vips.png'),
+('A-12344365', 'Farmacias Trébol', 'Oca, 33', '555099883', 'hello@farmaciastrebol.es', '123456Ar', 'img/fTrebol.png'),
+('A-12676789', 'Goiko Grill','Tembleque, 8', '555099830',  'hello@goikogrill.es','123456Ar', 'img/goiko.png'),
+('G-65654745', 'UDON', 'Magdalena, 7', '555099949', 'hello@udon.es', '123456Ar', 'img/UDON.png'),
+('A-55654626', 'Pans & Company', 'Av. Tomás, 12', '555667321', 'hello@pans.es', '123456Ar', 'img/pansandcompany.png'),
+('A-12347574', 'Tim Hortons', 'Vía libre, 4', '555671240', 'hello@timhortons.es', '123456Ar', 'img/timHortons.png');
 
 /*
  ····INSERCIÓN DE PRODUCTOS····
@@ -322,9 +322,9 @@ VALUES
 
 INSERT INTO CLIENTES(NOM_CLI, APE_CLI, TLF_CLI, MAIL_CLI, PW_CLI)
 VALUES
-('Carlos', 'Almendros Arellano', 608694312, 'carlos@gmail.com','123usuario'),
-('Ignacio', 'Gil Torres', 775432842, 'nacho@gmail.com','123usuario'),
-('Gonzalo', 'Oliver Alfonso', 690787526, 'gonzalo@gmail.com','123usuario');
+('Carlos', 'Almendros Arellano', 608694312, 'carlos@gmail.com','123Usuario'),
+('Ignacio', 'Gil Torres', 775432842, 'nacho@gmail.com','123Usuario'),
+('Gonzalo', 'Oliver Alfonso', 690787526, 'gonzalo@gmail.com','123Usuario');
 
 /*
  ····INSERCIÓN DE RIDERS····
@@ -337,11 +337,11 @@ VALUES
 
 INSERT INTO RIDERS(DNI_RID, NOM_RID, APE_RID, TLF_RID, MAIL_RID, PW_RID) 
  VALUES
-('11234356G','Jonathan', 'Casa Pila', 765457386, 'jota@dailygo.com','123usuario'),
-('11264584L','Benito', 'Martínez Ocasio', 694957545, 'benito@dailygo.com','123usuario'),
-('12345465X','Paula', 'Badosa Gibert', 600434523, 'paula@dailygo.com','123usuario'),
-('12222345T','Amicus', 'Echo', 666342345, 'amicus@dailygo.com','123usuario'),
-('16632387Y','Ibai', 'Llanos Garatea', 756454534, 'ibai@dailygo.com','123usuario');
+('11234356G','Jonathan', 'Casa Pila', 765457386, 'jota@dailygo.com','123Usuario'),
+('11264584L','Benito', 'Martínez Ocasio', 694957545, 'benito@dailygo.com','123Usuario'),
+('12345465X','Paula', 'Badosa Gibert', 600434523, 'paula@dailygo.com','123Usuario'),
+('12222345T','Amicus', 'Echo', 666342345, 'amicus@dailygo.com','123Usuario'),
+('16632387Y','Ibai', 'Llanos Garatea', 756454534, 'ibai@dailygo.com','123Usuario');
 
 /*
  ····INSERCIÓN DE VENTAS····
