@@ -17,9 +17,9 @@ function iniciarEventos() {
 
 function validarCorreo() {
     try {
-        const expCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
+        const expCorreo = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-        if (expCorreo.test(correo.value)) {
+        if (expCorreo.test(correo.value) && correo.value.length <= 40) {
             correo.setAttribute(
                 "class",
                 "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"

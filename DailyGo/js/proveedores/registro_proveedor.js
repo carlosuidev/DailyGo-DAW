@@ -170,9 +170,9 @@ function respuestaExisteNif() {
 
 function validarCorreo() {
     try {
-        const expCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
+        const expCorreo = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-        if (expCorreo.test(correo.value)) {
+        if (expCorreo.test(correo.value) && correo.value.length <= 40) {
             xhrCorreo.onreadystatechange = respuestaExisteCorreo;
             xhrCorreo.open("POST", ".....................", true);
             xhrCorreo.setRequestHeader(
