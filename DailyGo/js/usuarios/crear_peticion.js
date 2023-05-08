@@ -2,42 +2,50 @@ const asunto = document.getElementById("asunto");
 const descripcion = document.getElementById("descripcion");
 const btnEnviar = document.getElementById("btnEnviar");
 
-btnEnviar.onclick = function() {
+btnEnviar.onclick = function () {
     try {
-    validarAsunto();
-    validarDescripcion();
-
-    if(validarAsunto() && validarDescripcion()){
-        fetch("../server/.....", {
-            method: "POST",
-            body: JSON.stringify({ 
+        validarAsunto();
+        validarDescripcion();
+        if (validarAsunto() && validarDescripcion()) {
+            datos = {
+                id: localStorage.getItem('id'),
                 asunto: asunto.value,
-                descripcion: descripcion.value
-            }),
-            headers: {
-                "Content-Type": "application/json"
+                descripcion: descripcion.value,
             }
-        })
-            .then(response => response.json())
-            .then(data => {
-                const respuestaPeticion = document.getElementById("respuestaPeticion");
-                const avisoPeticon = document.createElement("p");
-                respuestaPeticion.innerHTML = "";
-
-                if(data[0].msg === "Creada"){
-                    avisoPeticon.setAttribute("class", "w-full text-center rounded text-green-600 bg-green-200 py-2");
-                    avisoPeticon.textContent = "Se ha creado correctamente la petición. Revisa el correo para recibir respuesta";
-                    respuestaPeticion.appendChild(avisoPeticon);
-                }else{
-                    avisoPeticon.setAttribute("class", "w-full text-center rounded text-red-600 bg-red-200 py-2");
-                    avisoPeticon.textContent = "No se ha podido crear la petición correctamente. Inténtalo de nuevo.";
-                    respuestaPeticion.appendChild(avisoPeticon);
+            console.log(datos)
+            fetch("../../php/enviar_mensaje_usuario.php", {
+                method: "POST",
+                body: JSON.stringify(datos),
+                headers: {
+                    "Content-Type": "application/json"
                 }
             })
-            .catch(error => {
-                console.error("Error: No se ha podido crear la petición ->", error);
-            });
-    }
+                .then(response => {
+                    console.log(response.text())
+                    if (!response.ok) {
+                        throw new Error('Error en la solicitud');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    const respuestaPeticion = document.getElementById("respuestaPeticion");
+                    const avisoPeticon = document.createElement("p");
+                    respuestaPeticion.innerHTML = "";
+                    console.log(data)
+                    if (data === "Creada") {
+                        avisoPeticon.setAttribute("class", "w-full text-center rounded text-green-600 bg-green-200 py-2");
+                        avisoPeticon.textContent = "Se ha creado correctamente la petición. Revisa el correo para recibir respuesta";
+                        respuestaPeticion.appendChild(avisoPeticon);
+                    } else {
+                        avisoPeticon.setAttribute("class", "w-full text-center rounded text-red-600 bg-red-200 py-2");
+                        avisoPeticon.textContent = "No se ha podido crear la petición correctamente. Inténtalo de nuevo.";
+                        respuestaPeticion.appendChild(avisoPeticon);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error: No se ha podido crear la petición ->", error);
+                });
+        }
     } catch (e) {
         const respuestaPeticion = document.getElementById("respuestaPeticion");
         const avisoPeticon = document.createElement("p");
@@ -45,15 +53,15 @@ btnEnviar.onclick = function() {
         avisoPeticon.setAttribute("class", "w-full text-center rounded text-red-600 bg-red-200 py-2");
         avisoPeticon.textContent = "No se ha podido crear la petición correctamente. Inténtalo de nuevo.";
         respuestaPeticion.appendChild(avisoPeticon);
-        console.log("No se ha podido crear la petición: "+e);
+        console.log("No se ha podido crear la petición: " + e);
     }
-    
+
 }
 
 function validarAsunto() {
     try {
         const expAsunto = /^[\wñÑÁáÉéÍíÓóÚú.,:;"'¡¿\s]{10,50}$/i;
-        const msgAsunto =  document.getElementById("msgAsunto");
+        const msgAsunto = document.getElementById("msgAsunto");
         if (expAsunto.test(asunto.value)) {
             asunto.setAttribute(
                 "class",
@@ -78,7 +86,7 @@ function validarAsunto() {
 
 function validarDescripcion() {
     try {
-        const msgDescripcion =  document.getElementById("msgDescripcion");
+        const msgDescripcion = document.getElementById("msgDescripcion");
         const expDescripcion = /^[\wñÑÁáÉéÍíÓóÚú.,:;"'¡¿\s]{10,200}$/i;
 
         if (expDescripcion.test(descripcion.value)) {
