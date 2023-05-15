@@ -1,7 +1,7 @@
-const sesionUsuario = localStorage.getItem("tipo")
-document.addEventListener('load', comprobarSesionUsuario(sesionUsuario));
+window.addEventListener('DOMContentLoaded', comprobarSesion);
 
 function comprobarSesion(tipoUsuario){
+    const tipoUsuario = localStorage.getItem("tipoUsuario");
     if(tipoUsuario !== "administrador"){
         if(tipoUsuario !== null){
             const redirecciones = {

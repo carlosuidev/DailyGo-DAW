@@ -1,13 +1,13 @@
-const sesionUsuario = localStorage.getItem("tipo")
-document.addEventListener('load', comprobarSesionUsuario(sesionUsuario));
+document.addEventListener('DOMContentLoaded', comprobarSesion);
 
-function comprobarSesion(tipoUsuario){
+function comprobarSesion(){
+    const tipoUsuario = localStorage.getItem("tipoUsuario");
     if(tipoUsuario !== "proveedor"){
         if(tipoUsuario !== null){
             const redirecciones = {
-                'usuarios': '../src/usuarios/inicio.html',
-                'rider': '../src/riders/inicio.html',
-                'administrador': '../src/proveedores/inicio.html',
+                'usuarios': '/usuarios/inicio.html',
+                'rider': '/riders/inicio.html',
+                'administrador': '/src/proveedores/inicio.html',
             }
 
             window.location.href = redirecciones.tipoUsuario;
