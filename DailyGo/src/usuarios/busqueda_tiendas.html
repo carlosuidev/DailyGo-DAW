@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DailyGo | Pedidos ultrarrápidos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <script src="../../styles/tailwind.js"></script>
     <link rel="stylesheet" href="../../styles/global.css">
     <link rel="shortcut icon" href="../../assets/svg/favicon.svg" type="image/x-icon">
@@ -15,7 +16,6 @@
     <nav class="bg-white py-4 fixed z-50 w-full">
         <div class="container mx-auto">
             <a href="#"><img src="../../assets/svg/logo.svg" alt=""></a>
-            <div></div>
         </div>
     </nav>
     <section class="pt-8 lg:pt-24 md:pt-16" id="hero-prductos">
@@ -40,28 +40,77 @@
 
     <section class="mt-16 mx-auto container p-5 lg:p-2 md:p-5">
         <div class="flex justify-center flex-wrap gap-5 mt-5">
-            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🍽️ Todos</button>
-            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🍔
-                Hamburguesas</button>
-            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🍝 Pastas</button>
-            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🍕 Pizzas</button>
-            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🌱 Vegano</button>
-            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🌏 Asiático</button>
-            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">❤️‍🩹
-                Parafarmacia</button>
-            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🥙 Kebabs</button>
-            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🌮 Tacos</button>
-            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🥪 Sandwiches y
-                bocadillos</button>
-            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🍦 Dulces</button>
-            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🥤 Bebidas
-                frias</button>
-            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">☕ Bebidas
-                calientes</button>
-            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">❓ Otros</button>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Hamburguesa')">
+                        <img src="../../assets/svg/categorias/hamburguesa.svg" alt="hamburguesa" width="54" class="mb-2.5">
+                        Hamburguesa
+                    </div>
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Asiática')">
+                        <img src="../../assets/svg/categorias/asiatica.svg" alt="asiática" width="54" class="mb-2.5">
+                        Asiática
+                    </div>
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Italiana')">
+                        <img src="../../assets/svg/categorias/italiana.svg" alt="Italiana" width="54" class="mb-2.5">
+                        Italiana
+                    </div>
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Pizza')">
+                        <img src="../../assets/svg/categorias/pizza.svg" alt="Pizza" width="54" class="mb-2.5">
+                        Pizza
+                    </div>
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Kebab')">
+                        <img src="../../assets/svg/categorias/kebab.svg" alt="Kebab" width="54" class="mb-2.5">
+                        Kebab
+                    </div>
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Bebida')">
+                        <img src="../../assets/svg/categorias/bebida.svg" alt="Bebida" width="54" class="mb-2.5">
+                        Bebida
+                    </div>
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Sandwich')">
+                        <img src="../../assets/svg/categorias/sandwich.svg" alt="Sandwich" width="54" class="mb-2.5">
+                        Sandwich
+                    </div>
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Vegana')">
+                        <img src="../../assets/svg/categorias/vegana.svg" alt="Vegana" width="46" class="mb-2.5">
+                        Vegana
+                    </div>
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Mexicana')">
+                        <img src="../../assets/svg/categorias/mexicana.svg" alt="Mexicana" width="54" class="mb-2.5">
+                        Mexicana
+                    </div>
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Parafarmacia')">
+                        <img src="../../assets/svg/categorias/parafarmacia.svg" alt="Parafarmacia" width="54" class="mb-2.5">
+                        Parafarmacia
+                    </div>
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Americana')">
+                        <img src="../../assets/svg/categorias/americana.svg" alt="Americana" width="54" class="mb-2.5">
+                        Americana
+                    </div>
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Dulce')">
+                        <img src="../../assets/svg/categorias/dulce.svg" alt="Dulce" width="54" class="mb-2.5">
+                        Dulce
+                    </div>
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Otra')">
+                        <img src="../../assets/svg/categorias/otra.svg" alt="Otra" width="54" class="mb-2.5">
+                        Otra
+                    </div>
+                </div>
+            </div>
         </div>
-        <hr class="my-8">
-        <h3 class="font-bold mb-5">Destacados de Hamburguesas</h3>
+        <hr class="mb-5 mt-8">
+        <div class="flex gap-2 flex-wrap">
+            <select class="text-sm lg:w-fit md:w-fit w-full bg-blue-100/25 border border-blue-200 text-blue-700 py-3 px-4 pr-8 rounded-md" id="grid-state">
+                <option>Por valoración: </option>
+                <option>Mejor valoración</option>
+                <option>Peor valoración</option>
+            </select>
+            <select class="text-sm lg:w-fit md:w-fit w-full bg-blue-100/25 border border-blue-200 text-blue-700 py-3 px-4 pr-8 rounded-md" id="grid-state">
+                <option>Por tiempo: </option>
+                <option>Menor tiempo</option>
+                <option>Mayor tiempo</option>
+            </select>
+        </div>
+        <h3 class="font-bold mb-5 mt-8">Destacados de Hamburguesas</h3>
         <div class="grid grid-cols-4 lg:grid-cols-4 md:grid-cols-2 gap-4 mb-16">
             <div style="
                 height: 200px;
@@ -95,6 +144,9 @@
     <footer class="mt-16">
 
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="../../js/usuarios/tiendas.js"></script>
 </body>
 
 </html>
