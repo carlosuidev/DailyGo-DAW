@@ -18,6 +18,19 @@ const contrasena = document.getElementById("contrasena");
 const confirmarContrasena = document.getElementById("confirmarContrasena");
 const terminos = document.getElementById("terminos");
 
+// DATOS FORMULARIO
+let nifValidado
+let nifExistenteBaseDatos
+let razonSocialValidada
+let direccionValidada
+let telefonoValidado
+let telefonoExistenteBaseDatos
+let correoValidado
+let correoExistenteBaseDatos
+let contrasenaValidada
+let confirmarContrasenaValidada
+let terminosValidados
+
 // ALERTAS FORMULARIO
 const msgCorreo = document.getElementById("msgCorreo");
 const msgCorreoExiste = document.getElementById("msgCorreoExiste");
@@ -28,7 +41,7 @@ const msgConfirmarContrasena = document.getElementById(
     "msgConfirmarContrasena"
 );
 const msgNif = document.getElementById("msgNif");
-const msgNifExiste = document.getElementById("NifExiste");
+const msgNifExiste = document.getElementById("msgNifExiste");
 const msgTerminos = document.getElementById("msgTerminos");
 const msgDireccion = document.getElementById("msgDireccion");
 const msgRazonSocial = document.getElementById("msgRazonSocial");
@@ -56,15 +69,14 @@ function iniciarEventos() {
         crearCuenta.addEventListener("click", peticionCrearUsuario);
     } catch (error) {
         console.log(
-            `Los evenetos no están funcionando correctamente: ${error}`
+            `Los eventos no están funcionando correctamente: ${error}`
         );
     }
 }
 
 function validarDireccion() {
     try {
-        const expDireccion =
-            /^[A-Z][a-záéíóúüñ\s]*\s\d{1,5}(\s\w{1,3})?(\s-)?\s[A-Za-záéíóúüñ\s]*\s\d{5}\s[A-Z\s]{2,}$/i;
+        const expDireccion = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s\d.',-]+$/u;
 
         if (expDireccion.test(direccion.value)) {
             direccion.setAttribute(
@@ -72,14 +84,14 @@ function validarDireccion() {
                 "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
             msgDireccion.setAttribute("class", "hidden");
-            return true;
+            direccionValidada = true;
         } else {
             direccion.setAttribute(
                 "class",
                 "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
             msgDireccion.setAttribute("class", "flex");
-            return false;
+            direccionValidada = false;
         }
     } catch (error) {
         console.log(`No se ha podido validar la dirección: ${error}`);
@@ -95,14 +107,14 @@ function validarRazonSocial() {
                 "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
             msgRazonSocial.setAttribute("class", "hidden");
-            return true;
+            razonSocialValidada = true;
         } else {
             razonSocial.setAttribute(
                 "class",
                 "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
             msgRazonSocial.setAttribute("class", "flex");
-            return false;
+            razonSocialValidada = false;
         }
     } catch (error) {
         console.log(`No se ha podido validar la Razón social: ${error}`);
@@ -111,19 +123,18 @@ function validarRazonSocial() {
 
 function validarNif() {
     try {
-        const expNif = /^(\d{8})([A-Z])$/i;
+        const expNif = /^[A-Z]-\d{8}$/i;
 
         if (expNif.test(nif.value)) {
-            xhrNIF.onreadystatechange = respuestaExisteNif;
-            xhrNIF.open("POST", ".....................", true);
-            xhrNIF.setRequestHeader(
+            xhrNif.onreadystatechange = respuestaExisteNif;
+            xhrNif.open("POST", "../php/registro_proveedor.php", true);
+            xhrNif.setRequestHeader(
                 "Content-type",
                 "application/x-www-form-urlencoded"
             );
-            xhrNIF.send(`nif=${nif.value}`);
-
-            return true;
-        } else {
+            xhrNif.send(`nifExistente=${nif.value}`);
+            nifValidado = true;
+         } else {
             nif.setAttribute(
                 "class",
                 "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
@@ -131,7 +142,7 @@ function validarNif() {
             msgNif.setAttribute("class", "flex");
             msgNifExiste.setAttribute("class", "hidden");
 
-            return false;
+            nifValidado = false;
         }
     } catch (error) {
         console.log(`No se ha podido validar el NIF: ${error}`);
@@ -140,17 +151,17 @@ function validarNif() {
 
 function respuestaExisteNif() {
     try {
-        if (xhrNIF.readyState == 4 && xhrNIF.status == 200) {
-            let jsonNIF = JSON.parse(xhrNIF.responseText);
-
-            if (jsonNIF[0].msg === "no existe") {
+        if (xhrNif.readyState == 4 && xhrNif.status == 200) {
+            let jsonNIF = xhrNif.responseText;
+            console.log(jsonNIF)
+            if (jsonNIF == "no existe") {
                 nif.setAttribute(
                     "class",
                     "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
                 );
                 msgNifExiste.setAttribute("class", "hidden");
                 msgNif.setAttribute("class", "hidden");
-                return false;
+                nifExistenteBaseDatos = true;
             } else {
                 nif.setAttribute(
                     "class",
@@ -158,7 +169,7 @@ function respuestaExisteNif() {
                 );
                 msgNifExiste.setAttribute("class", "flex");
                 msgNif.setAttribute("class", "hidden");
-                return true;
+                nifExistenteBaseDatos = false;
             }
         }
     } catch (error) {
@@ -170,18 +181,18 @@ function respuestaExisteNif() {
 
 function validarCorreo() {
     try {
-        const expCorreo = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+        const expCorreo = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
         if (expCorreo.test(correo.value) && correo.value.length <= 40) {
             xhrCorreo.onreadystatechange = respuestaExisteCorreo;
-            xhrCorreo.open("POST", ".....................", true);
+            xhrCorreo.open("POST", "../php/registro_proveedor.php", true);
             xhrCorreo.setRequestHeader(
                 "Content-type",
                 "application/x-www-form-urlencoded"
             );
-            xhrCorreo.send(`correo=${correo.value}`);
+            xhrCorreo.send(`correoExistente=${correo.value}`);
 
-            return true;
+            correoValidado = true;
         } else {
             correo.setAttribute(
                 "class",
@@ -190,26 +201,26 @@ function validarCorreo() {
             msgCorreo.setAttribute("class", "flex");
             msgCorreoExiste.setAttribute("class", "hidden");
 
-            return false;
+            correoValidado = false;
         }
     } catch (error) {
         console.log(`No se ha podido validar el correo: ${error}`);
     }
 }
 
-function respuestaCorreo() {
+function respuestaExisteCorreo() {
     try {
         if (xhrCorreo.readyState == 4 && xhrCorreo.status == 200) {
-            let jsonCorreo = JSON.parse(xhrCorreo.responseText);
+            let jsonCorreo = xhrCorreo.responseText;
 
-            if (jsonCorreo[0].msg === "no existe") {
+            if (jsonCorreo === "no existe") {
                 correo.setAttribute(
                     "class",
                     "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
                 );
                 msgCorreoExiste.setAttribute("class", "hidden");
                 msgCorreo.setAttribute("class", "hidden");
-                return false;
+                correoExistenteBaseDatos = true;
             } else {
                 correo.setAttribute(
                     "class",
@@ -217,7 +228,7 @@ function respuestaCorreo() {
                 );
                 msgCorreoExiste.setAttribute("class", "flex");
                 msgCorreo.setAttribute("class", "hidden");
-                return true;
+                correoExistenteBaseDatos = false;
             }
         }
     } catch (error) {
@@ -238,14 +249,14 @@ function validarContrasena() {
                 "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
             msgContrasena.setAttribute("class", "hidden");
-            return true;
+            contrasenaValidada = true;
         } else {
             contrasena.setAttribute(
                 "class",
                 "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
             msgContrasena.setAttribute("class", "flex");
-            return false;
+            contrasenaValidada = false;
         }
     } catch (error) {
         console.log(`No se ha podido validar la contraseña: ${error}`);
@@ -266,14 +277,14 @@ function validarConfirmarContrasena() {
                 "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
             msgConfirmarContrasena.setAttribute("class", "hidden");
-            return true;
+            confirmarContrasenaValidada = true;
         } else {
             confirmarContrasena.setAttribute(
                 "class",
                 "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
             msgConfirmarContrasena.setAttribute("class", "flex");
-            return false;
+            confirmarContrasenaValidada = false;
         }
     } catch (error) {
         console.log(
@@ -288,14 +299,14 @@ function validarTelefono() {
 
         if (expTelefono.test(telefono.value)) {
             xhrTelefono.onreadystatechange = respuestaExisteTelefono;
-            xhrTelefono.open("POST", ".....................", true);
+            xhrTelefono.open("POST", "../php/registro_proveedor.php", true);
             xhrTelefono.setRequestHeader(
                 "Content-type",
                 "application/x-www-form-urlencoded"
             );
-            xhrTelefono.send(`telefono=${telefono.value}`);
+            xhrTelefono.send(`telefonoExistente=${telefono.value}`);
 
-            return true;
+            telefonoValidado = true;
         } else {
             telefono.setAttribute(
                 "class",
@@ -304,7 +315,7 @@ function validarTelefono() {
             msgTelefono.setAttribute("class", "flex");
             msgTelefonoExiste.setAttribute("class", "hidden");
 
-            return false;
+            telefonoValidado = false;
         }
     } catch (error) {
         console.log(`No se ha podido validar el teléfono: ${error}`);
@@ -314,16 +325,16 @@ function validarTelefono() {
 function respuestaExisteTelefono() {
     try {
         if (xhrTelefono.readyState == 4 && xhrTelefono.status == 200) {
-            let jsonTelefono = JSON.parse(xhrTelefono.responseText);
+            let jsonTelefono = xhrTelefono.responseText;
 
-            if (jsonTelefono[0].msg === "no existe") {
+            if (jsonTelefono === "no existe") {
                 telefono.setAttribute(
                     "class",
                     "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
                 );
                 msgTelefonoExiste.setAttribute("class", "hidden");
                 msgTelefono.setAttribute("class", "hidden");
-                return false;
+                telefonoExistenteBaseDatos = true;
             } else {
                 telefono.setAttribute(
                     "class",
@@ -331,7 +342,7 @@ function respuestaExisteTelefono() {
                 );
                 msgTelefonoExiste.setAttribute("class", "flex");
                 msgTelefono.setAttribute("class", "hidden");
-                return true;
+                telefonoExistenteBaseDatos = false;
             }
         }
     } catch (error) {
@@ -344,8 +355,10 @@ function respuestaExisteTelefono() {
 function validarTerminos() {
     try {
         if (terminos.checked) {
+            terminosValidados = true
             msgTerminos.setAttribute("class", "hidden");
         } else {
+            terminosValidados = false
             msgTerminos.setAttribute("class", "flex");
         }
     } catch (error) {
@@ -355,33 +368,39 @@ function validarTerminos() {
 
 function peticionCrearUsuario() {
     try {
-        validarRazonSocial();
-        validarCorreo();
-        validarNif();
-        validarTelefono();
-        validarContrasena();
-        validarDireccion();
-        validarConfirmarContrasena();
-        validarTerminos();
+        console.log(nifValidado)
+        console.log(razonSocialValidada)
+        console.log(nifExistenteBaseDatos)
+        console.log(direccionValidada)
+        console.log(telefonoValidado)
+        console.log(telefonoExistenteBaseDatos)
+        console.log(correoValidado)
+        console.log(correoExistenteBaseDatos)
+        console.log(contrasenaValidada)
+        console.log(confirmarContrasenaValidada)
+        console.log(terminosValidados)
 
         if (
-            validarRazonSocial() &&
-            validarCorreo() &&
-            validarNif() &&
-            validarTelefono() &&
-            validarContrasena() &&
-            validarDireccion() &&
-            validarConfirmarContrasena() &&
-            validarTerminos()
+            nifValidado == true &&
+            nifExistenteBaseDatos == true &&
+            razonSocialValidada == true &&
+            direccionValidada == true &&
+            telefonoValidado == true &&
+            telefonoExistenteBaseDatos == true &&
+            correoValidado == true &&
+            correoExistenteBaseDatos == true &&
+            contrasenaValidada == true &&
+            confirmarContrasenaValidada == true &&
+            terminosValidados == true
         ) {
             xhrNuevoUsuario.onreadystatechange = respuestaCrearUsuario;
-            xhrNuevoUsuario.open("POST", ".....................", true);
+            xhrNuevoUsuario.open("POST", "../php/registro_proveedor.php", true);
             xhrNuevoUsuario.setRequestHeader(
                 "Content-type",
                 "application/x-www-form-urlencoded"
             );
             xhrNuevoUsuario.send(
-                `razonSocial=${razonSocial.value}&nif=${nif.value}&direccion=${direccion.value}&correo=${correo.value}&contrasena=${contrasena.value}&telefono=${telefono.value}&`
+                `razonSocial=${razonSocial.value}&nif=${nif.value}&direccion=${direccion.value}&correo=${correo.value}&contrasena=${contrasena.value}&telefono=${telefono.value}`
             );
         }
     } catch (error) {
@@ -392,15 +411,16 @@ function peticionCrearUsuario() {
 function respuestaCrearUsuario() {
     try {
         if (xhrNuevoUsuario.readyState == 4 && xhrNuevoUsuario.status == 200) {
-            let jsonCrearUsuario = JSON.parse(xhrNuevoUsuario.responseText);
-            if (jsonCrearUsuario[0].msg === "creado") {
+            let jsonCrearUsuario = xhrNuevoUsuario.responseText;
+            console.log(jsonCrearUsuario)
+            if (jsonCrearUsuario === "creado") {
                 localStorage.setItem("razonSocial", razonSocial.value);
                 localStorage.setItem("nif", nif.value);
                 localStorage.setItem("correo", correo.value);
                 localStorage.setItem("telefono", apellidos.value);
                 localStorage.setItem("direccion", direccion.value);
                 localStorage.setItem("tipoUsuario", "proveedor");
-                window.location.href = "../../src/index.html";
+                window.location.href = "../src/index.html";
             } else {
                 const errorCrear = document.getElementById("errorCrear");
                 errorCrear.setAttribute("class", "flex");

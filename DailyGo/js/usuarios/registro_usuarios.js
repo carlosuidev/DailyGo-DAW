@@ -1,10 +1,5 @@
-try {
-    document.addEventListener("DOMContentLoaded", iniciarEventos);
-} catch (error) {
-    console.log(
-        `Error del Listener a la hora de iniciar los eventos: ${error}`
-    );
-}
+document.addEventListener("DOMContentLoaded", iniciarEventos);
+
 
 const crearCuenta = document.getElementById("crearCuenta");
 
@@ -16,6 +11,16 @@ const correo = document.getElementById("correo");
 const contrasena = document.getElementById("contrasena");
 const confirmarContrasena = document.getElementById("confirmarContrasena");
 const terminos = document.getElementById("terminos");
+
+//RESPUESTAS 
+let correoComprobadoBaseDatos
+let correoValidado
+let contraValidada
+let nombreValidado
+let apellidoValidado
+let telefonoValidado
+let telefonoComprobadoBaseDatos
+let terminosValidados
 
 // ALERTAS FORMULARIO
 const msgCorreo = document.getElementById("msgCorreo");
@@ -42,10 +47,7 @@ function iniciarEventos() {
         telefono.addEventListener("input", validarTelefono);
         correo.addEventListener("input", validarCorreo);
         contrasena.addEventListener("input", validarContrasena);
-        confirmarContrasena.addEventListener(
-            "input",
-            validarConfirmarContrasena
-        );
+        confirmarContrasena.addEventListener("input", validarConfirmarContrasena);
         terminos.addEventListener("click", validarTerminos);
 
         crearCuenta.addEventListener("click", peticionCrearUsuario);
@@ -62,14 +64,14 @@ function validarCorreo() {
 
         if (expCorreo.test(correo.value)) {
             xhrCorreo.onreadystatechange = respuestaExisteCorreo;
-            xhrCorreo.open("POST", ".....................", true);
+            xhrCorreo.open("POST", "../php/registro_usuario.php", true);
             xhrCorreo.setRequestHeader(
                 "Content-type",
                 "application/x-www-form-urlencoded"
             );
-            xhrCorreo.send(`correo=${correo.value}`);
+            xhrCorreo.send(`correoExistente=${correo.value}`);
 
-            return true;
+            correoValidado = true;
         } else {
             correo.setAttribute(
                 "class",
@@ -78,26 +80,26 @@ function validarCorreo() {
             msgCorreo.setAttribute("class", "flex");
             msgCorreoExiste.setAttribute("class", "hidden");
 
-            return false;
+            correoValidado = false;
         }
     } catch (error) {
         console.log(`No se ha podido validar el correo: ${error}`);
     }
 }
 
-function respuestaCorreo() {
+function respuestaExisteCorreo() {
     try {
         if (xhrCorreo.readyState == 4 && xhrCorreo.status == 200) {
-            let jsonCorreo = JSON.parse(xhrCorreo.responseText);
+            let respuestaPhp = xhrCorreo.responseText;
 
-            if (jsonCorreo[0].msg === "no existe") {
+            if (respuestaPhp == "no existe") {
                 correo.setAttribute(
                     "class",
                     "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
                 );
                 msgCorreoExiste.setAttribute("class", "hidden");
                 msgCorreo.setAttribute("class", "hidden");
-                return false;
+                correoComprobadoBaseDatos = true;
             } else {
                 correo.setAttribute(
                     "class",
@@ -105,7 +107,7 @@ function respuestaCorreo() {
                 );
                 msgCorreoExiste.setAttribute("class", "flex");
                 msgCorreo.setAttribute("class", "hidden");
-                return true;
+                correoComprobadoBaseDatos = false;
             }
         }
     } catch (error) {
@@ -126,14 +128,14 @@ function validarContrasena() {
                 "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
             msgContrasena.setAttribute("class", "hidden");
-            return true;
+            contraValidada = true;
         } else {
             contrasena.setAttribute(
                 "class",
                 "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
             msgContrasena.setAttribute("class", "flex");
-            return false;
+            contraValidada = false;
         }
     } catch (error) {
         console.log(`No se ha podido validar la contraseña: ${error}`);
@@ -180,14 +182,14 @@ function validarNombre() {
                 "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
             msgNombre.setAttribute("class", "hidden");
-            return true;
+            nombreValidado = true;
         } else {
             nombre.setAttribute(
                 "class",
                 "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
             msgNombre.setAttribute("class", "flex");
-            return false;
+            nombreValidado = false;
         }
     } catch (error) {
         console.log(`No se ha podido validar el nombre: ${error}`);
@@ -204,14 +206,14 @@ function validarApellidos() {
                 "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
             msgApellidos.setAttribute("class", "hidden");
-            return true;
+            apellidoValidado = true;
         } else {
             apellidos.setAttribute(
                 "class",
                 "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
             msgApellidos.setAttribute("class", "flex");
-            return false;
+            apellidoValidado = false;
         }
     } catch (error) {
         console.log(`No se ha podido validar los apellidos: ${error}`);
@@ -224,14 +226,14 @@ function validarTelefono() {
 
         if (expTelefono.test(telefono.value)) {
             xhrTelefono.onreadystatechange = respuestaExisteTelefono;
-            xhrTelefono.open("POST", ".....................", true);
+            xhrTelefono.open("POST", "../php/registro_usuario.php", true);
             xhrTelefono.setRequestHeader(
                 "Content-type",
                 "application/x-www-form-urlencoded"
             );
-            xhrTelefono.send(`telefono=${telefono.value}`);
+            xhrTelefono.send(`telefonoExistente=${telefono.value}`);
 
-            return true;
+            telefonoValidado = true;
         } else {
             telefono.setAttribute(
                 "class",
@@ -240,7 +242,7 @@ function validarTelefono() {
             msgTelefono.setAttribute("class", "flex");
             msgTelefonoExiste.setAttribute("class", "hidden");
 
-            return false;
+            telefonoValidado = false;
         }
     } catch (error) {
         console.log(`No se ha podido validar el teléfono: ${error}`);
@@ -250,16 +252,16 @@ function validarTelefono() {
 function respuestaExisteTelefono() {
     try {
         if (xhrTelefono.readyState == 4 && xhrTelefono.status == 200) {
-            let jsonTelefono = JSON.parse(xhrTelefono.responseText);
-
-            if (jsonTelefono[0].msg === "no existe") {
+            let jsonTelefono = xhrTelefono.responseText;
+            console.log(jsonTelefono)
+            if (jsonTelefono === "no existe") {
                 telefono.setAttribute(
                     "class",
                     "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
                 );
                 msgTelefonoExiste.setAttribute("class", "hidden");
                 msgTelefono.setAttribute("class", "hidden");
-                return false;
+                telefonoComprobadoBaseDatos = true;
             } else {
                 telefono.setAttribute(
                     "class",
@@ -267,7 +269,7 @@ function respuestaExisteTelefono() {
                 );
                 msgTelefonoExiste.setAttribute("class", "flex");
                 msgTelefono.setAttribute("class", "hidden");
-                return true;
+                telefonoComprobadoBaseDatos = false;
             }
         }
     } catch (error) {
@@ -281,8 +283,10 @@ function validarTerminos() {
     try {
         if (terminos.checked) {
             msgTerminos.setAttribute("class", "hidden");
+            terminosValidados = true;
         } else {
             msgTerminos.setAttribute("class", "flex");
+            terminosValidados = false;
         }
     } catch (error) {
         console.log(`No se ha podido validar los términos: ${error}`);
@@ -291,25 +295,27 @@ function validarTerminos() {
 
 function peticionCrearUsuario() {
     try {
-        validarNombre();
-        validarApellidos();
-        validarCorreo();
-        validarTelefono();
-        validarContrasena();
-        validarConfirmarContrasena();
-        validarTerminos();
-
+        console.log(correoComprobadoBaseDatos)
+        console.log(correoValidado)
+        console.log(contraValidada)
+        console.log(nombreValidado)
+        console.log(apellidoValidado)
+        console.log(telefonoValidado)
+        console.log(telefonoComprobadoBaseDatos)
+        console.log(terminosValidados)
         if (
-            validarNombre() &&
-            validarApellidos() &&
-            validarCorreo() &&
-            validarTelefono() &&
-            validarContrasena() &&
-            validarConfirmarContrasena() &&
-            validarTerminos()
+            correoComprobadoBaseDatos == true &&
+            correoValidado == true &&
+            contraValidada == true &&
+            nombreValidado == true &&
+            apellidoValidado == true &&
+            telefonoValidado == true &&
+            telefonoComprobadoBaseDatos == true  &&
+            terminosValidados == true
         ) {
+            console.log("Se mete por 2")
             xhrNuevoUsuario.onreadystatechange = respuestaCrearUsuario;
-            xhrNuevoUsuario.open("POST", ".....................", true);
+            xhrNuevoUsuario.open("POST", "../php/registro_usuario.php", true);
             xhrNuevoUsuario.setRequestHeader(
                 "Content-type",
                 "application/x-www-form-urlencoded"
@@ -326,14 +332,15 @@ function peticionCrearUsuario() {
 function respuestaCrearUsuario() {
     try {
         if (xhrNuevoUsuario.readyState == 4 && xhrNuevoUsuario.status == 200) {
-            let jsonCrearUsuario = JSON.parse(xhrNuevoUsuario.responseText);
-            if (jsonCrearUsuario[0].msg === "creado") {
+            let respuestaUsuario = xhrNuevoUsuario.responseText;
+            console.log(respuestaUsuario)
+            if (respuestaUsuario === "creado") {
                 localStorage.setItem("nombre", nombre.value);
                 localStorage.setItem("apellidos", apellidos.value);
                 localStorage.setItem("correo", correo.value);
                 localStorage.setItem("telefono", apellidos.value);
                 localStorage.setItem("tipoUsuario", "usuario");
-                window.location.href = "../../src/index.html";
+                window.location.href = "../src/index.html";
             } else {
                 const errorCrear = document.getElementById("errorCrear");
                 errorCrear.setAttribute("class", "flex");

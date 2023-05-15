@@ -108,7 +108,6 @@ function peticionEntrar() {
 function respuestaEntrar() {
     try {
         if (xhrEntrar.readyState == 4 && xhrEntrar.status == 200) {
-            console.log(xhrEntrar.responseText)
             if (xhrEntrar.responseText != 'False') {
                 let jsonEntrar = JSON.parse(xhrEntrar.responseText);
                 switch (tipoUsuario) {

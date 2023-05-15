@@ -8,11 +8,10 @@ btnEnviar.onclick = function () {
         validarDescripcion();
         if (validarAsunto() && validarDescripcion()) {
             datos = {
-                id: localStorage.getItem('id'),
-                asunto: asunto.value,
-                descripcion: descripcion.value,
+                'id': localStorage.getItem('id'),
+                'asunto': asunto.value,
+                'descripcion': descripcion.value,
             }
-            console.log(datos)
             fetch("../../php/enviar_mensaje_usuario.php", {
                 method: "POST",
                 body: JSON.stringify(datos),
@@ -20,19 +19,18 @@ btnEnviar.onclick = function () {
                     "Content-Type": "application/json"
                 }
             })
-                .then(response => {
-                    console.log(response.text())
+            .then(response => {
                     if (!response.ok) {
                         throw new Error('Error en la solicitud');
                     }
                     return response.text();
                 })
-                .then(data => {
+            .then(data => {
                     const respuestaPeticion = document.getElementById("respuestaPeticion");
                     const avisoPeticon = document.createElement("p");
                     respuestaPeticion.innerHTML = "";
                     console.log(data)
-                    if (data === "Creada") {
+                    if (data == "Creada") {
                         avisoPeticon.setAttribute("class", "w-full text-center rounded text-green-600 bg-green-200 py-2");
                         avisoPeticon.textContent = "Se ha creado correctamente la petición. Revisa el correo para recibir respuesta";
                         respuestaPeticion.appendChild(avisoPeticon);
