@@ -5,7 +5,7 @@ function comprobarSesion(){
     if(tipoUsuario !== "rider"){
         if(tipoUsuario !== null){
             const redirecciones = {
-                'usuarios': '/usuarios/inicio.html',
+                'usuarios': '/usuarios/inicio.php',
                 'proveedor': '/riders/proveedor.html',
                 'administrador': '/proveedores/inicio.html',
             }

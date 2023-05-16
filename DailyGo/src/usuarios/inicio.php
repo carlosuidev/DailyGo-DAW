@@ -57,11 +57,11 @@
     <nav class="bg-white shadow-lg fixed w-full top-0 z-40">
         <div class="container mx-auto px-4">
             <div class="flex justify-between">
-                <a href="inicio.html" class="flex items-center py-5 px-2">
+                <a href="inicio.php" class="flex items-center py-5 px-2">
                     <img src="../../assets/svg/logo.svg" alt="DailyGo" width="110">
                 </a>
                 <div class="hidden md:flex items-center space-x-3">
-                    <a href="inicio.html#info-ayuda">Ayuda</a>
+                    <a href="inicio.php#info-ayuda">Ayuda</a>
                     <a href="promociones.html">Promociones</a>
                     <a href="pedidos.html">Mis Pedidos</a>
                     <a href="perfil.html">Mi Perfil</a>
@@ -84,7 +84,7 @@
             <div class="flex flex-col justify-center items-center">
                 <div
                     class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
-                    <a href="inicio.html#info-ayuda">Ayuda</a>
+                    <a href="inicio.php#info-ayuda">Ayuda</a>
                 </div>
                 <div
                     class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
@@ -106,14 +106,13 @@
         <div class="container mx-auto flex flex-col justify-center items-center p-5 lg:p-0 md:p-5">
             <h1 class="font-bold text-white text-center mb-8">Pedidos y comidas a <br class="hidden lg:block md:hidden">
                 domicilio en minutos</h1>
-            <div
+            <form action="busqueda_tiendas.php"
                 class="bg-white z-10 p-5 rounded-lg flex lg:flex-row md:flex-row flex-col justify-center items-center gap-3 w-full lg:w-1/2 md:w-full">
-                <input type="text" name="dni" id="dni"
+                <input type="text" name="nombreTienda"
                     class="w-full rounded-md border border-blue-100 focus:border-indigo-700 p-4 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
                     placeholder="¿Qué te apetece? Escribe el local que desees">
-                <button
-                    class="duration-300 text-white bg-indigo-700 rounded-md font-semibold hover:bg-indigo-800 p-4 lg:w-fit md:w-fit w-full">Buscar</button>
-            </div>
+                <input type="submit" value="Buscar" class="cursor-pointer duration-300 text-white bg-indigo-700 rounded-md font-semibold hover:bg-indigo-800 p-4 lg:w-fit md:w-fit w-full">
+            </form>
         </div>
     </section>
 
@@ -133,6 +132,15 @@
                 width="96">
         </div>
     </div>
+
+    <section class="mt-12 lg:mt-10 md:mt-8 p-5 lg:p-3 md:p-5">
+        <div class="container mx-auto rounded-lg">
+            <h3 class="font-bold mb-5 mt-8">🏅Locales mejor valorados </h3>
+            <div class="grid grid-cols-4 lg:grid-cols-4 md:grid-cols-2 gap-4 mb-16" id="listadoTiendas">
+                <!--LISTADO DE TIENDAS-->
+            </div>
+        </div>
+    </section>
 
     <section class="mt-12 lg:mt-10 md:mt-8 p-5 lg:p-3 md:p-5">
         <div class="container bg-blue-900 mx-auto rounded-lg">
@@ -155,7 +163,7 @@
         </div>
     </section>
 
-    <section class="mt-12 lg:mt-20 md:mt-18 p-5 lg:p-3 md:p-5">
+    <section class="mt-10 lg:mt-18 md:mt-16 p-5 lg:p-3 md:p-5">
         <div class="container mx-auto flex flex-col items-center">
             <div class="text-center items-center">
                 <h5 class="font-bold text-indigo-700">TUS LOCALES DE SIEMPRE</h5>
@@ -287,6 +295,7 @@
             </div>
         </div>
     </footer>
+    <script src="../../js/usuarios/tiendas.js"></script>
     <script src="../../js/usuarios/gestion_sesiones.js"></script>
     <script src="../../js/usuarios/crear_peticion.js"></script>
     <script src="../../js/global/navbar.js"></script>

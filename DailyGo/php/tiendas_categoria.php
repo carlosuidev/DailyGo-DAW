@@ -7,9 +7,9 @@ try {
     mysqli_select_db($conexion, "dailygo") or die("No se puede seleccionar la BD");
     
     /* Lazo la consulta sobre la BD*/
-    $tiendaUsuario = $datosJson['tienda'];
-    if($tiendaUsuario != "-"){
-        $datos = mysqli_query($conexion, "select * from proveedores where razsoc LIKE'$tiendaUsuario%'");
+    $categoria = $datosJson['categoria'];
+    if($categoria != ""){
+        $datos = mysqli_query($conexion, "select * from proveedores where categoria='$categoria'");
     }else{
         $datos = mysqli_query($conexion, "SELECT * FROM proveedores");
     }

@@ -1,18 +1,10 @@
 <?php
 try {
-    $json = file_get_contents('php://input');
-    $datosJson = json_decode($json, true);
-
     $conexion = mysqli_connect("localhost", "root", "", "dailygo");
     mysqli_select_db($conexion, "dailygo") or die("No se puede seleccionar la BD");
     
-    /* Lazo la consulta sobre la BD*/
-    $tiendaUsuario = $datosJson['tienda'];
-    if($tiendaUsuario != "-"){
-        $datos = mysqli_query($conexion, "select * from proveedores where razsoc LIKE'$tiendaUsuario%'");
-    }else{
-        $datos = mysqli_query($conexion, "SELECT * FROM proveedores");
-    }
+
+    $datos = mysqli_query($conexion, "select * from proveedores order by valoraciones desc limit 4");
     
     $numr = mysqli_num_rows($datos);
     if ($numr > 0) {
@@ -29,3 +21,4 @@ try {
     echo json_encode($arrError);
     return false;
 }
+?>

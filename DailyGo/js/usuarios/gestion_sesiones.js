@@ -12,7 +12,7 @@ function comprobarSesion(){
 
             window.location.href = redirecciones.tipoUsuario;
         }else{
-            window.location.href = 'index.html';
+            window.location.href = 'index.php';
         }
     }else{
         return true;

@@ -1,3 +1,6 @@
+<?php 
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -13,9 +16,52 @@
 </head>
 
 <body class="font-medium text-blue-800">
-    <nav class="bg-white py-4 fixed z-50 w-full">
-        <div class="container mx-auto">
-            <a href="#"><img src="../../assets/svg/logo.svg" alt=""></a>
+    <!--NAVBAR-->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between">
+                <a href="inicio.php" class="flex items-center py-5 px-2">
+                    <img src="../../assets/svg/logo.svg" alt="DailyGo" width="110">
+                </a>
+                <div class="hidden md:flex items-center space-x-3">
+                    <a href="inicio.php#info-ayuda">Ayuda</a>
+                    <a href="promociones.html">Promociones</a>
+                    <a href="pedidos.html">Mis Pedidos</a>
+                    <a href="perfil.html">Mi Perfil</a>
+                </div>
+
+
+                <!-- Móvil -->
+                <div class="md:hidden flex items-center">
+                    <button class="outline-none mobile-menu-button">
+                        <svg class=" w-6 h-6" x-show="!showMenu" fill="none" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Menú móvil -->
+        <div class="hidden mobile-menu">
+            <div class="flex flex-col justify-center items-center">
+                <div
+                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
+                    <a href="inicio.php#info-ayuda">Ayuda</a>
+                </div>
+                <div
+                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
+                    <a href="promociones.html">Promociones</a>
+                </div>
+                <div
+                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
+                    <a href="pedidos.html">Mis Pedidos</a>
+                </div>
+                <div
+                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
+                    <a href="perfil.html">Mi Perfil</a>
+                </div>
+            </div>
         </div>
     </nav>
     <section class="pt-8 lg:pt-24 md:pt-16" id="hero-prductos">
@@ -39,58 +85,65 @@
     </section>
 
     <section class="mt-16 mx-auto container p-5 lg:p-2 md:p-5">
+        <?php
+            if(isset($_REQUEST['nombreTienda'])){
+                echo "<input type='hidden' id='nombreTienda' value='".$_REQUEST['nombreTienda']."'>";
+            }else{
+                echo "<input type='hidden' id='nombreTienda' value='-'>";
+            }
+        ?>
         <div class="flex justify-center flex-wrap gap-5 mt-5">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Hamburguesa')">
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" onclick="filtrarCategoria('Hamburguesa')">
                         <img src="../../assets/svg/categorias/hamburguesa.svg" alt="hamburguesa" width="54" class="mb-2.5">
                         Hamburguesa
                     </div>
-                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Asiática')">
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" onclick="filtrarCategoria('Asiática')">
                         <img src="../../assets/svg/categorias/asiatica.svg" alt="asiática" width="54" class="mb-2.5">
                         Asiática
                     </div>
-                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Italiana')">
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" onclick="filtrarCategoria('Italiana')">
                         <img src="../../assets/svg/categorias/italiana.svg" alt="Italiana" width="54" class="mb-2.5">
                         Italiana
                     </div>
-                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Pizza')">
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" onclick="filtrarCategoria('Pizza')">
                         <img src="../../assets/svg/categorias/pizza.svg" alt="Pizza" width="54" class="mb-2.5">
                         Pizza
                     </div>
-                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Kebab')">
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" onclick="filtrarCategoria('Kebab')">
                         <img src="../../assets/svg/categorias/kebab.svg" alt="Kebab" width="54" class="mb-2.5">
                         Kebab
                     </div>
-                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Bebida')">
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" onclick="filtrarCategoria('Bebida')">
                         <img src="../../assets/svg/categorias/bebida.svg" alt="Bebida" width="54" class="mb-2.5">
                         Bebida
                     </div>
-                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Sandwich')">
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" onclick="filtrarCategoria('Sandwich')">
                         <img src="../../assets/svg/categorias/sandwich.svg" alt="Sandwich" width="54" class="mb-2.5">
                         Sandwich
                     </div>
-                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Vegana')">
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" onclick="filtrarCategoria('Vegana')">
                         <img src="../../assets/svg/categorias/vegana.svg" alt="Vegana" width="46" class="mb-2.5">
                         Vegana
                     </div>
-                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Mexicana')">
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" onclick="filtrarCategoria('Mexicana')">
                         <img src="../../assets/svg/categorias/mexicana.svg" alt="Mexicana" width="54" class="mb-2.5">
                         Mexicana
                     </div>
-                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Parafarmacia')">
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" onclick="filtrarCategoria('Parafarmacia')">
                         <img src="../../assets/svg/categorias/parafarmacia.svg" alt="Parafarmacia" width="54" class="mb-2.5">
                         Parafarmacia
                     </div>
-                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Americana')">
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" onclick="filtrarCategoria('Americana')">
                         <img src="../../assets/svg/categorias/americana.svg" alt="Americana" width="54" class="mb-2.5">
                         Americana
                     </div>
-                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Dulce')">
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" onclick="filtrarCategoria('Dulce')">
                         <img src="../../assets/svg/categorias/dulce.svg" alt="Dulce" width="54" class="mb-2.5">
                         Dulce
                     </div>
-                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" oncliclick="filtrarCategoria('Otra')">
+                    <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" onclick="filtrarCategoria('Otra')">
                         <img src="../../assets/svg/categorias/otra.svg" alt="Otra" width="54" class="mb-2.5">
                         Otra
                     </div>
@@ -110,35 +163,10 @@
                 <option>Mayor tiempo</option>
             </select>
         </div>
-        <h3 class="font-bold mb-5 mt-8">Destacados de Hamburguesas</h3>
+        <h3 class="font-bold mb-5 mt-8">Resultados</h3>
         <div class="grid grid-cols-4 lg:grid-cols-4 md:grid-cols-2 gap-4 mb-16" id="listadoTiendas">
-            <div style="
-                height: 200px;
-                background-image:
-                    linear-gradient(to bottom, rgba(16, 14, 52, 0.2), rgba(16, 14, 52, 0.9)),
-                    url(https://images.unsplash.com/photo-1619881589316-56c7f9e6b587?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8);
-                background-position: center; background-size: cover;"
-                class="col-span-4 lg:col-span-1 md:col-span-1 shadow-lg hover:shadow-2xl duration-300 cursor-pointer rounded-lg">
-                <div class="w-full h-full flex flex-col justify-end rounded-lg">
-                    <div class=" w-full h-fit mx-auto text-center rounded-xl">
-                        <div class="p-5">
-                            <h4 class="text-white font-bold">Carl´s Jr</h4>
-                            <small class="px-2 py-1 bg-indigo-700 rounded-full text-xs text-white">HAMBURGUESAS</small>
-                        </div>
-                        <div class="flex flex-wrap text-sm justify-center gap-3 bg-white p-2.5 rounded-b-lg">
-                            <div class="flex flex-wrap items-center gap-1.5">
-                                <img src="../../assets/svg/valoracion.svg" alt="restaurante" width="16">
-                                <p>84%</p>
-                            </div>
-                            <div class="flex flex-wrap items-center gap-1.5">
-                                <img src="../../assets/svg/tiempo.svg" alt="tiempo" width="16">
-                                <p>15-20 min</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+            <!--LISTADO DE TIENDAS-->
+        </div>
     </section>
 
     <footer class="mt-16">
