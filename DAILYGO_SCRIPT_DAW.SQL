@@ -184,26 +184,26 @@ CREATE TABLE `detalle_ventas` (
 */
    
 INSERT INTO proveedores (CIF_PROV, RAZSOC, DIR_PROV, TLF_PROV, MAIL_PROV, PW_PROV, VALORACIONES, CATEGORIA, TIEMPO, COORDENADAS) VALUES
-	('A-00000001', 'McDonald´s', 'C/ Goya, 70', '604564312', 'hello@mcdonalds.com', '123456Ar', '4.7', 'Hamburguesa', '20', '111'),
-	('A-00000002', 'Subway', 'Plaza del Carmen, 38', '643242323', 'hello@subway.com', '123456Ar', '3.0', 'Sandwich', '20', '222'),
-	('A-00000003', 'KFC', 'C/ Goya, 68', '754353463', 'hello@kfc.com', '123456Ar', '4.0', 'Americana', '30', '333'),
-	('A-00000004', 'Goiko', 'Gta. de Bilbao, 3', '644231323', 'hello@goiko.com', '123456Ar', '3.6', 'Hamburguesa', '40', '444'),
-	('A-00000005', 'Domino´s Pizza', 'C/ Juan Bravo, 62', '633343252', 'hello@dominos.com', '123456Ar', '4.8', 'Pizzza', '15', '555'),
-	('A-00000006', 'Starbucks', 'CC Islazul', '645235121', 'hello@starbucks.com', '123456Ar', '4.9', 'Bebida', '20', '666'),
-	('A-00000007', 'Donner Kebab', 'Av. Oporto 89', '742304344', 'hello@donner.com', '123456Ar', '4.2', 'Kebab', '20', '777'),
-	('A-00000008', 'Farmacia Trébol', 'Av. Oporto 57', '700331344', 'hello@ftrebol.com', '123456Ar', '4.2', 'Parafarmacia', '10', '888'),
-	('A-00000009', 'Dunkin\'', 'C/ Fuencarral, 43', '643242000', 'hello@dunkin.com', '123456Ar', '4.4', 'Bebida', '15', '999'),
-	('A-00000010', 'Carl´s Jr', 'C/ Gran Vía, 45', '600324143', 'hello@carls.com', '123456Ar', '3.8', 'Hamburguesa', '30', '1110'),
-	('A-00000011', 'THUNDER', 'C/ Don Felipe, 4', '711232131', 'hello@thunder.com', '123456Ar', '3.9', 'Vegana', '20', '1221'),
-	('A-00000012', 'UDON', 'C/ Narváez, 36', '762626652', 'hello@udon.com', '123456Ar', '4.3', 'Asiática', '15', '1332'),
-	('A-00000013', 'Taco Bell', 'CC Parque Sur', '634234411', 'hello@tacobell.com', '123456Ar', '3.7', 'Mexicana', '30', '1443'),
-	('A-00000014', 'La Tagliatella', 'C/ O´Donell, 8', '742342423', 'hello@latagliatella.com', '123456Ar', '4.0', 'Italiana', '50', '1554'),
-	('A-00000015', 'Manolo Bakes', 'CC Xanadú', '654535231', 'hello@manolobakes.com', '123456Ar', '4.7', 'Dulce', '15', '1665'),
-	('A-00000016', 'Toc Toc', 'Av. de Gran Bretaña, 1', '666886848', 'hello@toctoc.com', '123456Ar', '4.9', 'Asiática', '20', '1776'),
-	('A-00000017', 'Rodilla', 'CC Islazul', '777234213', 'hello@rodilla.com', '123456Ar', '5.0', 'Sandwich', '15', '1887'),
-	('A-00000018', 'Aloha Poké', 'C/ de la Libertad, 17 ', '772277271', 'hello@alohapoke.com', '123456Ar', '4.6', 'Vegana', '20', '1998'),
-	('A-00000019', 'Pizzería Carlos', 'C/ Alcalá, 238', '634302031', 'hello@pizzeriacarlos.com', '123456Ar', '4.7', 'Pizza', '30', '2109'),
-	('A-00000020', 'OVEN', 'C/ Gran Vía, 55', '703040608', 'hello@oven.com', '123456Ar', '4.2', 'Italiana', '40', '2220');
+	('A-00000001', 'McDonald´s', 'C/ Goya, 70', '604564312', 'hello@mcdonalds.com', '123456Ar', '4.7', 'Hamburguesa', '20', '40.4168,-3.7038'),
+	('A-00000002', 'Subway', 'Plaza del Carmen, 38', '643242323', 'hello@subway.com', '123456Ar', '3.0', 'Sandwich', '20', '40.392826,-3.661071'),
+	('A-00000003', 'KFC', 'C/ Goya, 68', '754353463', 'hello@kfc.com', '123456Ar', '4.0', 'Americana', '30', '40.386208,-3.678436'),
+	('A-00000004', 'Goiko', 'Gta. de Bilbao, 3', '644231323', 'hello@goiko.com', '123456Ar', '3.6', 'Hamburguesa', '40', '40.544043,-3.630498'),
+	('A-00000005', 'Domino´s Pizza', 'C/ Juan Bravo, 62', '633343252', 'hello@dominos.com', '123456Ar', '4.8', 'Pizzza', '15', '40.544043,-3.630498'),
+	('A-00000006', 'Starbucks', 'CC Islazul', '645235121', 'hello@starbucks.com', '123456Ar', '4.9', 'Bebida', '20', '40.544043,-3.630498'),
+	('A-00000007', 'Donner Kebab', 'Av. Oporto 89', '742304344', 'hello@donner.com', '123456Ar', '4.2', 'Kebab', '20', '40.461531,-4.129427'),
+	('A-00000008', 'Farmacia Trébol', 'Av. Oporto 57', '700331344', 'hello@ftrebol.com', '123456Ar', '4.2', 'Parafarmacia', '10', '40.410657,-3.720553'),
+	('A-00000009', 'Dunkin\'', 'C/ Fuencarral, 43', '643242000', 'hello@dunkin.com', '123456Ar', '4.4', 'Bebida', '15', '40.544043,-3.630498'),
+	('A-00000010', 'Carl´s Jr', 'C/ Gran Vía, 45', '600324143', 'hello@carls.com', '123456Ar', '3.8', 'Hamburguesa', '30', '40.551917,-3.615504'),
+	('A-00000011', 'THUNDER', 'C/ Don Felipe, 4', '711232131', 'hello@thunder.com', '123456Ar', '3.9', 'Vegana', '20', '40.544043,-3.630498'),
+	('A-00000012', 'UDON', 'C/ Narváez, 36', '762626652', 'hello@udon.com', '123456Ar', '4.3', 'Asiática', '15', '40.544043,-3.630498'),
+	('A-00000013', 'Taco Bell', 'CC Parque Sur', '634234411', 'hello@tacobell.com', '123456Ar', '3.7', 'Mexicana', '30', '40.544043,-3.630498'),
+	('A-00000014', 'La Tagliatella', 'C/ O´Donell, 8', '742342423', 'hello@latagliatella.com', '123456Ar', '4.0', 'Italiana', '50', '40.410657,-3.720553'),
+	('A-00000015', 'Manolo Bakes', 'CC Xanadú', '654535231', 'hello@manolobakes.com', '123456Ar', '4.7', 'Dulce', '15', '40.461531,-4.129427'),
+	('A-00000016', 'Toc Toc', 'Av. de Gran Bretaña, 1', '666886848', 'hello@toctoc.com', '123456Ar', '4.9', 'Asiática', '20', '40.544043,-3.630498'),
+	('A-00000017', 'Rodilla', 'CC Islazul', '777234213', 'hello@rodilla.com', '123456Ar', '5.0', 'Sandwich', '15', '40.551917,-3.615504'),
+	('A-00000018', 'Aloha Poké', 'C/ de la Libertad, 17 ', '772277271', 'hello@alohapoke.com', '123456Ar', '4.6', 'Vegana', '20', '40.334281,-3.714209'),
+	('A-00000019', 'Pizzería Carlos', 'C/ Alcalá, 238', '634302031', 'hello@pizzeriacarlos.com', '123456Ar', '4.7', 'Pizza', '30', '40.544043,-3.630498'),
+	('A-00000020', 'OVEN', 'C/ Gran Vía, 55', '703040608', 'hello@oven.com', '123456Ar', '4.2', 'Italiana', '40', '40.544043,-3.630498');
 /*
  ····INSERCIÓN DE PRODUCTOS····
 · DEN_PROD -> Denominación comercial del producto
