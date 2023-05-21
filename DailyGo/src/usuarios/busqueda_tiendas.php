@@ -1,6 +1,3 @@
-<?php 
-
-?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -16,6 +13,13 @@
 </head>
 
 <body class="font-medium text-blue-800">
+    <?php
+        if (isset($_REQUEST['nombreTienda'])) {
+            $nombreTienda = $_REQUEST['nombreTienda'];
+        } else {
+            $nombreTienda = "";
+        }
+    ?>
     <!--NAVBAR-->
     <nav class="bg-white shadow-lg fixed w-full top-0 z-40">
         <div class="container mx-auto px-4">
@@ -34,8 +38,7 @@
                 <!-- Móvil -->
                 <div class="md:hidden flex items-center">
                     <button class="outline-none mobile-menu-button">
-                        <svg class=" w-6 h-6" x-show="!showMenu" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg class=" w-6 h-6" x-show="!showMenu" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                             <path d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
                     </button>
@@ -45,56 +48,34 @@
         <!-- Menú móvil -->
         <div class="hidden mobile-menu">
             <div class="flex flex-col justify-center items-center">
-                <div
-                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
+                <div class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
                     <a href="inicio.php#info-ayuda">Ayuda</a>
                 </div>
-                <div
-                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
+                <div class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
                     <a href="promociones.html">Promociones</a>
                 </div>
-                <div
-                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
+                <div class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
                     <a href="pedidos.html">Mis Pedidos</a>
                 </div>
-                <div
-                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
+                <div class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
                     <a href="perfil.html">Mi Perfil</a>
                 </div>
             </div>
         </div>
     </nav>
     <section class="pt-8 lg:pt-24 md:pt-16" id="hero-prductos">
-        <div class="top-8 relative">
-            <div class="container mx-auto flex flex-col justify-center items-center p-5 lg:p-0 md:p-5">
-                <div
-                    class="shadow-lg bg-white p-5 rounded-lg flex justify-center items-center gap-3 w-full lg:w-1/2 md:w-full">
-                    <input type="text" name="dni" id="dni"
-                        class="w-full rounded-md border border-blue-100 focus:border-indigo-700 p-4 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
-                        placeholder="Producto, restaurante..">
-                    <button
-                        class="duration-300 text-white bg-indigo-700 rounded-md font-semibold hover:bg-indigo-800 p-4 w-fit">Buscar</button>
-                    <button
-                        class="duration-300 text-white bg-indigo-700 rounded-md font-semibold hover:bg-indigo-800 p-4 w-fit">
-
-                    </button>
-                </div>
-            </div>
+        <div class="container mx-auto flex flex-col justify-center items-center p-5 lg:p-0 md:p-5">
+            <form class="shadow-md relative top-10 bg-white z-10 p-5 rounded-lg flex lg:flex-row md:flex-row flex-col justify-center items-center gap-3 w-full lg:w-1/2 md:w-full">
+                <input type="text" name="nombreTienda" value="<?php echo $nombreTienda?>" id="nombreTienda" class="w-full rounded-md border border-blue-100 focus:border-indigo-700 p-4 bg-blue-100/10 focus:bg-blue-100/30 duration-300" placeholder="¿Qué te apetece? Escribe el local que desees">
+            </form>
         </div>
-
     </section>
 
-    <section class="mt-16 mx-auto container p-5 lg:p-2 md:p-5">
-        <?php
-            if(isset($_REQUEST['nombreTienda'])){
-                echo "<input type='hidden' id='nombreTienda' value='".$_REQUEST['nombreTienda']."'>";
-            }else{
-                echo "<input type='hidden' id='nombreTienda' value='-'>";
-            }
-        ?>
+    <section class="lg:mt-16 md:mt-8 mt-5  mx-auto container p-5 lg:p-2 md:p-5">
         <div class="flex justify-center flex-wrap gap-5 mt-5">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
+                    <input type="hidden" value="" id="categoria">
                     <div class="swiper-slide text-xs text-center flex flex-col justify-end items-center cursor-pointer" onclick="filtrarCategoria('Hamburguesa')">
                         <img src="../../assets/svg/categorias/hamburguesa.svg" alt="hamburguesa" width="54" class="mb-2.5">
                         Hamburguesa
@@ -151,26 +132,54 @@
             </div>
         </div>
         <hr class="mb-5 mt-8">
-        <div class="flex gap-2 flex-wrap">
-            <select class="text-sm lg:w-fit md:w-fit w-full bg-blue-100/25 border border-blue-200 text-blue-700 py-3 px-4 pr-8 rounded-md" id="grid-state">
-                <option>Por valoración: </option>
-                <option>Mejor valoración</option>
-                <option>Peor valoración</option>
-            </select>
-            <select class="text-sm lg:w-fit md:w-fit w-full bg-blue-100/25 border border-blue-200 text-blue-700 py-3 px-4 pr-8 rounded-md" id="grid-state">
-                <option>Por tiempo: </option>
-                <option>Menor tiempo</option>
-                <option>Mayor tiempo</option>
-            </select>
+        <div class="flex lg:justify-between md:justify-between justify-center items-center flex-wrap gap-5">
+            <div class="flex gap-2 justify-center flex-wrap">
+                <input type="hidden" id="orden" value="rand">
+                <input type="button" value="Ordenar por valoración" id="ordenValoracion" onclick="ordenarTiendas('VALORACIONES')" class="duration-300 rounded-full border px-3 py-1 hover:bg-blue-100/50 cursor-pointer">
+                <input type="button" value="Ordenar por tiempo" id="ordenTiempo" onclick="ordenarTiendas('TIEMPO')" class="duration-300 rounded-full border px-3 py-1 hover:bg-blue-100/50 cursor-pointer">
+            </div>
+            <button id="eliminarFiltros" class="duration-300 rounded-full border border-indigo-600 px-3 py-1 hover:bg-indigo-100/50 text-indigo-600">x Limpiar filtros</button>
         </div>
-        <h3 class="font-bold mb-5 mt-8">Resultados</h3>
+        <h3 class="font-bold mb-5 mt-8" id="tituloResultados">Resultados</h3>
         <div class="grid grid-cols-4 lg:grid-cols-4 md:grid-cols-2 gap-4 mb-16" id="listadoTiendas">
             <!--LISTADO DE TIENDAS-->
         </div>
     </section>
 
-    <footer class="mt-16">
-
+    <footer class="mt-24 mb-32">
+        <div class="container mx-auto lg:p-2 md:p-3 p-5">
+            <img src="../../assets/svg/logo.svg" alt="DailyGo" width="128">
+            <div class="grid grid-cols-4 gap-8 mt-8">
+                <div class="lg:col-span-1 md:col-span-1 col-span-2 flex flex-col gap-3">
+                    <p class="font-bold">Sitios</p>
+                    <a href="inicio.php">Inicio</a>
+                    <a href="promociones.html">Promociones</a>
+                    <a href="pedidos.html">Pedidos</a>
+                    <a href="perfil.html">Perfil</a>
+                </div>
+                <div class="lg:col-span-1 md:col-span-1 col-span-2 flex flex-col gap-3">
+                    <p class="font-bold">Información</p>
+                    <a href="../politica_privacidad.html" target="_blank">Política de privacidad</a>
+                    <a href="../terminos_condiciones.html" target="_blank">Términos y condiciones</a>
+                </div>
+                <div class="lg:col-span-1 md:col-span-1 col-span-2 flex flex-col gap-3">
+                    <p class="font-bold">Soporte</p>
+                    <a href="ayuda.html">Ayuda</a>
+                </div>
+            </div>
+            <hr class="my-12">
+            <div class="flex flex-col lg:flex-row md:flex-row lg:justify-between md:justify-between justify-center gap-5 flex-wrap items-center">
+                <small>&copy; DailyGo 2023</small>
+                <div class="flex gap-3 flex-wrap lg:flex-row md:flex-row lg:justify-between md:justify-between justify-center">
+                    <a href="https://www.apple.com/es/app-store/">
+                        <img src="../../assets/svg/app_store_logo.svg" alt="App Store">
+                    </a>
+                    <a href="https://play.google.com/store/games?hl=es&gl=US&pli=1">
+                        <img src="../../assets/svg/google_play_logo.svg" alt="Google Play">
+                    </a>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>

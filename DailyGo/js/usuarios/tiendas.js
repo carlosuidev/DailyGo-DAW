@@ -1,14 +1,85 @@
-document.addEventListener("DOMContentLoaded", iniciarTiendas);
+window.addEventListener("DOMContentLoaded", iniciarTiendas);
 
 const nombreTienda = document.getElementById("nombreTienda");
+const ordenValoracion = document.getElementById("ordenValoracion");
+const ordenTiempo = document.getElementById("ordenTiempo");
+const eliminarFiltros = document.getElementById("eliminarFiltros");
+const orden = document.getElementById("orden");
+const categoria = document.getElementById("categoria");
+const tituloResultados = document.getElementById("tituloResultados");
 
 function iniciarTiendas() {
-    if(filename() == "inicio.php" || "inicio.php#info-ayuda.php"){
+    if((filename() == "inicio.php") || (filename() == "inicio.php#info-ayuda.php") ){
         tiendasTop();
-    }else{
-        CarouselCategorias();
-        mostrarTodasTiendas();
     }
+
+    try {
+        CarouselCategorias();
+        buscarTiendas();
+        eliminarFiltros.addEventListener("click", quitarFiltros);
+        nombreTienda.addEventListener("input", buscarTiendas);
+    } catch (e) {
+        console.log("Página de Inicio 🏠");
+    }
+}
+
+function ordenarTiendas(tipo){
+    if(tipo == "VALORACIONES"){
+        orden.value = "VALORACIONES";
+        ordenValoracion.setAttribute("class", "rounded-full px-3 py-1 bg-blue-900 text-white cursor-pointer");
+        ordenTiempo.setAttribute("class", "duration-300 rounded-full border px-3 py-1 hover:bg-blue-100/50 cursor-pointer");
+    }else if(tipo == "TIEMPO"){
+        orden.value = "TIEMPO";
+        ordenTiempo.setAttribute("class", "rounded-full px-3 py-1 bg-blue-900 text-white cursor-pointer");
+        ordenValoracion.setAttribute("class", "duration-300 rounded-full border px-3 py-1 hover:bg-blue-100/50 cursor-pointer");
+    }
+
+    buscarTiendas();
+}
+
+function quitarFiltros(){
+    ordenTiempo.setAttribute("class", "duration-300 rounded-full border px-3 py-1 hover:bg-blue-100/50 cursor-pointer");
+    ordenValoracion.setAttribute("class", "duration-300 rounded-full border px-3 py-1 hover:bg-blue-100/50 cursor-pointer");
+    orden.value = "rand";
+    categoria.value = "";
+    tituloResultados.textContent = `Resultados`;
+    buscarTiendas();
+}
+
+function buscarTiendas(){
+    const listadoTiendas = document.getElementById("listadoTiendas");
+
+    const datos = {
+        tienda: nombreTienda.value,
+        categoria: categoria.value,
+        orden: orden.value
+    }
+
+    console.log(datos);
+
+    fetch("../../php/listar_tiendas.php", {
+        method: "POST",
+        body: JSON.stringify(datos),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+
+            listadoTiendas.innerHTML = "";
+
+            if (data.length > 0) {
+                data.forEach(element => {
+                    listadoTiendas.appendChild(crearComponenteTienda(element));
+                });
+            } else {
+                listadoTiendas.appendChild(crearComponenteSinResultados())
+            }
+        })
+        .catch(error => {
+            console.error("Error: No se ha podido obtener los datos de todas las tiendas -> ", error);
+        });
 }
 
 function filename(){
@@ -21,6 +92,7 @@ function filename(){
 function tiendasTop(){
     const listadoTiendas = document.getElementById("listadoTiendas");
     listadoTiendas.innerHTML = "";
+
     fetch("../../php/tiendas_top.php", {
         method: "POST",
         body: null,
@@ -72,74 +144,27 @@ function CarouselCategorias() {
     }
 }
 
-function mostrarTodasTiendas() {
-    const listadoTiendas = document.getElementById("listadoTiendas");
-
-    listadoTiendas.innerHTML = "";
-    const datos = {
-        tienda: nombreTienda.value
-    }
-    fetch("../../php/listar_tiendas.php", {
-        method: "POST",
-        body: JSON.stringify(datos),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.length > 0) {
-                data.forEach(element => {
-                    listadoTiendas.appendChild(crearComponenteTienda(element));
-                });
-            } else {
-                listadoTiendas.appendChild(crearComponenteSinResultados());
-            }
-        })
-        .catch(error => {
-            console.error("Error: No se ha podido obtener los datos de todas las tiendas -> ", error);
-        });
-}
-
-function filtrarCategoria(categoria) {
-    const listadoTiendas = document.getElementById("listadoTiendas");
-
-    listadoTiendas.innerHTML = "";
-    const datos = {
-        categoria: categoria
-    }
-    fetch("../../php/tiendas_categoria.php", {
-        method: "POST",
-        body: JSON.stringify(datos),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.length > 0) {
-                data.forEach(element => {
-                    listadoTiendas.appendChild(crearComponenteTienda(element));
-                });
-            } else {
-                listadoTiendas.appendChild(crearComponenteSinResultados());
-            }
-
-        })
-        .catch(error => {
-            console.error("Error: No se ha podido obtener los datos de todas las tiendas -> ", error);
-        });
+function filtrarCategoria(nombre) {
+    tituloResultados.textContent = `Resultados por ${nombre}`;
+    categoria.value = nombre;
+    buscarTiendas();
 }
 
 function crearComponenteTienda(element) {
-    const componente = document.createElement("div");
+    const componente = document.createElement("form");
+    componente.setAttribute("action", "tienda_productos.php");
+    componente.setAttribute("method", "post");
     componente.style.height = "200px";
     componente.style.backgroundImage = `linear-gradient(to bottom, rgba(16, 14, 52, 0.2), rgba(16, 14, 52, 0.9)), url('../../img_bbdd/fondos/${element['CIF_PROV']}.jpg')`;
     componente.style.backgroundSize = "cover";
     componente.style.backgroundPosition = "center";
     componente.setAttribute("class", "col-span-4 lg:col-span-1 md:col-span-1 shadow-lg hover:shadow-2xl duration-300 cursor-pointer rounded-lg");
 
-    const contenedor = document.createElement("div");
+    // VALORES
+    componente.appendChild(datosHiddens(element));
+
+    const contenedor = document.createElement("button");
+    contenedor.setAttribute("type", "submit");
     contenedor.setAttribute("class", "w-full h-full flex flex-col justify-end rounded-lg");
 
     const contendorTexto = document.createElement("div");
@@ -215,4 +240,20 @@ function crearComponenteSinResultados() {
     p.style.textAlign = "center";
 
     return p;
+}
+
+function datosHiddens(element){
+    const div = document.createElement("div");
+
+    const tipos = ["CIF_PROV", "RAZSOC", "DIR_PROV", "TLF_PROV", "VALORACIONES", "CATEGORIA", "TIEMPO", "COORDENADAS"];
+
+    for(let i=0; i<tipos.length; i++){
+        const nuevo = document.createElement("input");
+        nuevo.setAttribute("name", tipos[i]);
+        nuevo.setAttribute("type", "hidden");
+        nuevo.setAttribute("value", element[tipos[i]]);
+        div.appendChild(nuevo);
+    }
+    
+    return div;
 }

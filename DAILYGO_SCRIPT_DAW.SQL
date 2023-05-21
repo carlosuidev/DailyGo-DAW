@@ -188,7 +188,7 @@ INSERT INTO proveedores (CIF_PROV, RAZSOC, DIR_PROV, TLF_PROV, MAIL_PROV, PW_PRO
 	('A-00000002', 'Subway', 'Plaza del Carmen, 38', '643242323', 'hello@subway.com', '123456Ar', '3.0', 'Sandwich', '20', '40.392826,-3.661071'),
 	('A-00000003', 'KFC', 'C/ Goya, 68', '754353463', 'hello@kfc.com', '123456Ar', '4.0', 'Americana', '30', '40.386208,-3.678436'),
 	('A-00000004', 'Goiko', 'Gta. de Bilbao, 3', '644231323', 'hello@goiko.com', '123456Ar', '3.6', 'Hamburguesa', '40', '40.544043,-3.630498'),
-	('A-00000005', 'Domino´s Pizza', 'C/ Juan Bravo, 62', '633343252', 'hello@dominos.com', '123456Ar', '4.8', 'Pizzza', '15', '40.544043,-3.630498'),
+	('A-00000005', 'Domino´s Pizza', 'C/ Juan Bravo, 62', '633343252', 'hello@dominos.com', '123456Ar', '4.8', 'Pizza', '15', '40.544043,-3.630498'),
 	('A-00000006', 'Starbucks', 'CC Islazul', '645235121', 'hello@starbucks.com', '123456Ar', '4.9', 'Bebida', '20', '40.544043,-3.630498'),
 	('A-00000007', 'Donner Kebab', 'Av. Oporto 89', '742304344', 'hello@donner.com', '123456Ar', '4.2', 'Kebab', '20', '40.461531,-4.129427'),
 	('A-00000008', 'Farmacia Trébol', 'Av. Oporto 57', '700331344', 'hello@ftrebol.com', '123456Ar', '4.2', 'Parafarmacia', '10', '40.410657,-3.720553'),

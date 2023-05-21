@@ -106,7 +106,7 @@
         <div class="container mx-auto flex flex-col justify-center items-center p-5 lg:p-0 md:p-5">
             <h1 class="font-bold text-white text-center mb-8">Pedidos y comidas a <br class="hidden lg:block md:hidden">
                 domicilio en minutos</h1>
-            <form action="busqueda_tiendas.php"
+            <form action="busqueda_tiendas.php" method="post"
                 class="bg-white z-10 p-5 rounded-lg flex lg:flex-row md:flex-row flex-col justify-center items-center gap-3 w-full lg:w-1/2 md:w-full">
                 <input type="text" name="nombreTienda"
                     class="w-full rounded-md border border-blue-100 focus:border-indigo-700 p-4 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
@@ -258,13 +258,13 @@
         </div>
     </section>
 
-    <footer class="mt-24 relative bottom-0">
+    <footer class="mt-24 mb-32">
         <div class="container mx-auto lg:p-2 md:p-3 p-5">
             <img src="../../assets/svg/logo.svg" alt="DailyGo" width="128">
             <div class="grid grid-cols-4 gap-8 mt-8">
                 <div class="lg:col-span-1 md:col-span-1 col-span-2 flex flex-col gap-3">
                     <p class="font-bold">Sitios</p>
-                    <a href="inicio.html">Inicio</a>
+                    <a href="inicio.php">Inicio</a>
                     <a href="promociones.html">Promociones</a>
                     <a href="pedidos.html">Pedidos</a>
                     <a href="perfil.html">Perfil</a>

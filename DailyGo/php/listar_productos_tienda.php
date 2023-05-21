@@ -7,11 +7,17 @@ try {
     mysqli_select_db($conexion, "dailygo") or die("No se puede seleccionar la BD");
     
     /* Lazo la consulta sobre la BD*/
-    $categoria = $datosJson['categoria'];
-    if($categoria != ""){
-        $datos = mysqli_query($conexion, "select * from proveedores where categoria='$categoria'");
+    $cif = $datosJson['cif'];
+    $orden = $datosJson['orden'];
+    if($cif != "-"){
+        if($orden == "precio"){
+            $datos = mysqli_query($conexion, "select * from productos where CIF_PROV_PROD='$cif' order by PU_PROD ASC");
+        }else{
+            $datos = mysqli_query($conexion, "select * from productos where CIF_PROV_PROD='$cif'");
+        }
     }else{
-        $datos = mysqli_query($conexion, "SELECT * FROM proveedores");
+        echo "error";
+        return false;
     }
     
     $numr = mysqli_num_rows($datos);
