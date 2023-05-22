@@ -7,12 +7,12 @@ function comprobarSesion(){
             const redirecciones = {
                 'proveedor': '/proveedor/inicio.html',
                 'rider': '/riders/inicio.html',
-                'administrador': '/proveedores/inicio.html',
+                'administrador': '/administrador/inicio.html',
             }
 
             window.location.href = redirecciones.tipoUsuario;
         }else{
-            window.location.href = 'index.php';
+            window.location.href = '../index.html';
         }
     }else{
         return true;
