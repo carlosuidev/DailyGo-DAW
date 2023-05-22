@@ -9,7 +9,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
 
 document.getElementById('select-location').addEventListener('change',function(e){
   let coords = e.target.value.split(",");
-  map.flyTo(coords,13);0
+  map.flyTo(coords,13);
 
   // Obtener referencia al elemento select
 const selectLocation = document.getElementById('select-location');

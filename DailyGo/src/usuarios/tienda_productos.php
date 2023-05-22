@@ -8,6 +8,9 @@
     <title>DailyGo | Pedidos ultrarrápidos</title>
     <script src="../../styles/tailwind.js"></script>
     <link rel="stylesheet" href="../../styles/global.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   		integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   		crossorigin=""/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <link rel="shortcut icon" href="../../assets/svg/favicon.svg" type="image/x-icon">
 </head>
@@ -24,10 +27,43 @@
         $tiempo = $_REQUEST['TIEMPO'];
         $coordenadas = $_REQUEST['COORDENADAS'];
         echo "<input type='hidden' id='cifProv' value='$cifProv'>";
+        echo "<input type='hidden' id='coords' value='$coordenadas'>";
     } else {
         header("Location: busqueda_tiendas.php");
     }
     ?>
+
+    <input type="hidden" name="razSoc" id="razSoc" value="<?php echo $razonSocial; ?>">
+
+    <!--Resumen pedido PC Y TABLET-->
+    <div class="hover:shadow-lg duration-300 fixed lg:flex md:flex hidden bottom-0 w-full bg-blue-800 text-white p-2 z-50"
+        >
+        <div class="container mx-auto py-3 flex justify-between items-center gap-8">
+            <div class="flex w-full gap-3 overflow-x-auto px-2" id="listCarrito">
+            <!--Lista de productos en el carrito-->
+            </div>
+            <div class="border-l pl-5">
+                <small>Total</small>
+                <p id="totalBar"></p>
+            </div>
+            <a id="enlacePedido" href="carrito.html"
+                class="shrink-0 bg-yellow-400 text-blue-800 font-bold hover:bg-yellow-500 duration-300 rounded px-3 py-4">Pedir ahora</a>
+        </div>
+    </div>
+
+    <!--CARRITO MÓVIL-->
+    <a id="enlacePedido" href="carrito.html"
+        class="border border-1 z-50 lg:hidden md:hidden flex cursor-pointer hover:shadow-lg duration-300 fixed bottom-2 right-2 bg-blue-800 rounded-full text-white p-2"
+        >
+        <div class="flex items-center bg-yellow-400 rounded-full">
+            <div class="rounded-full w-12 h-12 bg-white flex items-center justify-center">
+                <img src="../../assets/svg/bolsa_compra.svg" width="28">
+                <p id="contadorPedidos" class="absolute text-sm mt-1.5 font-bold">2</p>
+            </div>
+            <a id="btnCarrito" class="bg-yellow-400 text-blue-800 font-bold py-2 pl-2 pr-3 rounded-full">Pedir ahora</a>
+        </div>
+    </id=>
+
     <!--NAVBAR-->
     <nav class="bg-white shadow-lg fixed w-full top-0 z-40">
         <div class="container mx-auto px-4">
@@ -72,56 +108,10 @@
         </div>
     </nav>
 
-    <div class="w-full h-fit bg-blue-900 p-5 shadow z-50 fixed bottom-0">
-        <div class="container mx-auto text-white flex justify-between items-center">
-            <div class="hidden lg:flex md:flex flex-wrap gap-5">
-                <div class="flex flex-wrap gap-4 items-center">
-                    <div class="bg-blue-700 px-3 py-2 rounded-lg">
-                        <p class="text-sm">Big Mac Clásica</p>
-                        <div class="flex items-center h-fit mt-1">
-                            <p class="text-xs text-white/60 mr-2">1 ud</p>
-                            <button class="mr-1 bg-indigo-700 hover:bg-indigo-800 duration-300 rounded-full h-5 w-5 flex items-center justify-center">+</button>
-                            <button class="mr-1 bg-indigo-700 hover:bg-indigo-800 duration-300 rounded-full h-5 w-5 flex items-center justify-center">-</button>
-                        </div>
-                    </div>
-                    <div class="bg-blue-700 px-3 py-2 rounded-lg">
-                        <p class="text-sm">Big Mac Clásica</p>
-                        <div class="flex items-center h-fit mt-1">
-                            <p class="text-xs text-white/60 mr-2">1 ud</p>
-                            <button class="mr-1 bg-indigo-700 hover:bg-indigo-800 duration-300 rounded-full h-5 w-5 flex items-center justify-center">+</button>
-                            <button class="mr-1 bg-indigo-700 hover:bg-indigo-800 duration-300 rounded-full h-5 w-5 flex items-center justify-center">-</button>
-                        </div>
-                    </div>
-                    <div class="bg-blue-700 px-3 py-2 rounded-lg">
-                        <p class="text-sm">Big Mac Clásica</p>
-                        <div class="flex items-center h-fit mt-1">
-                            <p class="text-xs text-white/60 mr-2">1 ud</p>
-                            <button class="mr-1 bg-indigo-700 hover:bg-indigo-800 duration-300 rounded-full h-5 w-5 flex items-center justify-center">+</button>
-                            <button class="mr-1 bg-indigo-700 hover:bg-indigo-800 duration-300 rounded-full h-5 w-5 flex items-center justify-center">-</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-wrap lg:hidden md:hidden gap-5">
-                Tienes 5 productos
-            </div>
-            <div class="flex items-center gap-5 border-l-white border-t-blue-900 border-r-blue-900 border-b-blue-900 border pl-5">
-
-                <div class="flex flex-col justify-center">
-                    <small>Total sin envío:</small>
-                    <p class="font-bold text-lg">32,50 €</p>
-                </div>
-                <button class="duration-300 text-blue-900 font-semibold px-2 py-2 flex items-center justify-center bg-yellow-400 rounded-md hover:bg-yellow-500">
-                    Seleccionar destino
-                </button>
-            </div>
-
-        </div>
-    </div>
 
     <main>
         <div class="w-full h-32 lg:h-48 md:h-42" style="
-        background-image: url('../../img_bbdd/fondos/<?php echo $cifProv ?>.jpg');
+        background-image: url('../../img_bbdd/fondos/<?php echo $cifProv; ?>.jpg');
         background-position: center;
         background-size: cover;
         width:100%">
@@ -130,29 +120,31 @@
         <div class="mx-auto container mt-8 px-5">
             <p class="text-sm"><a href="busqueda_tiendas.php" class="underline">Búsqueda de tiendas</a> > <span class="font-bold"><?php echo $razonSocial ?></span></p>
             <div class="mt-5">
-                <div>
+                <div class="flex justify-between flex-wrap gap-3">
                     <div class="flex gap-5 items-center w-fit bg-white">
                         <div class="w-32 h-32 hidden lg:flex md:flex rounded-lg border" style="
-                        background-image: url('../../img_bbdd/proveedores/<?php echo $cifProv ?>.jpg');
+                        background-image: url('../../img_bbdd/proveedores/<?php echo $cifProv; ?>.jpg');
                         background-position: center;
                         background-size: cover;">
                         </div>
                         <div>
-                            <small class="bg-indigo-700 text-white px-2 py-1 rounded-full"><?php echo $categoria ?></small>
-                            <h2 class="font-bold mt-1.5"><?php echo $razonSocial ?></h2>
+                            <small class="bg-indigo-700 text-white px-2 py-1 rounded-full"><?php echo $categoria; ?></small>
+                            <h2 class="font-bold mt-1.5"><?php echo $razonSocial; ?></h2>
                             <div class="flex text-sm mb-2 gap-3 flex-wrap mt-2">
                                 <div class="flex flex-wrap items-center gap-1.5">
                                     <img id="iconoValoracion" src="../../assets/svg/valoracion.svg" alt="restaurante" width="16">
-                                    <p id="valoracion"><?php echo $valoraciones ?></p>
+                                    <p id="valoracion"><?php echo $valoraciones; ?></p>
                                 </div>
                                 <p>|</p>
                                 <div class="flex flex-wrap items-center gap-1.5">
                                     <img src="../../assets/svg/tiempo.svg" alt="tiempo" width="16">
-                                    <p><?php echo $tiempo ?> min</p>
+                                    <p><?php echo $tiempo; ?> min</p>
                                 </div>
                             </div>
                         </div>
-
+                    </div>
+                    <div id="map">
+                        <!--MAPA DEL LOCAL-->
                     </div>
                 </div>
 
@@ -208,7 +200,11 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   		integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   		crossorigin=""></script>   	
     <script src="../../js/usuarios/productos_tienda.js"></script>
+    <script src="../../js/usuarios/carrito.js"></script>
     <script src="../../js/global/navbar.js"></script>
 </body>
 
