@@ -113,7 +113,7 @@ function crearComponenteProducto(element) {
 
     const boton = document.createElement("button");
     boton.setAttribute("class", "duration-300 text-white flex items-center justify-center bg-indigo-700 rounded-md hover:bg-indigo-800 w-10 h-10 text-xl");
-    boton.setAttribute("onclick", "a()");
+    boton.setAttribute("onclick", `addProducto(${element['COD_PROD']})`);
     const imgBtn = document.createElement("img");
     imgBtn.setAttribute("alt", "+");
     imgBtn.setAttribute("src", "../../assets/svg/agregar.svg");

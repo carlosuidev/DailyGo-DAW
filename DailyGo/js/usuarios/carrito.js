@@ -95,6 +95,21 @@ function eliminarProducto(id){
 
 function crearComponenteProducto(element){
     const componente = document.createElement("div");
+    componente.setAttribute("class", "bg-blue-700 px-3 py-2 rounded-lg");
+    const producto = document.createElement("p");
+    producto.textContent = element.nombre;
+    producto.setAttribute("class", "text-sm text-white font-semibold");
+
+    const divUd = document.createElement("div");
+    divUd.setAttribute("class", "flex items-center h-fit mt-1 gap-1.5");
+    const ud = document.createElement("p");
+    ud.setAttribute("class", "");
+    ud.textContent = element.cantidad;
+    divUd.appendChild(ud);
+    const btnMas = document.createElement("button");
+    ud.setAttribute("class", "");
+    ud.textContent = element.cantidad;
+    divUd.appendChild(ud);
 
     return componente;
 }
