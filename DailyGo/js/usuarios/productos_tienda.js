@@ -117,7 +117,8 @@ function crearComponenteProducto(element) {
 
     const boton = document.createElement("button");
     boton.setAttribute("class", "duration-300 text-white flex items-center justify-center bg-indigo-700 rounded-md hover:bg-indigo-800 w-10 h-10 text-xl");
-    boton.setAttribute("onclick", "addProducto(" + element['COD_PROD'] + "," + element['PU_PROD'] + ",'" + element['DEN_PROD'] + "','" + razSoc.value + ")");
+    //boton.setAttribute("onclick", "addProducto(" + element['COD_PROD'] + "," + element['PU_PROD'] + ",'" + element['DEN_PROD'] + "','" + razSoc.value + ")");
+    boton.setAttribute("onclick", `addProducto(${element['COD_PROD']}, ${element['PU_PROD']}, '${element['DEN_PROD']}', '${razSoc.value}')`);
     const imgBtn = document.createElement("img");
     imgBtn.setAttribute("alt", "+");
     imgBtn.setAttribute("src", "../../assets/svg/agregar.svg");
@@ -145,7 +146,7 @@ function crearComponenteSinResultados() {
 function mostrarMapa() {
     let marker;
 
-    let map = L.map('map').setView([40.314224, -3.7038], 6)
+    let map = L.map('map').setView([40.314224, -3.7038], 16)
 
     //Agregar tilelAyer mapa base desde openstreetmap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -155,7 +156,7 @@ function mostrarMapa() {
     
 
         let coordenadas = coords.value.split(",");
-        map.flyTo(coordenadas, 13);
+        map.flyTo(coordenadas, 16);
         
         const lat = coordenadas[0];
         const lng = coordenadas[1];
@@ -170,7 +171,7 @@ function mostrarMapa() {
         marker = L.marker([lat, lng]).addTo(map);
 
         // Centrar el mapa en la ubicación seleccionada
-        map.flyTo([lat, lng], 13);
+        map.flyTo([lat, lng], 16);
 
         const chincheta = document.querySelectorAll(".leaflet-marker-pane")[0];
         const imagen = chincheta.childNodes[0];

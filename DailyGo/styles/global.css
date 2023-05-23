@@ -67,10 +67,14 @@ h6{
     line-height: 1.25rem !important;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
     #map{
         width: 100% !important;
     }
+}
+
+@media (max-width: 640px) {
+    
 
     h1{
         font-size: 2.5rem !important;
@@ -211,7 +215,7 @@ p,a,h1,h2,h3,h4,h5,h6,small,span{
 
 #map{
     z-index: 1 !important;
-    border-radius: 0.8rem;
+    border-radius: 0.8rem !important;
     width: 50% ;
     height:  150px !important;
 }
