@@ -13,41 +13,27 @@
 
 <body class="font-medium text-blue-800 pb-36 min-vh-100">
     <!--Resumen pedido PC Y TABLET-->
-    <div class="hover:shadow-lg duration-300 border border-b-0 border-x-0 border-t-1 border-white fixed lg:flex md:flex hidden bottom-0 w-full bg-blue-800 text-white p-2 z-50"
-        id="contadorPedidos">
-        <div class="container mx-auto py-3 flex justify-between items-center gap-8 flex-shrink-0">
-            <div class="flex flex justify-start w-full gap-5 overflow-x-auto" id="listProductosBar">
-                <div class="shrink-0 bg-blue-700 rounded-md p-2">
-                    <p class="text-sm">Big Mac</p>
-                    <p class="text-sm font-normal text-blue-300"><span>1 ud.</span> | <span>3,75€</span></p>
-                </div>
-                <div class="shrink-0 bg-blue-700 rounded-md p-2">
-                    <p class="text-sm">Patatas</p>
-                    <p class="text-sm font-normal text-blue-300"><span>1 ud.</span> | <span>1,00€</span></p>
-                </div>
-                <div class="shrink-0 bg-blue-700 rounded-md p-2">
-                    <p class="text-sm">McFlurry Oreo</p>
-                    <p class="text-sm font-normal text-blue-300"><span>2 ud.</span> | <span>6,82€</span></p>
-                </div>
+    <div class="hover:shadow-lg duration-300 fixed lg:flex md:flex hidden bottom-0 w-full bg-blue-800 text-white p-2 z-50">
+        <div class="container mx-auto py-3 flex justify-between items-center gap-8 items-center">
+            <div class="flex lg:w-3/4 md:w-4/6 gap-3 overflow-x-auto px-2" id="listCarrito">
+                <!--Lista de productos en el carrito-->
             </div>
-            <div class="border-l pl-5">
-                <small>Total</small>
-                <p id="totalBar"></p>
+            <div class="lg:w-1/4 md:w-2/6 flex items-center lg:gap-5 md:gap-3">
+                <div class="border-l pl-5">
+                    <small>Total con envío:</small>
+                    <p id="totalBar"></p>
+                </div>
+                <a id="enlacePedido" href="carrito.html" class="shrink-0 bg-yellow-400 text-blue-800 font-bold hover:bg-yellow-500 duration-300 rounded px-3 py-4 flex items-center justify-center">Pedir ahora</a>
             </div>
-            <a href="carrito.html"
-                class="shrink-0 bg-yellow-400 text-blue-800 font-bold hover:bg-yellow-500 duration-300 rounded px-3 py-4">Revisar
-                pedido</a>
         </div>
     </div>
 
     <!--CARRITO MÓVIL-->
-    <a href="carrito.html"
-        class="border border-1 z-50 lg:hidden md:hidden flex cursor-pointer hover:shadow-lg duration-300 fixed bottom-2 right-2 bg-blue-800 rounded-full text-white p-2"
-        id="contadorPedidos">
+    <a id="btnCarrito" href="carrito.html" class="border border-1 z-50 lg:hidden md:hidden flex cursor-pointer hover:shadow-lg duration-300 fixed bottom-2 right-2 bg-blue-800 rounded-full text-white p-2">
         <div class="flex items-center bg-yellow-400 rounded-full">
             <div class="rounded-full w-12 h-12 bg-white flex items-center justify-center">
                 <img src="../../assets/svg/bolsa_compra.svg" width="28">
-                <p class="absolute text-sm mt-1.5 font-bold">2</p>
+                <p id="contadorPedidos" class="absolute text-sm mt-1.5 font-bold">0</p>
             </div>
             <p class="bg-yellow-400 text-blue-800 font-bold py-2 pl-2 pr-3 rounded-full">Pedir ahora</p>
         </div>
@@ -109,17 +95,21 @@
             <hr class="mt-2 mb-5">
             <div class="grid lg:grid-cols-2 grid-cols-1 gap-4 bg-white border rounded-lg p-5">
                 <div>
-                    <h4 class="font-bold">Tus datos</h4>
-                    <hr class="my-5">
-                    <div class="grid lg:grid-cols-2 grid-cols-1 gap-3">
-                        <p><b>Nombre:</b> <span id="nombreActual">Carlos</span></p>
-                        <p><b>Apellidos:</b> <span id="apellidosActual">Almendros Arellano</span></p>
-                        <p><b>Teléfono:</b> <span id="telefonoActual">65745743</span></p>
-                        <p><b>Correo eletrónico:</b> <span id="correoActual">carlos@gmail.com</span></p>
+                    <h4 class="font-bold mb-1.5">Actualizar datos</h4>
+                    <div id="correctoActualizar" class="hidden">
+                        <div class="fixed mx-auto container top-20 mb-8 rounded-lg w-full bg-green-200 text-green-500 text-center p-3">
+                            <p class="text-sm">Se han actualizado correctamente tus datos</p>
+                        </div>
                     </div>
+                    <div id="errorActualizar" class="hidden">
+                        <div class="fixed mx-auto container top-20 mb-8 rounded-lg w-full bg-red-200 text-red-500 text-center p-3">
+                            <p class="text-sm" id="msgError">No se ha podido crear su cuenta. Inténtelo de nuevo</p>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="bg-white shadow-lg border rounded-lg p-5 lg:mt-0 mt-12">
-                    <h4 class="font-bold mb-1.5">¿Deseas actualizar tus datos?</h4>
+                    <h4 class="font-bold mb-1.5">Actualización de contraseña</h4>
                     <form class="mt-5">
                         <div id="correctoActualizar" class="hidden">
                             <div class="mb-8 rounded-lg w-full bg-green-200 text-green-500 border border-green-500 text-center p-3">

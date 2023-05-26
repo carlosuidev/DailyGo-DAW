@@ -13,33 +13,31 @@
 
 <body class="font-medium text-blue-800 pb-36">
     <!--Resumen pedido PC Y TABLET-->
-    <div class="hover:shadow-lg duration-300 fixed lg:flex md:flex hidden bottom-0 w-full bg-blue-800 text-white p-2 z-50"
-        >
-        <div class="container mx-auto py-3 flex justify-between items-center gap-8 flex-shrink-0">
-            <div class="flex flex justify-start w-full gap-5 overflow-x-auto px-2" id="listProductosBar">
-            <!--Lista de productos en el carrito-->
+    <div class="hover:shadow-lg duration-300 fixed lg:flex md:flex hidden bottom-0 w-full bg-blue-800 text-white p-2 z-50">
+        <div class="container mx-auto py-3 flex justify-between items-center gap-8 items-center">
+            <div class="flex lg:w-3/4 md:w-4/6 gap-3 overflow-x-auto px-2" id="listCarrito">
+                <!--Lista de productos en el carrito-->
             </div>
-            <div class="border-l pl-5">
-                <small>Total</small>
-                <p id="totalBar"></p>
+            <div class="lg:w-1/4 md:w-2/6 flex items-center lg:gap-5 md:gap-3">
+                <div class="border-l pl-5">
+                    <small>Total con envío:</small>
+                    <p id="totalBar"></p>
+                </div>
+                <a id="enlacePedido" href="carrito.html" class="shrink-0 bg-yellow-400 text-blue-800 font-bold hover:bg-yellow-500 duration-300 rounded px-3 py-4 flex items-center justify-center">Pedir ahora</a>
             </div>
-            <a id="enlacePedido" href="carrito.html"
-                class="shrink-0 bg-yellow-400 text-blue-800 font-bold hover:bg-yellow-500 duration-300 rounded px-3 py-4">Pedir ahora</a>
         </div>
     </div>
 
     <!--CARRITO MÓVIL-->
-    <a id="enlacePedido" href="carrito.html"
-        class="border border-1 z-50 lg:hidden md:hidden flex cursor-pointer hover:shadow-lg duration-300 fixed bottom-2 right-2 bg-blue-800 rounded-full text-white p-2"
-        >
+    <a id="btnCarrito" href="carrito.html" class="border border-1 z-50 lg:hidden md:hidden flex cursor-pointer hover:shadow-lg duration-300 fixed bottom-2 right-2 bg-blue-800 rounded-full text-white p-2">
         <div class="flex items-center bg-yellow-400 rounded-full">
             <div class="rounded-full w-12 h-12 bg-white flex items-center justify-center">
                 <img src="../../assets/svg/bolsa_compra.svg" width="28">
-                <p id="contadorPedidos" class="absolute text-sm mt-1.5 font-bold">2</p>
+                <p id="contadorPedidos" class="absolute text-sm mt-1.5 font-bold">0</p>
             </div>
-            <a id="btnCarrito" class="bg-yellow-400 text-blue-800 font-bold py-2 pl-2 pr-3 rounded-full">Pedir ahora</a>
+            <p class="bg-yellow-400 text-blue-800 font-bold py-2 pl-2 pr-3 rounded-full">Pedir ahora</p>
         </div>
-    </id=>
+    </a>
 
     <!--NAVBAR-->
     <nav class="bg-white shadow-lg fixed w-full top-0 z-40">

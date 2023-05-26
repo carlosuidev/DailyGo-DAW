@@ -20,7 +20,7 @@ function mostrarBarraProductos() {
         calcularImporte();
     } else {
         listCarrito.innerHTML = "No tienes ningún producto en tu carrito :(";
-        totalBar.innerHTML = "0.00";
+        totalBar.innerHTML = "0.00€";
     }
 }
 
@@ -42,6 +42,14 @@ function addProducto(id, precio, nombre, tienda) {
                 carrito.push(nuevoProducto);
             }
         } else {
+            const avisoTienda = document.getElementById("avisoTienda");
+            avisoTienda.setAttribute("class", "w-full container mx-auto");
+            avisoTienda.style.opacity = 1;
+            setTimeout(function() {
+                avisoTienda.style.opacity = 0;
+                avisoTienda.style.transition = "opacity 0.5";
+                avisoTienda.setAttribute("class", "hidden w-full container mx-auto");
+            }, 2000);
             localStorage.removeItem("miCarrito");
             addProducto(id, precio, nombre, tienda);
             mostrarBarraProductos();
@@ -196,6 +204,8 @@ function calcularImporte() {
             cantidad += producto.cantidad;
         });
         contadorPedidos.innerHTML = cantidad;
+        // Suma gastos de envío (1.90 + 0.12 cent por cada unidad)
+        total = total+1.90+(0.12*cantidad);
         totalBar.textContent = `${total.toFixed(2)}€`;
     } else {
         contadorPedidos.innerHTML = 0;

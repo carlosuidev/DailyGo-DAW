@@ -95,45 +95,12 @@
                                             </tr>
                                         </thead>
                                         <tbody class="bg-white divide-y divide-blue-200" id="listaProductosTabla">
-                                            <tr class="hover:bg-blue-100/20 duration-300">
-                                                <td class="p-4 text-sm font-medium">
-                                                    <div>
-                                                        <p>Big Mac</p>
-                                                        <p class="text-sm font-normal text-blue-300">McDondald´s</p>
-                                                    </div>
-                                                </td>
-                                                <td class="p-4 text-sm">
-                                                    4,49€
-                                                </td>
-                                                <td class="p-4 text-sm text-center">
-                                                    <div class="flex gap-2">
-                                                        <button
-                                                            class="cursor-pointer duration-300 bg-white border border-blue-200 hover:bg-green-500 w-5 h-5 font-bold rounded-full"
-                                                            onclick="aumentarCantidad(id)">
-                                                            <p class="relative bottom-0.5">+</p>
-                                                        </button>
-                                                        <p>2</p>
-                                                        <button
-                                                            class="cursor-pointer duration-300 bg-white border border-blue-200 hover:bg-red-500 w-5 h-5 font-bold rounded-full"
-                                                            onclick="reducirCantidad(id)">
-                                                            <p class="relative bottom-0.5">-</p>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                                <td class="p-4 text-sm">
-                                                    8,98€
-                                                </td>
-                                                <td class="p-4 text-sm">
-                                                    <button
-                                                        class="cursor-pointer duration-300 bg-white border border-red-500 text-red-500 hover:text-white hover:bg-red-500 w-5 h-5 rounded-full"
-                                                        onclick="elimianrProducto(id)">
-                                                        <p class="relative bottom-0.5">x</p>
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                            <!--PRODUCTOS CARRITO-->
                                         </tbody>
                                     </table>
+                                    
                                 </div>
+                                <small class="text-xs pl-1.5 text-blue-400">*IVA incluído</small>
                             </div>
                         </div>
                     </div>
@@ -206,20 +173,20 @@
                         <hr class="w-full my-3">
                         <div class="flex justify-between my-1.5">
                             <p>Subtotal:</p>
-                            <p>10,50€</p>
+                            <p id="subtotal">10,50€</p>
                         </div>
                         <div class="flex justify-between my-1.5">
                             <p>Envío:</p>
-                            <p>1,50€</p>
+                            <p id="envío">1,50€</p>
                         </div>
                         <div class="flex justify-between my-1.5">
                             <p>Descuento:</p>
-                            <p>0,00€</p>
+                            <p id="descuento">0,00€</p>
                         </div>
                         <hr>
                         <div class="flex justify-between my-1.5 font-bold">
                             <p>Total:</p>
-                            <p>12,00€</p>
+                            <p id="total">12,00€</p>
                         </div>
                         <div class="flex justify-between mt-5 font-bold items-center gap-2">
                             <input type="text" name="direccion" id="direccion" placeholder="Codigo promocional"
@@ -277,6 +244,7 @@
     </footer>
 
     <script src="../../js/global/navbar.js"></script>
+    <script src="../../js/usuarios/crear_pedido.js"></script>
 </body>
 
 </html>
