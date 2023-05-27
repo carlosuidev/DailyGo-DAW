@@ -126,7 +126,7 @@ function respuestaEntrar() {
                         localStorage.setItem("correo", jsonEntrar.MAIL_CLI);
                         localStorage.setItem("telefono", jsonEntrar.TLF_CLI);
                         localStorage.setItem("tipoUsuario", "usuario");
-                        window.location.href = "../src/usuarios/inicio.phphp";
+                        window.location.href = "../src/usuarios/inicio.php";
                         break;
 
                     case "rider":

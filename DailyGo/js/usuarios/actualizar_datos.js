@@ -4,7 +4,7 @@ const nombre = document.getElementById("nombre");
 const apellidos = document.getElementById("apellidos");
 const telefono = document.getElementById("telefono");
 const correo = document.getElementById("correo");
-const contrasenaActual = document.getElementById("contrasenaActual");
+const contrasenaActual = document.getElementById("contrasena");
 const contrasenaNueva = document.getElementById("contrasenaNueva");
 
 const msgNombre = document.getElementById("msgNombre");
@@ -21,11 +21,20 @@ const incorrectoDatos = document.getElementById("incorrectoDatos");
 const correctoContrasena = document.getElementById("correctoContrasena");
 const incorrectoContrasena = document.getElementById("incorrectoContrasena");
 
-const btnNombre = document.getElementById("btnnombre");
+const btnNombre = document.getElementById("btnNombre");
 const btnApellidos = document.getElementById("btnApellidos");
 const btnTelefono = document.getElementById("btnTelefono");
 const btnCorreo = document.getElementById("btnCorreo");
 const btnContrasena = document.getElementById("btnContrasena");
+
+//
+let validacionNombre = '';
+let validacionApellidos = '';
+let validacionCorreo = '';
+let validacionTelefono = '';
+let validacionContrasenhaAntigua = '';
+let validacionContrasenhaNueva = '';
+let resNombre = '';
 
 function iniciarPerfil() {
     mostrarDatos();
@@ -54,11 +63,11 @@ function validarNombre() {
     if (expNombre.test(nombre.value)) {
         nombre.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
         msgNombre.setAttribute("class", "hidden");
-        return true;
+        validacionNombre = true;
     } else {
         nombre.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
         msgNombre.setAttribute("class", "flex");
-        return false;
+        validacionNombre = false;
     }
 }
 
@@ -67,89 +76,42 @@ function validarApellidos() {
     if (expApellidos.test(apellidos.value)) {
         apellidos.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
         msgApellidos.setAttribute("class", "hidden");
-        return true;
+        validacionApellidos = true;
     } else {
         nombrapellidos.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
         msgApellidos.setAttribute("class", "flex");
-        return false;
+        validacionApellidos = false;
     }
 }
 
 function validarTelefono() {
     const expTelefono = /^(6|7|8|9)\d{8}$/;
     if (expTelefono.test(telefono.value)) {
-        const datos = {
-            'telefono': telefono.value
-        }
-
-        fetch("ruta...", {
-            method: "POST",
-            body: JSON.stringify(datos),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-            .then(data => {
-                if (data.msg = "no existe") {
-                    telefono.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
-                    msgTelefono.setAttribute("class", "hidden");
-                    msgTelefonoExiste.setAttribute("class", "hidden");
-                    return true;
-                } else {
-                    telefono.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
-                    msgTelefono.setAttribute("class", "hidden");
-                    msgTelefonoExiste.setAttribute("class", "flex");
-                    return false;
-                }
-            })
-            .catch(error => {
-                console.error("Error: ", error);
-                return false;
-            });
+        telefono.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+        msgTelefono.setAttribute("class", "hidden");
+        msgTelefonoExiste.setAttribute("class", "hidden");
+        validacionTelefono = true;
     } else {
         telefono.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
         msgTelefono.setAttribute("class", "flex");
         msgTelefonoExiste.setAttribute("class", "hidden");
-        return false;
+        validacionTelefono = false;
     }
 }
 
 function validarCorreo() {
     const expCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
     if (expCorreo.test(correo.value)) {
-        const datos = {
-            'correo': correo.value
-        }
+        correo.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+        msgCorreo.setAttribute("class", "hidden");
+        msgCorreoExiste.setAttribute("class", "hidden");
+        validacionCorreo = true;
 
-        fetch("ruta...", {
-            method: "POST",
-            body: JSON.stringify(datos),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-            .then(data => {
-                if (data.msg = "no existe") {
-                    correo.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
-                    msgCorreo.setAttribute("class", "hidden");
-                    msgCorreoExiste.setAttribute("class", "hidden");
-                    return true;
-                } else {
-                    correo.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
-                    msgCorreo.setAttribute("class", "hidden");
-                    msgCorreoExiste.setAttribute("class", "flex");
-                    return false;
-                }
-            })
-            .catch(error => {
-                console.error("Error: ", error);
-                return false;
-            });
     } else {
         correo.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
         msgCorreo.setAttribute("class", "flex");
         msgCorreoExiste.setAttribute("class", "hidden");
-        return false;
+        validacionCorreo = false;
     }
 }
 
@@ -159,11 +121,11 @@ function validarContrasena() {
     if (expContrasena.test(contrasenaNueva.value)) {
         contrasenaNueva.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
         msgContrasenaNueva.setAttribute("class", "hidden");
-        return true;
+        validacionContrasenhaNueva = true;
     } else {
         contrasenaNueva.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
         msgContrasenaNueva.setAttribute("class", "flex");
-        return false;
+        validacionContrasenhaNueva = false;
     }
 }
 
@@ -175,20 +137,74 @@ function actualizarDatos(ruta, datos) {
             "Content-Type": "application/json"
         }
     })
-        .then(data => {
-            if (data.msg = "actualizado") {
-                correctoDatos.setAttribute("class", "flex");
-                setTimeout(function () {
-                    correctoDatos.setAttribute("class", "hidden");
-                }, 3000);
-                return true;
-            } else {
-                incorrectoDatos.setAttribute("class", "flex");
-                setTimeout(function () {
-                    incorrectoDatos.setAttribute("class", "hidden");
-                }, 3000);
-                return false;
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la solicitud');
             }
+            return response.text();
+        })
+        .then(data => {
+            console.log(data)
+            switch (data) {
+                case "actualizadoNombre":
+                    correctoDatos.setAttribute("class", "flex");
+                    setTimeout(function () {
+                        correctoDatos.setAttribute("class", "hidden");
+                    }, 3000);
+                    localStorage.setItem("nombre", nombre.value);
+                    break;
+                case "actualizadoApe":
+                    correctoDatos.setAttribute("class", "flex");
+                    setTimeout(function () {
+                        correctoDatos.setAttribute("class", "hidden");
+                    }, 3000);
+                    localStorage.setItem("apellidos", apellidos.value);
+                    break;
+                case "actualizadoTel":
+                    correctoDatos.setAttribute("class", "flex");
+                    setTimeout(function () {
+                        correctoDatos.setAttribute("class", "hidden");
+                    }, 3000);
+                    localStorage.setItem("telefono", telefono.value);
+                    break;
+                case "actualizadoMail":
+                    correctoDatos.setAttribute("class", "flex");
+                    setTimeout(function () {
+                        correctoDatos.setAttribute("class", "hidden");
+                    }, 3000);
+                    localStorage.setItem("correo", correo.value);
+                    break;
+                case "actualizadoContra":
+                    correctoContrasena.setAttribute("class", "flex");
+                    setTimeout(function () {
+                        correctoContrasena.setAttribute("class", "hidden");
+                    }, 3000);
+                    localStorage.setItem("correo", correo.value);
+                    break;
+                case "telExiste":
+                    telefono.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                    msgTelefono.setAttribute("class", "hidden");
+                    msgTelefonoExiste.setAttribute("class", "flex");
+                    setTimeout(function () {
+                        correctoDatos.setAttribute("class", "hidden");
+                    }, 3000);
+                    break;
+                case "mailExiste":
+                    correo.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                    msgCorreo.setAttribute("class", "hidden");
+                    msgCorreoExiste.setAttribute("class", "flex");
+                    setTimeout(function () {
+                        correctoDatos.setAttribute("class", "hidden");
+                    }, 3000);
+                    break;
+                case "contraExiste":
+                    incorrectoContrasena.setAttribute("class", "flex");
+                    setTimeout(function () {
+                        incorrectoContrasena.setAttribute("class", "hidden");
+                    }, 3000);
+                    break;
+            }
+
         })
         .catch(error => {
             console.error("Error: ", error);
@@ -197,96 +213,55 @@ function actualizarDatos(ruta, datos) {
 }
 
 function cambiarNombre() {
-    validarNombre();
-    if (validarNombre()) {
+    if (validacionNombre) {
         const datos = {
             'nombre': nombre.value,
             'id': localStorage.getItem("id")
         }
-        const res = actualizarDatos("../../php/actualizar_datos_usuario.php", datos);
-        if(res){
-            localStorage.setItem("nombre", nombre.value);
-        }
+        actualizarDatos("../../php/actualizar_datos_usuario.php", datos);
+
     }
 }
 
 function cambiarApellidos() {
-    validarApellidos();
-    if (validarApellidos()) {
+    if (validacionApellidos) {
         const datos = {
             'apellidos': apellidos.value,
             'id': localStorage.getItem("id")
         }
-        const res = actualizarDatos("../../php/actualizar_datos_usuario.php", datos);
-        if(res){
-            localStorage.setItem("apellidos", apellidos.value);
-        }
+        actualizarDatos("../../php/actualizar_datos_usuario.php", datos);
+
     }
 }
 
 function cambiarTelefono() {
-    validarTelefono();
-    if (validarTelefono()) {
+    if (validacionTelefono) {
         const datos = {
             'telefono': telefono.value,
             'id': localStorage.getItem("id")
         }
-        const res = actualizarDatos("../../php/actualizar_datos_usuario.php", datos);
-        if(res){
-            localStorage.setItem("telefono", telefono.value);
-        }
+        actualizarDatos("../../php/actualizar_datos_usuario.php", datos);
+
     }
 }
 
 function cambiarCorreo() {
-    validarCorreo();
-    if (validarCorreo()) {
+    if (validacionCorreo) {
         const datos = {
             'correo': correo.value,
             'id': localStorage.getItem("id")
         }
-        const res = actualizarDatos("../../php/actualizar_datos_usuario.php", datos);
-        if(res){
-            localStorage.setItem("correo", correo.value);
-        }
+        actualizarDatos("../../php/actualizar_datos_usuario.php", datos);
     }
 }
 
 function cambiarContrasena() {
-    validarContrasena();
-    if (validarContrasena()) {
+    if (validacionContrasenhaNueva) {
         const datos = {
             'contrasenaActual': contrasenaActual.value,
             'contrasenaNueva': contrasenaNueva.value,
             'id': localStorage.getItem("id")
         }
-
-        fetch("../../php/actualizar_datos_usuario.php", {
-            method: "POST",
-            body: JSON.stringify(datos),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-            .then(data => {
-                if (data.msg = "actualizado") {
-                    correctoContrasena.setAttribute("class", "flex");
-                    setTimeout(function () {
-                        correctoContrasena.setAttribute("class", "hidden");
-                    }, 3000);
-                    return true;
-                } else {
-                    incorrectoContrasena.setAttribute("class", "flex");
-                    setTimeout(function () {
-                        incorrectoContrasena.setAttribute("class", "hidden");
-                    }, 3000);
-                    return false;
-                }
-            })
-            .catch(error => {
-
-                console.error("Error: ", error);
-                return false;
-            });
+        actualizarDatos("../../php/actualizar_datos_usuario.php", datos);
     }
 }
