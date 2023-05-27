@@ -42,17 +42,18 @@ function addProducto(id, precio, nombre, tienda) {
                 carrito.push(nuevoProducto);
             }
         } else {
-            const avisoTienda = document.getElementById("avisoTienda");
-            avisoTienda.setAttribute("class", "w-full container mx-auto");
-            avisoTienda.style.opacity = 1;
-            setTimeout(function() {
-                avisoTienda.style.opacity = 0;
-                avisoTienda.style.transition = "opacity 0.5";
-                avisoTienda.setAttribute("class", "hidden w-full container mx-auto");
-            }, 2000);
+            listCarrito.innerHTML = "";
+            listCarrito.innerHTML = `
+            <div class="w-fit rounded-lg bg-blue-700 text-yellow-400 text-center p-3 h-full animate__animated animate__fadeIn">
+                <p class="text-sm">⚠️ Se han retirado los productos de otras tiendas</p>
+            </div>
+            `;
+            setTimeout(function () {
+                addProducto(id, precio, nombre, tienda);
+                mostrarBarraProductos();
+            }, 3500);
             localStorage.removeItem("miCarrito");
-            addProducto(id, precio, nombre, tienda);
-            mostrarBarraProductos();
+
             return true;
         }
 
@@ -176,14 +177,14 @@ function crearComponenteProductoCarrito(element) {
 function enlacePedido() {
     const enlace = document.getElementById("enlacePedido");
     if (typeof localStorage !== "undefined" && localStorage.getItem("miCarrito")) {
-        if(JSON.parse(localStorage.getItem("miCarrito")).length){
+        if (JSON.parse(localStorage.getItem("miCarrito")).length) {
             enlace.setAttribute("href", "carrito.html");
             enlace.textContent = "Pedir ahora";
-        }else{
+        } else {
             enlace.setAttribute("href", "busqueda_tiendas.php");
             enlace.textContent = "Buscar tiendas";
         }
-        
+
     } else {
         enlace.setAttribute("href", "busqueda_tiendas.php");
         enlace.textContent = "Buscar tiendas";
@@ -196,16 +197,16 @@ function calcularImporte() {
         let total = 0.00;
         let cantidad = 0;
         carrito.forEach(producto => {
-            if(producto.cantidad == 1){
+            if (producto.cantidad == 1) {
                 total += producto.precio;
-            }else{
+            } else {
                 total += (producto.precio * producto.cantidad);
             }
             cantidad += producto.cantidad;
         });
         contadorPedidos.innerHTML = cantidad;
         // Suma gastos de envío (1.90 + 0.12 cent por cada unidad)
-        total = total+1.90+(0.12*cantidad);
+        total = total + 1.90 + (0.12 * cantidad);
         totalBar.textContent = `${total.toFixed(2)}€`;
     } else {
         contadorPedidos.innerHTML = 0;

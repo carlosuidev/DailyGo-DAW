@@ -95,55 +95,85 @@
             <hr class="mt-2 mb-5">
             <div class="grid lg:grid-cols-2 grid-cols-1 gap-4 bg-white border rounded-lg p-5">
                 <div>
-                    <h4 class="font-bold mb-1.5">Actualizar datos</h4>
-                    <div id="correctoActualizar" class="hidden">
-                        <div class="fixed mx-auto container top-20 mb-8 rounded-lg w-full bg-green-200 text-green-500 text-center p-3">
-                            <p class="text-sm">Se han actualizado correctamente tus datos</p>
+                    <h4 class="font-bold mb-5">Actualizar datos personales</h4>
+                    <div id="correctoDatos" class="hidden">
+                        <div class="mb-8 rounded-lg w-full bg-green-200 text-green-500 border border-green-500 text-center p-3">
+                            <p class="text-sm">Se ha actualizado correctamente</p>
                         </div>
                     </div>
-                    <div id="errorActualizar" class="hidden">
-                        <div class="fixed mx-auto container top-20 mb-8 rounded-lg w-full bg-red-200 text-red-500 text-center p-3">
-                            <p class="text-sm" id="msgError">No se ha podido crear su cuenta. Inténtelo de nuevo</p>
+                    <div id="incorrectoDatos" class="hidden">
+                        <div class="mb-8 rounded-lg w-full bg-red-200 text-red-500 border border-red-500 text-center p-3">
+                            <p class="text-sm">No se ha actualizado correctamente. Inténtalo de nuevo</p>
                         </div>
                     </div>
-
+                    <div class="flex flex-col mb-5">
+                        <label for="nombre" class="mb-2">Nombre:</label>
+                        <div class="flex gap-2">
+                            <input type="text" name="nombre" id="nombre"
+                            class="rounded-md border border-blue-100 focus:border-blue-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300">
+                            <input type="button" id="btnNombre" class="duration-300 text-white bg-green-500 rounded-md font-semibold hover:bg-green-600 py-2 px-3 cursor-pointer" value="✅"></input>
+                        </div>
+                        <div class="hidden" id="msgNombre">
+                            <small class="text-xs text-red-500 mt-2">Escriba un nombre válido</small>
+                        </div>    
+                    </div>
+                    <div class="flex flex-col mb-5">
+                        <label for="apellidos" class="mb-2">Apellidos:</label>
+                        <div class="flex gap-2">
+                            <input type="text" name="apellidos" id="apellidos"
+                            class="rounded-md border border-blue-100 focus:border-blue-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300">
+                            <input type="button" id="btnApellidos" class="duration-300 text-white bg-green-500 rounded-md font-semibold hover:bg-green-600 py-2 px-3 cursor-pointer" value="✅"></input>
+                        </div>
+                        <div class="hidden" id="msgApellidos">
+                            <small class="text-xs text-red-500 mt-2">Escriba apelidos válidos</small>
+                        </div>    
+                    </div>
+                    <div class="flex flex-col mb-5">
+                        <label for="telefono" class="mb-2">Teléfono:</label>
+                        <div class="flex gap-2">
+                            <input type="text" name="telefono" id="telefono"
+                            class="rounded-md border border-blue-100 focus:border-blue-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300">
+                            <input type="button" id="btnTelefono" class="duration-300 text-white bg-green-500 rounded-md font-semibold hover:bg-green-600 py-2 px-3 cursor-pointer" value="✅"></input>
+                        </div>
+                        <div class="hidden" id="msgTelefono">
+                            <small class="text-xs text-red-500 mt-2">Escriba un teléfono válido</small>
+                        </div>    
+                        <div class="hidden" id="msgTelefonoExiste">
+                            <small class="text-xs text-red-500 mt-2">Ese teléfono está en uso</small>
+                        </div>  
+                    </div>
+                    <div class="flex flex-col mb-5">
+                        <label for="correo" class="mb-2">Correo:</label>
+                        <div class="flex gap-2">
+                            <input type="text" name="correo" id="correo"
+                            class="rounded-md border border-blue-100 focus:border-blue-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300">
+                            <input type="button" id="btnCorreo" class="duration-300 text-white bg-green-500 rounded-md font-semibold hover:bg-green-600 py-2 px-3 cursor-pointer" value="✅"></input>
+                        </div>
+                        <div class="hidden" id="msgCorreo">
+                            <small class="text-xs text-red-500 mt-2">Escriba un correo válido</small>
+                        </div>
+                        <div class="hidden" id="msgCorreoExiste">
+                            <small class="text-xs text-red-500 mt-2">Ese correo está en uso</small>
+                        </div>  
+                    </div>
                 </div>
                 <div class="bg-white shadow-lg border rounded-lg p-5 lg:mt-0 mt-12">
-                    <h4 class="font-bold mb-1.5">Actualización de contraseña</h4>
+                    <h4 class="font-bold mb-1.5">Actualizar contraseña</h4>
                     <form class="mt-5">
-                        <div id="correctoActualizar" class="hidden">
+                        <div id="correctoContrasena" class="hidden">
                             <div class="mb-8 rounded-lg w-full bg-green-200 text-green-500 border border-green-500 text-center p-3">
-                                <p class="text-sm">Se han actualizado correctamente tus datos</p>
+                                <p class="text-sm">Se ha actualizado correctamente tu contaseña</p>
                             </div>
                         </div>
-                        <div id="errorActualizar" class="hidden">
+                        <div id="incorrectoContrasena" class="hidden">
                             <div class="mb-8 rounded-lg w-full bg-red-200 text-red-500 border border-red-500 text-center p-3">
-                                <p class="text-sm" id="msgError">No se ha podido crear su cuenta. Inténtelo de nuevo</p>
+                                <p class="text-sm">Esa contaseña no es válida. Inténtalo de nuevo</p>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 lg:grid-cols-3 md:grid-cols-2 gap-2 w-full">
-                            <div class="col-span-2 lg:col-span-1 md:lg:col-span-2 flex flex-col mb-8">
-                                <label for="nombre" class="mb-2">Nombre</label>
-                                <input type="text" name="nombre" id="nombre"
-                                    class="rounded-md border border-blue-100 focus:border-blue-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
-                                    placeholder="Tu nombre">
-                                <div class="hidden" id="msgNombre">
-                                    <small class="text-xs text-red-500 mt-2">Escriba un nombre válido</small>
-                                </div>
-                            </div>
-                            <div class="col-span-2 lg:col-span-2 md:lg:col-span-2 flex flex-col mb-8">
-                                <label for="apellidos" class="mb-2">Apellidos</label>
-                                <input type="text" name="apellidos" id="apellidos"
-                                    class="rounded-md border border-blue-100 focus:border-blue-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
-                                    placeholder="Tu apellido o apellidos">
-                                <div class="hidden" id="msgApellidos">
-                                    <small class="text-xs text-red-500 mt-2">Escriba un apellido o apellidos válidos</small>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="flex flex-col mb-8">
-                            <label for="contrasenaActual" class="mb-2">Contraseña actual</label>
-                            <input type="password" name="contrasenaActual" id="contrasenaActual"
+                            <label for="contrasena" class="mb-2">Contraseña actual</label>
+                            <input type="password" name="contrasena" id="contrasena"
                                 class="rounded-md border border-blue-100 focus:border-blue-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
                                 placeholder="********">
                         </div>
@@ -157,9 +187,9 @@
                                     mayúscula y un número. Mínimo 8 caracteres y máximo 16</small>
                             </div>
                         </div>
-                        <input type="button" id="actualizarDatos"
+                        <input type="button" id="btnContrasena"
                             class="duration-300 text-white bg-indigo-700 rounded-md mt-3 font-semibold hover:bg-indigo-800 py-2 w-full cursor-pointer"
-                            value="Actulizar mis datos" />
+                            value="Actulizar contraseña" />
                     </form>
                 </div>
             </div>

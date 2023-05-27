@@ -8,6 +8,7 @@
     <title>DailyGo | Pedidos ultrarrápidos</title>
     <script src="../../styles/tailwind.js"></script>
     <link rel="stylesheet" href="../../styles/global.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <link rel="shortcut icon" href="../../assets/svg/favicon.svg" type="image/x-icon">
@@ -60,12 +61,6 @@
             <p class="bg-yellow-400 text-blue-800 font-bold py-2 pl-2 pr-3 rounded-full">Pedir ahora</p>
         </div>
     </a>
-
-    <div id="avisoTienda" class="hidden w-full container mx-auto">
-        <div class="z-30 fixed mx-auto container top-20 mb-8 rounded-lg bg-yellow-100 text-yellow-600 text-center p-3">
-            <p class="text-sm">Has adquirido un producto de una tienda nueva. Los productos de tu carrito pertenecientes a la otra tienda han sido retirados</p>
-        </div>
-    </div>
 
     <!--NAVBAR-->
     <nav class="bg-white shadow-lg fixed w-full top-0 z-40">

@@ -214,7 +214,7 @@ p,a,h1,h2,h3,h4,h5,h6,small,span{
 }
 
 #map{
-    z-index: 1 !important;
+    z-index: 0 !important;
     border-radius: 0.8rem !important;
     width: 50% ;
     height:  150px !important;
