@@ -79,20 +79,6 @@ function peticionEntrar() {
 
         if (validarCorreo() && validarContrasena()) {
             xhrEntrar.onreadystatechange = respuestaEntrar;
-            switch (tipoUsuario) {
-                case "rider":
-                    direccionServer = "...";
-                    break;
-                case "proveedor":
-                    direccionServer = "...";
-                    break;
-                case "cliente":
-                    direccionServer = "...";
-                    break;
-                default:
-                    direccionServer = "...";
-                    break;
-            }
             xhrEntrar.open("POST", `${direccionServer}`, true);
             xhrEntrar.setRequestHeader(
                 "Content-type",

@@ -16,7 +16,6 @@ function mostrarProductos() {
             listaProductosTabla.appendChild(crearFila(producto));
         });
     } else {
-        const 
         listaProductosTabla.innerHTML = "<tr><td class='p-4 text-sm'>(Sin productos)</td></tr>";
     }
 }

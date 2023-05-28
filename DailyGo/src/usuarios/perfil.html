@@ -91,7 +91,11 @@
 
     <section class="mt-24 p-5 lg:p-3 md:p-5" id="info-ayuda">
         <div class="container mx-auto">
-            <h3 class="font-bold">Configura tu perfil</h3>
+            <div class="flex flex-wrap gap-5 justify-between">
+                <h3 class="font-bold">Configura tu perfil</h3>
+                <input type="button" id="btnCerrarSesion" class="duration-300 text-white bg-red-500 rounded-md font-semibold hover:bg-red-600 py-2 px-3 cursor-pointer" value="Cerrar sesión"></input>
+            </div>
+            
             <hr class="mt-2 mb-5">
             <div class="grid lg:grid-cols-2 grid-cols-1 gap-4 bg-white border rounded-lg p-5">
                 <div>
@@ -238,6 +242,7 @@
     <script src="../../js/global/navbar.js"></script>
     <script src="../../js/usuarios/carrito.js"></script>
     <script src="../../js/usuarios/actualizar_datos.js"></script>
+    <script src="../../js/global/cerrar_sesion.js"></script>
 </body>
 
 </html>

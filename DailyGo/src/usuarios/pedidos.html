@@ -13,7 +13,8 @@
 
 <body class="font-medium text-blue-800 pb-36 min-vh-100">
     <!--Resumen pedido PC Y TABLET-->
-    <div class="hover:shadow-lg duration-300 fixed lg:flex md:flex hidden bottom-0 w-full bg-blue-800 text-white p-2 z-50">
+    <div
+        class="hover:shadow-lg duration-300 fixed lg:flex md:flex hidden bottom-0 w-full bg-blue-800 text-white p-2 z-50">
         <div class="container mx-auto py-3 flex justify-between items-center gap-8 items-center">
             <div class="flex lg:w-3/4 md:w-4/6 gap-3 overflow-x-auto px-2" id="listCarrito">
                 <!--Lista de productos en el carrito-->
@@ -23,13 +24,16 @@
                     <small>Total con envío:</small>
                     <p id="totalBar"></p>
                 </div>
-                <a id="enlacePedido" href="carrito.html" class="shrink-0 bg-yellow-400 text-blue-800 font-bold hover:bg-yellow-500 duration-300 rounded px-3 py-4 flex items-center justify-center">Pedir ahora</a>
+                <a id="enlacePedido" href="carrito.html"
+                    class="shrink-0 bg-yellow-400 text-blue-800 font-bold hover:bg-yellow-500 duration-300 rounded px-3 py-4 flex items-center justify-center">Pedir
+                    ahora</a>
             </div>
         </div>
     </div>
 
     <!--CARRITO MÓVIL-->
-    <a id="btnCarrito" href="carrito.html" class="border border-1 z-50 lg:hidden md:hidden flex cursor-pointer hover:shadow-lg duration-300 fixed bottom-2 right-2 bg-blue-800 rounded-full text-white p-2">
+    <a id="btnCarrito" href="carrito.html"
+        class="border border-1 z-50 lg:hidden md:hidden flex cursor-pointer hover:shadow-lg duration-300 fixed bottom-2 right-2 bg-blue-800 rounded-full text-white p-2">
         <div class="flex items-center bg-yellow-400 rounded-full">
             <div class="rounded-full w-12 h-12 bg-white flex items-center justify-center">
                 <img src="../../assets/svg/bolsa_compra.svg" width="28">
@@ -86,31 +90,52 @@
                 </div>
             </div>
         </div>
-    </nav>    
+    </nav>
 
 
-    <section class="mt-24 p-5 lg:p-3 md:p-5" id="info-ayuda">
+    <section class="mt-24 p-5 lg:p-3 md:p-5">
         <div class="container mx-auto">
             <h3 class="font-bold">Seguimiento de pedidos</h3>
             <hr class="mt-2 mb-5">
-            <div class="grid lg:grid-cols-2 grid-cols-1 gap-4">
-                <div class="bg-white border rounded-lg p-5">
-                    <div class="flex gap-3 justify-content-between">
-                        <div>
-                            <h4 class="font-bold">ID: 43242</h4>
-                            <p class="text-sm text-blue-300">McDonald´s</p>
-                        </div>
-                        
-                        <p>En proceso</p>
+            <div class="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-16" id="pedidos-activos">
+                <!--LISTADO-->
+            </div>
+            <hr>
+            <h4 class="font-bold my-4">Historial de productos adquiridos</h4>
+            <div class="overflow-x-auto">
+                <div class="inline-block min-w-full align-middle">
+                    <div class="overflow-hidden border border-blue-100 md:rounded-lg">
+                        <table class="min-w-full divide-y divide-blue-100">
+                            <thead class="bg-blue-100/20 text-left">
+                                <tr>
+                                    <th scope="col" class="p-4 text-sm font-semibold text-blue-800">
+                                        ID
+                                    </th>
+                                    <th scope="col" class="p-4 text-sm font-semibold text-blue-800">
+                                        Producto
+                                    </th>
+                                    <th scope="col" class="p-4 text-sm font-semibold text-blue-800">
+                                        Cantidad
+                                    </th>
+                                    <th scope="col" class="p-4 text-sm font-semibold text-blue-800">
+                                        Dirección
+                                    </th>
+                                    <th scope="col" class="p-4 text-sm font-semibold text-blue-800">
+                                        Fecha
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-blue-200" id="historialPedidos">
+                                <!-- LISTADO DE PEDIDOS REALIZADOS -->
+                            </tbody>
+                        </table>
+
                     </div>
-                    <iframe class="mt-5 rounded-md"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12151.590089366286!2d-3.7235650448706523!3d40.41112093456269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4227f1d340750d%3A0x309dbf533eaa95b4!2sMcDonald&#39;s!5e0!3m2!1ses!2ses!4v1682864013430!5m2!1ses!2ses"
-                        width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    <button class="w-full">Confirmar recepción</button>
                 </div>
             </div>
+            <d id="historial-pedidos">
 
+            </d>
         </div>
     </section>
 
@@ -155,6 +180,7 @@
 
     <script src="../../js/global/navbar.js"></script>
     <script src="../../js/usuarios/carrito.js"></script>
+    <script src="../../js/usuarios/listar_pedidos.js"></script>
 </body>
 
 </html>
