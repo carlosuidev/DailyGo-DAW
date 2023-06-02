@@ -6,10 +6,6 @@ function iniciarPedidos() {
 }
 
 function confirmarRecepcion(id) {
-<<<<<<< Updated upstream
-    const datos{
-
-=======
 
 }
 
@@ -23,16 +19,16 @@ function crearComponentePedido(element) {
     const div = document.createElement("div");
 
     const id = document.createElement("h4");
-    id.textContent = `ID: ${element.id}`;
+    id.textContent = `ID Pedido: ${element['NUM_VEN']}`;
     id.setAttribute("class", "font-bold");
     div.appendChild(id);
 
     const tienda = document.getElementById("p");
-    tienda.textContent = element.tienda;
+    tienda.textContent = element['RAZSOC'];
     div.appendChild(tienda);
 
     const estado = document.getElementById("small");
-    estado.textContent = element.estado;
+    estado.textContent = element['ESTADO_VEN'];
     switch (element.estado) {
         case "En preparación":
             estado.setAttribute("class", "bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full")
@@ -52,7 +48,6 @@ function crearComponentePedido(element) {
         default:
             estado.setAttribute("class", "bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full");
             break;
->>>>>>> Stashed changes
     }
     div.appendChild(estado);
     componete.appendChild(div);
@@ -152,7 +147,7 @@ function listarPedidos() {
 }
 
 function valorarPedido(){
-    
+
 }
 
 function crearComponentePedido(element) {
@@ -281,8 +276,35 @@ function listarPedidos() {
         .then(response => response.json())
         .then(data => {
             const historialPedidos = document.getElementById("historialPedidos");
+            const pedidosActivos = document.getElementById("pedidosActivos");
             data.forEach(element => {
                 if(element['ESTADO_VEN'] == "Entregado" || element['ESTADO_VEN'] == "Valorado"){
+                    historialPedidos.appendChild(crearComponenteFila(element));
+                }
+            });
+        })
+        .catch(error => {
+            console.error("Error: No se ha podido crear la petición ->", error);
+        });
+}
+
+function listarPedidosActivos() {
+    const datos = {
+        'id': localStorage.getItem("id")
+    }
+    fetch("../../php/listar_pedidos_activos_usuario.php", {
+        method: "POST",
+        body: JSON.stringify(datos),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            const historialPedidos = document.getElementById("historialPedidos");
+            const pedidosActivos = document.getElementById("pedidosActivos");
+            data.forEach(element => {
+                if(element['ESTADO_VEN'] !== "Entregado" || element['ESTADO_VEN'] !== "Valorado"){
                     historialPedidos.appendChild(crearComponenteFila(element));
                 }
             });

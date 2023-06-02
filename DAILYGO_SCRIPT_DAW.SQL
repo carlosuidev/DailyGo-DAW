@@ -39,7 +39,6 @@ Esta tabla almacena la información de los proveedores que ofrecen productos a l
 Cada proveedor se identifica con un CIF único y se almacenan sus datos de contacto, incluyendo su dirección,
 teléfono y correo electrónico. Además, se incluye una imagen de la compañía para facilitar su identificación. 
 La contraseña se almacena para garantizar la seguridad del acceso a la información del proveedor.
-"valoraciones": un número decimal con una precisión de una cifra antes del punto decimal y una precisión de una cifra después del punto decimal.
 "categoria": una cadena de caracteres con un máximo de 50 caracteres.
 "coordenadas": una cadena de caracteres con un máximo de 30 caracteres, donde se guardarán las coordenadas en el formato "latitud,longitud" (por ejemplo, "40.4168,-3.7038").
 */
@@ -51,7 +50,6 @@ CREATE TABLE `proveedores` (
     `TLF_PROV` int(11) NOT NULL COMMENT 'Teléfono',
     `MAIL_PROV` varchar(80) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Correo electrónico',
     `PW_PROV` varchar(20) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Contraseña',
-    `VALORACIONES` DECIMAL(2,1) COMMENT 'Valoración del proveedor',
     `CATEGORIA` VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL COMMENT 'Categoría del proveedor',
     `TIEMPO` int(3) COMMENT 'Tiempo de Espera',
     `COORDENADAS` VARCHAR(30) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Coordenadas del proveedor',
@@ -74,6 +72,7 @@ CREATE TABLE `riders` (
     `TLF_RID` int(11) NOT NULL COMMENT 'Teléfono',
     `MAIL_RID` varchar(80) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Correo electrónico',
     `PW_RID` varchar(20) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Contraseña',
+	`ESTADO` varchar(20) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Estado',
     PRIMARY KEY (`DNI_RID`)
 );
 
@@ -97,7 +96,6 @@ CREATE TABLE `productos` (
     `DEN_PROD` varchar(40) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Denomincación de Producto',
     `PU_PROD` DECIMAL(5, 2) DEFAULT NULL COMMENT 'Precio Unitario',
     `CIF_PROV_PROD` varchar(10) CHARACTER SET utf8mb4 NOT NULL COMMENT 'CIF del Proveedor > A-00000000',
-    `IMG_PROD` varchar(2) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'Imagen de producto',
     PRIMARY KEY (`COD_PROD`),
     KEY `CIF_PROV_PROD` (`CIF_PROV_PROD`),
     CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`CIF_PROV_PROD`) REFERENCES `proveedores` (`CIF_PROV`) ON DELETE CASCADE
@@ -144,7 +142,8 @@ CREATE TABLE `ventas` (
     `FECH_VEN` varchar(10) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT 'Fecha de la Venta',
     `ESTADO_VEN` varchar(40) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'Estado de la venta/pedido',
     `COM_VEN` varchar(128) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'Comentarios sobre la venta',
-    PRIMARY KEY (`NUM_VEN`),
+    `VALORACION` int(1) DEFAULT NULL COMMENT 'Valoración venta',
+	PRIMARY KEY (`NUM_VEN`),
     KEY `COD_CLI_VEN` (`COD_CLI_VEN`),
     KEY `DNI_RID_VEN` (`DNI_RID_VEN`),
     CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`COD_CLI_VEN`) REFERENCES `clientes` (`COD_CLI`) ON DELETE CASCADE,
@@ -316,13 +315,13 @@ VALUES
 · PW_RID -> contraseña del rider.     PPPPPPPPPP cifrar contraseñas ppppppppppp
 */
 
-INSERT INTO RIDERS(DNI_RID, NOM_RID, APE_RID, TLF_RID, MAIL_RID, PW_RID) 
+INSERT INTO RIDERS(DNI_RID, NOM_RID, APE_RID, TLF_RID, MAIL_RID, PW_RID, ESTADO) 
  VALUES
-('11234356G','Jonathan', 'Casa Pila', 765457386, 'jota@dailygo.com','123Usuario'),
-('11264584L','Benito', 'Martínez Ocasio', 694957545, 'benito@dailygo.com','123Usuario'),
-('12345465X','Paula', 'Badosa Gibert', 600434523, 'paula@dailygo.com','123Usuario'),
-('12222345T','Amicus', 'Echo', 666342345, 'amicus@dailygo.com','123Usuario'),
-('16632387Y','Ibai', 'Llanos Garatea', 756454534, 'ibai@dailygo.com','123Usuario');
+('11234356G','Jonathan', 'Casa Pila', 765457386, 'jota@dailygo.com','123Usuario', 'Disponible'),
+('11264584L','Benito', 'Martínez Ocasio', 694957545, 'benito@dailygo.com','123Usuario', 'Ocupado'),
+('12345465X','Paula', 'Badosa Gibert', 600434523, 'paula@dailygo.com','123Usuario', 'Ocupado'),
+('12222345T','Amicus', 'Echo', 666342345, 'amicus@dailygo.com','123Usuario', 'Desconectado'),
+('16632387Y','Ibai', 'Llanos Garatea', 756454534, 'ibai@dailygo.com','123Usuario', 'Disponible');
 
 /*
  ····INSERCIÓN DE VENTAS····
@@ -335,17 +334,36 @@ INSERT INTO RIDERS(DNI_RID, NOM_RID, APE_RID, TLF_RID, MAIL_RID, PW_RID)
 `COD_CLI_VEN` int(11) NOT NULL COMMENT 'Código Cliente',
 */
 
-INSERT INTO VENTAS (COD_CLI_VEN, DNI_RID_VEN, DIR_VEN, FECH_VEN, ESTADO_VEN, COM_VEN) 
+INSERT INTO VENTAS (COD_CLI_VEN, DNI_RID_VEN, DIR_VEN, FECH_VEN, ESTADO_VEN, COM_VEN, VALORACION) 
 VALUES
 (1, '11234356G', 'Margaritas, 81', '18-03-2022', 'Entregado', 'Cuidado con el perro'),
 (1, '12345465X', 'Av. de Concha Espina, 14', '28-05-2022', 'Entregado', 'La entrada está en obras'),
-(1, '11264584L', 'Margaritas, 81, 14', '30-05-2022', 'Entregado', ''),
+(1, '11264584L', 'Margaritas, 81', '30-05-2022', 'Entregado', ''),
 (2, '12345465X', 'Lucecitas, 22', '12-01-2022', 'Entregado', ''),
 (2, '11264584L', 'Lucecitas, 22', '23-03-2022', 'Entregado', ''),
 (2, '11234356G', 'Don Juan, 14', '28-03-2022', 'Entregado', ''),
 (3, '11234356G', 'General Ricardos 32', '20-03-2022', 'Entregado', ''),
 (3, '11264584L', 'General Ricardos 32', '11-05-2022', 'Entregado', ''),
-(3, '12345465X', 'General Ricardos 32', '28-05-2022', 'Entregado', '');
+(3, '12345465X', 'General Ricardos 32', '28-05-2022', 'Entregado', ''),
+(1, '11264584L', 'Tolosa, 2', '28-05-2023', 'En reparto', ''),
+(1, '12345465X', 'Tolosa, 2', '28-05-2023', 'En preparación', ''),
+
+(1, '12345465X', 'Arroyo José 5', '30-04-2022', 'Valorado', '', 5),
+(2, '12345465X', 'Ramal Micaela, 90', '11-05-2022', 'Valorado', '', 4),
+(3, '11234356G', 'Puente Alfonso, 2', '11-05-2022', 'Valorado', '', 4),
+
+(1, '11264584L', 'Arroyo José 5', '24-07-2022', 'Valorado', '', 3),
+(2, '12345465X', 'Ramal Micaela, 90', '12-05-2022', 'Valorado', 'No llamar al telefonillo, bajo yo', 4),
+
+(2, '11234356G', 'Av Francisco Manzanares, 43', '28-08-2022', 'Valorado', '', 4),
+
+(2, '12345465X', 'Av Francisco Manzanares, 43', '29-09-2023', 'Valorado', '', 5),
+
+(1, '12345465X', 'Catalina Rosado, 2', '29-09-2023', 'Valorado', '', 5),
+(1, '12345465X', 'Bloque Rosa Espinosa, 1', '29-09-2023', 'Valorado', '', 5),
+(2, '12345465X', 'José Eduardo Correa', '29-09-2023', 'Valorado', '', 5),
+(2, '12345465X', 'Urbanización Gustavo Hernández, 2xº', '29-09-2023', 'Valorado', '', 5),
+
 
 /*
  ····INSERCIÓN DE DETALLES DE VENTAS····
@@ -360,15 +378,28 @@ VALUES
 (1, 5, 1),
 (2, 1, 4),
 (3, 33, 8),
-(3, 32, 1),
-(3, 30, 1),
 (4, 20, 1),
 (5, 8, 2),
-(5, 22, 2),
 (6, 7, 2),
 (6, 8, 2),
-(7, 6, 2),
 (7, 2, 2),
 (8, 23, 1),
-(8, 67, 4),
-(9, 48, 2);
+(9, 48, 2),
+(10, 21, 1),
+(10, 22, 1),
+(11, 44, 2),
+(11, 25, 1),
+
+(12, 2, 2),
+(12, 1, 1),
+(13, 1, 1),
+(14, 4, 2),
+
+(15, 9, 1),
+(15, 8, 2),
+(15, 11, 1),
+(16, 10, 3),
+
+(17, 15, 4),
+
+(18, 15, 4),

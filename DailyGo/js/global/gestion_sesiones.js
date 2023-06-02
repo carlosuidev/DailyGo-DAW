@@ -1,5 +1,3 @@
-window.addEventListener('DOMContentLoaded', comprobarSesion);
-
 function comprobarSesion(){
     const tipoUsuario = localStorage.getItem("tipoUsuario");
     if(tipoUsuario !== null){
@@ -14,3 +12,5 @@ function comprobarSesion(){
         return true;
     }
 }
+
+comprobarSesion();

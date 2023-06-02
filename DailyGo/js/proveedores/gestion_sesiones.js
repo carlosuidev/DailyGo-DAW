@@ -1,20 +1,21 @@
-document.addEventListener('DOMContentLoaded', comprobarSesion);
-
 function comprobarSesion(){
     const tipoUsuario = localStorage.getItem("tipoUsuario");
     if(tipoUsuario !== "proveedor"){
         if(tipoUsuario !== null){
+            
             const redirecciones = {
-                'usuarios': '/usuarios/inicio.php',
-                'rider': '/riders/inicio.html',
-                'administrador': '/src/proveedores/inicio.html',
+                'usuario': '../usuarios/inicio.php',
+                'rider': '../riders/inicio.html',
+                'administrador': '../administrador/inicio.html',
             }
 
-            window.location.href = redirecciones.tipoUsuario;
+            window.location.href = redirecciones[tipoUsuario];
         }else{
-            window.location.href = '../src/index.html';
+            window.location.href = '../index.html';
         }
     }else{
         return true;
     }
 }
+
+comprobarSesion();

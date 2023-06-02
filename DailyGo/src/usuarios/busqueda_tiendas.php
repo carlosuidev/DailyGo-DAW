@@ -10,6 +10,7 @@
     <script src="../../styles/tailwind.js"></script>
     <link rel="stylesheet" href="../../styles/global.css">
     <link rel="shortcut icon" href="../../assets/svg/favicon.svg" type="image/x-icon">
+    <script src="../../js/usuarios/gestion_sesiones.js"></script>
 </head>
 
 <body class="font-medium text-blue-800">

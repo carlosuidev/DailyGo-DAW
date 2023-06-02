@@ -47,7 +47,7 @@ if (isset($_POST["correoExistente"])) {
         $conexion = mysqli_connect("localhost", "root", "", "dailygo");
         mysqli_select_db($conexion, "dailygo") or die("No se puede seleccionar la BD");
         /* Lazo la consulta sobre la BD*/
-        $datos = mysqli_query($conexion, "INSERT INTO proveedores (CIF_PROV, RAZSOC, DIR_PROV, TLF_PROV, MAIL_PROV, PW_PROV) VALUES ('$nif', '$razonSocial', '$direccion', '$telefono', '$correo', '$contrasena')");
+        $datos = mysqli_query($conexion, "INSERT INTO proveedores (CIF_PROV, RAZSOC, DIR_PROV, TLF_PROV, MAIL_PROV, PW_PROV, CATEGORIA, TIEMPO, VALORACIONES, COORDENADAS) VALUES ('$nif', '$razonSocial', '$direccion', '$telefono', '$correo', '$contrasena', 'Otros', 60, 0.0, '4.50, 4.50')");
         echo 'creado';
     } catch (Exception $err) {
         echo $err;
