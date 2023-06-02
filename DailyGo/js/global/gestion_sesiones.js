@@ -3,7 +3,7 @@ function comprobarSesion(){
     if(tipoUsuario !== null){
         const redirecciones = {
             usuario: '../src/usuarios/inicio.php',
-            rider: '../src/riders/inicio.html',
+            rider: '../src/riders/perfil.html',
             proveedor: '../src/proveedores/inicio.html',
             administrador: '../src/administrador/inicio.html'
         }
