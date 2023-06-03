@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', iniciarPerfil);
 
 const razsoc = document.getElementById("razsoc");
 const perfil = document.getElementById("perfil");
+const banner = document.getElementById("banner");
 const cat = document.getElementById("categorias");
 const coordenadas = document.getElementById("coord");
 const direccion = document.getElementById("direc");
@@ -12,6 +13,7 @@ const contrasenaNueva = document.getElementById("contrasenaNueva");
 
 const msgRazsoc = document.getElementById("msgRazsoc");
 const msgDireccion = document.getElementById("msgDirec");
+const msgBanner = document.getElementById("msgBanner");
 const msgPerfil = document.getElementById("msgPerfil");
 const msgCoordenadas = document.getElementById("msgCoord");
 const msgTelefono = document.getElementById("msgTelefono");
@@ -31,6 +33,7 @@ const btnDirec = document.getElementById("btnDirec");
 const btnCoord = document.getElementById("btnCoord");
 const btnTelefono = document.getElementById("btnTelefono");
 const btnCorreo = document.getElementById("btnCorreo");
+const btnBanner = document.getElementById("btnBanner");
 const btnContrasena = document.getElementById("btnContrasena");
 const btnPerfil = document.getElementById("btnPerfil");
 
@@ -43,6 +46,7 @@ let validacionCoordenadas = '';
 let validacionContrasenhaAntigua = '';
 let validacionContrasenhaNueva = '';
 let validacionPerfil = '';
+let validacionBanner = '';
 
 function iniciarPerfil() {
     mostrarDatos();
@@ -53,6 +57,7 @@ function iniciarPerfil() {
     direccion.addEventListener("input", validarDireccion);
     telefono.addEventListener("input", validarTelefono);
     correo.addEventListener("input", validarCorreo);
+    banner.addEventListener("change", validarImagenBanner);
     contrasenaNueva.addEventListener("input", validarContrasena);
 
     btnRazsoc.addEventListener("click", cambiarRazsoc);
@@ -62,6 +67,7 @@ function iniciarPerfil() {
     btnCorreo.addEventListener("click", cambiarCorreo);
     btnContrasena.addEventListener("click", cambiarContrasena);
     btnPerfil.addEventListener("click", guardarImagen);
+    btnBanner.addEventListener("click", guardarImagenBanner);
 }
 
 function mostrarDatos() {
@@ -133,8 +139,8 @@ function validarCoordenadas() {
 }
 
 function validarImagenPerfil() {
-    const expCoord = /\.(jpg)/i;
-    if (expCoord.test(perfil.value)) {
+    const expPerfil = /\.(jpg)/i;
+    if (expPerfil.test(perfil.value)) {
         perfil.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
         msgPerfil.setAttribute("class", "hidden");
         validacionPerfil = true;
@@ -142,6 +148,19 @@ function validarImagenPerfil() {
         perfil.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
         msgPerfil.setAttribute("class", "flex");
         validacionPerfil = false;
+    }
+}
+
+function validarImagenBanner() {
+    const expBanner = /\.(jpg)/i;
+    if (expBanner.test(banner.value)) {
+        banner.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+        msgBanner.setAttribute("class", "hidden");
+        validacionBanner = true;
+    } else {
+        banner.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+        msgBanner.setAttribute("class", "flex");
+        validacionBanner = false;
     }
 }
 
@@ -404,6 +423,39 @@ function guardarImagen() {
                 }
             })
             .then(data => {
+                if (data == 'Imagen guardada correctamente') {
+                    correctoDatos.setAttribute("class", "flex");
+                    setTimeout(function () {
+                        correctoDatos.setAttribute("class", "hidden");
+                    }, 3000);
+                }
+            })
+            .catch(error => {
+                console.log('Error en la solicitud:', error);
+            });
+    }
+}
+
+function guardarImagenBanner() {
+    if (validacionBanner) {
+        var archivo = banner.files[0]
+        var formData = new FormData();
+        formData.append('imagen', archivo);
+        formData.append('cif', localStorage.getItem("cif"))
+        fetch('../../php/proveedores/actualizar_banner_proveedores.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Datos enviados con éxito');
+                    return response.text();
+                } else {
+                    console.log('Error al enviar los datos');
+                }
+            })
+            .then(data => {
+                console.log(data)
                 if (data == 'Imagen guardada correctamente') {
                     correctoDatos.setAttribute("class", "flex");
                     setTimeout(function () {
