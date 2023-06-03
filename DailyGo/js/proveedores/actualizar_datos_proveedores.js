@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', iniciarPerfil);
 
 const razsoc = document.getElementById("razsoc");
+const perfil = document.getElementById("perfil");
 const cat = document.getElementById("categorias");
+const coordenadas = document.getElementById("coord");
 const direccion = document.getElementById("direc");
 const telefono = document.getElementById("telefono");
 const correo = document.getElementById("correo");
@@ -10,6 +12,8 @@ const contrasenaNueva = document.getElementById("contrasenaNueva");
 
 const msgRazsoc = document.getElementById("msgRazsoc");
 const msgDireccion = document.getElementById("msgDirec");
+const msgPerfil = document.getElementById("msgPerfil");
+const msgCoordenadas = document.getElementById("msgCoord");
 const msgTelefono = document.getElementById("msgTelefono");
 const msgCorreo = document.getElementById("msgCorreo");
 const msgTelefonoExiste = document.getElementById("msgTelefonoExiste");
@@ -24,20 +28,26 @@ const incorrectoContrasena = document.getElementById("incorrectoContrasena");
 
 const btnRazsoc = document.getElementById("btnRazsoc");
 const btnDirec = document.getElementById("btnDirec");
+const btnCoord = document.getElementById("btnCoord");
 const btnTelefono = document.getElementById("btnTelefono");
 const btnCorreo = document.getElementById("btnCorreo");
 const btnContrasena = document.getElementById("btnContrasena");
+const btnPerfil = document.getElementById("btnPerfil");
 
 //
 let validacionRazsoc = '';
 let validacionDirec = '';
 let validacionCorreo = '';
 let validacionTelefono = '';
+let validacionCoordenadas = '';
 let validacionContrasenhaAntigua = '';
 let validacionContrasenhaNueva = '';
+let validacionPerfil = '';
 
 function iniciarPerfil() {
     mostrarDatos();
+    coordenadas.addEventListener("input", validarCoordenadas);
+    perfil.addEventListener("change", validarImagenPerfil);
     razsoc.addEventListener("input", validarRazsoc);
     cat.addEventListener("change", cambiarCategoria);
     direccion.addEventListener("input", validarDireccion);
@@ -46,10 +56,12 @@ function iniciarPerfil() {
     contrasenaNueva.addEventListener("input", validarContrasena);
 
     btnRazsoc.addEventListener("click", cambiarRazsoc);
+    btnCoord.addEventListener("click", cambiarCoordenadas);
     btnDirec.addEventListener("click", cambiarDireccion);
     btnTelefono.addEventListener("click", cambiarTelefono);
     btnCorreo.addEventListener("click", cambiarCorreo);
     btnContrasena.addEventListener("click", cambiarContrasena);
+    btnPerfil.addEventListener("click", guardarImagen);
 }
 
 function mostrarDatos() {
@@ -64,22 +76,73 @@ function mostrarDatos() {
             "Content-Type": "application/json"
         }
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Error en la solicitud');
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la solicitud');
+            }
+            return response.json();
+        })
+        .then(data => {
+            data.forEach(element => {
+                cat.innerHTML += "<option value='" + element.categoria + "'>" + element.categoria + "</option>"
+            });
+        })
+
+    datosCoord = {
+        'coord': 'coord',
+        'cif': localStorage.getItem("cif")
+    }
+    fetch("../../php/proveedores/actualizar_datos_proveedores.php", {
+        method: "POST",
+        body: JSON.stringify(datosCoord),
+        headers: {
+            "Content-Type": "application/json"
         }
-        return response.json();
     })
-    .then(data => {
-        data.forEach( element=> {
-            cat.innerHTML += "<option value='"+element.categoria+"'>"+element.categoria+"</option>"
-            
-        });
-    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la solicitud');
+            }
+            return response.json();
+        })
+        .then(data => {
+            data.forEach(element => {
+                coordenadas.value = element.coordenadas
+            });
+
+        })
     razsoc.value = localStorage.getItem("razonSocial");
     direccion.value = localStorage.getItem("direccion");
     telefono.value = localStorage.getItem("telefono");
     correo.value = localStorage.getItem("correo");
+}
+
+
+
+function validarCoordenadas() {
+    const expCoord = /^[-+]?((([0-9]|[1-9][0-9]|1[0-7][0-9])(\.\d{1,8})?)|180(\.0{1,8})?),[-+]?((([0-9]|[1-9][0-9]|1[0-7][0-9])(\.\d{1,8})?)|180(\.0{1,8})?)$/;
+    if (expCoord.test(coordenadas.value)) {
+        coordenadas.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+        msgCoord.setAttribute("class", "hidden");
+        validacionCoordenadas = true;
+    } else {
+        coordenadas.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+        msgCoord.setAttribute("class", "flex");
+        validacionCoordenadas = false;
+    }
+}
+
+function validarImagenPerfil() {
+    const expCoord = /\.(jpg)/i;
+    if (expCoord.test(perfil.value)) {
+        perfil.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+        msgPerfil.setAttribute("class", "hidden");
+        validacionPerfil = true;
+    } else {
+        perfil.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+        msgPerfil.setAttribute("class", "flex");
+        validacionPerfil = false;
+    }
 }
 
 function validarRazsoc() {
@@ -170,6 +233,12 @@ function actualizarDatos(ruta, datos) {
         .then(data => {
             console.log(data)
             switch (data) {
+                case "coordenadasCambiadas":
+                    correctoDatos.setAttribute("class", "flex");
+                    setTimeout(function () {
+                        correctoDatos.setAttribute("class", "hidden");
+                    }, 3000);
+                    break;
                 case "catCambiada":
                     correctoDatos.setAttribute("class", "flex");
                     setTimeout(function () {
@@ -242,14 +311,13 @@ function actualizarDatos(ruta, datos) {
 }
 
 function cambiarCategoria() {
-    console.log(cat.value)
-        const datos = {
-            'categoria': cat.value,
-            'cif': localStorage.getItem("cif")
-        }
-        actualizarDatos("../../php/proveedores/actualizar_datos_proveedores.php", datos);
+    const datos = {
+        'categoria': cat.value,
+        'cif': localStorage.getItem("cif")
+    }
+    actualizarDatos("../../php/proveedores/actualizar_datos_proveedores.php", datos);
 
-    
+
 }
 
 function cambiarRazsoc() {
@@ -303,5 +371,42 @@ function cambiarContrasena() {
             'cif': localStorage.getItem("cif")
         }
         actualizarDatos("../../php/proveedores/actualizar_datos_proveedores.php", datos);
+    }
+}
+
+function cambiarCoordenadas() {
+    if (validacionCoordenadas) {
+        const datos = {
+            'coordenadasCambiadas': coordenadas.value,
+            'cif': localStorage.getItem("cif")
+        }
+        actualizarDatos("../../php/proveedores/actualizar_datos_proveedores.php", datos);
+    }
+}
+
+function guardarImagen() {
+    if (validacionPerfil) {
+        var archivo = perfil.files[0]
+        var formData = new FormData();
+        formData.append('imagen', archivo);
+        formData.append('cif', )
+        fetch('../../php/proveedores/cambiar_imagen_proveedores.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Datos enviados con éxito');
+                    return response.text();
+                } else {
+                    console.log('Error al enviar los datos');
+                }
+            })
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.log('Error en la solicitud:', error);
+            });
     }
 }
