@@ -17,6 +17,7 @@ const direccion = document.getElementById("direccion");
 const piso = document.getElementById("piso");
 const puerta = document.getElementById("puerta");
 const mensaje = document.getElementById("mensaje");
+mensaje.value = "-";
 
 // DATOS TARJETA
 const tarjeta = document.getElementById("tarjeta");
@@ -57,28 +58,35 @@ function procesarPedido() {
         validarTarjeta() &&
         validarCVV() &&
         validarCaducidad() &&
-        validarTitular()) {
+        validarTitular()
+    ) {
+        const idUsu = localStorage.getItem("id");
 
         const datos = {
-            'id': localStorage.getItem("id"),
-            'carrito': JSON.parse(localStorage.getItem("miCarrito")),
+            id: idUsu,
+            carrito: localStorage.getItem("miCarrito"),
+            direccion: direccion.value,
+            piso: piso.value,
+            puerta: puerta.value,
+            mensaje: mensaje.value
         }
 
-        fetch("../../php/crear_pedido.html", {
+        fetch("../../php/crear_pedido.php", {
             method: "POST",
             body: JSON.stringify(datos),
             headers: {
                 "Content-Type": "application/json"
             }
         })
-            .then(response => response.json())
+            .then(response => response.text())
             .then(data => {
-                if (data.msg = "creado") {
+                if (data == "Creado") {
+                    localStorage.removeItem("miCarrito");
                     window.location.href = "pedidos.html"
                 }
             })
             .catch(error => {
-                console.error("Error: No se ha podido crear la petición ->", error);
+                console.error(error);
             });
     }
 }

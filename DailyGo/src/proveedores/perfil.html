@@ -9,52 +9,21 @@
     <script src="../../styles/tailwind.js"></script>
     <link rel="stylesheet" href="../../styles/global.css">
     <link rel="shortcut icon" href="../../assets/svg/favicon.svg" type="image/x-icon">
+    <script src="../../js/proveedores/gestion_sesiones.js"></script>
 </head>
 
 <body class="font-medium text-blue-800 pb-36 min-vh-100">
-    <!--Resumen pedido PC Y TABLET-->
-    <div
-        class="hover:shadow-lg duration-300 fixed lg:flex md:flex hidden bottom-0 w-full bg-blue-800 text-white p-2 z-50">
-        <div class="container mx-auto py-3 flex justify-between items-center gap-8 items-center">
-            <div class="flex lg:w-3/4 md:w-4/6 gap-3 overflow-x-auto px-2" id="listCarrito">
-                <!--Lista de productos en el carrito-->
-            </div>
-            <div class="lg:w-1/4 md:w-2/6 flex items-center lg:gap-5 md:gap-3">
-                <div class="border-l pl-5">
-                    <small>Total con envío:</small>
-                    <p id="totalBar"></p>
-                </div>
-                <a id="enlacePedido" href="carrito.html"
-                    class="shrink-0 bg-yellow-400 text-blue-800 font-bold hover:bg-yellow-500 duration-300 rounded px-3 py-4 flex items-center justify-center">Pedir
-                    ahora</a>
-            </div>
-        </div>
-    </div>
-
-    <!--CARRITO MÓVIL-->
-    <a id="btnCarrito" href="carrito.html"
-        class="border border-1 z-50 lg:hidden md:hidden flex cursor-pointer hover:shadow-lg duration-300 fixed bottom-2 right-2 bg-blue-800 rounded-full text-white p-2">
-        <div class="flex items-center bg-yellow-400 rounded-full">
-            <div class="rounded-full w-12 h-12 bg-white flex items-center justify-center">
-                <img src="../../assets/svg/bolsa_compra.svg" width="28">
-                <p id="contadorPedidos" class="absolute text-sm mt-1.5 font-bold">0</p>
-            </div>
-            <p class="bg-yellow-400 text-blue-800 font-bold py-2 pl-2 pr-3 rounded-full">Pedir ahora</p>
-        </div>
-    </a>
-
     <!--NAVBAR-->
     <nav class="bg-white shadow-lg fixed w-full top-0 z-40">
         <div class="container mx-auto px-4">
             <div class="flex justify-between">
-                <a href="inicio.php" class="flex items-center py-5 px-2">
+                <a href="inicio.html" class="flex items-center py-5 px-2">
                     <img src="../../assets/svg/logo.svg" alt="DailyGo" width="110">
                 </a>
                 <div class="hidden md:flex items-center space-x-3">
-                    <a href="inicio.php#info-ayuda">Ayuda</a>
-                    <a href="promociones.html">Promociones</a>
-                    <a href="pedidos.html">Mis Pedidos</a>
-                    <a href="perfil.html">Mi Perfil</a>
+                    <a href="productos.html">Productos</a>
+                    <a href="pedidos.html">Pedidos</a>
+                    <a href="perfil.html" id="imgPerfil" class="w-10 h-10 rounded-full bg-blue-100 border"></a>
                 </div>
 
 
@@ -74,19 +43,15 @@
             <div class="flex flex-col justify-center items-center">
                 <div
                     class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
-                    <a href="inicio.php#info-ayuda">Ayuda</a>
+                    <a href="productos.html">Productos</a>
                 </div>
                 <div
                     class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
-                    <a href="promociones.html">Promociones</a>
+                    <a href="pedidos.html">Pedidos</a>
                 </div>
                 <div
                     class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
-                    <a href="pedidos.html">Mis Pedidos</a>
-                </div>
-                <div
-                    class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
-                    <a href="perfil.html">Mi Perfil</a>
+                    <a href="perfil.html">Perfil</a>
                 </div>
             </div>
         </div>
@@ -227,25 +192,21 @@
     </section>
 
 
-    <footer class="mt-24 mb-32">
+    <footer class="mt-24z">
         <div class="container mx-auto lg:p-2 md:p-3 p-5">
             <img src="../../assets/svg/logo.svg" alt="DailyGo" width="128">
             <div class="grid grid-cols-4 gap-8 mt-8">
                 <div class="lg:col-span-1 md:col-span-1 col-span-2 flex flex-col gap-3">
                     <p class="font-bold">Sitios</p>
-                    <a href="inicio.php">Inicio</a>
-                    <a href="promociones.html">Promociones</a>
+                    <a href="inicio.html">Inicio</a>
                     <a href="pedidos.html">Pedidos</a>
+                    <a href="productos.html">Procuctos</a>
                     <a href="perfil.html">Perfil</a>
                 </div>
                 <div class="lg:col-span-1 md:col-span-1 col-span-2 flex flex-col gap-3">
                     <p class="font-bold">Información</p>
                     <a href="../politica_privacidad.html" target="_blank">Política de privacidad</a>
                     <a href="../terminos_condiciones.html" target="_blank">Términos y condiciones</a>
-                </div>
-                <div class="lg:col-span-1 md:col-span-1 col-span-2 flex flex-col gap-3">
-                    <p class="font-bold">Soporte</p>
-                    <a href="ayuda.html">Ayuda</a>
                 </div>
             </div>
             <hr class="my-12">
@@ -266,7 +227,6 @@
     </footer>
 
     <script src="../../js/global/navbar.js"></script>
-    <script src="../../js/usuarios/carrito.js"></script>
     <script src="../../js/proveedores/actualizar_datos_proveedores.js"></script>
     <script src="../../js/global/cerrar_sesion.js"></script>
 </body>

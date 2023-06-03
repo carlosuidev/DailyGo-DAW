@@ -22,7 +22,7 @@
         $razonSocial = $_REQUEST['RAZSOC'];
         $dirProv = $_REQUEST['DIR_PROV'];
         $tlfProv = $_REQUEST['TLF_PROV'];
-        $valoraciones = $_REQUEST['VALORACIONES'];
+        $valoraciones = $_REQUEST['MEDIA'];
         $categoria = $_REQUEST['CATEGORIA'];
         $tiempo = $_REQUEST['TIEMPO'];
         $coordenadas = $_REQUEST['COORDENADAS'];

@@ -20,3 +20,4 @@ if (isset($data["asunto"])) {
 } else {
     echo 'Datos vacios';
 }
+?>

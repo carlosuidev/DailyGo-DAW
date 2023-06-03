@@ -2,14 +2,14 @@ window.addEventListener("DOMContentLoaded", iniciarTiendas);
 
 const nombreTienda = document.getElementById("nombreTienda");
 const ordenValoracion = document.getElementById("ordenValoracion");
-const ordenTiempo = document.getElementById("ordenTiempo");
+//const ordenTiempo = document.getElementById("ordenTiempo");
 const eliminarFiltros = document.getElementById("eliminarFiltros");
 const orden = document.getElementById("orden");
 const categoria = document.getElementById("categoria");
 const tituloResultados = document.getElementById("tituloResultados");
 
 function iniciarTiendas() {
-    if((filename() == "inicio.php") || (filename() == "inicio.php#info-ayuda.php") ){
+    if ((filename() == "inicio.php") || (filename() == "inicio.php#info-ayuda.php")) {
         tiendasTop();
     }
 
@@ -23,30 +23,28 @@ function iniciarTiendas() {
     }
 }
 
-function ordenarTiendas(tipo){
-    if(tipo == "VALORACIONES"){
-        orden.value = "VALORACIONES";
-        ordenValoracion.setAttribute("class", "rounded-full px-3 py-1 bg-blue-900 text-white cursor-pointer");
+function ordenarTiendas(tipo) {
+    if (orden.value == "TIEMPO") {
         ordenTiempo.setAttribute("class", "duration-300 rounded-full border px-3 py-1 hover:bg-blue-100/50 cursor-pointer");
-    }else if(tipo == "TIEMPO"){
+        orden.value = "rand";
+        buscarTiendas();
+    } else {
+        ordenTiempo.setAttribute("class", "duration-300 rounded-full border px-3 py-1 bg-blue-800 text-white hover:bg-blue-900 cursor-pointer");
         orden.value = "TIEMPO";
-        ordenTiempo.setAttribute("class", "rounded-full px-3 py-1 bg-blue-900 text-white cursor-pointer");
-        ordenValoracion.setAttribute("class", "duration-300 rounded-full border px-3 py-1 hover:bg-blue-100/50 cursor-pointer");
+        buscarTiendas();
     }
-
-    buscarTiendas();
 }
 
-function quitarFiltros(){
+function quitarFiltros() {
     ordenTiempo.setAttribute("class", "duration-300 rounded-full border px-3 py-1 hover:bg-blue-100/50 cursor-pointer");
-    ordenValoracion.setAttribute("class", "duration-300 rounded-full border px-3 py-1 hover:bg-blue-100/50 cursor-pointer");
     orden.value = "rand";
     categoria.value = "";
     tituloResultados.textContent = `Resultados`;
+    nombreTienda.value = "";
     buscarTiendas();
 }
 
-function buscarTiendas(){
+function buscarTiendas() {
     const listadoTiendas = document.getElementById("listadoTiendas");
 
     const datos = {
@@ -82,14 +80,14 @@ function buscarTiendas(){
         });
 }
 
-function filename(){
-    const rutaAbsoluta = self.location.href;   
-	const posicionUltimaBarra = rutaAbsoluta.lastIndexOf("/");
-	const rutaRelativa = rutaAbsoluta.substring( posicionUltimaBarra + "/".length , rutaAbsoluta.length );
-	return rutaRelativa;  
+function filename() {
+    const rutaAbsoluta = self.location.href;
+    const posicionUltimaBarra = rutaAbsoluta.lastIndexOf("/");
+    const rutaRelativa = rutaAbsoluta.substring(posicionUltimaBarra + "/".length, rutaAbsoluta.length);
+    return rutaRelativa;
 }
 
-function tiendasTop(){
+function tiendasTop() {
     const listadoTiendas = document.getElementById("listadoTiendas");
     listadoTiendas.innerHTML = "";
 
@@ -151,6 +149,8 @@ function filtrarCategoria(nombre) {
 }
 
 function crearComponenteTienda(element) {
+    let valorMedia = parseFloat(element.media).toFixed(1);
+    
     const componente = document.createElement("form");
     componente.setAttribute("action", "tienda_productos.php");
     componente.setAttribute("method", "post");
@@ -161,7 +161,7 @@ function crearComponenteTienda(element) {
     componente.setAttribute("class", "col-span-4 lg:col-span-1 md:col-span-1 shadow-lg hover:shadow-2xl duration-300 cursor-pointer rounded-lg");
 
     // VALORES
-    componente.appendChild(datosHiddens(element));
+    componente.appendChild(datosHiddens(element, valorMedia));
 
     const contenedor = document.createElement("button");
     contenedor.setAttribute("type", "submit");
@@ -192,7 +192,7 @@ function crearComponenteTienda(element) {
 
     const imgValoracion = document.createElement("img");
     imgValoracion.style.width = "16px";
-    if (element['VALORACIONES'] >= 4) {
+    if (valorMedia >= 4) {
         imgValoracion.setAttribute("src", "../../assets/svg/valoracion_top.svg");
     } else {
         imgValoracion.setAttribute("src", "../../assets/svg/valoracion.svg");
@@ -201,8 +201,8 @@ function crearComponenteTienda(element) {
     imgValoracion.setAttribute("alt", "valoración");
 
     const valoracion = document.createElement("p");
-    valoracion.textContent = `${element['VALORACIONES']}`;
-    if (element['VALORACIONES'] >= 4) {
+    valoracion.textContent = valorMedia;
+    if (valorMedia >= 4) {
         valoracion.setAttribute("class", "text-yellow-500 font-bold");
     }
 
@@ -242,18 +242,22 @@ function crearComponenteSinResultados() {
     return p;
 }
 
-function datosHiddens(element){
+function datosHiddens(element, media) {
     const div = document.createElement("div");
+    
+    const tipos = ["CIF_PROV", "RAZSOC", "DIR_PROV", "TLF_PROV", "MEDIA", "CATEGORIA", "TIEMPO", "COORDENADAS"];
 
-    const tipos = ["CIF_PROV", "RAZSOC", "DIR_PROV", "TLF_PROV", "VALORACIONES", "CATEGORIA", "TIEMPO", "COORDENADAS"];
-
-    for(let i=0; i<tipos.length; i++){
+    for (let i = 0; i < tipos.length; i++) {
         const nuevo = document.createElement("input");
         nuevo.setAttribute("name", tipos[i]);
         nuevo.setAttribute("type", "hidden");
-        nuevo.setAttribute("value", element[tipos[i]]);
+        if(tipos[i] == "MEDIA"){
+            nuevo.setAttribute("value", media);
+        }else{
+            nuevo.setAttribute("value", element[tipos[i]]);
+        }
         div.appendChild(nuevo);
     }
-    
+    console.log(div);
     return div;
 }

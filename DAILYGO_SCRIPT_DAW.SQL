@@ -182,27 +182,27 @@ CREATE TABLE `detalle_ventas` (
 · IMG_PROV -> imagen png del proveedor
 */
    
-INSERT INTO proveedores (CIF_PROV, RAZSOC, DIR_PROV, TLF_PROV, MAIL_PROV, PW_PROV, VALORACIONES, CATEGORIA, TIEMPO, COORDENADAS) VALUES
-	('A-00000001', 'McDonald´s', 'C/ Goya, 70', '604564312', 'hello@mcdonalds.com', '123456Ar', '4.7', 'Hamburguesa', '20', '40.4247014,-3.679194'),
-	('A-00000002', 'Subway', 'Plaza del Carmen, 38', '643242323', 'hello@subway.com', '123456Ar', '3.0', 'Sandwich', '20', '40.4185013,-3.70578'),
-	('A-00000003', 'KFC', 'C/ Goya, 68', '754353463', 'hello@kfc.com', '123456Ar', '4.0', 'Americana', '30', '40.4185013,-3.7057869'),
-	('A-00000004', 'Goiko', 'Gta. de Bilbao, 3', '644231323', 'hello@goiko.com', '123456Ar', '3.6', 'Hamburguesa', '40', '40.4295507,-3.70478148'),
-	('A-00000005', 'Domino´s Pizza', 'C/ Juan Bravo, 62', '633343252', 'hello@dominos.com', '123456Ar', '4.8', 'Pizza', '15', '40.4321243,-3.676367'),
-	('A-00000006', 'Starbucks', 'CC Islazul', '645235121', 'hello@starbucks.com', '123456Ar', '4.9', 'Bebida', '20', '40.3637152,-3.7400689'),
-	('A-00000007', 'Donner Kebab', 'Av. Oporto 89', '742304344', 'hello@donner.com', '123456Ar', '4.2', 'Kebab', '20', '40.3878321,-3.7341421'),
-	('A-00000008', 'Farmacia Trébol', 'Av. Oporto 57', '700331344', 'hello@ftrebol.com', '123456Ar', '4.2', 'Parafarmacia', '10', '40.3863437,-3.730784'),
-	('A-00000009', 'Dunkin\'', 'C/ Fuencarral, 43', '643242000', 'hello@dunkin.com', '123456Ar', '4.4', 'Bebida', '15', '40.423078,-3.7036909'),
-	('A-00000010', 'Carl´s Jr', 'C/ Gran Vía, 45', '600324143', 'hello@carls.com', '123456Ar', '3.8', 'Hamburguesa', '30', '40.421043,-3.7099399'),
-	('A-00000011', 'THUNDER', 'C/ Don Felipe, 4', '711232131', 'hello@thunder.com', '123456Ar', '3.9', 'Vegana', '20', '40.4245371,-3.7049399'),
-	('A-00000012', 'UDON', 'C/ Narváez, 36', '762626652', 'hello@udon.com', '123456Ar', '4.3', 'Asiática', '15', '40.4207253,-3.6788594'),
-	('A-00000013', 'Taco Bell', 'CC Parque Sur', '634234411', 'hello@tacobell.com', '123456Ar', '3.7', 'Mexicana', '30', '40.3383095,-3.7417939'),
-	('A-00000014', 'La Tagliatella', 'C/ O´Donell, 8', '742342423', 'hello@latagliatella.com', '123456Ar', '4.0', 'Italiana', '50', '40.4214431,-3.6810026'),
-	('A-00000015', 'Manolo Bakes', 'CC Xanadú', '654535231', 'hello@manolobakes.com', '123456Ar', '4.7', 'Dulce', '15', '40.2996099,-3.9287321'),
-	('A-00000016', 'Toc Toc', 'Av. de Gran Bretaña, 1', '666886848', 'hello@toctoc.com', '123456Ar', '4.9', 'Asiática', '20', '40.3394641,-3.7360649'),
-	('A-00000017', 'Rodilla', 'CC Islazul', '777234213', 'hello@rodilla.com', '123456Ar', '5.0', 'Sandwich', '15', '40.3637152,-3.7400689'),
-	('A-00000018', 'Aloha Poké', 'C/ de la Libertad, 17 ', '772277271', 'hello@alohapoke.com', '123456Ar', '4.6', 'Vegana', '20', '40.4211408,-3.7000227'),
-	('A-00000019', 'Pizzería Carlos', 'C/ Alcalá, 238', '634302031', 'hello@pizzeriacarlos.com', '123456Ar', '4.7', 'Pizza', '30', '40.4317699,-3.6595159'),
-	('A-00000020', 'OVEN', 'C/ Gran Vía, 55', '703040608', 'hello@oven.com', '123456Ar', '4.2', 'Italiana', '40', '40.4215541,-3.7112035');
+INSERT INTO proveedores (CIF_PROV, RAZSOC, DIR_PROV, TLF_PROV, MAIL_PROV, PW_PROV, CATEGORIA, TIEMPO, COORDENADAS) VALUES
+	('A-00000001', 'McDonalds', 'C/ Goya, 70', '604564312', 'hello@mcdonalds.com', '123456Ar', 'Hamburguesa', '20', '40.4247014,-3.679194'),
+	('A-00000002', 'Subway', 'Plaza del Carmen, 38', '643242323', 'hello@subway.com', '123456Ar', 'Sandwich', '20', '40.4185013,-3.70578'),
+	('A-00000003', 'KFC', 'C/ Goya, 68', '754353463', 'hello@kfc.com', '123456Ar', 'Americana', '30', '40.4185013,-3.7057869'),
+	('A-00000004', 'Goiko', 'Gta. de Bilbao, 3', '644231323', 'hello@goiko.com', '123456Ar', 'Hamburguesa', '40', '40.4295507,-3.70478148'),
+	('A-00000005', 'Dominos Pizza', 'C/ Juan Bravo, 62', '633343252', 'hello@dominos.com', '123456Ar', 'Pizza', '15', '40.4321243,-3.676367'),
+	('A-00000006', 'Starbucks', 'CC Islazul', '645235121', 'hello@starbucks.com', '123456Ar', 'Bebida', '20', '40.3637152,-3.7400689'),
+	('A-00000007', 'Donner Kebab', 'Av. Oporto 89', '742304344', 'hello@donner.com', '123456Ar', 'Kebab', '20', '40.3878321,-3.7341421'),
+	('A-00000008', 'Farmacia Trébol', 'Av. Oporto 57', '700331344', 'hello@ftrebol.com', '123456Ar', 'Parafarmacia', '10', '40.3863437,-3.730784'),
+	('A-00000009', 'Dunkin', 'C/ Fuencarral, 43', '643242000', 'hello@dunkin.com', '123456Ar', 'Bebida', '15', '40.423078,-3.7036909'),
+	('A-00000010', 'Carls Jr', 'C/ Gran Vía, 45', '600324143', 'hello@carls.com', '123456Ar', 'Hamburguesa', '30', '40.421043,-3.7099399'),
+	('A-00000011', 'THUNDER', 'C/ Don Felipe, 4', '711232131', 'hello@thunder.com', '123456Ar', 'Vegana', '20', '40.4245371,-3.7049399'),
+	('A-00000012', 'UDON', 'C/ Narváez, 36', '762626652', 'hello@udon.com', '123456Ar', 'Asiática', '15', '40.4207253,-3.6788594'),
+	('A-00000013', 'Taco Bell', 'CC Parque Sur', '634234411', 'hello@tacobell.com', '123456Ar', 'Mexicana', '30', '40.3383095,-3.7417939'),
+	('A-00000014', 'La Tagliatella', 'C/ O´Donell, 8', '742342423', 'hello@latagliatella.com', '123456Ar', 'Italiana', '50', '40.4214431,-3.6810026'),
+	('A-00000015', 'Manolo Bakes', 'CC Xanadú', '654535231', 'hello@manolobakes.com', '123456Ar', 'Dulce', '15', '40.2996099,-3.9287321'),
+	('A-00000016', 'Toc Toc', 'Av. de Gran Bretaña, 1', '666886848', 'hello@toctoc.com', '123456Ar', 'Asiática', '20', '40.3394641,-3.7360649'),
+	('A-00000017', 'Rodilla', 'CC Islazul', '777234213', 'hello@rodilla.com', '123456Ar', 'Sandwich', '15', '40.3637152,-3.7400689'),
+	('A-00000018', 'Aloha Poké', 'C/ de la Libertad, 17 ', '772277271', 'hello@alohapoke.com', '123456Ar', 'Vegana', '20', '40.4211408,-3.7000227'),
+	('A-00000019', 'Pizzería Carlos', 'C/ Alcalá, 238', '634302031', 'hello@pizzeriacarlos.com', '123456Ar', 'Pizza', '30', '40.4317699,-3.6595159'),
+	('A-00000020', 'OVEN', 'C/ Gran Vía, 55', '703040608', 'hello@oven.com', '123456Ar', 'Italiana', '40', '40.4215541,-3.7112035');
 /*
  ····INSERCIÓN DE PRODUCTOS····
 · DEN_PROD -> Denominación comercial del producto
@@ -317,6 +317,7 @@ VALUES
 
 INSERT INTO RIDERS(DNI_RID, NOM_RID, APE_RID, TLF_RID, MAIL_RID, PW_RID, ESTADO) 
  VALUES
+('0','Temporal', 'TEMP', 0, '-','-', '-'),
 ('11234356G','Jonathan', 'Casa Pila', 765457386, 'jota@dailygo.com','123Usuario', 'Disponible'),
 ('11264584L','Benito', 'Martínez Ocasio', 694957545, 'benito@dailygo.com','123Usuario', 'Ocupado'),
 ('12345465X','Paula', 'Badosa Gibert', 600434523, 'paula@dailygo.com','123Usuario', 'Ocupado'),
@@ -336,17 +337,17 @@ INSERT INTO RIDERS(DNI_RID, NOM_RID, APE_RID, TLF_RID, MAIL_RID, PW_RID, ESTADO)
 
 INSERT INTO VENTAS (COD_CLI_VEN, DNI_RID_VEN, DIR_VEN, FECH_VEN, ESTADO_VEN, COM_VEN, VALORACION) 
 VALUES
-(1, '11234356G', 'Margaritas, 81', '18-03-2022', 'Entregado', 'Cuidado con el perro'),
-(1, '12345465X', 'Av. de Concha Espina, 14', '28-05-2022', 'Entregado', 'La entrada está en obras'),
-(1, '11264584L', 'Margaritas, 81', '30-05-2022', 'Entregado', ''),
-(2, '12345465X', 'Lucecitas, 22', '12-01-2022', 'Entregado', ''),
-(2, '11264584L', 'Lucecitas, 22', '23-03-2022', 'Entregado', ''),
-(2, '11234356G', 'Don Juan, 14', '28-03-2022', 'Entregado', ''),
-(3, '11234356G', 'General Ricardos 32', '20-03-2022', 'Entregado', ''),
-(3, '11264584L', 'General Ricardos 32', '11-05-2022', 'Entregado', ''),
-(3, '12345465X', 'General Ricardos 32', '28-05-2022', 'Entregado', ''),
-(1, '11264584L', 'Tolosa, 2', '28-05-2023', 'En reparto', ''),
-(1, '12345465X', 'Tolosa, 2', '28-05-2023', 'En preparación', ''),
+(1, '11234356G', 'Margaritas, 81', '18-03-2022', 'Valorado', 'Cuidado con el perro', 5),
+(1, '12345465X', 'Av. de Concha Espina, 14', '28-05-2022', 'Valorado', 'La entrada está en obras', 3),
+(1, '11264584L', 'Margaritas, 81', '30-05-2022', 'Valorado', '', 4),
+(2, '12345465X', 'Lucecitas, 22', '12-01-2022', 'Valorado', '', 5),
+(2, '11264584L', 'Lucecitas, 22', '23-03-2022', 'Valorado', '', 2),
+(2, '11234356G', 'Don Juan, 14', '28-03-2022', 'Valorado', '', 4),
+(3, '11234356G', 'General Ricardos 32', '20-03-2022', 'Valorado', '', 4),
+(3, '11264584L', 'General Ricardos 32', '11-05-2022', 'Valorado', '', 4),
+(3, '12345465X', 'General Ricardos 32', '28-05-2022', 'Valorado', '', 4),
+(1, '11264584L', 'Tolosa, 2', '28-05-2023', 'Valorado', '', 4),
+(1, '12345465X', 'Tolosa, 2', '28-05-2023', 'Valorado', '', 4),
 
 (1, '12345465X', 'Arroyo José 5', '30-04-2022', 'Valorado', '', 5),
 (2, '12345465X', 'Ramal Micaela, 90', '11-05-2022', 'Valorado', '', 4),
@@ -360,10 +361,49 @@ VALUES
 (2, '12345465X', 'Av Francisco Manzanares, 43', '29-09-2023', 'Valorado', '', 5),
 
 (1, '12345465X', 'Catalina Rosado, 2', '29-09-2023', 'Valorado', '', 5),
-(1, '12345465X', 'Bloque Rosa Espinosa, 1', '29-09-2023', 'Valorado', '', 5),
-(2, '12345465X', 'José Eduardo Correa', '29-09-2023', 'Valorado', '', 5),
-(2, '12345465X', 'Urbanización Gustavo Hernández, 2xº', '29-09-2023', 'Valorado', '', 5),
+(3, '12345465X', 'Bloque Rosa Espinosa, 1', '29-09-2023', 'Valorado', '', 4),
+(2, '11234356G', 'José Eduardo Correa, 4', '29-09-2023', 'Valorado', '', 3),
+(3, '11264584L', 'Urbanización Gustavo Hernández, 5', '29-09-2023', 'Valorado', '', 5),
 
+(2, '12345465X', 'Beatriz Alcalá, 25', '01-01-2023', 'Valorado', '', 4),
+(1, '11234356G', 'Alfredo, 4', '02-11-2022', 'Valorado', 'No quiero azúcar', 4),
+
+(3, '11264584L', 'Alcalá, 123', '08-12-2021', 'Valorado', '', 4),
+
+(2, '11234356G', 'Lourdes del Pilar, 4', '11-12-2021', 'Valorado', '', 4),
+(1, '11234356G', 'Coco, 3', '10-08-2022', 'Valorado', '', 2),
+(2, '11264584L', 'Lourdes del Pilar, 4', '11-03-2023', 'Valorado', '', 5),
+
+(2, '11264584L', 'Fuente de la Mora, 23', '10-02-2023', 'Valorado', '', 3),
+
+(2, '12345465X', 'Lugar Cecilia, 8', '05-06-2021', 'Valorado', '', 4),
+(1, '11234356G', 'Pedro Urrutia, 3', '03-04-2023', 'Valorado', '', 3),
+(3, '11264584L', 'Adán Casillas, 32', '27-03-2021', 'Valorado', 'Pan sin glúten', 3),
+
+(2, '11264584L', 'Torre Rosario Salinas', '17-05-2022', 'Valorado', '', 4),
+(1, '11234356G', 'Av América, 2', '20-04-2021', 'Valorado', '', 5),
+
+(1, '12345465X', 'Pedro Urrutia, 3', '01-08-2021', 'Valorado', '', 4),
+
+(2, '12345465X', 'Marcela Armenta, 2', '21-11-2022', 'Valorado', '', 4),
+(1, '12345465X', 'Escalinata Ángela, 32', '20-01-2023', 'Valorado', '', 1),
+
+(1, '12345465X', 'Riera Timoteo, 1', '21-03-2023', 'Valorado', '', 5),
+
+(3, '12345465X', 'Beatriz Alcalá, 25', '01-01-2022', 'Valorado', '', 4),
+(1, '11234356G', 'Alfredo, 4', '10-10-2021', 'Valorado', '', 4),
+
+(2, '11264584L', 'Ramal Javier, 9', '05-02-2021', 'Valorado', '', 4),
+(1, '11234356G', 'Poblado Mónica, 56', '02-08-2022', 'Valorado', '', 3),
+(3, '11264584L', 'César, 9', '01-04-2021', 'Valorado', '', 5),
+
+(2, '11264584L', 'Alcalá, 22', '07-12-2022', 'Valorado', '', 4),
+
+(2, '12345465X', 'San Carlos, 21', '17-05-2021', 'Valorado', '', 3),
+
+(1, '12345465X', 'Jesús Rico, 4', '17-10-2021', 'Valorado', '', 5),
+
+(3, '12345465X', 'Paseo de la Oliva, 2', '10-11-2022', 'Valorado', '', 4);
 
 /*
  ····INSERCIÓN DE DETALLES DE VENTAS····
@@ -403,3 +443,53 @@ VALUES
 (17, 15, 4),
 
 (18, 15, 4),
+
+(19, 22, 3),
+(19, 21, 1),
+(19, 25, 1),
+(20, 23, 2),
+(21, 25, 2),
+(22, 24, 1),
+(22, 25, 3),
+
+(23, 27, 1),
+(23, 28, 3),
+
+(24, 33, 3),
+
+(25, 38, 1),
+(26, 39, 1),
+(27, 40, 1),
+
+(28, 41, 1),
+
+(29, 43, 1),
+(28, 44, 1),
+(27, 45, 2),
+
+(28, 47, 1),
+(29, 48, 1),
+
+(30, 50, 2),
+
+(31, 56, 1),
+(31, 55, 2),
+(31, 54, 1),
+(32, 54, 3),
+
+(33, 57, 2),
+
+(34, 59, 1),
+(35, 60, 1),
+
+(36, 64, 1),
+(37, 63, 3),
+(38, 67, 1),
+
+(39, 62, 2),
+
+(40, 68, 1),
+
+(41, 72, 5),
+
+(42, 75, 1);

@@ -1,6 +1,6 @@
 function comprobarSesion(){
     const tipoUsuario = localStorage.getItem("tipoUsuario");
-    if(tipoUsuario !== "usuarios"){
+    if(tipoUsuario !== "usuario"){
         if(tipoUsuario !== null){
             
             const redirecciones = {

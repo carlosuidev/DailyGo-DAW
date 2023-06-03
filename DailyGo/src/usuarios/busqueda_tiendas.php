@@ -162,7 +162,7 @@
         <div class="flex lg:justify-between md:justify-between justify-center items-center flex-wrap gap-5">
             <div class="flex gap-2 justify-center flex-wrap">
                 <input type="hidden" id="orden" value="rand">
-                <input type="button" value="Ordenar por valoración" id="ordenValoracion" onclick="ordenarTiendas('VALORACIONES')" class="duration-300 rounded-full border px-3 py-1 hover:bg-blue-100/50 cursor-pointer">
+                <!--<input type="button" value="Ordenar por valoración" id="ordenValoracion" onclick="ordenarTiendas('VALORACIONES')" class="duration-300 rounded-full border px-3 py-1 hover:bg-blue-100/50 cursor-pointer">-->
                 <input type="button" value="Ordenar por tiempo" id="ordenTiempo" onclick="ordenarTiendas('TIEMPO')" class="duration-300 rounded-full border px-3 py-1 hover:bg-blue-100/50 cursor-pointer">
             </div>
             <button id="eliminarFiltros" class="duration-300 rounded-full border border-indigo-600 px-3 py-1 hover:bg-indigo-100/50 text-indigo-600">x Limpiar filtros</button>

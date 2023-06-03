@@ -122,7 +122,7 @@
 
     <section class="mt-12 lg:mt-10 md:mt-8 p-5 lg:p-3 md:p-5">
         <div class="container mx-auto rounded-lg">
-            <h3 class="font-bold mb-5 mt-8">🏅Locales mejor valorados </h3>
+            <h3 class="font-bold mb-5 mt-8">Te recomendamos</h3>
             <div class="grid grid-cols-4 lg:grid-cols-4 md:grid-cols-2 gap-4 mb-16" id="listadoTiendas">
                 <!--LISTADO DE TIENDAS-->
             </div>

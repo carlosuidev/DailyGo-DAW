@@ -136,7 +136,7 @@ function respuestaEntrar() {
                         localStorage.setItem("dni", jsonEntrar.DNI_RID);
                         localStorage.setItem("telefono", jsonEntrar.TLF_RID);
                         localStorage.setItem("tipoUsuario", "rider");
-                        window.location.href = "../src/riders/perfil.html";
+                        window.location.href = "../src/riders/inicio.html";
                         break;
 
                     case "proveedor":
@@ -146,7 +146,7 @@ function respuestaEntrar() {
                         localStorage.setItem("telefono", jsonEntrar.TLF_PROV);
                         localStorage.setItem("direccion", jsonEntrar.DIR_PROV);
                         localStorage.setItem("tipoUsuario", "proveedor");
-                        window.location.href = "../src/proveedores/perfil.html";
+                        window.location.href = "../src/proveedores/inicio.html";
                         break;
 
                     default:

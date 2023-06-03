@@ -2,11 +2,7 @@ window.addEventListener('DOMContentLoaded', iniciarPedidos);
 
 function iniciarPedidos() {
     listarPedidos();
-
-}
-
-function confirmarRecepcion(id) {
-
+    listarPedidosActivos();
 }
 
 function crearComponentePedido(element) {
@@ -17,24 +13,24 @@ function crearComponentePedido(element) {
     superior.setAttribute("class", "flex gap-3 justify-content-between");
 
     const div = document.createElement("div");
+    div.setAttribute("class", "flex gap-4 items-center justify-between");
 
     const id = document.createElement("h4");
-    id.textContent = `ID Pedido: ${element['NUM_VEN']}`;
+    id.textContent = `Pedido nº${element['num_ven']}`;
     id.setAttribute("class", "font-bold");
     div.appendChild(id);
 
-    const tienda = document.getElementById("p");
-    tienda.textContent = element['RAZSOC'];
-    div.appendChild(tienda);
-
-    const estado = document.getElementById("small");
-    estado.textContent = element['ESTADO_VEN'];
-    switch (element.estado) {
+    const estado = document.createElement("small");
+    estado.textContent = element['estado_ven'];
+    switch (element['estado_ven']) {
         case "En preparación":
             estado.setAttribute("class", "bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full")
             break;
         case "Cancelado":
             estado.setAttribute("class", "bg-red-200 text-red-600 py-0.5 px-2.5 rounded-full")
+            break;
+        case "Preparado":
+            estado.setAttribute("class", "bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full")
             break;
         case "En reparto":
             estado.setAttribute("class", "bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full");
@@ -52,27 +48,78 @@ function crearComponentePedido(element) {
     div.appendChild(estado);
     componete.appendChild(div);
 
-    const btn = document.createElement("input");
-    btn.setAttribute("type", "button");
-
-    if (element.estado == "En reparto") {
-        btn.setAttribute("class", "bg-indigo-600 text-white w-full rounded-md py-2 mt-3 hover:bg-indigo-700 duration-300 font-semibold");
-        btn.disabled = false;
-        btn.value = "Confirmar recepción";
-        btn.setAttribute("onclick", `confirmarRecepcion(${element.id})`);
-    } else if (element.estado == "Completado") {
-        btn.setAttribute("class", "bg-indigo-600 text-white w-full rounded-md py-2 mt-3 hover:bg-indigo-700 duration-300 font-semibold");
-        btn.disabled = false;
-        btn.value = "Valorar";
-        btn.setAttribute("onclick", `valorarPedido(${element.id})`);
+    const extra = document.createElement("div");
+    let rider = "";
+    if (element['nom_rid'] == "Temporal") {
+        rider = "(En espera)";
     } else {
-        btn.setAttribute("class", "opacity-50 bg-indigo-600 text-white w-full rounded-md py-2 mt-3 hover:bg-indigo-700 duration-300 font-semibold");
-        btn.disabled = true;
-        btn.value = "Confirmar recepción";
+        rider = element['nom_rid'];
     }
-    componete.appendChild(btn);
+    extra.setAttribute("class", "flex my-3 text-indigo-700 gap-5 text-sm");
+    extra.innerHTML = `
+    <div class='flex gap-2 items-center'><img src='../../assets/svg/inicio_registro/proveedor.svg' class='w-4'> ${element['razsoc']}</div>
+    <div class='flex gap-2 items-center'><img src='../../assets/svg/inicio_registro/rider.svg' class='w-4'> ${rider}</div>
+    `;
+    componete.appendChild(extra);
+
+    if (element['estado_ven'] == "Entregado") {
+        const btnValorar = document.createElement("div");
+        btnValorar.setAttribute("class", "w-full flex justify-center items-center flex-col");
+        btnValorar.innerHTML = `
+            <p>¡Se ha a entrado tu pedido! ¿Qué nota le pones sobre 5? 🏅</p>
+            <div class='flex gap-3 justify-center items-center'>
+            <button onclick='valorarPedido(${element['num_ven']}, 1)' class='rounded-full hover:bg-blue-800 bg-blue-100/20 border p-3 flex items-center justify-center text-center'>1</button>
+            <button onclick='valorarPedido(${element['num_ven']}, 2)' class='rounded-full hover:bg-blue-800 bg-blue-100/20 border p-3 flex items-center justify-center text-center'>2</button>
+            <button onclick='valorarPedido(${element['num_ven']}, 3)' class='rounded-full hover:bg-blue-800 bg-blue-100/20 border p-3 flex items-center justify-center text-center'>3</button>
+            <button onclick='valorarPedido(${element['num_ven']}, 4)' class='rounded-full hover:bg-blue-800 bg-blue-100/20 border p-3 flex items-center justify-center text-center'>4</button>
+            <button onclick='valorarPedido(${element['num_ven']}, 5)' class='rounded-full hover:bg-blue-800 bg-blue-100/20 border p-3 flex items-center justify-center text-center'>5</button>
+            </div>
+        `;
+        componete.appendChild(btnValorar);
+    } else {
+        const listadoProd = document.createElement("div");
+        listadoProd.setAttribute("class", "flex flex-col gap-3 mt-8");
+        element['carro'].forEach(prod => {
+            listadoProd.innerHTML += `
+            <div class='flex flex-wrap items-center justify-between w-full border rounded p-3 gap-5'>
+                <div class='flex items-center justify-center gap-3'>
+                    <div class="w-12 h-12 rounded border" style="background-image: url('../../img_bbdd/productos/${prod['cod_prod']}.jpg'); background-size: cover; background-position: center bottom;">
+                    </div>
+                    <p class='font-semibold'>${prod['den_prod']}</p>
+                </div>
+                <p>${prod['cant_det']} uds.</p>
+            <div>
+            `;
+        });
+        componete.appendChild(listadoProd);
+    }
 
     return componete;
+}
+
+function valorarPedido(idPedido, nota) {
+    const datos = {
+        id: idPedido,
+        nota: nota,
+        estado: 'Valorado'
+    }
+    fetch("../../php/actualizar_pedido.php", {
+        method: "POST",
+        body: JSON.stringify(datos),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then(response => response.text())
+        .then(data => {
+            if (data == "Actualizado") {
+                listarPedidos();
+                listarPedidosActivos();
+            }
+        })
+        .catch(error => {
+            console.error("Error: No se ha podido crear la petición ->", error);
+        });
 }
 
 function crearComponenteFila(element) {
@@ -118,6 +165,12 @@ function crearComponenteFila(element) {
     fecha.textContent = element['FECH_VEN'];
     fila.appendChild(fecha);
 
+    const estado = document.createElement("td");
+    estado.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
+    estado.setAttribute("scope", "col");
+    estado.textContent = element['ESTADO_VEN'];
+    fila.appendChild(estado);
+
     return fila;
 }
 
@@ -136,7 +189,7 @@ function listarPedidos() {
         .then(data => {
             const historialPedidos = document.getElementById("historialPedidos");
             data.forEach(element => {
-                if(element['ESTADO_VEN'] == "Entregado" || element['ESTADO_VEN'] == "Valorado"){
+                if (element['ESTADO_VEN'] == "Entregado" || element['ESTADO_VEN'] == "Valorado") {
                     historialPedidos.appendChild(crearComponenteFila(element));
                 }
             });
@@ -146,122 +199,6 @@ function listarPedidos() {
         });
 }
 
-function valorarPedido(){
-
-}
-
-function crearComponentePedido(element) {
-    const componete = document.createElement("div");
-    componete.setAttribute("class", "bg-white border rounded-lg p-5");
-
-    const superior = document.createElement("div");
-    superior.setAttribute("class", "flex gap-3 justify-content-between");
-
-    const div = document.createElement("div");
-
-    const id = document.createElement("h4");
-    id.textContent = `ID: ${element.id}`;
-    id.setAttribute("class", "font-bold");
-    div.appendChild(id);
-
-    const tienda = document.getElementById("p");
-    tienda.textContent = element.tienda;
-    div.appendChild(tienda);
-
-    const estado = document.getElementById("small");
-    estado.textContent = element.estado;
-    switch (element.estado) {
-        case "En preparación":
-            estado.setAttribute("class", "bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full")
-            break;
-        case "Cancelado":
-            estado.setAttribute("class", "bg-red-200 text-red-600 py-0.5 px-2.5 rounded-full")
-            break;
-        case "En reparto":
-            estado.setAttribute("class", "bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full");
-            break;
-        case "Entregado":
-            estado.setAttribute("class", "bg-green-200 text-green-600 py-0.5 px-2.5 rounded-full");
-            break;
-        case "Valorado":
-            estado.setAttribute("class", "bg-green-200 text-green-600 py-0.5 px-2.5 rounded-full");
-            break;
-        default:
-            estado.setAttribute("class", "bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full");
-            break;
-    }
-    div.appendChild(estado);
-    componete.appendChild(div);
-
-    const btn = document.createElement("input");
-    btn.setAttribute("type", "button");
-
-    if (element.estado == "En reparto") {
-        btn.setAttribute("class", "bg-indigo-600 text-white w-full rounded-md py-2 mt-3 hover:bg-indigo-700 duration-300 font-semibold");
-        btn.disabled = false;
-        btn.value = "Confirmar recepción";
-        btn.setAttribute("onclick", `confirmarRecepcion(${element.id})`);
-    } else if (element.estado == "Completado") {
-        btn.setAttribute("class", "bg-indigo-600 text-white w-full rounded-md py-2 mt-3 hover:bg-indigo-700 duration-300 font-semibold");
-        btn.disabled = false;
-        btn.value = "Valorar";
-        btn.setAttribute("onclick", `valorarPedido(${element.id})`);
-    } else {
-        btn.setAttribute("class", "opacity-50 bg-indigo-600 text-white w-full rounded-md py-2 mt-3 hover:bg-indigo-700 duration-300 font-semibold");
-        btn.disabled = true;
-        btn.value = "Confirmar recepción";
-    }
-    componete.appendChild(btn);
-
-    return componete;
-}
-
-function crearComponenteFila(element) {
-    const fila = document.createElement("tr");
-    fila.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
-
-    const id = document.createElement("td");
-    id.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
-    id.setAttribute("scope", "col");
-    id.textContent = element['num_ven'];
-    fila.appendChild(id);
-
-    const producto = document.createElement("td");
-    producto.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
-    producto.setAttribute("scope", "col");
-    producto.innerHTML = `
-        <div class='flex items-center gap-2'>
-            <div class="w-12 h-12 rounded border" style="background-image: url('../../img_bbdd/productos/${element['cod_prod']}.jpg'); background-size: cover; background-position: center bottom;">
-            </div>
-            <div>
-                <p>${element['den_prod']}</p>
-                <p class="text-sm font-normal text-blue-300">${element['razsoc']}</p>
-            </div>
-        </div>
-    `;
-    fila.appendChild(producto);
-
-    const cantidad = document.createElement("td");
-    cantidad.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
-    cantidad.setAttribute("scope", "col");
-    cantidad.textContent = element['cant_det'];
-    fila.appendChild(cantidad);
-
-    const direccion = document.createElement("td");
-    direccion.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
-    direccion.setAttribute("scope", "col");
-    direccion.textContent = element['DIR_VEN'];
-    fila.appendChild(direccion);
-
-    const fecha = document.createElement("td");
-    fecha.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
-    fecha.setAttribute("scope", "col");
-    fecha.textContent = element['FECH_VEN'];
-    fila.appendChild(fecha);
-
-    return fila;
-}
-
 function listarPedidos() {
     const datos = {
         'id': localStorage.getItem("id")
@@ -276,11 +213,8 @@ function listarPedidos() {
         .then(response => response.json())
         .then(data => {
             const historialPedidos = document.getElementById("historialPedidos");
-            const pedidosActivos = document.getElementById("pedidosActivos");
             data.forEach(element => {
-                if(element['ESTADO_VEN'] == "Entregado" || element['ESTADO_VEN'] == "Valorado"){
-                    historialPedidos.appendChild(crearComponenteFila(element));
-                }
+                historialPedidos.appendChild(crearComponenteFila(element));
             });
         })
         .catch(error => {
@@ -301,16 +235,19 @@ function listarPedidosActivos() {
     })
         .then(response => response.json())
         .then(data => {
-            const historialPedidos = document.getElementById("historialPedidos");
             const pedidosActivos = document.getElementById("pedidosActivos");
-            data.forEach(element => {
-                if(element['ESTADO_VEN'] !== "Entregado" || element['ESTADO_VEN'] !== "Valorado"){
-                    historialPedidos.appendChild(crearComponenteFila(element));
-                }
-            });
+            if (data.msg == 'Sin resultados') {
+                pedidosActivos.innerHTML = "<p>No tienes pedidos en activo 🛍️</p>"
+            } else {
+                data.forEach(element => {
+                    pedidosActivos.appendChild(crearComponentePedido(element));
+                });
+            }
         })
         .catch(error => {
             console.error("Error: No se ha podido crear la petición ->", error);
         });
 }
+
+
 
