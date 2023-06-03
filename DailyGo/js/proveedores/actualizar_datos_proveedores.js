@@ -404,7 +404,12 @@ function guardarImagen() {
                 }
             })
             .then(data => {
-                console.log(data)
+                if (data == 'Imagen guardada correctamente') {
+                    correctoDatos.setAttribute("class", "flex");
+                    setTimeout(function () {
+                        correctoDatos.setAttribute("class", "hidden");
+                    }, 3000);
+                }
             })
             .catch(error => {
                 console.log('Error en la solicitud:', error);

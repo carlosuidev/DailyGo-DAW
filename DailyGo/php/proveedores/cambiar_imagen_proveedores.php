@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     move_uploaded_file($rutaTemporal, $rutaDestino);
 
     // La imagen se guardó correctamente
-    //echo 'Imagen guardada correctamente';
+    echo 'Imagen guardada correctamente';
   } else {
     // Error al recibir el archivo
     echo 'Error al recibir el archivo';
