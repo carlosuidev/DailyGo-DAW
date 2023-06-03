@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DailyGo | Pedidos ultrarrápidos</title>
+    <script src="../../styles/tailwind.js"></script>
+    <link rel="stylesheet" href="../../styles/global.css">
+    <link rel="shortcut icon" href="../../assets/svg/favicon.svg" type="image/x-icon">
+</head>
+
+<body class="font-medium text-blue-800">
+    <nav class="bg-white py-4 fixed z-50 w-full">
+        <div class="container mx-auto">
+            <a href="#"><img src="../../assets/svg/logo.svg" alt=""></a>
+            <div></div>
+        </div>
+    </nav>
+    <section class="pt-8 lg:pt-24 md:pt-16" id="hero-prductos">
+        <div class="top-8 relative">
+            <div class="container mx-auto flex flex-col justify-center items-center p-5 lg:p-0 md:p-5">
+                <div
+                    class="shadow-lg bg-white p-5 rounded-lg flex justify-center items-center gap-3 w-full lg:w-1/2 md:w-full">
+                    <input type="text" name="dni" id="dni"
+                        class="w-full rounded-md border border-blue-100 focus:border-indigo-700 p-4 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                        placeholder="Producto, restaurante..">
+                    <button
+                        class="duration-300 text-white bg-indigo-700 rounded-md font-semibold hover:bg-indigo-800 p-4 w-fit">Buscar</button>
+                    <button
+                        class="duration-300 text-white bg-indigo-700 rounded-md font-semibold hover:bg-indigo-800 p-4 w-fit">
+
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="mt-16 mx-auto container p-5 lg:p-2 md:p-5">
+        <div class="flex justify-center flex-wrap gap-5 mt-5">
+            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🍽️ Todos</button>
+            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🍔
+                Hamburguesas</button>
+            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🍝 Pastas</button>
+            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🍕 Pizzas</button>
+            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🌱 Vegano</button>
+            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🌏 Asiático</button>
+            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">❤️‍🩹
+                Parafarmacia</button>
+            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🥙 Kebabs</button>
+            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🌮 Tacos</button>
+            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🥪 Sandwiches y
+                bocadillos</button>
+            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🍦 Dulces</button>
+            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">🥤 Bebidas
+                frias</button>
+            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">☕ Bebidas
+                calientes</button>
+            <button class="py-2 px-4 bg-white border rounded-full duration-300 hover:bg-blue-100">❓ Otros</button>
+        </div>
+        <hr class="my-8">
+        <h3 class="font-bold mb-5">Destacados de Hamburguesas</h3>
+        <div class="grid grid-cols-4 lg:grid-cols-4 md:grid-cols-2 gap-4 mb-16">
+            <div style="
+                height: 200px;
+                background-image:
+                    linear-gradient(to bottom, rgba(16, 14, 52, 0.2), rgba(16, 14, 52, 0.9)),
+                    url(https://images.unsplash.com/photo-1619881589316-56c7f9e6b587?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8);
+                background-position: center; background-size: cover;"
+                class="col-span-4 lg:col-span-1 md:col-span-1 shadow-lg hover:shadow-2xl duration-300 cursor-pointer rounded-lg">
+                <div class="w-full h-full flex flex-col justify-end rounded-lg">
+                    <div class=" w-full h-fit mx-auto text-center rounded-xl">
+                        <div class="p-5">
+                            <h4 class="text-white font-bold">Carl´s Jr</h4>
+                            <small class="px-2 py-1 bg-indigo-700 rounded-full text-xs text-white">HAMBURGUESAS</small>
+                        </div>
+                        <div class="flex flex-wrap text-sm justify-center gap-3 bg-white p-2.5 rounded-b-lg">
+                            <div class="flex flex-wrap items-center gap-1.5">
+                                <img src="../../assets/svg/valoracion.svg" alt="restaurante" width="16">
+                                <p>84%</p>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-1.5">
+                                <img src="../../assets/svg/tiempo.svg" alt="tiempo" width="16">
+                                <p>15-20 min</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    </section>
+
+    <footer class="mt-16">
+
+    </footer>
+</body>
+
+</html>
