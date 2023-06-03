@@ -386,10 +386,11 @@ function cambiarCoordenadas() {
 
 function guardarImagen() {
     if (validacionPerfil) {
+        console.log("a")
         var archivo = perfil.files[0]
         var formData = new FormData();
         formData.append('imagen', archivo);
-        formData.append('cif', )
+        formData.append('cif', localStorage.getItem("cif"))
         fetch('../../php/proveedores/cambiar_imagen_proveedores.php', {
             method: 'POST',
             body: formData

@@ -112,5 +112,39 @@ if (isset($data["razSoc"])) {
     } catch (Exception $err) {
         echo $err;
     }
+} else if (isset($data["coord"])) {
+    $cif = $data["cif"];
+    $conexion = mysqli_connect("localhost", "root", "", "dailygo");
+    $arrayCord = [];
+    mysqli_select_db($conexion, "dailygo") or die("No se puede seleccionar la BD");
+    /* Lazo la consulta sobre la BD*/
+    try {
+        $datos = mysqli_query($conexion, "SELECT coordenadas from proveedores where CIF_PROV = '$cif'");
+        $numr = mysqli_num_rows($datos);
+        if ($numr != 0) {
+            while ($data = mysqli_fetch_assoc($datos)) {
+                array_push($arrayCord,  $data);
+            }
+            echo json_encode($arrayCord);
+        }
+    } catch (Exception $err) {
+        echo $err;
+    }
+} else if (isset($data["coordenadasCambiadas"])) {
+    $cif = $data["cif"];
+    $coordenadas = $data["coordenadasCambiadas"];
+    $conexion = mysqli_connect("localhost", "root", "", "dailygo");
+    $arrayCord = [];
+    mysqli_select_db($conexion, "dailygo") or die("No se puede seleccionar la BD");
+    /* Lazo la consulta sobre la BD*/
+    try {
+        mysqli_query($conexion, "UPDATE proveedores set coordenadas = '$coordenadas' where cif_prov = '$cif'");
+        echo "coordenadasCambiadas";
+    } catch (Exception $err) {
+        echo $err;
+    }
 }
+
+
+
 
