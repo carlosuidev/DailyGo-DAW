@@ -16,7 +16,7 @@ try {
         JOIN productos ON detalle_ventas.cod_prod_det=productos.cod_prod 
         JOIN proveedores ON proveedores.cif_prov=productos.cif_prov_prod
         WHERE ventas.COD_CLI_VEN = $id 
-        AND (ventas.estado_ven='Creado' OR ventas.estado_ven='En preparación' OR ventas.estado_ven='Preparado' OR ventas.estado_ven='En reparto' OR ventas.estado_ven='Entregado')");
+        AND (ventas.estado_ven='Creado' OR ventas.estado_ven='En preparación' OR ventas.estado_ven='Preparado' OR ventas.estado_ven='En camino' OR ventas.estado_ven='Completado')");
     } else {
         $arrError = array('msg' => "Error");
         echo json_encode($arrError);

@@ -135,6 +135,7 @@ function respuestaEntrar() {
                         localStorage.setItem("correo", jsonEntrar.MAIL_RID);
                         localStorage.setItem("dni", jsonEntrar.DNI_RID);
                         localStorage.setItem("telefono", jsonEntrar.TLF_RID);
+                        localStorage.setItem("estado", jsonEntrar['ESTADO']);
                         localStorage.setItem("tipoUsuario", "rider");
                         window.location.href = "../src/riders/inicio.html";
                         break;

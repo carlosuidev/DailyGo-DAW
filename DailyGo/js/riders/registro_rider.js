@@ -430,6 +430,7 @@ function respuestaCrearUsuario() {
                 localStorage.setItem("dni", dni.value);
                 localStorage.setItem("telefono", apellidos.value);
                 localStorage.setItem("tipoUsuario", "rider");
+                localStorage.setItem("estado", "No disponible");
                 window.location.href = "../src/index.html";
             } else {
                 const errorCrear = document.getElementById("errorCrear");

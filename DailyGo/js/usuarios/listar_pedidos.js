@@ -13,7 +13,7 @@ function crearComponentePedido(element) {
     superior.setAttribute("class", "flex gap-3 justify-content-between");
 
     const div = document.createElement("div");
-    div.setAttribute("class", "flex gap-4 items-center justify-between");
+    div.setAttribute("class", "flex gap-4 items-center justify-between flex-wrap");
 
     const id = document.createElement("h4");
     id.textContent = `Pedido nº${element['num_ven']}`;
@@ -35,7 +35,7 @@ function crearComponentePedido(element) {
         case "En reparto":
             estado.setAttribute("class", "bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full");
             break;
-        case "Entregado":
+        case "Completado":
             estado.setAttribute("class", "bg-green-200 text-green-600 py-0.5 px-2.5 rounded-full");
             break;
         case "Valorado":
@@ -55,24 +55,25 @@ function crearComponentePedido(element) {
     } else {
         rider = element['nom_rid'];
     }
-    extra.setAttribute("class", "flex my-3 text-indigo-700 gap-5 text-sm");
+    extra.setAttribute("class", "flex flex-wrap my-3 text-indigo-700 gap-5 text-sm");
     extra.innerHTML = `
     <div class='flex gap-2 items-center'><img src='../../assets/svg/inicio_registro/proveedor.svg' class='w-4'> ${element['razsoc']}</div>
     <div class='flex gap-2 items-center'><img src='../../assets/svg/inicio_registro/rider.svg' class='w-4'> ${rider}</div>
     `;
     componete.appendChild(extra);
 
-    if (element['estado_ven'] == "Entregado") {
+    if (element['estado_ven'] == "Completado") {
         const btnValorar = document.createElement("div");
         btnValorar.setAttribute("class", "w-full flex justify-center items-center flex-col");
         btnValorar.innerHTML = `
-            <p>¡Se ha a entrado tu pedido! ¿Qué nota le pones sobre 5? 🏅</p>
-            <div class='flex gap-3 justify-center items-center'>
-            <button onclick='valorarPedido(${element['num_ven']}, 1)' class='rounded-full hover:bg-blue-800 bg-blue-100/20 border p-3 flex items-center justify-center text-center'>1</button>
-            <button onclick='valorarPedido(${element['num_ven']}, 2)' class='rounded-full hover:bg-blue-800 bg-blue-100/20 border p-3 flex items-center justify-center text-center'>2</button>
-            <button onclick='valorarPedido(${element['num_ven']}, 3)' class='rounded-full hover:bg-blue-800 bg-blue-100/20 border p-3 flex items-center justify-center text-center'>3</button>
-            <button onclick='valorarPedido(${element['num_ven']}, 4)' class='rounded-full hover:bg-blue-800 bg-blue-100/20 border p-3 flex items-center justify-center text-center'>4</button>
-            <button onclick='valorarPedido(${element['num_ven']}, 5)' class='rounded-full hover:bg-blue-800 bg-blue-100/20 border p-3 flex items-center justify-center text-center'>5</button>
+            <hr class='border w-full my-3'>
+            <p class='text-center mb-5'>¡Se ha entragado tu pedido! ¿Qué nota le pones sobre 5 a este pedido? 🏅</p>
+            <div class='flex gap-3 justify-center items-center text-center w-full'>
+            <button onclick='valorarPedido(${element['num_ven']}, 1)' class='w-5 h-5 duration-300 rounded-full hover:text-white hover:bg-blue-800 bg-blue-100/20 border p-5 flex items-center justify-center text-center'>1</button>
+            <button onclick='valorarPedido(${element['num_ven']}, 2)' class='w-5 h-5 duration-300 rounded-full hover:text-white hover:bg-blue-800 bg-blue-100/20 border p-5 flex items-center justify-center text-center'>2</button>
+            <button onclick='valorarPedido(${element['num_ven']}, 3)' class='w-5 h-5 duration-300 rounded-full hover:text-white hover:bg-blue-800 bg-blue-100/20 border p-5 flex items-center justify-center text-center'>3</button>
+            <button onclick='valorarPedido(${element['num_ven']}, 4)' class='w-5 h-5 duration-300 rounded-full hover:text-white hover:bg-blue-800 bg-blue-100/20 border p-5 flex items-center justify-center text-center'>4</button>
+            <button onclick='valorarPedido(${element['num_ven']}, 5)' class='w-5 h-5 duration-300 rounded-full hover:text-white hover:bg-blue-800 bg-blue-100/20 border p-5 flex items-center justify-center text-center'>5</button>
             </div>
         `;
         componete.appendChild(btnValorar);
@@ -189,7 +190,7 @@ function listarPedidos() {
         .then(data => {
             const historialPedidos = document.getElementById("historialPedidos");
             data.forEach(element => {
-                if (element['ESTADO_VEN'] == "Entregado" || element['ESTADO_VEN'] == "Valorado") {
+                if (element['ESTADO_VEN'] == "Completado" || element['ESTADO_VEN'] == "Valorado") {
                     historialPedidos.appendChild(crearComponenteFila(element));
                 }
             });

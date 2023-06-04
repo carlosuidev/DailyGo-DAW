@@ -5,7 +5,7 @@ const btnActualizar = document.getElementById("btnActualizar");
 
 function iniciarProveedor() {
     personalizarUI();
-    mostrarPedidos();   
+    mostrarPedidos();
     btnActualizar.addEventListener("click", () => {
         mostrarPedidos();
     });
@@ -33,7 +33,7 @@ function personalizarUI() {
     }
 }
 
-function actualizarEstado(idPedido, estado){
+function actualizarEstado(idPedido, estado) {
     const datos = {
         id: idPedido,
         estado: estado
@@ -64,7 +64,7 @@ function crearComponenteSolicitud(element) {
     superior.setAttribute("class", "flex gap-3 justify-content-between");
 
     const div = document.createElement("div");
-    div.setAttribute("class", "flex gap-4 items-center justify-between");
+    div.setAttribute("class", "flex gap-2 items-center justify-between flex-wrap");
 
     const id = document.createElement("h4");
     id.textContent = `Pedido nº${element['num_ven']}`;
@@ -75,25 +75,25 @@ function crearComponenteSolicitud(element) {
     estado.textContent = element['estado_ven'];
     switch (element['estado_ven']) {
         case "En preparación":
-            estado.setAttribute("class", "bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full")
+            estado.setAttribute("class", "w-fit bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full")
             break;
         case "Cancelado":
-            estado.setAttribute("class", "bg-red-200 text-red-600 py-0.5 px-2.5 rounded-full")
+            estado.setAttribute("class", "w-fit bg-red-200 text-red-600 py-0.5 px-2.5 rounded-full")
             break;
         case "Preparado":
-            estado.setAttribute("class", "bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full")
+            estado.setAttribute("class", "w-fit bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full")
             break;
         case "En reparto":
-            estado.setAttribute("class", "bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full");
+            estado.setAttribute("class", "w-fit bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full");
             break;
         case "Entregado":
-            estado.setAttribute("class", "bg-green-200 text-green-600 py-0.5 px-2.5 rounded-full");
+            estado.setAttribute("class", "w-fit bg-green-200 text-green-600 py-0.5 px-2.5 rounded-full");
             break;
         case "Valorado":
-            estado.setAttribute("class", "bg-green-200 text-green-600 py-0.5 px-2.5 rounded-full");
+            estado.setAttribute("class", "w-fit bg-green-200 text-green-600 py-0.5 px-2.5 rounded-full");
             break;
         default:
-            estado.setAttribute("class", "bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full");
+            estado.setAttribute("class", "w-fit bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full");
             break;
     }
     div.appendChild(estado);
@@ -112,19 +112,10 @@ function crearComponenteSolicitud(element) {
     `;
     componete.appendChild(extra);
 
-    if (element['estado_ven'] == "Creado") {
-        const btnValorar = document.createElement("div");
-        btnValorar.setAttribute("class", "w-full flex justify-center items-center flex-col");
-        btnValorar.innerHTML = `
-        <input onclick='actualizarEstado(${element['NUM_VEN']}, 'En preparación')' type="button" value="Aceptar" class="w-40 duration-300 text-white bg-green-500 rounded-md font-semibold hover:bg-green-600 py-2 px-3 cursor-pointer">
-        <input onclick='actualizarEstado(${element['NUM_VEN']}, 'Cancelado')' type="button" value="Rechazar" class="w-40 duration-300 text-white bg-red-500 rounded-md font-semibold hover:bg-red-600 py-2 px-3 cursor-pointer">
-        `;
-        componete.appendChild(btnValorar);
-    } else {
-        const listadoProd = document.createElement("div");
-        listadoProd.setAttribute("class", "flex flex-col gap-3 mt-8");
-        element['carro'].forEach(prod => {
-            listadoProd.innerHTML += `
+    const listadoProd = document.createElement("div");
+    listadoProd.setAttribute("class", "flex flex-col gap-3 mt-8");
+    element['carro'].forEach(prod => {
+        listadoProd.innerHTML += `
             <div class='flex flex-wrap items-center justify-between w-full border rounded p-3 gap-5'>
                 <div class='flex items-center justify-center gap-3'>
                     <div class="w-12 h-12 rounded border" style="background-image: url('../../img_bbdd/productos/${prod['cod_prod']}.jpg'); background-size: cover; background-position: center bottom;">
@@ -134,8 +125,31 @@ function crearComponenteSolicitud(element) {
                 <p>${prod['cant_det']} uds.</p>
             <div>
             `;
-        });
-        componete.appendChild(listadoProd);
+    });
+    componete.appendChild(listadoProd);
+
+    const info = document.createElement("div");
+    info.innerHTML = `
+    <hr class='w-full my-3'>
+    <p class='mb-5 text-sm w-full rounded-md p-3 bg-blue-100/40'><b>Mensaje:</b> ${element['com_ven']}</p>
+    `
+    componete.appendChild(info);
+
+    if (element['estado_ven'] == "Creado") {
+        const btnValorar = document.createElement("div");
+        btnValorar.setAttribute("class", "w-full flex flex-wrap justify-center items-center mt-5 gap-2");
+        btnValorar.innerHTML = `
+        <button onclick="modificarEstado(${element['num_ven']}, 'En preparación')" class="w-full duration-300 text-white bg-green-500 rounded-md font-semibold hover:bg-green-600 py-2 px-3 cursor-pointer">Aceptar</button>
+        <button onclick="modificarEstado(${element['num_ven']}, 'Cancelado')" class="w-full duration-300 text-white bg-red-500 rounded-md font-semibold hover:bg-red-600 py-2 px-3 cursor-pointer">Cancelar</button>
+        `;
+        componete.appendChild(btnValorar);
+    } else if (element['estado_ven'] == "En preparación") {
+        const btnValorar = document.createElement("div");
+        btnValorar.setAttribute("class", "w-full flex justify-center items-center flex-col");
+        btnValorar.innerHTML = `
+        <button onclick="modificarEstado(${element['num_ven']}, 'Preparado')" class="w-full duration-300 text-white bg-indigo-700 rounded-md font-semibold hover:bg-indigo-800 py-2 px-3 cursor-pointer">Pedido preparado</button>
+        `;
+        componete.appendChild(btnValorar);
     }
 
     return componete;
@@ -156,24 +170,37 @@ function mostrarPedidos() {
     })
         .then(response => response.json())
         .then(data => {
-            let existePet = false;
-            let existePen = false;
             const listadoPeticiones = document.getElementById("listadoPeticiones");
-            listadoPendientes.innerHTML = "";
             const listadoPendientes = document.getElementById("listadoPendientes");
-            data.forEach(element => {
-                
+            listadoPeticiones.innerHTML = "";
+            listadoPendientes.innerHTML = "";
+            if (data.msg != "Sin resultados") {
+                let existePet = false;
+                let existePen = false;
 
-                if(element['ESTADO_VEN'] == 'Creado'){
-                    listadoPeticiones.innerHTML += crearComponenteSolicitud(element);
-                    existePet = true;
-                }else{
-                    listadoPendientes.innerHTML += crearComponenteSolicitud(element);
+                data.forEach(element => {
+                    if (element['estado_ven'] == 'Creado') {
+                        listadoPeticiones.appendChild(crearComponenteSolicitud(element));
+                        existePet = true;
+                    } else {
+                        listadoPendientes.appendChild(crearComponenteSolicitud(element));
+                        existePen = true;
+                    }
+                });
+
+                if (!existePet) {
+                    listadoPeticiones.innerHTML = "(No hay ningún pedido ¡Ya llegarán! 😀)";
                 }
-            });
+
+                if (!existePen) {
+                    listadoPendientes.innerHTML = "(No hay pedidos pendientes por realizar)";
+                }
+            }else{
+                listadoPeticiones.innerHTML = "(No hay ningún pedido ¡Ya llegarán! 😀)";
+                listadoPendientes.innerHTML = "(No hay pedidos pendientes por realizar)";
+            }
         })
         .catch(error => {
-
             console.error("Error: No se ha podido crear la petición ->", error);
         });
 }
@@ -194,8 +221,10 @@ function modificarEstado(idPedido, estado) {
         .then(response => response.text())
         .then(data => {
             if (data == "Actualizado") {
-                mostrarSolicitudes();
-                mostrarPendientes();
+                mostrarPedidos();
+            } else {
+                mostrarPedidos();
+                console.log(data);
             }
         })
         .catch(error => {
