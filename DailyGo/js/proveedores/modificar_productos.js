@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', iniciarPerfil);
+document.addEventListener('DOMContentLoaded', mostrarDatos);
 
 const productosIniciales = document.getElementById("productosIniciales");
 
@@ -12,8 +12,8 @@ const productosIniciales = document.getElementById("productosIniciales");
 const correctoDatos = document.getElementById("correctoDatos");
 const incorrectoDatos = document.getElementById("incorrectoDatos");
 
-// const correctoContrasena = document.getElementById("correctoContrasena");
-// const incorrectoContrasena = document.getElementById("incorrectoContrasena");
+const correctoContrasena = document.getElementById("correctoContrasena");
+const incorrectoContrasena = document.getElementById("incorrectoContrasena");
 
 // const btnRazsoc = document.getElementById("btnRazsoc");
 // const btnDirec = document.getElementById("btnDirec");
@@ -34,28 +34,6 @@ const incorrectoDatos = document.getElementById("incorrectoDatos");
 // let validacionContrasenhaNueva = '';
 // let validacionPerfil = '';
 // let validacionBanner = '';
-
-function iniciarPerfil() {
-    mostrarDatos();
-    // coordenadas.addEventListener("input", validarCoordenadas);
-    // perfil.addEventListener("change", validarImagenPerfil);
-    // razsoc.addEventListener("input", validarRazsoc);
-    // cat.addEventListener("change", cambiarCategoria);
-    // direccion.addEventListener("input", validarDireccion);
-    // telefono.addEventListener("input", validarTelefono);
-    // correo.addEventListener("input", validarCorreo);
-    // banner.addEventListener("change", validarImagenBanner);
-    // contrasenaNueva.addEventListener("input", validarContrasena);
-
-    // btnRazsoc.addEventListener("click", cambiarRazsoc);
-    // btnCoord.addEventListener("click", cambiarCoordenadas);
-    // btnDirec.addEventListener("click", cambiarDireccion);
-    // btnTelefono.addEventListener("click", cambiarTelefono);
-    // btnCorreo.addEventListener("click", cambiarCorreo);
-    // btnContrasena.addEventListener("click", cambiarContrasena);
-    // btnPerfil.addEventListener("click", guardarImagen);
-    // btnBanner.addEventListener("click", guardarImagenBanner);
-}
 
 function mostrarDatos() {
     cif = localStorage.getItem("cif");
@@ -119,7 +97,7 @@ function mostrarDatos() {
         })
 
 
-    // razsoc.value = localStorage.getItem("razonSocial");
+    razsoc.value = localStorage.getItem("razonSocial");
     // direccion.value = localStorage.getItem("direccion");
     // telefono.value = localStorage.getItem("telefono");
     // correo.value = localStorage.getItem("correo");
