@@ -21,7 +21,6 @@ function personalizarUI() {
         hero.style.backgroundPosition = "center";
         // Nombre proveedor - razón social
         const razonProv = document.getElementById("razonProv");
-        razonProv.innerHTML = "aa"
         razonProv.innerHTML = localStorage.getItem("razonSocial");
         //Logo
         const logo = document.getElementById("logoProveedor");
