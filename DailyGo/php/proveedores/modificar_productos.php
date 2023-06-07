@@ -21,7 +21,7 @@ if (isset($data["producIni"])) {
     } catch (Exception $err) {
         echo $err;
     }
-} else if (isset($data["idProd"])){
+} else if (isset($data["idProd"])) {
     $cif = $data["cif"];
     $idProd = $data["idProd"];
     $conexion = mysqli_connect("localhost", "root", "", "dailygo");
@@ -37,6 +37,32 @@ if (isset($data["producIni"])) {
             }
             echo json_encode($arrayProductos);
         }
+    } catch (Exception $err) {
+        echo $err;
+    }
+} else if (isset($data["nombreProducto"])) {
+    $nombreProducto = $data["nombreProducto"];
+    $id = $data["id"];
+    $conexion = mysqli_connect("localhost", "root", "", "dailygo");
+    $arrayProductos = [];
+    mysqli_select_db($conexion, "dailygo") or die("No se puede seleccionar la BD");
+    /* Lazo la consulta sobre la BD*/
+    try {
+        mysqli_query($conexion, "UPDATE productos set DEN_PROD = '$nombreProducto' where COD_PROD = $id");
+        echo 'NombreActualizado';
+    } catch (Exception $err) {
+        echo $err;
+    }
+} else if (isset($data["precioNuevo"])) {
+    $precioNuevo = $data["precioNuevo"];
+    $id = $data["id"];
+    $conexion = mysqli_connect("localhost", "root", "", "dailygo");
+    $arrayProductos = [];
+    mysqli_select_db($conexion, "dailygo") or die("No se puede seleccionar la BD");
+    /* Lazo la consulta sobre la BD*/
+    try {
+        mysqli_query($conexion, "UPDATE productos set PU_PROD = $precioNuevo where COD_PROD = $id");
+        echo 'precioActualizado';
     } catch (Exception $err) {
         echo $err;
     }

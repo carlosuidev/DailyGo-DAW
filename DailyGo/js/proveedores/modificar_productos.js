@@ -8,8 +8,8 @@ const razonSocial = localStorage.getItem("razonSocial");
 const logo = document.getElementById("logoProveedor");
 const hero = document.getElementById("hero-proveedor");
 const nombreProducto = document.getElementById("nombreProducto");
-const imagenProducto = document.getElementById("imagenProducto");
-const imgEdit = document.getElementById("imgEdit");
+const imagenDelProducto = document.getElementById("imagenDelProducto");
+const imagenSubidaUsuario = document.getElementById("imagenSubidaUsuario");
 const precioUnitario = document.getElementById("precioUnitario");
 
 const ocultoImagen = document.getElementById("ocultoImagen");
@@ -24,34 +24,19 @@ const msgPrecioUnitario = document.getElementById("msgPrecioUnitario");
 const correctoDatos = document.getElementById("correctoDatos");
 const incorrectoDatos = document.getElementById("incorrectoDatos");
 
-// const correctoContrasena = document.getElementById("correctoContrasena");
-// const incorrectoContrasena = document.getElementById("incorrectoContrasena");
-
 const btnNombreProducto = document.getElementById("btnNombreProducto");
 const btnPrecioUnitario = document.getElementById("btnPrecioUnitario");
 const btnImagen = document.getElementById("btnImagen");
-// const btnTelefono = document.getElementById("btnTelefono");
-// const btnCorreo = document.getElementById("btnCorreo");
-// const btnBanner = document.getElementById("btnBanner");
-// const btnContrasena = document.getElementById("btnContrasena");
-// const btnPerfil = document.getElementById("btnPerfil");
+
 
 //
 let validarImagenTrue = '';
 let validarNombre = '';
 let precioUnitarioValidado = '';
-// let validacionDirec = '';
-// let validacionCorreo = '';
-// let validacionTelefono = '';
-// let validacionCoordenadas = '';
-// let validacionContrasenhaAntigua = '';
-// let validacionContrasenhaNueva = '';
-// let validacionPerfil = '';
-// let validacionBanner = '';
 
 function mostrarDatos() {
     btnImagen.addEventListener("click", cambiarImagen)
-    imgEdit.addEventListener("change", validarImagen);
+    imagenSubidaUsuario.addEventListener("change", validarImagen);
 
     btnNombreProducto.addEventListener("click", cambiarNombreProducto);
     nombreProducto.addEventListener("input", validarNombreProducto);
@@ -103,7 +88,6 @@ function modiProducMostrar() {
         'idProd': productosIniciales.value,
         'cif': cif
     }
-    console.log(productosIniciales.value)
     fetch("../../php/proveedores/modificar_productos.php", {
         method: "POST",
         body: JSON.stringify(productosArray),
@@ -120,22 +104,22 @@ function modiProducMostrar() {
         .then(data => {
             data.forEach(element => {
                 nombreProducto.value = element.nombre;
-                imgEdit.style.backgroundImage = `url('../../img_bbdd/productos/${element.codigo}.jpg')`;
+                imagenDelProducto.style.backgroundImage = `url('../../img_bbdd/productos/${element.codigo}.jpg')`;
                 precioUnitario.value = element.precio;
             });
-            imgEdit.style.backgroundSize = "cover";
-            imgEdit.style.backgroundPosition = "center";
+            imagenDelProducto.style.backgroundSize = "cover";
+            imagenDelProducto.style.backgroundPosition = "center";
         })
 }
 
 function validarImagen() {
     const expImagen = /\.(jpg)/i;
-    if (expImagen.test(imgEdit.value)) {
-        imgEdit.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+    if (expImagen.test(imagenSubidaUsuario.value)) {
+        imagenSubidaUsuario.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
         msgImagen.setAttribute("class", "hidden");
         validarImagenTrue = true;
     } else {
-        imgEdit.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+        imagenSubidaUsuario.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
         msgImagen.setAttribute("class", "flex");
         validarImagenTrue = false;
     }
@@ -182,74 +166,18 @@ function actualizarDatos(ruta, datos) {
             return response.text();
         })
         .then(data => {
-            console.log(data)
             switch (data) {
-                case "coordenadasCambiadas":
+                case "NombreActualizado":
                     correctoDatos.setAttribute("class", "flex");
                     setTimeout(function () {
                         correctoDatos.setAttribute("class", "hidden");
                     }, 3000);
+                    
                     break;
-                case "catCambiada":
+                case "precioActualizado":
                     correctoDatos.setAttribute("class", "flex");
                     setTimeout(function () {
                         correctoDatos.setAttribute("class", "hidden");
-                    }, 3000);
-                    break;
-                case "actualizadoRazsoc":
-                    correctoDatos.setAttribute("class", "flex");
-                    setTimeout(function () {
-                        correctoDatos.setAttribute("class", "hidden");
-                    }, 3000);
-                    localStorage.setItem("razonSocial", razsoc.value);
-                    break;
-                case "actualizadoDir":
-                    correctoDatos.setAttribute("class", "flex");
-                    setTimeout(function () {
-                        correctoDatos.setAttribute("class", "hidden");
-                    }, 3000);
-                    localStorage.setItem("direccion", direccion.value);
-                    break;
-                case "actualizadoTel":
-                    correctoDatos.setAttribute("class", "flex");
-                    setTimeout(function () {
-                        correctoDatos.setAttribute("class", "hidden");
-                    }, 3000);
-                    localStorage.setItem("telefono", telefono.value);
-                    break;
-                case "actualizadoMail":
-                    correctoDatos.setAttribute("class", "flex");
-                    setTimeout(function () {
-                        correctoDatos.setAttribute("class", "hidden");
-                    }, 3000);
-                    localStorage.setItem("correo", correo.value);
-                    break;
-                case "actualizadoContra":
-                    correctoContrasena.setAttribute("class", "flex");
-                    setTimeout(function () {
-                        correctoContrasena.setAttribute("class", "hidden");
-                    }, 3000);
-                    break;
-                case "telExiste":
-                    telefono.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
-                    msgTelefono.setAttribute("class", "hidden");
-                    msgTelefonoExiste.setAttribute("class", "flex");
-                    setTimeout(function () {
-                        correctoDatos.setAttribute("class", "hidden");
-                    }, 3000);
-                    break;
-                case "mailExiste":
-                    correo.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
-                    msgCorreo.setAttribute("class", "hidden");
-                    msgCorreoExiste.setAttribute("class", "flex");
-                    setTimeout(function () {
-                        correctoDatos.setAttribute("class", "hidden");
-                    }, 3000);
-                    break;
-                case "contraExiste":
-                    incorrectoContrasena.setAttribute("class", "flex");
-                    setTimeout(function () {
-                        incorrectoContrasena.setAttribute("class", "hidden");
                     }, 3000);
                     break;
             }
@@ -262,21 +190,20 @@ function actualizarDatos(ruta, datos) {
 }
 
 function cambiarNombreProducto() {
-    if (validacionRazsoc) {
+    if (validarNombre) {
         const datos = {
-            'razSoc': razsoc.value,
-            'cif': localStorage.getItem("cif")
+            'nombreProducto': nombreProducto.value,
+            'id': productosIniciales.value
         }
         actualizarDatos("../../php/proveedores/modificar_productos.php", datos);
-
     }
 }
 
 function cambiarPrecioUnitario() {
-    if (validacionDirec) {
+    if (precioUnitarioValidado) {
         const datos = {
-            'direccion': direccion.value,
-            'cif': localStorage.getItem("cif")
+            'precioNuevo': precioUnitario.value,
+            'id': productosIniciales.value
         }
         actualizarDatos("../../php/proveedores/modificar_productos.php", datos);
 
@@ -284,12 +211,12 @@ function cambiarPrecioUnitario() {
 }
 
 function cambiarImagen() {
-    if (validacionPerfil) {
-        var archivo = perfil.files[0]
+    if (validarImagenTrue) {
+        var archivo = imagenSubidaUsuario.files[0];
         var formData = new FormData();
         formData.append('imagen', archivo);
-        formData.append('cif', localStorage.getItem("cif"))
-        fetch('../../php/proveedores/cambiar_imagen_proveedores.php', {
+        formData.append('id', productosIniciales.value)
+        fetch('../../php/proveedores/cambiar_imagen_producto.php', {
             method: 'POST',
             body: formData
         })
