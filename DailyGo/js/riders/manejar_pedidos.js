@@ -14,6 +14,8 @@ function mostrarDatos() {
     datosRider.textContent = `${localStorage.getItem("nombre")}`
     msgEstado.textContent = estadoRider;
     if (estadoRider == "Disponible") {
+        const listadoEntregar = document.getElementById("listadoEntregar");
+        listadoEntregar.innerHTML = "<div class='flex flex-col justify-center items-center gap-10 text-lg'><img src='../../assets/svg/rider_ilust.svg'><p class='text-center'>Todavía no hemos encontrado ningún pedido para ti ¡No tardarán en llegar! 😀</p></div>";
         msgEstado.setAttribute("class", "px-3 py-1 mb-2 w-fit flex items-center rounded-full bg-green-600 text-white text-xs");
         zonaBtn.innerHTML = `<button class="duration-300 hover:bg-indigo-700 w-fit px-3 py-1 bg-indigo-600 font-semibold text-white rounded-md" onclick="actualizarDisponibilidad(\'No Disponible\')"> Cambiar a No Disponible </button>`;
     } else if (estadoRider == "Ocupado") {
@@ -21,7 +23,7 @@ function mostrarDatos() {
         zonaBtn.innerHTML = "";
     } else if (estadoRider == "No Disponible") {
         const listadoEntregar = document.getElementById("listadoEntregar");
-        listadoEntregar.innerHTML = "<div class='col-span-4'>⚠️ Debes estar 'Disponible' para empezar a entregar pedidos</div>"
+        listadoEntregar.innerHTML = "<div class='flex flex-col justify-center items-center gap-10 text-lg'><img src='../../assets/svg/rider_ilust.svg'><p class='text-center'>⚠️ Debes estar 'Disponible' para empezar a entregar pedidos</p></div>";
         msgEstado.setAttribute("class", "px-3 py-1 mb-2 w-fit flex items-center rounded-full bg-red-600 text-white text-xs");
         zonaBtn.innerHTML = `<button class="duration-300 hover:bg-indigo-700 w-fit px-3 py-1 bg-indigo-600 font-semibold text-white rounded-md" onclick="actualizarDisponibilidad(\'Disponible\')"> Cambiar a Disponible </button>`;
     }
@@ -51,7 +53,7 @@ function actualizarDisponibilidad(estado) {
                 localStorage.setItem("estado", estado);
                 if (estado == "No disponible") {
                     const listadoEntregar = document.getElementById("listadoEntregar");
-                    listadoEntregar.innerHTML = "<div class='col-span-4'>⚠️ Debes estar 'Disponible' para empezar a entregar pedidos</div>"
+                    listadoEntregar.innerHTML = "<div class='flex flex-col justify-center items-center gap-10 text-lg'><img src='../../assets/svg/rider_ilust.svg'><p class='text-center'>⚠️ Debes estar 'Disponible' para empezar a entregar pedidos</p></div>"
                 }
                 mostrarDatos();
             } else {
@@ -85,11 +87,11 @@ function verPedido() {
             if (data.length == 1 && data.msg == undefined) {
                 localStorage.setItem("estado", "Ocupado");
                 listadoEntregar.appendChild(crearComponentePedido(data[0]));
-                //mostrarMapa();
+                mostrarMapa();
                 mostrarDatos();
             } else {
                 console.log(data);
-                listadoEntregar.innerHTML = "<div class='col-span-4'>Todavía no hemos encontrado ningún pedido para ti ¡No tardarán en llegar! 😀</div>";
+                listadoEntregar.innerHTML = "<div class='flex flex-col justify-center items-center gap-10 text-lg'><img src='../../assets/svg/rider_ilust.svg'><p class='text-center'>Todavía no hemos encontrado ningún pedido para ti ¡No tardarán en llegar! 😀</p></div>";
             }
         })
         .catch(error => {
@@ -196,7 +198,7 @@ function crearComponentePedido(element) {
     const mapaTienda = document.createElement("div");
     mapaTienda.innerHTML = `
     <input type='hidden' id='coords' value='${element['coordenadas']}'>
-    <input type='hidden' id='coords' value='${element['cif_prov']}'>
+    <input type='hidden' id='cifProv' value='${element['cif_prov']}'>
     <div id="map" style='width:100% !important; height:350px !important' class="mt-5 leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0" style="position: relative;"></div>
     `;
     componente.appendChild(mapaTienda);
@@ -206,7 +208,7 @@ function crearComponentePedido(element) {
 function mostrarMapa() {
     let marker;
 
-    let map = L.map('map').setView([40.314224, -3.7038], 16)
+    let map = L.map('map').setView([40.314224, -3.7038], 16);
 
     //Agregar tilelAyer mapa base desde openstreetmap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

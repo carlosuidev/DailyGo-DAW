@@ -1,6 +1,9 @@
 window.addEventListener('DOMContentLoaded', iniciarPedidos);
 
+const fecha = document.getElementById("fecha");
+
 function iniciarPedidos() {
+    fecha.addEventListener("change", listarPedidos);
     listarPedidos();
     listarPedidosActivos();
 }
@@ -136,7 +139,10 @@ function crearComponenteFila(element) {
     const producto = document.createElement("td");
     producto.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
     producto.setAttribute("scope", "col");
-    producto.innerHTML = `
+    if(element['cod_prod'] == 0){
+        producto.innerHTML = "-";
+    }else{
+        producto.innerHTML = `
         <div class='flex items-center gap-2'>
             <div class="w-12 h-12 rounded border" style="background-image: url('../../img_bbdd/productos/${element['cod_prod']}.jpg'); background-size: cover; background-position: center bottom;">
             </div>
@@ -146,6 +152,8 @@ function crearComponenteFila(element) {
             </div>
         </div>
     `;
+    }
+    
     fila.appendChild(producto);
 
     const cantidad = document.createElement("td");
@@ -201,8 +209,18 @@ function listarPedidos() {
 }
 
 function listarPedidos() {
+
+    let valorFecha = "";
+    if (fecha.value == "") {
+        valorFecha = "";
+    } else {
+        const fechaTipo = new Date(fecha.value);
+        valorFecha = `${fechaTipo.getDate().toString().padStart(2, '0')}-${(fechaTipo.getMonth() + 1).toString().padStart(2, '0')}-${fechaTipo.getFullYear()}`;
+    }
+
     const datos = {
-        'id': localStorage.getItem("id")
+        'id': localStorage.getItem("id"),
+        fecha: valorFecha
     }
     fetch("../../php/listar_pedidos_usuario.php", {
         method: "POST",
@@ -214,6 +232,7 @@ function listarPedidos() {
         .then(response => response.json())
         .then(data => {
             const historialPedidos = document.getElementById("historialPedidos");
+            historialPedidos.innerHTML = "";
             data.forEach(element => {
                 historialPedidos.appendChild(crearComponenteFila(element));
             });

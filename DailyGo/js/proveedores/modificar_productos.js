@@ -8,13 +8,13 @@ const razonSocial = localStorage.getItem("razonSocial");
 const logo = document.getElementById("logoProveedor");
 const hero = document.getElementById("hero-proveedor");
 const nombreProducto = document.getElementById("nombreProducto");
-const imagenDelProducto = document.getElementById("imagenDelProducto");
 const imagenSubidaUsuario = document.getElementById("imagenSubidaUsuario");
 const precioUnitario = document.getElementById("precioUnitario");
 
 const ocultoImagen = document.getElementById("ocultoImagen");
 const ocultoNombre = document.getElementById("ocultoNombre");
 const ocultoDinero = document.getElementById("ocultoDinero");
+const ocultoBorrar = document.getElementById("ocultoBorrar");
 
 const msgImagen = document.getElementById("msgImagen");
 const msgNombreProducto = document.getElementById("msgNombreProducto");
@@ -27,6 +27,7 @@ const incorrectoDatos = document.getElementById("incorrectoDatos");
 const btnNombreProducto = document.getElementById("btnNombreProducto");
 const btnPrecioUnitario = document.getElementById("btnPrecioUnitario");
 const btnImagen = document.getElementById("btnImagen");
+const btnBorrarProducto = document.getElementById("btnBorrarProducto");
 
 
 //
@@ -43,6 +44,8 @@ function mostrarDatos() {
 
     btnPrecioUnitario.addEventListener("click", cambiarPrecioUnitario)
     precioUnitario.addEventListener("input", validarPrecioUnitario);
+
+    btnBorrarProducto.addEventListener("click", borrarProducto);
 
     productosIniciales.addEventListener("change", modiProducMostrar);
     razonProv.innerHTML = localStorage.getItem("razonSocial");
@@ -73,6 +76,7 @@ function mostrarDatos() {
             return response.json();
         })
         .then(data => {
+            productosIniciales.innerHTML += `<option value='-'>(Selecciona un productos)</option>`;
             data.forEach(element => {
                 productosIniciales.innerHTML += "<option value='" + element.codigo + "'>" + element.nombre + "</option>"
             });
@@ -84,6 +88,7 @@ function modiProducMostrar() {
     ocultoNombre.setAttribute("class", "");
     ocultoImagen.setAttribute("class", "");
     ocultoDinero.setAttribute("class", "");
+    ocultoBorrar.setAttribute("class", "");
     productosArray = {
         'idProd': productosIniciales.value,
         'cif': cif
@@ -104,11 +109,9 @@ function modiProducMostrar() {
         .then(data => {
             data.forEach(element => {
                 nombreProducto.value = element.nombre;
-                imagenDelProducto.style.backgroundImage = `url('../../img_bbdd/productos/${element.codigo}.jpg')`;
+
                 precioUnitario.value = element.precio;
             });
-            imagenDelProducto.style.backgroundSize = "cover";
-            imagenDelProducto.style.backgroundPosition = "center";
         })
 }
 
@@ -152,6 +155,10 @@ function validarPrecioUnitario() {
 }
 
 function actualizarDatos(ruta, datos) {
+    if(productosIniciales.value == "-"){
+        return false;
+    }
+
     fetch(ruta, {
         method: "POST",
         body: JSON.stringify(datos),
@@ -211,6 +218,10 @@ function cambiarPrecioUnitario() {
 }
 
 function cambiarImagen() {
+    if(productosIniciales.value == "-"){
+        return false;
+    }
+
     if (validarImagenTrue) {
         var archivo = imagenSubidaUsuario.files[0];
         var formData = new FormData();
@@ -240,6 +251,41 @@ function cambiarImagen() {
                 console.log('Error en la solicitud:', error);
             });
     }
+}
+
+function borrarProducto(){
+
+    if(productosIniciales.value == "-"){
+        return false;
+    }
+
+    const data = {
+        'id': productosIniciales.value
+    }
+
+    fetch('../../php/proveedores/cambiar_imagen_producto.php', {
+        method: 'POST',
+        body: data
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('Datos enviados con éxito');
+                return response.text();
+            } else {
+                console.log('Error al enviar los datos');
+            }
+        })
+        .then(data => {
+            if (data == 'Imagen guardada correctamente') {
+                correctoDatos.setAttribute("class", "flex");
+                setTimeout(function () {
+                    correctoDatos.setAttribute("class", "hidden");
+                }, 3000);
+            }
+        })
+        .catch(error => {
+            console.log('Error en la solicitud:', error);
+        });
 }
 
 // function guardarImagenBanner() {

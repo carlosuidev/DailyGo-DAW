@@ -319,9 +319,9 @@ INSERT INTO RIDERS(DNI_RID, NOM_RID, APE_RID, TLF_RID, MAIL_RID, PW_RID, ESTADO)
  VALUES
 ('0','Temporal', 'TEMP', 0, '-','-', '-'),
 ('11234356G','Jonathan', 'Casa Pila', 765457386, 'jota@dailygo.com','123Usuario', 'Disponible'),
-('11264584L','Benito', 'Martínez Ocasio', 694957545, 'benito@dailygo.com','123Usuario', 'Ocupado'),
-('12345465X','Paula', 'Badosa Gibert', 600434523, 'paula@dailygo.com','123Usuario', 'Ocupado'),
-('12222345T','Amicus', 'Echo', 666342345, 'amicus@dailygo.com','123Usuario', 'Desconectado'),
+('11264584L','Benito', 'Martínez Ocasio', 694957545, 'benito@dailygo.com','123Usuario', 'Desconectado'),
+('12345465X','Paula', 'Badosa Gibert', 600434523, 'paula@dailygo.com','123Usuario', 'Disponible'),
+('12222345T','Amicus', 'Echo', 666342345, 'amicus@dailygo.com','123Usuario', 'Disponible'),
 ('16632387Y','Ibai', 'Llanos Garatea', 756454534, 'ibai@dailygo.com','123Usuario', 'Disponible');
 
 /*

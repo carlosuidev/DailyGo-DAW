@@ -2,24 +2,12 @@ document.addEventListener('DOMContentLoaded', iniciarGestionUsuarios);
 
 const listaUsuarios = document.getElementById("listaUsuarios");
 
-const idUsuario = document.getElementById("idUsuario");
-
 const nombre = document.getElementById("nombre");
 const apellidos = document.getElementById("apellidos");
 const correo = document.getElementById("correo");
 const telefono = document.getElementById("telefono");
 
 const btnCrearUsuario = document.getElementById("btnCrearUsuario");
-
-const btnActualizarNombre = document.getElementById("btnActualizarNombre");
-const btnActualizarApellidos = document.getElementById("btnActualizarApellidos");
-const btnActualizarCorreo = document.getElementById("btnActualizarCorreo");
-const btnActualizarTelefono = document.getElementById("btnActualizarTelefono");
-
-const msgNombre = document.getElementById("msgNombre");
-const msgApellidos = document.getElementById("msgApellidos");
-const msgCorreo = document.getElementById("msgCorreo");
-const msgTelefono = document.getElementById("msgTelefono");
 
 function iniciarGestionUsuarios() {
     obtenerUsuarios();
@@ -30,11 +18,6 @@ function iniciarGestionUsuarios() {
     telefono.addEventListener("input", validarTelefono)
 
     btnCrearUsuario.addEventListener("click", agregarUsuario);
-
-    btnActualizarNombre.addEventListener("click", modificarNombre);
-    btnActualizarApellidos.addEventListener("click", modificarApellidos);
-    btnActualizarCorreo.addEventListener("click", modificarCorreo);
-    btnActualizarTelefono.addEventListener("click", modificarTelefono);
 
     mostrarDatosUsuario(idUsuario.value);
 }

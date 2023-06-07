@@ -43,7 +43,7 @@
             <div class="flex flex-col justify-center items-center">
                 <div
                     class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
-                    <a href="productos.html">Productos</a>
+                    <a href="nuevo_producto.html">Productos</a>
                 </div>
                 <div
                     class="w-full cursor-pointer text-center py-4 duration-300 hover:bg-blue-900 hover:text-white focus:text-white focus:bg-blue-800">
@@ -58,8 +58,57 @@
     </nav>
 
 
-    <main class="mt-24 p-5 lg:p-3 md:p-5 min-h-screen">
-        <div class="container mx-auto"></div>
+    <main class="mt-24 p-5 lg:p-3 md:p-5 min-h-screen" style="min-height: 100vh !important">
+        <div class="container mx-auto">
+            <div class="flex flex-wrap gap-5 justify-between">
+                <h3 class="font-bold">Historial de pedidos por producto</h3>
+            </div>
+            
+            <hr class="mt-2 mb-5">
+            
+            <div class="flex flex-col">
+                <small>Ordenar por fecha:</small>
+                <input type="date" id="fecha" class="border p-2 rounded-md mb-5 w-fit mt-2">
+            </div>
+            
+            <div class="overflow-x-auto">
+                <div class="inline-block min-w-full align-middle">
+                    <div class="overflow-hidden border border-blue-100 md:rounded-lg">
+                        <table class="min-w-full divide-y divide-blue-100">
+                            <thead class="bg-blue-100/20 text-left">
+                                <tr>
+                                    <th scope="col" class="p-4 text-sm font-semibold text-blue-800">
+                                        ID Pedido
+                                    </th>
+                                    <th scope="col" class="p-4 text-sm font-semibold text-blue-800">
+                                        Producto
+                                    </th>
+                                    <th scope="col" class="p-4 text-sm font-semibold text-blue-800">
+                                        Cantidad
+                                    </th>
+                                    <th scope="col" class="p-4 text-sm font-semibold text-blue-800">
+                                        Cliente
+                                    </th>
+                                    <th scope="col" class="p-4 text-sm font-semibold text-blue-800">
+                                        Rider
+                                    </th>
+                                    <th scope="col" class="p-4 text-sm font-semibold text-blue-800">
+                                        Fecha
+                                    </th>
+                                    <th scope="col" class="p-4 text-sm font-semibold text-blue-800">
+                                        Estado
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-blue-200" id="historialPedidos">
+                                <!-- LISTADO DE PEDIDOS REALIZADOS -->
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
 
@@ -96,7 +145,7 @@
             </div>
         </div>
     </footer>
-
+    <script src="../../js/proveedores/historial_pedidos.js"></script>
     <script src="../../js/global/navbar.js"></script>
 </body>
 
