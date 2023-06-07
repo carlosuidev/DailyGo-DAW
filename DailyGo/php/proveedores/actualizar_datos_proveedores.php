@@ -23,7 +23,7 @@ if (isset($data["razSoc"])) {
     mysqli_select_db($conexion, "dailygo") or die("No se puede seleccionar la BD");
     /* Lazo la consulta sobre la BD*/
     try {
-        $datos = mysqli_query($conexion, "UPDATE proveedores SET DIR_PROV = '$direccion' where CIF_PROV = '$cif'");
+        mysqli_query($conexion, "UPDATE proveedores SET DIR_PROV = '$direccion' where CIF_PROV = '$cif'");
         echo 'actualizadoDir';
     } catch (Exception $err) {
         echo 'Fallo';
