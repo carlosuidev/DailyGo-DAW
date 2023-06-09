@@ -304,7 +304,8 @@ INSERT INTO CLIENTES(NOM_CLI, APE_CLI, TLF_CLI, MAIL_CLI, PW_CLI)
 VALUES
 ('Carlos', 'Almendros Arellano', 608694312, 'carlos@gmail.com','123Usuario'),
 ('Ignacio', 'Gil Torres', 775432842, 'nacho@gmail.com','123Usuario'),
-('Gonzalo', 'Oliver Alfonso', 690787526, 'gonzalo@gmail.com','123Usuario');
+('Gonzalo', 'Oliver Alfonso', 690787526, 'gonzalo@gmail.com','123Usuario'),
+('Admin', 'DailyGo', 000000000, 'admin@dailygo.com', '123Admin');
 
 /*
  ····INSERCIÓN DE RIDERS····
@@ -493,3 +494,7 @@ VALUES
 (41, 72, 5),
 
 (42, 75, 1);
+
+INSERT INTO `mensajes` (COD_CLI_MEN, ASU_MEN, MEN_MEN) VALUES
+(1, 'Faltan productos', 'En mi último pedido me falta una hamburguesa Kevin Bacon y unos Teques. Espero un reemolso del pedido.'),
+(2, 'Entrega en mal estado', 'He recibido un pedido con todo en mal estado, las bolsas estaban rotas y la comida desperdiciada por todos los sitios. Esto no es propio de una empresa como la vuestra >:(');

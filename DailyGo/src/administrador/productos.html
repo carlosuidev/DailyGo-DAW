@@ -78,8 +78,9 @@
 
     <section class="lg:py-24 md:py-16 py-12">
         <div class="container mx-auto p-5 lg:p-0 md:p-5">
-            <h3 class="font-bold">Gestión de consultas</h3>
+            <h3 class="font-bold">Gestión de productos</h3>
             <hr class="my-5">
+            <input type="text" id="buscar" value="" class="mt-5 bg-blue-700 border border-blue-400 rounded px-3 py-2 focus:border-blue-100 w-full mb-5" placeholder="Buscar producto">
             
             <div class="overflow-x-auto text-white">
                 <div class="inline-block min-w-full align-middle">
@@ -88,22 +89,22 @@
                             <thead class="bg-blue-700 text-left table-auto">
                                 <tr>
                                     <th class="p-4 text-sm font-semibold">
-                                        ID Consulta
+                                        ID Producto
                                     </th>
                                     <th class="p-4 text-sm font-semibold">
-                                        Usuario
+                                        Denominación
                                     </th>
                                     <th class="p-4 text-sm font-semibold">
-                                        Asunto
+                                        Proveedor
                                     </th>
                                     <th class="p-4 text-sm font-semibold">
-                                        Mensaje
+                                        Precio
                                     </th>
                                     <th class="p-4 text-sm font-semibold">
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-blue-800/50 divide-y divide-blue-500 table-auto" id="listadoConsultas">
+                            <tbody class="bg-blue-800/50 divide-y divide-blue-500 table-auto" id="listadoProductos">
                                 <!-- LISTADO -->
                             </tbody>
                         </table>
@@ -113,7 +114,7 @@
         </div>
     </section>
 </body>
-<script src="../../js/administrador/gestion_consultas.js"></script>
+<script src="../../js/administrador/gestion_producto.js"></script>
 <script src="../../js/global/cerrar_sesion.js"></script>
 <script src="../../js/administrador/gestion_sesiones.js"></script>
 <script src="../../js/global/navbar.js"></script>

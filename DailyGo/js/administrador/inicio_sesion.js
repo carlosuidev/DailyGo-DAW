@@ -7,14 +7,12 @@ const tipoUsuario = document.getElementById("tipoUsuario").value;
 const msgIncorrecto = document.getElementById("msgIncorrecto");
 const btnEntrar = document.getElementById("btnEntrar");
 const correo = document.getElementById("correo");
-const msgCorreo = document.getElementById("msgCorreo");
 const contrasena = document.getElementById("contrasena");
-const msgContrasena = document.getElementById("msgContrasena");
 
 function iniciarEventos() {
     correo.addEventListener("input", validarCorreo);
     contrasena.addEventListener("input", validarContrasena);
-    btnEntrar.addEventListener("click", peticionEntrar);
+    btnEntrar.addEventListener("click", iniciarSesion);
 }
 
 function validarCorreo() {
@@ -26,7 +24,6 @@ function validarCorreo() {
                 "class",
                 "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
-            msgCorreo.setAttribute("class", "hidden");
 
             return true;
         } else {
@@ -34,7 +31,6 @@ function validarCorreo() {
                 "class",
                 "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
-            msgCorreo.setAttribute("class", "flex");
 
             return false;
         }
@@ -53,7 +49,6 @@ function validarContrasena() {
                 "class",
                 "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
-            msgContrasena.setAttribute("class", "hidden");
 
             return true;
         } else {
@@ -61,7 +56,6 @@ function validarContrasena() {
                 "class",
                 "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
             );
-            msgContrasena.setAttribute("class", "flex");
 
             return false;
         }
@@ -70,84 +64,48 @@ function validarContrasena() {
     }
 }
 
-function peticionEntrar() {
-    try {
-        validarCorreo();
-        validarContrasena();
+function iniciarSesion() {
+    validarCorreo();
+    validarContrasena();
 
-        let direccionServer = "";
+    if (validarCorreo && validarContrasena) {
+        if (correo.value == "admin@dailygo.com") {
+            const datos = {
+                correo: correo.value,
+                contrasena: contrasena.value
+            }
 
-        if (validarCorreo() && validarContrasena()) {
-            xhrEntrar.onreadystatechange = respuestaEntrar;
-            xhrEntrar.open("POST", `${direccionServer}`, true);
-            xhrEntrar.setRequestHeader(
-                "Content-type",
-                "application/x-www-form-urlencoded"
-            );
-            xhrEntrar.send(
-                `correo=${correo.value}&contrasena=${contrasena.value}`
-            );
+            fetch("../php/admin/inicio_sesion.php", {
+                method: "POST",
+                body: JSON.stringify(datos),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                    if (data == "Dentro") {
+                        localStorage.setItem("tipoUsuario", "administrador");
+                        window.location.href = "administrador/inicio.html";
+                    } else {
+                        verError();
+                    }
+                })
+                .catch(error => {
+                    console.error("Error: No se ha podido crear la petición ->", error);
+                });
+        } else {
+            verError();
         }
-    } catch (error) {
-        console.log(
-            `No se ha podido realizar la petición para entrar: ${error}`
-        );
     }
 }
 
-function respuestaEntrar() {
-    try {
-        if (xhrEntrar.readyState == 4 && xhrEntrar.status == 200) {
-            let jsonEntrar = JSON.parse(xhrEntrar.responseText);
-            if (jsonEntrar[0].msg === "dentro") {
-                switch (tipoUsuario.value) {
-                    case "administrador":
-                        localStorage.setItem("nombre", nombre.value);
-                        localStorage.setItem("apellidos", apellidos.value);
-                        localStorage.setItem("correo", correo.value);
-                        localStorage.setItem("telefono", telefono.value);
-                        localStorage.setItem("tipoUsuario", "administrador");
-                        break;
-                        
-                    case "usuario":
-                        localStorage.setItem("nombre", nombre.value);
-                        localStorage.setItem("apellidos", apellidos.value);
-                        localStorage.setItem("correo", correo.value);
-                        localStorage.setItem("telefono", telefono.value);
-                        localStorage.setItem("tipoUsuario", "usuario");
-                        break;
+function verError() {
+    msgIncorrecto.setAttribute("class", "");
+    let cerrarMsg = setTimeout(function () {
+        msgIncorrecto.setAttribute("class", "hidden");
+    }, 3000);
 
-                    case "rider":
-                        localStorage.setItem("nombre", nombre.value);
-                        localStorage.setItem("apellidos", apellidos.value);
-                        localStorage.setItem("correo", correo.value);
-                        localStorage.setItem("dni", dni.value);
-                        localStorage.setItem("telefono", telefono.value);
-                        localStorage.setItem("tipoUsuario", "rider");
-                        break;
-
-                    case "proveedor":
-                        localStorage.setItem("razonSocial", razonSocial.value);
-                        localStorage.setItem("nif", nif.value);
-                        localStorage.setItem("correo", correo.value);
-                        localStorage.setItem("telefono", telefono.value);
-                        localStorage.setItem("direccion", direccion.value);
-                        localStorage.setItem("tipoUsuario", "proveedor");
-                        break;
-
-                    default:
-                        msgIncorrecto.setAttribute("class", "flex");
-                        break;
-                }
-            } else {
-                msgIncorrecto.setAttribute("class", "flex");
-            }
-
-            window.location.href = "../../src/index.html";
-        }
-    } catch (error) {
-        console.log(
-            `No hay una respuesta válida por parte del servidor: ${error}`
-        );
-    }
+    return true;
 }
