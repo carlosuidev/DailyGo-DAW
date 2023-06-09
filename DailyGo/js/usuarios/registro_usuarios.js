@@ -295,14 +295,6 @@ function validarTerminos() {
 
 function peticionCrearUsuario() {
     try {
-        console.log(correoComprobadoBaseDatos)
-        console.log(correoValidado)
-        console.log(contraValidada)
-        console.log(nombreValidado)
-        console.log(apellidoValidado)
-        console.log(telefonoValidado)
-        console.log(telefonoComprobadoBaseDatos)
-        console.log(terminosValidados)
         if (
             correoComprobadoBaseDatos == true &&
             correoValidado == true &&

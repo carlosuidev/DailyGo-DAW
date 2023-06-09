@@ -10,6 +10,9 @@ const hero = document.getElementById("hero-proveedor");
 const nombreProducto = document.getElementById("nombreProducto");
 const imagenSubidaUsuario = document.getElementById("imagenSubidaUsuario");
 const precioUnitario = document.getElementById("precioUnitario");
+const nuevoNombre = document.getElementById("nuevoNombre");
+const nuevoPrecio = document.getElementById("nuevoPrecio");
+const nuevaImg = document.getElementById("nuevaImg");
 
 const ocultoImagen = document.getElementById("ocultoImagen");
 const ocultoNombre = document.getElementById("ocultoNombre");
@@ -19,11 +22,19 @@ const ocultoBorrar = document.getElementById("ocultoBorrar");
 const msgImagen = document.getElementById("msgImagen");
 const msgNombreProducto = document.getElementById("msgNombreProducto");
 const msgPrecioUnitario = document.getElementById("msgPrecioUnitario");
+const msgImagenNueva = document.getElementById("msgImagenNueva");
+const msgNuevoProductoPrecio = document.getElementById("msgNuevoProductoPrecio");
+const msgNombreNuevoProducto = document.getElementById("msgNombreNuevoProducto");
+
 
 
 const correctoDatos = document.getElementById("correctoDatos");
 const incorrectoDatos = document.getElementById("incorrectoDatos");
+const correctoDatosInsert = document.getElementById("correctoDatosInsert");
+const incorrectoDatosInsert = document.getElementById("incorrectoDatosInsert");
 
+
+const btnCrearProducto = document.getElementById("btnCrearProducto");
 const btnNombreProducto = document.getElementById("btnNombreProducto");
 const btnPrecioUnitario = document.getElementById("btnPrecioUnitario");
 const btnImagen = document.getElementById("btnImagen");
@@ -34,10 +45,18 @@ const btnBorrarProducto = document.getElementById("btnBorrarProducto");
 let validarImagenTrue = '';
 let validarNombre = '';
 let precioUnitarioValidado = '';
+let validacionImagenNueva = '';
+let validarNombreNuevo = '';
+let validarPrecioNuevo = '';
 
 function mostrarDatos() {
     btnImagen.addEventListener("click", cambiarImagen)
     imagenSubidaUsuario.addEventListener("change", validarImagen);
+
+    nuevaImg.addEventListener("input", validarImagenNueva)
+    nuevoNombre.addEventListener("input", validarNuevoProducto)
+    nuevoPrecio.addEventListener("input", validarNuevoProductoPrecioUnitario)
+    btnCrearProducto.addEventListener("click", anhadirProducto)
 
     btnNombreProducto.addEventListener("click", cambiarNombreProducto);
     nombreProducto.addEventListener("input", validarNombreProducto);
@@ -128,6 +147,32 @@ function validarImagen() {
     }
 }
 
+function validarImagenNueva() {
+    const expImagen = /\.(jpg)/i;
+    if (expImagen.test(nuevaImg.value)) {
+        nuevaImg.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+        msgImagenNueva.setAttribute("class", "hidden");
+        validacionImagenNueva = true;
+    } else {
+        nuevaImg.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+        msgImagenNueva.setAttribute("class", "flex");
+        validacionImagenNueva = false;
+    }
+}
+
+function validarNuevoProducto() {
+    const expProducto = /^[\wñÑÁáÉéÍíÓóÚú.,:;"'¡¿\s]{2,200}$/i;
+    if (expProducto.test(nuevoNombre.value)) {
+        nuevoNombre.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+        msgNombreNuevoProducto.setAttribute("class", "hidden");
+        validarNombreNuevo = true;
+    } else {
+        nuevoNombre.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+        msgNombreNuevoProducto.setAttribute("class", "flex");
+        validarNombreNuevo = false;
+    }
+}
+
 function validarNombreProducto() {
     const expProducto = /^[\wñÑÁáÉéÍíÓóÚú.,:;"'¡¿\s]{2,200}$/i;
     if (expProducto.test(nombreProducto.value)) {
@@ -154,8 +199,21 @@ function validarPrecioUnitario() {
     }
 }
 
+function validarNuevoProductoPrecioUnitario() {
+    const expPrecio = /^(\d{1,3})(\.\d{1,2})?$/i;
+    if (expPrecio.test(nuevoPrecio.value)) {
+        nuevoPrecio.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+        msgNuevoProductoPrecio.setAttribute("class", "hidden");
+        validarPrecioNuevo = true;
+    } else {
+        nuevoPrecio.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+        msgNuevoProductoPrecio.setAttribute("class", "flex");
+        validarPrecioNuevo = false;
+    }
+}
+
 function actualizarDatos(ruta, datos) {
-    if(productosIniciales.value == "-"){
+    if (productosIniciales.value == "-") {
         return false;
     }
 
@@ -179,7 +237,7 @@ function actualizarDatos(ruta, datos) {
                     setTimeout(function () {
                         correctoDatos.setAttribute("class", "hidden");
                     }, 3000);
-                    
+
                     break;
                 case "precioActualizado":
                     correctoDatos.setAttribute("class", "flex");
@@ -218,7 +276,7 @@ function cambiarPrecioUnitario() {
 }
 
 function cambiarImagen() {
-    if(productosIniciales.value == "-"){
+    if (productosIniciales.value == "-") {
         return false;
     }
 
@@ -253,33 +311,37 @@ function cambiarImagen() {
     }
 }
 
-function borrarProducto(){
+function borrarProducto() {
 
-    if(productosIniciales.value == "-"){
+    if (productosIniciales.value == "-") {
         return false;
     }
 
     const data = {
-        'id': productosIniciales.value
+        'idBorrar': productosIniciales.value,
     }
 
-    fetch('../../php/proveedores/cambiar_imagen_producto.php', {
+    fetch('../../php/proveedores/modificar_productos.php', {
         method: 'POST',
-        body: data
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json"
+        }
     })
         .then(response => {
             if (response.ok) {
-                console.log('Datos enviados con éxito');
                 return response.text();
             } else {
                 console.log('Error al enviar los datos');
             }
         })
         .then(data => {
-            if (data == 'Imagen guardada correctamente') {
+            console.log(data)
+            if (data == 'ProductoBorradoImagenBorrada') {
                 correctoDatos.setAttribute("class", "flex");
                 setTimeout(function () {
                     correctoDatos.setAttribute("class", "hidden");
+                    location.reload();
                 }, 3000);
             }
         })
@@ -288,35 +350,43 @@ function borrarProducto(){
         });
 }
 
-// function guardarImagenBanner() {
-//     if (validacionBanner) {
-//         var archivo = banner.files[0]
-//         var formData = new FormData();
-//         formData.append('imagen', archivo);
-//         formData.append('cif', localStorage.getItem("cif"))
-//         fetch('../../php/proveedores/actualizar_banner_proveedores.php', {
-//             method: 'POST',
-//             body: formData
-//         })
-//             .then(response => {
-//                 if (response.ok) {
-//                     console.log('Datos enviados con éxito');
-//                     return response.text();
-//                 } else {
-//                     console.log('Error al enviar los datos');
-//                 }
-//             })
-//             .then(data => {
-//                 console.log(data)
-//                 if (data == 'Imagen guardada correctamente') {
-//                     correctoDatos.setAttribute("class", "flex");
-//                     setTimeout(function () {
-//                         correctoDatos.setAttribute("class", "hidden");
-//                     }, 3000);
-//                 }
-//             })
-//             .catch(error => {
-//                 console.log('Error en la solicitud:', error);
-//             });
-//     }
-// }
+function anhadirProducto() {
+    if (validacionImagenNueva == true && validarNombreNuevo == true && validarPrecioNuevo == true) {
+        var archivo = nuevaImg.files[0];
+        var formData = new FormData();
+        formData.append('imagen', archivo);
+        formData.append('nombre', nuevoNombre.value)
+        formData.append('precio', nuevoPrecio.value)
+        formData.append('cif', cif)
+        fetch('../../php/proveedores/nuevo_producto.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Datos enviados con éxito');
+                    return response.text();
+                } else {
+                    console.log('Error al enviar los datos');
+                }
+            })
+            .then(data => {
+
+                if (data == 'InsertCorrecto') {
+                    correctoDatosInsert.setAttribute("class", "flex");
+                    setTimeout(function () {
+                        correctoDatosInsert.setAttribute("class", "hidden");
+                        location.reload();
+                    }, 1000);
+                }else{
+                    incorrectoDatosInsert.setAttribute("class", "flex");
+                    setTimeout(function () {
+                        incorrectoDatosInsert.setAttribute("class", "hidden");
+                    }, 3000);
+                }
+            })
+            .catch(error => {
+                console.log('Error en la solicitud:', error);
+            });
+    }
+}

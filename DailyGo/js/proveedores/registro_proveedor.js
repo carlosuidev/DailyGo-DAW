@@ -368,17 +368,6 @@ function validarTerminos() {
 
 function peticionCrearUsuario() {
     try {
-        console.log(nifValidado)
-        console.log(razonSocialValidada)
-        console.log(nifExistenteBaseDatos)
-        console.log(direccionValidada)
-        console.log(telefonoValidado)
-        console.log(telefonoExistenteBaseDatos)
-        console.log(correoValidado)
-        console.log(correoExistenteBaseDatos)
-        console.log(contrasenaValidada)
-        console.log(confirmarContrasenaValidada)
-        console.log(terminosValidados)
 
         if (
             nifValidado == true &&

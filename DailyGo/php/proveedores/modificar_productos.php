@@ -66,4 +66,28 @@ if (isset($data["producIni"])) {
     } catch (Exception $err) {
         echo $err;
     }
-}
+} else if (isset($data["idBorrar"])) {
+    $id = $data["idBorrar"];
+    $imagen = '../../img_bbdd\productos\\' . $id . '.jpg'; // Ruta completa de la imagen que deseas borrar
+    $conexion = mysqli_connect("localhost", "root", "", "dailygo");
+    $arrayProductos = [];
+    mysqli_select_db($conexion, "dailygo") or die("No se puede seleccionar la BD");
+    /* Lazo la consulta sobre la BD*/
+    try {
+        mysqli_query($conexion, "DELETE FROM productos where COD_PROD = $id");
+        echo 'ProductoBorrado';
+        // Verificar si el archivo existe antes de intentar eliminarlo
+        if (file_exists($imagen)) {
+            // Intentar eliminar el archivo
+            if (unlink($imagen)) {
+                echo 'ImagenBorrada';
+            } else {
+                echo 'No se pudo borrar la imagen.';
+            }
+        } else {
+            echo 'El archivo de imagen no existe.';
+        }
+    } catch (Exception $err) {
+        echo $err;
+    }
+} 
