@@ -86,7 +86,7 @@ function crearFila(element){
     const accion = document.createElement("td");
     accion.setAttribute("class", "px-5 py-3 text-sm");
     accion.innerHTML = `
-        <button class='text-white duration-300 bg-red-500 w-5 h-5 flex justify-center items-center rounded-full hover:bg-red-600 text-sm p-1 text-center' onclick='borrarProducto(${element.COD_PROD})'>x</button>
+        <button class='text-white pb-2 duration-300 bg-red-500 w-5 h-5 flex justify-center items-center rounded-full hover:bg-red-600 text-sm p-1 text-center' onclick='borrarProducto(${element.COD_PROD})'>x</button>
     `;
     fila.appendChild(accion);
 

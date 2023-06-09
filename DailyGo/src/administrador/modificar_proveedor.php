@@ -1,12 +1,13 @@
 <?php
-if(isset($_POST['id'])){
-    $id = $_POST['id'];
-    $nombre = $_POST['nombre'];
-    $apellidos = $_POST['apellidos'];
+if(isset($_POST['cif'])){
+    $cif = $_POST['cif'];
+    $razon = $_POST['razon'];
+    $direccion = $_POST['direccion'];
+    $categoria = $_POST['categoria'];
     $mail = $_POST['mail'];
     $telefono = $_POST['telefono']; 
 }else{
-    header("Location: clientes.html");
+    header("Location: riders.html");
 }
 ?>
 <!DOCTYPE html>
@@ -90,31 +91,45 @@ if(isset($_POST['id'])){
     <section class="lg:py-24 md:py-16 py-12">
         <div class="container mx-auto p-5 lg:p-0 md:p-5">
             <div class="flex gap-2 text-sm mb-3 text-blue-100">
-                <a href="clientes.html" class="underline">Gestión de clientes</a>
-                <p>> Modificar usuario</p>
+                <a href="proveedores.html" class="underline">Gestión de proveedores</a>
+                <p>> Modificar proveedor</p>
             </div>
-            <h3 class="font-bold">Modificar usuario</h3>
+            <h3 class="font-bold">Modificar proveedor</h3>
             <hr class="my-5">
             <div id="msgCorrecto" class="hidden">
                 <p class="mt-10 bg-green-200 text-green-700 text-center py-3 rounded">
                     Se ha actualizado la información correctamente
                 </p>
             </div>
-            
+            <div class="bg-indigo-600 w-full mt-10 rounded-lg"
+            style="background-image: url('../../img_bbdd/fondos/<?php echo $cif ?>.jpg');
+        background-position: center;
+        background-size: cover;">
+                <div class="w-1/2 bg-indigo-600/75 px-5 p-8 rounded-lg flex flex-wrap gap-3 items-center">
+                <div class="border rounded-full h-16 w-16"
+                    style="background-image: url('../../img_bbdd/proveedores/<?php echo $cif ?>.jpg');
+                    background-position: center;
+                    background-size: cover;"></div>
+                    <div>
+                        <h4 class="font-bold"><?php echo $razon ?></h4>
+                        <p class="text-white/75"><?php echo $categoria ?></p>
+                    </div>
+                </div>
+            </div>
             <div class="mt-10 flex gap-8 flex-wrap">
-                <input type="hidden" id="codigo" value="<?php echo $id ?>">
+                <input type="hidden" id="cif" value="<?php echo $cif ?>">
                 <form class="flex flex-col">
-                    <label for="nombre" class="text-sm mb-3">Nombre:</label>
+                    <label for="nombre" class="text-sm mb-3">Razón social:</label>
                     <div class="flex gap-2">
-                        <input type="text" name="nombre" id="nombre" value="<?php echo $nombre ?>" class="w-fit p-2 rounded bg-blue-800 border border-blue-500 duration-300 focus:border-blue-200">
-                        <input type="button" id="btnNombre" value="✅" class="p-2 cursor-pointer bg-green-500 rounded hover:bg-green-600 duration-300">
+                        <input type="text" name="razon" id="razon" value="<?php echo $razon ?>" class="w-fit p-2 rounded bg-blue-800 border border-blue-500 duration-300 focus:border-blue-200">
+                        <input type="button" id="btnRazon" value="✅" class="p-2 cursor-pointer bg-green-500 rounded hover:bg-green-600 duration-300">
                     </div>
                 </form>
                 <form class="flex flex-col">
-                    <label for="apellidos" class="text-sm mb-3">Apellidos:</label>
+                    <label for="direccion" class="text-sm mb-3">Dirección:</label>
                     <div class="flex gap-2">
-                        <input type="text" name="apellidos" id="apellidos" value="<?php echo $apellidos ?>" class="w-fit p-2 rounded bg-blue-800 border border-blue-500 duration-300 focus:border-blue-200">
-                        <input type="button" id="btnApellidos" value="✅" class="p-2 cursor-pointer bg-green-500 rounded hover:bg-green-600 duration-300">
+                        <input type="text" name="direccion" id="direccion" value="<?php echo $direccion ?>" class="w-fit p-2 rounded bg-blue-800 border border-blue-500 duration-300 focus:border-blue-200">
+                        <input type="button" id="btnDireccion" value="✅" class="p-2 cursor-pointer bg-green-500 rounded hover:bg-green-600 duration-300">
                     </div>
                 </form>
                 <form class="flex flex-col">
@@ -131,11 +146,20 @@ if(isset($_POST['id'])){
                         <input type="button" id="btnTelefono" value="✅" class="p-2 cursor-pointer bg-green-500 rounded hover:bg-green-600 duration-300">
                     </div>
                 </form>
+                <form class="flex flex-col">
+                    <label for="categoria" class="text-sm mb-3">Categoría:</label>
+                    <div class="flex gap-2">
+                        <select id="categoria" class="w-fit p-2 rounded bg-blue-800 border border-blue-500 duration-300 focus:border-blue-200">
+                            <!--LISTAR CATEGORIAS-->
+                        </select>
+                        <input type="button" id="btnCategoria" value="✅" class="p-2 cursor-pointer bg-green-500 rounded hover:bg-green-600 duration-300">
+                    </div>
+                </form>
             </div>
         </div>
     </section>
 </body>
-<script src="../../js/administrador/updates/modificar_cliente.js"></script>
+<script src="../../js/administrador/updates/modificar_rider.js"></script>
 <script src="../../js/global/cerrar_sesion.js"></script>
 <script src="../../js/administrador/gestion_sesiones.js"></script>
 <script src="../../js/global/navbar.js"></script>

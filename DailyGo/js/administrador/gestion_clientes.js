@@ -1,19 +1,19 @@
-document.addEventListener("DOMContentLoaded", iniciarRiders);
+document.addEventListener("DOMContentLoaded", iniciarClientes);
 
 const buscar = document.getElementById("buscar");
-const listadoRiders = document.getElementById("listadoRiders");
+const listadoClientes = document.getElementById("listadoClientes");
 
-function iniciarRiders(){
-    listarRiders();
-    buscar.addEventListener("input", listarRiders);
+function iniciarClientes(){
+    listarClientes();
+    buscar.addEventListener("input", listarClientes);
 }
 
-function borrarRider(id){
+function borrarCliente(id){
     const datos = {
         id: id
     }
 
-    fetch("../../php/admin/borrar_rider.php", {
+    fetch("../../php/admin/borrar_cliente.php", {
         method: "POST",
         body: JSON.stringify(datos),
         headers: {
@@ -23,7 +23,7 @@ function borrarRider(id){
         .then(response => response.text())
         .then(data => {
             if(data == "Borrado"){
-                listarRiders();
+                listarClientes();
             }else{
                 console.log(data.msg);
             }
@@ -33,12 +33,12 @@ function borrarRider(id){
         });
 }
 
-function listarRiders(){
+function listarClientes(){
     const datos = {
         buscar: buscar.value
     }
 
-    fetch("../../php/admin/listar_riders.php", {
+    fetch("../../php/admin/listar_clientes.php", {
         method: "POST",
         body: JSON.stringify(datos),
         headers: {
@@ -48,10 +48,10 @@ function listarRiders(){
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            listadoRiders.innerHTML = "";
+            listadoClientes.innerHTML = "";
             if(data.msg == undefined){
                 data.forEach(element => {
-                    listadoRiders.appendChild(crearFila(element));
+                    listadoClientes.appendChild(crearFila(element));
                 });
             }
             
@@ -66,38 +66,38 @@ function crearFila(element){
     
     const id = document.createElement("td");
     id.setAttribute("class", "px-5 py-3 font-bold");
-    id.textContent = element.DNI_RID;
+    id.textContent = element.COD_CLI;
     fila.appendChild(id);
 
     const nombre = document.createElement("td");
     nombre.setAttribute("class", "px-5 py-3 text-sm");
-    nombre.textContent = element.NOM_RID+" "+element.APE_RID;
+    nombre.textContent = element.NOM_CLI+" "+element.APE_CLI;
     fila.appendChild(nombre);
 
     const telefono = document.createElement("td");
     telefono.setAttribute("class", "px-5 py-3 text-sm");
-    telefono.innerHTML = element.TLF_RID;
+    telefono.innerHTML = element.TLF_CLI;
     fila.appendChild(telefono);
 
     const mail = document.createElement("td");
     mail.setAttribute("class", "px-5 py-3 text-sm");
-    mail.textContent = element.MAIL_RID;
+    mail.textContent = element.MAIL_CLI;
     fila.appendChild(mail);
 
     const accion = document.createElement("td");
     accion.setAttribute("class", "px-5 text-sm flex gap-2 lg:pt-3 mb:pt-3 pt-8");
     accion.innerHTML = `
-        <form action='modificar_rider.php' method='post'>
-            <input type='hidden' name='dni' value='${element.DNI_RID}'>
-            <input type='hidden' name='nombre' value='${element.NOM_RID}'>
-            <input type='hidden' name='apellidos' value='${element.APE_RID}'>
-            <input type='hidden' name='telefono' value='${element.TLF_RID}'>
-            <input type='hidden' name='mail' value='${element.MAIL_RID}'>
+        <form action='modificar_cliente.php' method='post'>
+            <input type='hidden' name='id' value='${element.COD_CLI}'>
+            <input type='hidden' name='nombre' value='${element.NOM_CLI}'>
+            <input type='hidden' name='apellidos' value='${element.APE_CLI}'>
+            <input type='hidden' name='telefono' value='${element.TLF_CLI}'>
+            <input type='hidden' name='mail' value='${element.MAIL_CLI}'>
             <button type='submit' class='text-white duration-300 bg-yellow-500 w-5 h-5 flex justify-center items-center rounded-full hover:bg-yellow-600 text-sm p-1 text-center''>
                 <img src='../../assets/svg/modificar.svg'>
             </button>
         </form>
-        <button class='text-white pb-3 duration-300 bg-red-500 w-5 h-5 flex justify-center items-center rounded-full hover:bg-red-600 text-sm p-2 text-center' onclick="borrarRider('${element.DNI_RID}')">x</button>
+        <button class='text-white pb-3 duration-300 bg-red-500 w-5 h-5 flex justify-center items-center rounded-full hover:bg-red-600 text-sm p-2 text-center' onclick='borrarCliente(${element.COD_CLI})'>x</button>
     `;
     fila.appendChild(accion);
 
