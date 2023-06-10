@@ -49,15 +49,17 @@ if (isset($data["nombre"])) {
 } else if (isset($data["contrasenaActual"])) {
     $contraActual = $data["contrasenaActual"];
     $contraNueva = $data["contrasenaNueva"];
+    $hashActual = hash('sha256', $contraActual);
+    $hashNueva = hash('sha256', $contraNueva);
     $dni = $data["dni"];
     $conexion = mysqli_connect("localhost", "root", "", "dailygo");
     mysqli_select_db($conexion, "dailygo") or die("No se puede seleccionar la BD");
     /* Lazo la consulta sobre la BD*/
     try {
-        $datos = mysqli_query($conexion, "SELECT NOM_RID from riders where DNI_RID = '$dni' and PW_RID = '$contraActual'");
+        $datos = mysqli_query($conexion, "SELECT NOM_RID from riders where DNI_RID = '$dni' and PW_RID = '$hashActual'");
         $numr = mysqli_num_rows($datos);
         if ($numr != 0) {
-            mysqli_query($conexion, "UPDATE riders SET PW_RID = '$contraNueva' where DNI_RID = '$dni'");
+            mysqli_query($conexion, "UPDATE riders SET PW_RID = '$hashNueva' where DNI_RID = '$dni'");
             echo 'actualizadoContra';
         } else {
             echo 'contraExiste';

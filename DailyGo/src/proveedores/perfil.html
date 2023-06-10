@@ -163,6 +163,19 @@
                         </div>
                     </div>
                     <div class="flex flex-col mb-5">
+                        <label for="tiempo" class="mb-2">Tiempo promedio:</label>
+                        <div class="flex gap-2">
+                            <input type="input" name="tiempo" id="tiempo"
+                                class="rounded-md border border-blue-100 focus:border-blue-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300">
+                            <input type="button" id="btnTiempo"
+                                class="duration-300 text-white bg-green-500 rounded-md font-semibold hover:bg-green-600 py-2 px-3 cursor-pointer"
+                                value="✅"></input>
+                        </div>
+                        <div class="hidden" id="msgTiempo">
+                            <small class="text-xs text-red-500 mt-2">Tiempo incorrecto</small>
+                        </div>
+                    </div>
+                    <div class="flex flex-col mb-5">
                         <label for="perfil" class="mb-2">Imagen de perfil:</label>
                         <div class="flex gap-2">
                             <input type="file" name="perfil" id="perfil"
@@ -188,6 +201,7 @@
                             <small class="text-xs text-red-500 mt-2">Solo admitimos imagenes en jpg</small>
                         </div>
                     </div>
+
                 </div>
                 <div class="bg-white shadow-lg border rounded-lg p-5 lg:mt-0 mt-12">
                     <h4 class="font-bold mb-1.5">Actualizar contraseña</h4>
@@ -223,7 +237,7 @@
                         </div>
                         <input type="button" id="btnContrasena"
                             class="duration-300 text-white bg-indigo-700 rounded-md mt-3 font-semibold hover:bg-indigo-800 py-2 w-full cursor-pointer"
-                            value="Actualizar contraseña" /> 
+                            value="Actualizar contraseña" />
                     </form>
                 </div>
             </div>

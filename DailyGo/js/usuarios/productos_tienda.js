@@ -48,7 +48,7 @@ function mostrarProductos() {
 
     console.log(datos)
 
-    fetch("../../php/listar_productos_tienda.php", {
+    fetch("../../php/usuarios/listar_productos_tienda.php", {
         method: "POST",
         body: JSON.stringify(datos),
         headers: {

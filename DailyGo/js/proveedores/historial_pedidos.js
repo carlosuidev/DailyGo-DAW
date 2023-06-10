@@ -22,7 +22,7 @@ function mostrarHistorial() {
     }
 
 
-    fetch("../../php/proveedor/historial_pedidos.php", {
+    fetch("../../php/proveedores/historial_pedidos.php", {
         method: "POST",
         body: JSON.stringify(datos),
         headers: {

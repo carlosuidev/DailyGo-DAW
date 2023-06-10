@@ -60,11 +60,11 @@ function iniciarEventos() {
 
 function validarCorreo() {
     try {
-        const expCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
+        const expCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
         if (expCorreo.test(correo.value)) {
             xhrCorreo.onreadystatechange = respuestaExisteCorreo;
-            xhrCorreo.open("POST", "../php/registro_usuario.php", true);
+            xhrCorreo.open("POST", "../php/usuarios/registro_usuario.php", true);
             xhrCorreo.setRequestHeader(
                 "Content-type",
                 "application/x-www-form-urlencoded"
@@ -226,7 +226,7 @@ function validarTelefono() {
 
         if (expTelefono.test(telefono.value)) {
             xhrTelefono.onreadystatechange = respuestaExisteTelefono;
-            xhrTelefono.open("POST", "../php/registro_usuario.php", true);
+            xhrTelefono.open("POST", "../php/usuarios/registro_usuario.php", true);
             xhrTelefono.setRequestHeader(
                 "Content-type",
                 "application/x-www-form-urlencoded"
@@ -305,9 +305,8 @@ function peticionCrearUsuario() {
             telefonoComprobadoBaseDatos == true  &&
             terminosValidados == true
         ) {
-            console.log("Se mete por 2")
             xhrNuevoUsuario.onreadystatechange = respuestaCrearUsuario;
-            xhrNuevoUsuario.open("POST", "../php/registro_usuario.php", true);
+            xhrNuevoUsuario.open("POST", "../php/usuarios/registro_usuario.php", true);
             xhrNuevoUsuario.setRequestHeader(
                 "Content-type",
                 "application/x-www-form-urlencoded"

@@ -50,14 +50,16 @@ if (isset($data["razSoc"])) {
     $contraActual = $data["contrasenaActual"];
     $contraNueva = $data["contrasenaNueva"];
     $cif = $data["cif"];
+    $hashActual = hash('sha256', $contraActual);
+    $hashNueva = hash('sha256', $contraNueva);
     $conexion = mysqli_connect("localhost", "root", "", "dailygo");
     mysqli_select_db($conexion, "dailygo") or die("No se puede seleccionar la BD");
     /* Lazo la consulta sobre la BD*/
     try {
-        $datos = mysqli_query($conexion, "SELECT RAZSOC from proveedores where CIF_PROV = '$cif' and PW_PROV = '$contraActual'");
+        $datos = mysqli_query($conexion, "SELECT RAZSOC from proveedores where CIF_PROV = '$cif' and PW_PROV = '$hashActual'");
         $numr = mysqli_num_rows($datos);
         if ($numr != 0) {
-            mysqli_query($conexion, "UPDATE proveedores SET PW_PROV = '$contraNueva' where CIF_PROV = '$cif'");
+            mysqli_query($conexion, "UPDATE proveedores SET PW_PROV = '$hashNueva' where CIF_PROV = '$cif'");
             echo 'actualizadoContra';
         } else {
             echo 'contraExiste';
@@ -72,7 +74,7 @@ if (isset($data["razSoc"])) {
     mysqli_select_db($conexion, "dailygo") or die("No se puede seleccionar la BD");
     /* Lazo la consulta sobre la BD*/
     try {
-        $datos = mysqli_query($conexion, "SELECT valoraciones from proveedores where CIF_PROV != '$cif' and MAIL_PROV = '$correo'");
+        $datos = mysqli_query($conexion, "SELECT tiempo from proveedores where CIF_PROV != '$cif' and MAIL_PROV = '$correo'");
         $numr = mysqli_num_rows($datos);
         if ($numr == 0) {
             mysqli_query($conexion, "UPDATE proveedores SET MAIL_PROV = '$correo' where CIF_PROV = '$cif'");
@@ -81,7 +83,7 @@ if (isset($data["razSoc"])) {
             echo 'mailExiste';
         }
     } catch (Exception $err) {
-        echo 'Fallo';
+        echo $err;
     }
 } else if (isset($data["cat"])) {
     $categorias = [];
@@ -143,8 +145,34 @@ if (isset($data["razSoc"])) {
     } catch (Exception $err) {
         echo $err;
     }
+} else if (isset($data["time"])) {
+    $cif = $data["cif"];
+    $conexion = mysqli_connect("localhost", "root", "", "dailygo");
+    $arrayTime = [];
+    mysqli_select_db($conexion, "dailygo") or die("No se puede seleccionar la BD");
+    /* Lazo la consulta sobre la BD*/
+    try {
+        $datos = mysqli_query($conexion, "SELECT tiempo as timeto from proveedores where CIF_PROV = '$cif'");
+        $numr = mysqli_num_rows($datos);
+        if ($numr != 0) {
+            while ($data = mysqli_fetch_assoc($datos)) {
+                array_push($arrayTime,  $data);
+            }
+            echo json_encode($arrayTime);
+        }
+    } catch (Exception $err) {
+        echo $err;
+    }
+}else if (isset($data["tiempoCambiante"])) {
+    $cif = $data["cif"];
+    $tiempo = $data["tiempoCambiante"];
+    $conexion = mysqli_connect("localhost", "root", "", "dailygo");
+    mysqli_select_db($conexion, "dailygo") or die("No se puede seleccionar la BD");
+    /* Lazo la consulta sobre la BD*/
+    try {
+        mysqli_query($conexion, "UPDATE proveedores set tiempo = $tiempo where cif_prov = '$cif'");
+        echo "tiempoCambiado";
+    } catch (Exception $err) {
+        echo $err;
+    }
 }
-
-
-
-

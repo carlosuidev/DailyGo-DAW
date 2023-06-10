@@ -8,6 +8,7 @@ const coordenadas = document.getElementById("coord");
 const direccion = document.getElementById("direc");
 const telefono = document.getElementById("telefono");
 const correo = document.getElementById("correo");
+const tiempo = document.getElementById("tiempo");
 const contrasenaActual = document.getElementById("contrasena");
 const contrasenaNueva = document.getElementById("contrasenaNueva");
 
@@ -21,6 +22,9 @@ const msgCorreo = document.getElementById("msgCorreo");
 const msgTelefonoExiste = document.getElementById("msgTelefonoExiste");
 const msgCorreoExiste = document.getElementById("msgCorreoExiste");
 const msgContrasenaNueva = document.getElementById("msgContrasenaNueva");
+const msgTiempo = document.getElementById("msgTiempo");
+
+
 
 const correctoDatos = document.getElementById("correctoDatos");
 const incorrectoDatos = document.getElementById("incorrectoDatos");
@@ -36,6 +40,7 @@ const btnCorreo = document.getElementById("btnCorreo");
 const btnBanner = document.getElementById("btnBanner");
 const btnContrasena = document.getElementById("btnContrasena");
 const btnPerfil = document.getElementById("btnPerfil");
+const btnTiempo = document.getElementById("btnTiempo");
 
 //
 let validacionRazsoc = '';
@@ -47,6 +52,7 @@ let validacionContrasenhaAntigua = '';
 let validacionContrasenhaNueva = '';
 let validacionPerfil = '';
 let validacionBanner = '';
+let validacionTiempo = '';
 
 function iniciarPerfil() {
     mostrarDatos();
@@ -59,6 +65,7 @@ function iniciarPerfil() {
     correo.addEventListener("input", validarCorreo);
     banner.addEventListener("change", validarImagenBanner);
     contrasenaNueva.addEventListener("input", validarContrasena);
+    tiempo.addEventListener("input", validarTiempo)
 
     btnRazsoc.addEventListener("click", cambiarRazsoc);
     btnCoord.addEventListener("click", cambiarCoordenadas);
@@ -68,6 +75,7 @@ function iniciarPerfil() {
     btnContrasena.addEventListener("click", cambiarContrasena);
     btnPerfil.addEventListener("click", guardarImagen);
     btnBanner.addEventListener("click", guardarImagenBanner);
+    btnTiempo.addEventListener("click", cambiarTiempo)
 }
 
 function mostrarDatos() {
@@ -117,6 +125,32 @@ function mostrarDatos() {
             });
 
         })
+    datosTiempo = {
+        'time': 'time',
+        'cif': localStorage.getItem("cif")
+    }
+    fetch("../../php/proveedores/actualizar_datos_proveedores.php", {
+        method: "POST",
+        body: JSON.stringify(datosTiempo),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la solicitud');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data)
+
+            data.forEach(element => {
+                tiempo.value = element.timeto
+            });
+
+        })
+
     razsoc.value = localStorage.getItem("razonSocial");
     direccion.value = localStorage.getItem("direccion");
     telefono.value = localStorage.getItem("telefono");
@@ -124,6 +158,18 @@ function mostrarDatos() {
 }
 
 
+function validarTiempo() {
+
+    if (tiempo.value >= 10 && tiempo.value <= 90) {
+        tiempo.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+        msgTiempo.setAttribute("class", "hidden");
+        validacionTiempo = true;
+    } else {
+        tiempo.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+        msgTiempo.setAttribute("class", "flex");
+        validacionTiempo = false;
+    }
+}
 
 function validarCoordenadas() {
     const expCoord = /^[-+]?((([0-9]|[1-9][0-9]|1[0-7][0-9])(\.\d{1,8})?)|180(\.0{1,8})?),[-+]?((([0-9]|[1-9][0-9]|1[0-7][0-9])(\.\d{1,8})?)|180(\.0{1,8})?)$/;
@@ -298,6 +344,12 @@ function actualizarDatos(ruta, datos) {
                         correctoContrasena.setAttribute("class", "hidden");
                     }, 3000);
                     break;
+                case "tiempoCambiado":
+                    correctoDatos.setAttribute("class", "flex");                    
+                    setTimeout(function () {
+                        correctoDatos.setAttribute("class", "hidden");
+                    }, 3000);
+                    break;
                 case "telExiste":
                     telefono.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
                     msgTelefono.setAttribute("class", "hidden");
@@ -397,6 +449,16 @@ function cambiarCoordenadas() {
     if (validacionCoordenadas) {
         const datos = {
             'coordenadasCambiadas': coordenadas.value,
+            'cif': localStorage.getItem("cif")
+        }
+        actualizarDatos("../../php/proveedores/actualizar_datos_proveedores.php", datos);
+    }
+}
+
+function cambiarTiempo() {
+    if (validarTiempo) {
+        const datos = {
+            'tiempoCambiante': tiempo.value,
             'cif': localStorage.getItem("cif")
         }
         actualizarDatos("../../php/proveedores/actualizar_datos_proveedores.php", datos);

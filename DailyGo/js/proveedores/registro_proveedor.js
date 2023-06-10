@@ -127,7 +127,7 @@ function validarNif() {
 
         if (expNif.test(nif.value)) {
             xhrNif.onreadystatechange = respuestaExisteNif;
-            xhrNif.open("POST", "../php/registro_proveedor.php", true);
+            xhrNif.open("POST", "../php/proveedores/registro_proveedor.php", true);
             xhrNif.setRequestHeader(
                 "Content-type",
                 "application/x-www-form-urlencoded"
@@ -185,7 +185,7 @@ function validarCorreo() {
 
         if (expCorreo.test(correo.value) && correo.value.length <= 40) {
             xhrCorreo.onreadystatechange = respuestaExisteCorreo;
-            xhrCorreo.open("POST", "../php/registro_proveedor.php", true);
+            xhrCorreo.open("POST", "../php/proveedores/registro_proveedor.php", true);
             xhrCorreo.setRequestHeader(
                 "Content-type",
                 "application/x-www-form-urlencoded"
@@ -299,7 +299,7 @@ function validarTelefono() {
 
         if (expTelefono.test(telefono.value)) {
             xhrTelefono.onreadystatechange = respuestaExisteTelefono;
-            xhrTelefono.open("POST", "../php/registro_proveedor.php", true);
+            xhrTelefono.open("POST", "../php/proveedores/registro_proveedor.php", true);
             xhrTelefono.setRequestHeader(
                 "Content-type",
                 "application/x-www-form-urlencoded"
@@ -383,7 +383,7 @@ function peticionCrearUsuario() {
             terminosValidados == true
         ) {
             xhrNuevoUsuario.onreadystatechange = respuestaCrearUsuario;
-            xhrNuevoUsuario.open("POST", "../php/registro_proveedor.php", true);
+            xhrNuevoUsuario.open("POST", "../php/proveedores/registro_proveedor.php", true);
             xhrNuevoUsuario.setRequestHeader(
                 "Content-type",
                 "application/x-www-form-urlencoded"

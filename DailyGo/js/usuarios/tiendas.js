@@ -55,7 +55,7 @@ function buscarTiendas() {
 
     console.log(datos);
 
-    fetch("../../php/listar_tiendas.php", {
+    fetch("../../php/usuarios/listar_tiendas.php", {
         method: "POST",
         body: JSON.stringify(datos),
         headers: {
@@ -91,7 +91,7 @@ function tiendasTop() {
     const listadoTiendas = document.getElementById("listadoTiendas");
     listadoTiendas.innerHTML = "";
 
-    fetch("../../php/tiendas_top.php", {
+    fetch("../../php/usuarios/tiendas_top.php", {
         method: "POST",
         body: null,
         headers: {

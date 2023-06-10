@@ -77,13 +77,13 @@ function peticionEntrar() {
             
             switch (tipoUsuario) {
                 case "rider":
-                    direccionServer = "../php/inicio_sesion_rider.php";
+                    direccionServer = "../php/riders/inicio_sesion_rider.php";
                     break;
                 case "proveedor":
-                    direccionServer = "../php/inicio_sesion_proveedor.php";
+                    direccionServer = "../php/proveedores/inicio_sesion_proveedor.php";
                     break;
                 case "cliente":
-                    direccionServer = "../php/inicio_sesion_usuario.php";
+                    direccionServer = "../php/usuarios/inicio_sesion_usuario.php";
                     break;
                 default:
                     direccionServer = "...";
@@ -108,6 +108,7 @@ function peticionEntrar() {
 function respuestaEntrar() {
     try {
         if (xhrEntrar.readyState == 4 && xhrEntrar.status == 200) {
+            console.log(xhrEntrar.responseText)
             if (xhrEntrar.responseText != 'False') {
                 let jsonEntrar = JSON.parse(xhrEntrar.responseText);
                 switch (tipoUsuario) {

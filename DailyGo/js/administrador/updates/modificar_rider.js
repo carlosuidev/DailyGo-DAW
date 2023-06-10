@@ -3,59 +3,38 @@ document.addEventListener('DOMContentLoaded', iniciarPerfil);
 const nombre = document.getElementById("nombre");
 const apellidos = document.getElementById("apellidos");
 const telefono = document.getElementById("telefono");
-const correo = document.getElementById("correo");
-const contrasenaActual = document.getElementById("contrasena");
-const contrasenaNueva = document.getElementById("contrasenaNueva");
+const mail = document.getElementById("mail");
+const dni = document.getElementById("dni");
 
 const msgNombre = document.getElementById("msgNombre");
 const msgApellidos = document.getElementById("msgApellidos");
 const msgTelefono = document.getElementById("msgTelefono");
 const msgCorreo = document.getElementById("msgCorreo");
 const msgTelefonoExiste = document.getElementById("msgTelefonoExiste");
-const msgCorreoExiste = document.getElementById("msgCorreoExiste");
-const msgContrasenaNueva = document.getElementById("msgContrasenaNueva");
 
-const correctoDatos = document.getElementById("correctoDatos");
-const incorrectoDatos = document.getElementById("incorrectoDatos");
-
-const correctoContrasena = document.getElementById("correctoContrasena");
-const incorrectoContrasena = document.getElementById("incorrectoContrasena");
+const correctoDatos = document.getElementById("msgCorrecto");
 
 const btnNombre = document.getElementById("btnNombre");
 const btnApellidos = document.getElementById("btnApellidos");
 const btnTelefono = document.getElementById("btnTelefono");
-const btnCorreo = document.getElementById("btnCorreo");
-const btnContrasena = document.getElementById("btnContrasena");
+const btnMail = document.getElementById("btnMail");
 
 //
 let validacionNombre = '';
 let validacionApellidos = '';
 let validacionCorreo = '';
 let validacionTelefono = '';
-let validacionContrasenhaAntigua = '';
-let validacionContrasenhaNueva = '';
-let resNombre = '';
 
 function iniciarPerfil() {
-    mostrarDatos();
     nombre.addEventListener("input", validarNombre);
     apellidos.addEventListener("input", validarApellidos);
     telefono.addEventListener("input", validarTelefono);
-    correo.addEventListener("input", validarCorreo);
-    contrasenaNueva.addEventListener("input", validarContrasena);
+    mail.addEventListener("input", validarCorreo);
 
     btnNombre.addEventListener("click", cambiarNombre);
     btnApellidos.addEventListener("click", cambiarApellidos);
     btnTelefono.addEventListener("click", cambiarTelefono);
-    btnCorreo.addEventListener("click", cambiarCorreo);
-    btnContrasena.addEventListener("click", cambiarContrasena);
-}
-
-function mostrarDatos() {
-    nombre.value = localStorage.getItem("nombre");
-    apellidos.value = localStorage.getItem("apellidos");
-    telefono.value = localStorage.getItem("telefono");
-    correo.value = localStorage.getItem("correo");
+    btnMail.addEventListener("click", cambiarCorreo);
 }
 
 function validarNombre() {
@@ -78,7 +57,7 @@ function validarApellidos() {
         msgApellidos.setAttribute("class", "hidden");
         validacionApellidos = true;
     } else {
-        nombrapellidos.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+        apellidos.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
         msgApellidos.setAttribute("class", "flex");
         validacionApellidos = false;
     }
@@ -100,32 +79,18 @@ function validarTelefono() {
 }
 
 function validarCorreo() {
-    const expCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
-    if (expCorreo.test(correo.value)) {
-        correo.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+    const expCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (expCorreo.test(mail.value)) {
+        mail.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
         msgCorreo.setAttribute("class", "hidden");
         msgCorreoExiste.setAttribute("class", "hidden");
         validacionCorreo = true;
 
     } else {
-        correo.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+        mail.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
         msgCorreo.setAttribute("class", "flex");
         msgCorreoExiste.setAttribute("class", "hidden");
         validacionCorreo = false;
-    }
-}
-
-function validarContrasena() {
-    const expContrasena =
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$/;
-    if (expContrasena.test(contrasenaNueva.value)) {
-        contrasenaNueva.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
-        msgContrasenaNueva.setAttribute("class", "hidden");
-        validacionContrasenhaNueva = true;
-    } else {
-        contrasenaNueva.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
-        msgContrasenaNueva.setAttribute("class", "flex");
-        validacionContrasenhaNueva = false;
     }
 }
 
@@ -151,28 +116,24 @@ function actualizarDatos(ruta, datos) {
                     setTimeout(function () {
                         correctoDatos.setAttribute("class", "hidden");
                     }, 3000);
-                    localStorage.setItem("nombre", nombre.value);
                     break;
                 case "actualizadoApe":
                     correctoDatos.setAttribute("class", "flex");
                     setTimeout(function () {
                         correctoDatos.setAttribute("class", "hidden");
                     }, 3000);
-                    localStorage.setItem("apellidos", apellidos.value);
                     break;
                 case "actualizadoTel":
                     correctoDatos.setAttribute("class", "flex");
                     setTimeout(function () {
                         correctoDatos.setAttribute("class", "hidden");
                     }, 3000);
-                    localStorage.setItem("telefono", telefono.value);
                     break;
                 case "actualizadoMail":
                     correctoDatos.setAttribute("class", "flex");
                     setTimeout(function () {
                         correctoDatos.setAttribute("class", "hidden");
                     }, 3000);
-                    localStorage.setItem("correo", correo.value);
                     break;
                 case "actualizadoContra":
                     correctoContrasena.setAttribute("class", "flex");
@@ -190,19 +151,14 @@ function actualizarDatos(ruta, datos) {
                     }, 3000);
                     break;
                 case "mailExiste":
-                    correo.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                    mail.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
                     msgCorreo.setAttribute("class", "hidden");
                     msgCorreoExiste.setAttribute("class", "flex");
                     setTimeout(function () {
                         correctoDatos.setAttribute("class", "hidden");
                     }, 3000);
                     break;
-                case "contraExiste":
-                    incorrectoContrasena.setAttribute("class", "flex");
-                    setTimeout(function () {
-                        incorrectoContrasena.setAttribute("class", "hidden");
-                    }, 3000);
-                    break;
+
             }
 
         })
@@ -216,9 +172,9 @@ function cambiarNombre() {
     if (validacionNombre) {
         const datos = {
             'nombre': nombre.value,
-            'id': localStorage.getItem("id")
+            'dni': dni.value
         }
-        actualizarDatos("../../php/usuarios/actualizar_datos_usuario.php", datos);
+        actualizarDatos("../../php/riders/actualizar_datos_riders.php", datos);
 
     }
 }
@@ -227,9 +183,9 @@ function cambiarApellidos() {
     if (validacionApellidos) {
         const datos = {
             'apellidos': apellidos.value,
-            'id': localStorage.getItem("id")
+            'dni': dni.value
         }
-        actualizarDatos("../../php/usuarios/actualizar_datos_usuario.php", datos);
+        actualizarDatos("../../php/riders/actualizar_datos_riders.php", datos);
 
     }
 }
@@ -238,9 +194,9 @@ function cambiarTelefono() {
     if (validacionTelefono) {
         const datos = {
             'telefono': telefono.value,
-            'id': localStorage.getItem("id")
+            'dni': dni.value
         }
-        actualizarDatos("../../php/usuarios/actualizar_datos_usuario.php", datos);
+        actualizarDatos("../../php/riders/actualizar_datos_riders.php", datos);
 
     }
 }
@@ -248,20 +204,9 @@ function cambiarTelefono() {
 function cambiarCorreo() {
     if (validacionCorreo) {
         const datos = {
-            'correo': correo.value,
-            'id': localStorage.getItem("id")
+            'correo': mail.value,
+            'dni': dni.value
         }
-        actualizarDatos("../../php/usuarios/actualizar_datos_usuario.php", datos);
-    }
-}
-
-function cambiarContrasena() {
-    if (validacionContrasenhaNueva) {
-        const datos = {
-            'contrasenaActual': contrasenaActual.value,
-            'contrasenaNueva': contrasenaNueva.value,
-            'id': localStorage.getItem("id")
-        }
-        actualizarDatos("../../php/usuarios/actualizar_datos_usuario.php", datos);
+        actualizarDatos("../../php/riders/actualizar_datos_riders.php", datos);
     }
 }

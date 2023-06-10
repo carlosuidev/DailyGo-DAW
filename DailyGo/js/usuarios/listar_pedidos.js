@@ -107,7 +107,7 @@ function valorarPedido(idPedido, nota) {
         nota: nota,
         estado: 'Valorado'
     }
-    fetch("../../php/actualizar_pedido.php", {
+    fetch("../../php/global/actualizar_pedido.php", {
         method: "POST",
         body: JSON.stringify(datos),
         headers: {
@@ -187,7 +187,7 @@ function listarPedidos() {
     const datos = {
         'id': localStorage.getItem("id")
     }
-    fetch("../../php/listar_pedidos_usuario.php", {
+    fetch("../../php/usuarios/listar_pedidos_usuario.php", {
         method: "POST",
         body: JSON.stringify(datos),
         headers: {
@@ -222,7 +222,7 @@ function listarPedidos() {
         'id': localStorage.getItem("id"),
         fecha: valorFecha
     }
-    fetch("../../php/listar_pedidos_usuario.php", {
+    fetch("../../php/usuarios/listar_pedidos_usuario.php", {
         method: "POST",
         body: JSON.stringify(datos),
         headers: {
@@ -246,7 +246,7 @@ function listarPedidosActivos() {
     const datos = {
         'id': localStorage.getItem("id")
     }
-    fetch("../../php/listar_pedidos_activos_usuario.php", {
+    fetch("../../php/usuarios/listar_pedidos_activos_usuario.php", {
         method: "POST",
         body: JSON.stringify(datos),
         headers: {

@@ -37,7 +37,7 @@ function actualizarEstado(idPedido, estado) {
         id: idPedido,
         estado: estado
     }
-    fetch("../../php/actualizar_pedido.php", {
+    fetch("../../php/global/actualizar_pedido.php", {
         method: "POST",
         body: JSON.stringify(datos),
         headers: {
@@ -160,7 +160,7 @@ function mostrarPedidos() {
     const datos = {
         cif: localStorage.getItem('cif')
     }
-    fetch("../../php/proveedor/peticiones_pedidos.php", {
+    fetch("../../php/proveedores/peticiones_pedidos.php", {
         method: "POST",
         body: JSON.stringify(datos),
         headers: {
@@ -210,7 +210,7 @@ function modificarEstado(idPedido, estado) {
         id: idPedido,
         estado: estado
     }
-    fetch("../../php/actualizar_pedido.php", {
+    fetch("../../php/global/actualizar_pedido.php", {
         method: "POST",
         body: JSON.stringify(datos),
         headers: {

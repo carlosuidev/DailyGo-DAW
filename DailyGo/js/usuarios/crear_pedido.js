@@ -71,7 +71,7 @@ function procesarPedido() {
             mensaje: mensaje.value
         }
 
-        fetch("../../php/crear_pedido.php", {
+        fetch("../../php/usuarios/crear_pedido.php", {
             method: "POST",
             body: JSON.stringify(datos),
             headers: {

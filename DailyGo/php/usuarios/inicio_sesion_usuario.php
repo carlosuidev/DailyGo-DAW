@@ -2,11 +2,12 @@
 if (isset($_POST["correo"])) {
     $correo = $_POST["correo"];
     $contra = $_POST["contrasena"];
+    $hash = hash('sha256', $contra);
     $conexion = mysqli_connect("localhost", "root", "", "dailygo");
     mysqli_select_db($conexion, "dailygo") or die("No se puede seleccionar la BD");
     $arrayParaJson = [];
     /* Lazo la consulta sobre la BD*/
-    $datos = mysqli_query($conexion, "SELECT * FROM clientes where MAIL_CLI = '$correo' and PW_CLI = '$contra'");
+    $datos = mysqli_query($conexion, "SELECT * FROM clientes where MAIL_CLI = '$correo' and PW_CLI = '$hash'");
     $numr = mysqli_num_rows($datos);
     if ($numr > 0) {
         for ($i = 0; $i < $numr; $i++) {

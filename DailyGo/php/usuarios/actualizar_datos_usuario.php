@@ -11,10 +11,10 @@ if (isset($data["nombre"])) {
     mysqli_select_db($conexion, "dailygo") or die("No se puede seleccionar la BD");
     /* Lazo la consulta sobre la BD*/
     try {
-        $datos = mysqli_query($conexion, "UPDATE clientes SET nom_cli = '$nombre' where cod_cli = $id");
+        mysqli_query($conexion, "UPDATE clientes SET nom_cli = '$nombre' where cod_cli = $id");
         echo 'actualizadoNombre';
     } catch (Exception $err) {
-        echo 'Fallo';
+        echo $err;
     }
 } else if (isset($data["apellidos"])) {
     $nombre = $data["apellidos"];
@@ -50,14 +50,17 @@ if (isset($data["nombre"])) {
     $contraActual = $data["contrasenaActual"];
     $contraNueva = $data["contrasenaNueva"];
     $id = $data["id"];
+    $hashActual = hash('sha256', $contraActual);
+    $hashNueva = hash('sha256', $contraNueva);
+
     $conexion = mysqli_connect("localhost", "root", "", "dailygo");
     mysqli_select_db($conexion, "dailygo") or die("No se puede seleccionar la BD");
     /* Lazo la consulta sobre la BD*/
     try {
-        $datos = mysqli_query($conexion, "SELECT nom_cli from clientes where cod_cli = $id and pw_cli = '$contraActual'");
+        $datos = mysqli_query($conexion, "SELECT nom_cli from clientes where cod_cli = $id and pw_cli = '$hashActual'");
         $numr = mysqli_num_rows($datos);
         if ($numr != 0) {
-            mysqli_query($conexion, "UPDATE clientes SET pw_cli = '$contraNueva' where cod_cli = $id");
+            mysqli_query($conexion, "UPDATE clientes SET pw_cli = '$hashNueva' where cod_cli = $id");
             echo 'actualizadoContra';
         } else {
             echo 'contraExiste';

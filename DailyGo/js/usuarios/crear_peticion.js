@@ -12,7 +12,7 @@ btnEnviar.onclick = function () {
                 'asunto': asunto.value,
                 'descripcion': descripcion.value,
             }
-            fetch("../../php/enviar_mensaje_usuario.php", {
+            fetch("../../php/usuarios/enviar_mensaje_usuario.php", {
                 method: "POST",
                 body: JSON.stringify(datos),
                 headers: {

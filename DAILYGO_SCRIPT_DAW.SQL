@@ -28,7 +28,7 @@ CREATE TABLE `clientes` (
     `APE_CLI` varchar(120) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Apellidos',
     `TLF_CLI` int(11) NOT NULL COMMENT 'Teléfono',
     `MAIL_CLI` varchar(80) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Correo electrónico',
-    `PW_CLI` varchar(20) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Contrasenya',
+    `PW_CLI` varchar(256) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Contrasenya',
     PRIMARY KEY (`COD_CLI`),
     UNIQUE KEY `ÚNIDCA` (`TLF_CLI`, `MAIL_CLI`)
 );
@@ -49,7 +49,7 @@ CREATE TABLE `proveedores` (
     `DIR_PROV` varchar(120) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Dirección',
     `TLF_PROV` int(11) NOT NULL COMMENT 'Teléfono',
     `MAIL_PROV` varchar(80) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Correo electrónico',
-    `PW_PROV` varchar(20) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Contraseña',
+    `PW_PROV` varchar(256) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Contraseña',
     `CATEGORIA` VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL COMMENT 'Categoría del proveedor',
     `TIEMPO` int(3) COMMENT 'Tiempo de Espera',
     `COORDENADAS` VARCHAR(30) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Coordenadas del proveedor',
@@ -71,7 +71,7 @@ CREATE TABLE `riders` (
     `APE_RID` varchar(120) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Apellidos',
     `TLF_RID` int(11) NOT NULL COMMENT 'Teléfono',
     `MAIL_RID` varchar(80) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Correo electrónico',
-    `PW_RID` varchar(20) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Contraseña',
+    `PW_RID` varchar(256) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Contraseña',
 	`ESTADO` varchar(20) CHARACTER SET utf8mb4 NOT NULL COMMENT 'Estado',
     PRIMARY KEY (`DNI_RID`)
 );
@@ -181,28 +181,29 @@ CREATE TABLE `detalle_ventas` (
 · PW_PROV -> Contraseña del proveedor
 · IMG_PROV -> imagen png del proveedor
 */
-   
+
+-- 123456Ar contraseña de los proveedores
 INSERT INTO proveedores (CIF_PROV, RAZSOC, DIR_PROV, TLF_PROV, MAIL_PROV, PW_PROV, CATEGORIA, TIEMPO, COORDENADAS) VALUES
-	('A-00000001', 'McDonalds', 'C/ Goya, 70', '604564312', 'hello@mcdonalds.com', '123456Ar', 'Hamburguesa', '20', '40.4247014,-3.679194'),
-	('A-00000002', 'Subway', 'Plaza del Carmen, 38', '643242323', 'hello@subway.com', '123456Ar', 'Sandwich', '20', '40.4185013,-3.70578'),
-	('A-00000003', 'KFC', 'C/ Goya, 68', '754353463', 'hello@kfc.com', '123456Ar', 'Americana', '30', '40.4185013,-3.7057869'),
-	('A-00000004', 'Goiko', 'Gta. de Bilbao, 3', '644231323', 'hello@goiko.com', '123456Ar', 'Hamburguesa', '40', '40.4295507,-3.70478148'),
-	('A-00000005', 'Dominos Pizza', 'C/ Juan Bravo, 62', '633343252', 'hello@dominos.com', '123456Ar', 'Pizza', '15', '40.4321243,-3.676367'),
-	('A-00000006', 'Starbucks', 'CC Islazul', '645235121', 'hello@starbucks.com', '123456Ar', 'Bebida', '20', '40.3637152,-3.7400689'),
-	('A-00000007', 'Donner Kebab', 'Av. Oporto 89', '742304344', 'hello@donner.com', '123456Ar', 'Kebab', '20', '40.3878321,-3.7341421'),
-	('A-00000008', 'Farmacia Trébol', 'Av. Oporto 57', '700331344', 'hello@ftrebol.com', '123456Ar', 'Parafarmacia', '10', '40.3863437,-3.730784'),
-	('A-00000009', 'Dunkin', 'C/ Fuencarral, 43', '643242000', 'hello@dunkin.com', '123456Ar', 'Bebida', '15', '40.423078,-3.7036909'),
-	('A-00000010', 'Carls Jr', 'C/ Gran Vía, 45', '600324143', 'hello@carls.com', '123456Ar', 'Hamburguesa', '30', '40.421043,-3.7099399'),
-	('A-00000011', 'THUNDER', 'C/ Don Felipe, 4', '711232131', 'hello@thunder.com', '123456Ar', 'Vegana', '20', '40.4245371,-3.7049399'),
-	('A-00000012', 'UDON', 'C/ Narváez, 36', '762626652', 'hello@udon.com', '123456Ar', 'Asiática', '15', '40.4207253,-3.6788594'),
-	('A-00000013', 'Taco Bell', 'CC Parque Sur', '634234411', 'hello@tacobell.com', '123456Ar', 'Mexicana', '30', '40.3383095,-3.7417939'),
-	('A-00000014', 'La Tagliatella', 'C/ O´Donell, 8', '742342423', 'hello@latagliatella.com', '123456Ar', 'Italiana', '50', '40.4214431,-3.6810026'),
-	('A-00000015', 'Manolo Bakes', 'CC Xanadú', '654535231', 'hello@manolobakes.com', '123456Ar', 'Dulce', '15', '40.2996099,-3.9287321'),
-	('A-00000016', 'Toc Toc', 'Av. de Gran Bretaña, 1', '666886848', 'hello@toctoc.com', '123456Ar', 'Asiática', '20', '40.3394641,-3.7360649'),
-	('A-00000017', 'Rodilla', 'CC Islazul', '777234213', 'hello@rodilla.com', '123456Ar', 'Sandwich', '15', '40.3637152,-3.7400689'),
-	('A-00000018', 'Aloha Poké', 'C/ de la Libertad, 17 ', '772277271', 'hello@alohapoke.com', '123456Ar', 'Vegana', '20', '40.4211408,-3.7000227'),
-	('A-00000019', 'Pizzería Carlos', 'C/ Alcalá, 238', '634302031', 'hello@pizzeriacarlos.com', '123456Ar', 'Pizza', '30', '40.4317699,-3.6595159'),
-	('A-00000020', 'OVEN', 'C/ Gran Vía, 55', '703040608', 'hello@oven.com', '123456Ar', 'Italiana', '40', '40.4215541,-3.7112035');
+	('A-00000001', 'McDonalds', 'C/ Goya, 70', '604564312', 'hello@mcdonalds.com', '2f18069f79f57ffc2f930e7153baeb9641151d25e75606a06772fa99a9adec26', 'Hamburguesa', '20', '40.4247014,-3.679194'),
+	('A-00000002', 'Subway', 'Plaza del Carmen, 38', '643242323', 'hello@subway.com', '2f18069f79f57ffc2f930e7153baeb9641151d25e75606a06772fa99a9adec26', 'Sandwich', '20', '40.4185013,-3.70578'),
+	('A-00000003', 'KFC', 'C/ Goya, 68', '754353463', 'hello@kfc.com', '2f18069f79f57ffc2f930e7153baeb9641151d25e75606a06772fa99a9adec26', 'Americana', '30', '40.4185013,-3.7057869'),
+	('A-00000004', 'Goiko', 'Gta. de Bilbao, 3', '644231323', 'hello@goiko.com', '2f18069f79f57ffc2f930e7153baeb9641151d25e75606a06772fa99a9adec26', 'Hamburguesa', '40', '40.4295507,-3.70478148'),
+	('A-00000005', 'Dominos Pizza', 'C/ Juan Bravo, 62', '633343252', 'hello@dominos.com', '2f18069f79f57ffc2f930e7153baeb9641151d25e75606a06772fa99a9adec26', 'Pizza', '15', '40.4321243,-3.676367'),
+	('A-00000006', 'Starbucks', 'CC Islazul', '645235121', 'hello@starbucks.com', '2f18069f79f57ffc2f930e7153baeb9641151d25e75606a06772fa99a9adec26', 'Bebida', '20', '40.3637152,-3.7400689'),
+	('A-00000007', 'Donner Kebab', 'Av. Oporto 89', '742304344', 'hello@donner.com', '2f18069f79f57ffc2f930e7153baeb9641151d25e75606a06772fa99a9adec26', 'Kebab', '20', '40.3878321,-3.7341421'),
+	('A-00000008', 'Farmacia Trébol', 'Av. Oporto 57', '700331344', 'hello@ftrebol.com', '2f18069f79f57ffc2f930e7153baeb9641151d25e75606a06772fa99a9adec26', 'Parafarmacia', '10', '40.3863437,-3.730784'),
+	('A-00000009', 'Dunkin', 'C/ Fuencarral, 43', '643242000', 'hello@dunkin.com', '2f18069f79f57ffc2f930e7153baeb9641151d25e75606a06772fa99a9adec26', 'Bebida', '15', '40.423078,-3.7036909'),
+	('A-00000010', 'Carls Jr', 'C/ Gran Vía, 45', '600324143', 'hello@carls.com', '2f18069f79f57ffc2f930e7153baeb9641151d25e75606a06772fa99a9adec26', 'Hamburguesa', '30', '40.421043,-3.7099399'),
+	('A-00000011', 'THUNDER', 'C/ Don Felipe, 4', '711232131', 'hello@thunder.com', '2f18069f79f57ffc2f930e7153baeb9641151d25e75606a06772fa99a9adec26', 'Vegana', '20', '40.4245371,-3.7049399'),
+	('A-00000012', 'UDON', 'C/ Narváez, 36', '762626652', 'hello@udon.com', '2f18069f79f57ffc2f930e7153baeb9641151d25e75606a06772fa99a9adec26', 'Asiática', '15', '40.4207253,-3.6788594'),
+	('A-00000013', 'Taco Bell', 'CC Parque Sur', '634234411', 'hello@tacobell.com', '2f18069f79f57ffc2f930e7153baeb9641151d25e75606a06772fa99a9adec26', 'Mexicana', '30', '40.3383095,-3.7417939'),
+	('A-00000014', 'La Tagliatella', 'C/ O´Donell, 8', '742342423', 'hello@latagliatella.com', '2f18069f79f57ffc2f930e7153baeb9641151d25e75606a06772fa99a9adec26', 'Italiana', '50', '40.4214431,-3.6810026'),
+	('A-00000015', 'Manolo Bakes', 'CC Xanadú', '654535231', 'hello@manolobakes.com', '2f18069f79f57ffc2f930e7153baeb9641151d25e75606a06772fa99a9adec26', 'Dulce', '15', '40.2996099,-3.9287321'),
+	('A-00000016', 'Toc Toc', 'Av. de Gran Bretaña, 1', '666886848', 'hello@toctoc.com', '2f18069f79f57ffc2f930e7153baeb9641151d25e75606a06772fa99a9adec26', 'Asiática', '20', '40.3394641,-3.7360649'),
+	('A-00000017', 'Rodilla', 'CC Islazul', '777234213', 'hello@rodilla.com', '2f18069f79f57ffc2f930e7153baeb9641151d25e75606a06772fa99a9adec26', 'Sandwich', '15', '40.3637152,-3.7400689'),
+	('A-00000018', 'Aloha Poké', 'C/ de la Libertad, 17 ', '772277271', 'hello@alohapoke.com', '2f18069f79f57ffc2f930e7153baeb9641151d25e75606a06772fa99a9adec26', 'Vegana', '20', '40.4211408,-3.7000227'),
+	('A-00000019', 'Pizzería Carlos', 'C/ Alcalá, 238', '634302031', 'hello@pizzeriacarlos.com', '2f18069f79f57ffc2f930e7153baeb9641151d25e75606a06772fa99a9adec26', 'Pizza', '30', '40.4317699,-3.6595159'),
+	('A-00000020', 'OVEN', 'C/ Gran Vía, 55', '703040608', 'hello@oven.com', '2f18069f79f57ffc2f930e7153baeb9641151d25e75606a06772fa99a9adec26', 'Italiana', '40', '40.4215541,-3.7112035');
 /*
  ····INSERCIÓN DE PRODUCTOS····
 · DEN_PROD -> Denominación comercial del producto
@@ -300,12 +301,14 @@ INSERT INTO productos (DEN_PROD, PU_PROD, CIF_PROV_PROD) VALUES
 · PW_CLI -> contraseña del cliente.     PPPPPPPPPP cifrar contraseñas ppppppppppp
 */
 
+-- Usuario: 123Usuario
+-- Admin: 123Admin
 INSERT INTO CLIENTES(NOM_CLI, APE_CLI, TLF_CLI, MAIL_CLI, PW_CLI)
 VALUES
-('Carlos', 'Almendros Arellano', 608694312, 'carlos@gmail.com','123Usuario'),
-('Ignacio', 'Gil Torres', 775432842, 'nacho@gmail.com','123Usuario'),
-('Gonzalo', 'Oliver Alfonso', 690787526, 'gonzalo@gmail.com','123Usuario'),
-('Admin', 'DailyGo', 000000000, 'admin@dailygo.com', '123Admin');
+('Carlos', 'Almendros Arellano', 608694312, 'carlos@gmail.com','26f193d6d05497da68733883269e4fbf86b2501df393fd56b841c29208f235ee'),
+('Ignacio', 'Gil Torres', 775432842, 'nacho@gmail.com','26f193d6d05497da68733883269e4fbf86b2501df393fd56b841c29208f235ee'),
+('Gonzalo', 'Oliver Alfonso', 690787526, 'gonzalo@gmail.com','26f193d6d05497da68733883269e4fbf86b2501df393fd56b841c29208f235ee'),
+('Admin', 'DailyGo', 000000000, 'admin@dailygo.com', '9209cbb6bc86b52f7070b8b4013b301b5053ec384608144e611052ef125b0f1f');
 
 /*
  ····INSERCIÓN DE RIDERS····
@@ -316,14 +319,15 @@ VALUES
 · PW_RID -> contraseña del rider.     PPPPPPPPPP cifrar contraseñas ppppppppppp
 */
 
+-- 123Usuario contraseña
 INSERT INTO RIDERS(DNI_RID, NOM_RID, APE_RID, TLF_RID, MAIL_RID, PW_RID, ESTADO) 
  VALUES
 ('0','Temporal', 'TEMP', 0, '-','-', '-'),
-('11234356G','Jonathan', 'Casa Pila', 765457386, 'jota@dailygo.com','123Usuario', 'Disponible'),
-('11264584L','Benito', 'Martínez Ocasio', 694957545, 'benito@dailygo.com','123Usuario', 'Desconectado'),
-('12345465X','Paula', 'Badosa Gibert', 600434523, 'paula@dailygo.com','123Usuario', 'Disponible'),
-('12222345T','Amicus', 'Echo', 666342345, 'amicus@dailygo.com','123Usuario', 'Disponible'),
-('16632387Y','Ibai', 'Llanos Garatea', 756454534, 'ibai@dailygo.com','123Usuario', 'Disponible');
+('11234356G','Jonathan', 'Casa Pila', 765457386, 'jota@dailygo.com','26f193d6d05497da68733883269e4fbf86b2501df393fd56b841c29208f235ee', 'Disponible'),
+('11264584L','Benito', 'Martínez Ocasio', 694957545, 'benito@dailygo.com','26f193d6d05497da68733883269e4fbf86b2501df393fd56b841c29208f235ee', 'Desconectado'),
+('12345465X','Paula', 'Badosa Gibert', 600434523, 'paula@dailygo.com','26f193d6d05497da68733883269e4fbf86b2501df393fd56b841c29208f235ee', 'Disponible'),
+('12222345T','Amicus', 'Echo', 666342345, 'amicus@dailygo.com','26f193d6d05497da68733883269e4fbf86b2501df393fd56b841c29208f235ee', 'Disponible'),
+('16632387Y','Ibai', 'Llanos Garatea', 756454534, 'ibai@dailygo.com','26f193d6d05497da68733883269e4fbf86b2501df393fd56b841c29208f235ee', 'Disponible');
 
 /*
  ····INSERCIÓN DE VENTAS····

@@ -76,7 +76,7 @@ function validarDni() {
 
         if (validateDNI(dni.value)) {
             xhrDNI.onreadystatechange = repuestaExisteDni;
-            xhrDNI.open("POST", "../php/registro_rider.php", true);
+            xhrDNI.open("POST", "../php/riders/registro_rider.php", true);
             xhrDNI.setRequestHeader(
                 "Content-type",
                 "application/x-www-form-urlencoded"
@@ -162,7 +162,7 @@ function validarCorreo() {
 
         if (expCorreo.test(correo.value) && correo.value.length<=40) {
             xhrCorreo.onreadystatechange = respuestaCorreo;
-            xhrCorreo.open("POST", "../php/registro_rider.php", true);
+            xhrCorreo.open("POST", "../php/riders/registro_rider.php", true);
             xhrCorreo.setRequestHeader(
                 "Content-type",
                 "application/x-www-form-urlencoded"
@@ -325,7 +325,7 @@ function validarTelefono() {
 
         if (expTelefono.test(telefono.value)) {
             xhrTelefono.onreadystatechange = respuestaExisteTelefono;
-            xhrTelefono.open("POST", "../php/registro_rider.php", true);
+            xhrTelefono.open("POST", "../php/riders/registro_rider.php", true);
             xhrTelefono.setRequestHeader(
                 "Content-type",
                 "application/x-www-form-urlencoded"
@@ -405,7 +405,7 @@ function peticionCrearUsuario() {
             terminosCheck == true
         ) {
             xhrNuevoUsuario.onreadystatechange = respuestaCrearUsuario;
-            xhrNuevoUsuario.open("POST", "../php/registro_rider.php", true);
+            xhrNuevoUsuario.open("POST", "../php/riders/registro_rider.php", true);
             xhrNuevoUsuario.setRequestHeader(
                 "Content-type",
                 "application/x-www-form-urlencoded"

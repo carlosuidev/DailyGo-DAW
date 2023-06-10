@@ -42,12 +42,13 @@ if (isset($_POST["dniComprobar"])) {
     $contrasena = $_POST["contrasena"];
     $dni = $_POST["dni"];
     $telefono = $_POST["telefono"];
-   
+    $hash = hash('sha256', $contrasena);
+
     try {
         $conexion = mysqli_connect("localhost", "root", "", "dailygo");
         mysqli_select_db($conexion, "dailygo") or die("No se puede seleccionar la BD");
         /* Lazo la consulta sobre la BD*/
-        $datos = mysqli_query($conexion, "INSERT INTO riders (DNI_RID, NOM_RID, APE_RID, TLF_RID, MAIL_RID, PW_RID, ESTADO) VALUES ('$dni', '$nombre', '$apellidos', $telefono, '$correo', '$contrasena', 'No disponible')");
+        $datos = mysqli_query($conexion, "INSERT INTO riders (DNI_RID, NOM_RID, APE_RID, TLF_RID, MAIL_RID, PW_RID, ESTADO) VALUES ('$dni', '$nombre', '$apellidos', $telefono, '$correo', '$hash', 'No disponible')");
         echo 'creado';
     } catch (Exception $err) {
         echo $err;
