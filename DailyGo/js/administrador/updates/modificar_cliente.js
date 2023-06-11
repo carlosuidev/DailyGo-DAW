@@ -61,7 +61,7 @@ function validarApellidos() {
         msgApellidos.setAttribute("class", "hidden");
         validacionApellidos = true;
     } else {
-        nombrapellidos.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+        apellidos.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
         msgApellidos.setAttribute("class", "flex");
         validacionApellidos = false;
     }
