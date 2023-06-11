@@ -20,6 +20,6 @@ if (isset($_POST["correo"])) {
         }
         echo json_encode($arrayParaJson);
     } else {
-        echo 'False '.$hash;
+        echo 'False';
     }
 }
