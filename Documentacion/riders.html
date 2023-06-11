@@ -40,7 +40,7 @@
                             <a class="nav-link" href="riders.html">Riders</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href=".html">Administrador</a>
+                            <a class="nav-link" href="administrador.html">Administrador</a>
                         </li>
                     </ul>
                 </div>
@@ -55,18 +55,1153 @@
         <h4 class="bg-primary text-white rounded p-2 mb-4">actualizar_datos_rider.js</h4>
         <section class="mb-5">
             <div class="mb-3 ">
-                <p class="fw-bold mb-0">cerrarSesion()</p>
-                <small style="font-size: 0.8rem">Elimina las variables de sesión</small>
+                <p class="fw-bold mb-0">iniciarPerfil()</p>
+                <small style="font-size: 0.8rem">Inicia los eventos perfil</small>
             </div>
             <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
                 <code>
-                    function cerrarSesion() {
+                    function iniciarPerfil() {
+                        mostrarDatos();
+                        nombre.addEventListener("input", validarNombre);
+                        apellidos.addEventListener("input", validarApellidos);
+                        telefono.addEventListener("input", validarTelefono);
+                        correo.addEventListener("input", validarCorreo);
+                        contrasenaNueva.addEventListener("input", validarContrasena);
+                    
+                        btnNombre.addEventListener("click", cambiarNombre);
+                        btnApellidos.addEventListener("click", cambiarApellidos);
+                        btnTelefono.addEventListener("click", cambiarTelefono);
+                        btnCorreo.addEventListener("click", cambiarCorreo);
+                        btnContrasena.addEventListener("click", cambiarContrasena);
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">mostrarDatos()</p>
+                <small style="font-size: 0.8rem">Inserta los datos actuales en los input</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function mostrarDatos() {
+                        nombre.value = localStorage.getItem("nombre");
+                        apellidos.value = localStorage.getItem("apellidos");
+                        telefono.value = localStorage.getItem("telefono");
+                        correo.value = localStorage.getItem("correo");
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarNombre()</p>
+                <small style="font-size: 0.8rem">Valida el nombre por medio de expresión</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarNombre() {
+                        const expNombre = /^([a-zA-ZáéíóúÁÉÍÓÚñÑüÜñ]{2,20}\s?)+$/;
+                        if (expNombre.test(nombre.value)) {
+                            nombre.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgNombre.setAttribute("class", "hidden");
+                            validacionNombre = true;
+                        } else {
+                            nombre.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgNombre.setAttribute("class", "flex");
+                            validacionNombre = false;
+                        }
+                    }
+                </code>
+            </pre>
+            <section class="mb-5">
+                <div class="mb-3 ">
+                    <p class="fw-bold mb-0">validarApellidos()</p>
+                    <small style="font-size: 0.8rem">Valida apellidos por medio de expresión</small>
+                </div>
+                <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                    <code>
+                        function validarApellidos() {
+                            const expApellidos = /^([a-zA-ZáéíóúÁÉÍÓÚñÑüÜñ]{2,}\s?-?\s?){1,4}$/;
+                            if (expApellidos.test(apellidos.value)) {
+                                apellidos.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                                msgApellidos.setAttribute("class", "hidden");
+                                validacionApellidos = true;
+                            } else {
+                                apellidos.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                                msgApellidos.setAttribute("class", "flex");
+                                validacionApellidos = false;
+                            }
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section class="mb-5">
+                <div class="mb-3 ">
+                    <p class="fw-bold mb-0">validarTelefono()</p>
+                    <small style="font-size: 0.8rem">Valida el teléfono por medio de expresión y su existencia</small>
+                </div>
+                <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                    <code>
+                        function validarTelefono() {
+                            const expTelefono = /^(6|7|8|9)\d{8}$/;
+                            if (expTelefono.test(telefono.value)) {
+                                telefono.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                                msgTelefono.setAttribute("class", "hidden");
+                                msgTelefonoExiste.setAttribute("class", "hidden");
+                                validacionTelefono = true;
+                            } else {
+                                telefono.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                                msgTelefono.setAttribute("class", "flex");
+                                msgTelefonoExiste.setAttribute("class", "hidden");
+                                validacionTelefono = false;
+                            }
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section class="mb-5">
+                <div class="mb-3 ">
+                    <p class="fw-bold mb-0">validarCorreo()</p>
+                    <small style="font-size: 0.8rem">Valida el correo por medio de expresión y su existencia</small>
+                </div>
+                <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                    <code>
+                        function validarCorreo() {
+                            const expCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
+                            if (expCorreo.test(correo.value)) {
+                                correo.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                                msgCorreo.setAttribute("class", "hidden");
+                                msgCorreoExiste.setAttribute("class", "hidden");
+                                validacionCorreo = true;
+                        
+                            } else {
+                                correo.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                                msgCorreo.setAttribute("class", "flex");
+                                msgCorreoExiste.setAttribute("class", "hidden");
+                                validacionCorreo = false;
+                            }
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section class="mb-5">
+                <div class="mb-3 ">
+                    <p class="fw-bold mb-0">validarContrasena()</p>
+                    <small style="font-size: 0.8rem">Valida la contraseña por medio de expresión</small>
+                </div>
+                <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                    <code>
+                        function validarContrasena() {
+                            const expContrasena =
+                                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$/;
+                            if (expContrasena.test(contrasenaNueva.value)) {
+                                contrasenaNueva.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                                msgContrasenaNueva.setAttribute("class", "hidden");
+                                validacionContrasenhaNueva = true;
+                            } else {
+                                contrasenaNueva.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                                msgContrasenaNueva.setAttribute("class", "flex");
+                                validacionContrasenhaNueva = false;
+                            }
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section class="mb-5">
+                <div class="mb-3 ">
+                    <p class="fw-bold mb-0">actualizarDatos()</p>
+                    <small style="font-size: 0.8rem">Envía un fetch AJAX con los cambios a realizar</small>
+                </div>
+                <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                    <code>
+                        function actualizarDatos(ruta, datos) {
+                            fetch(ruta, {
+                                method: "POST",
+                                body: JSON.stringify(datos),
+                                headers: {
+                                    "Content-Type": "application/json"
+                                }
+                            })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error('Error en la solicitud');
+                                    }
+                                    return response.text();
+                                })
+                                .then(data => {
+                                    console.log(data)
+                                    switch (data) {
+                                        case "actualizadoNombre":
+                                            correctoDatos.setAttribute("class", "flex");
+                                            setTimeout(function () {
+                                                correctoDatos.setAttribute("class", "hidden");
+                                            }, 3000);
+                                            localStorage.setItem("nombre", nombre.value);
+                                            break;
+                                        case "actualizadoApe":
+                                            correctoDatos.setAttribute("class", "flex");
+                                            setTimeout(function () {
+                                                correctoDatos.setAttribute("class", "hidden");
+                                            }, 3000);
+                                            localStorage.setItem("apellidos", apellidos.value);
+                                            break;
+                                        case "actualizadoTel":
+                                            correctoDatos.setAttribute("class", "flex");
+                                            setTimeout(function () {
+                                                correctoDatos.setAttribute("class", "hidden");
+                                            }, 3000);
+                                            localStorage.setItem("telefono", telefono.value);
+                                            break;
+                                        case "actualizadoMail":
+                                            correctoDatos.setAttribute("class", "flex");
+                                            setTimeout(function () {
+                                                correctoDatos.setAttribute("class", "hidden");
+                                            }, 3000);
+                                            localStorage.setItem("correo", correo.value);
+                                            break;
+                                        case "actualizadoContra":
+                                            correctoContrasena.setAttribute("class", "flex");
+                                            setTimeout(function () {
+                                                correctoContrasena.setAttribute("class", "hidden");
+                                            }, 3000);
+                                            localStorage.setItem("correo", correo.value);
+                                            break;
+                                        case "telExiste":
+                                            telefono.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                                            msgTelefono.setAttribute("class", "hidden");
+                                            msgTelefonoExiste.setAttribute("class", "flex");
+                                            setTimeout(function () {
+                                                correctoDatos.setAttribute("class", "hidden");
+                                            }, 3000);
+                                            break;
+                                        case "mailExiste":
+                                            correo.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                                            msgCorreo.setAttribute("class", "hidden");
+                                            msgCorreoExiste.setAttribute("class", "flex");
+                                            setTimeout(function () {
+                                                correctoDatos.setAttribute("class", "hidden");
+                                            }, 3000);
+                                            break;
+                                        case "contraExiste":
+                                            incorrectoContrasena.setAttribute("class", "flex");
+                                            setTimeout(function () {
+                                                incorrectoContrasena.setAttribute("class", "hidden");
+                                            }, 3000);
+                                            break;
+                                    }
+                        
+                                })
+                                .catch(error => {
+                                    console.error("Error: ", error);
+                                    return false;
+                                });
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section class="mb-5">
+                <div class="mb-3 ">
+                    <p class="fw-bold mb-0">cambiarNombre()</p>
+                    <small style="font-size: 0.8rem">JSON con los cambios y la dirección de la función php cambiar los datos</small>
+                </div>
+                <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                    <code>
+                        function cambiarNombre() {
+                            if (validacionNombre) {
+                                const datos = {
+                                    'nombre': nombre.value,
+                                    'dni': localStorage.getItem("dni")
+                                }
+                                actualizarDatos("../../php/riders/actualizar_datos_riders.php", datos);
+                        
+                            }
+                        }                        
+                    </code>
+                </pre>
+            </section>
+            <section class="mb-5">
+                <div class="mb-3 ">
+                    <p class="fw-bold mb-0">cambiarApellidos()</p>
+                    <small style="font-size: 0.8rem">JSON con los cambios y la dirección de la función php cambiar los datos</small>
+                </div>
+                <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                    <code>
+                        function cambiarApellidos() {
+                            if (validacionApellidos) {
+                                const datos = {
+                                    'apellidos': apellidos.value,
+                                    'dni': localStorage.getItem("dni")
+                                }
+                                actualizarDatos("../../php/riders/actualizar_datos_riders.php", datos);
+                        
+                            }
+                        }                      
+                    </code>
+                </pre>
+            </section>
+            <section class="mb-5">
+                <div class="mb-3 ">
+                    <p class="fw-bold mb-0">cambiarTelefono()</p>
+                    <small style="font-size: 0.8rem">JSON con los cambios y la dirección de la función php cambiar los datos</small>
+                </div>
+                <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                    <code>
+                        function cambiarTelefono() {
+                            if (validacionTelefono) {
+                                const datos = {
+                                    'telefono': telefono.value,
+                                    'dni': localStorage.getItem("dni")
+                                }
+                                actualizarDatos("../../php/riders/actualizar_datos_riders.php", datos);
+                        
+                            }
+                        }                     
+                    </code>
+                </pre>
+            </section>
+            <section class="mb-5">
+                <div class="mb-3 ">
+                    <p class="fw-bold mb-0">cambiarCorreo()</p>
+                    <small style="font-size: 0.8rem">JSON con los cambios y la dirección de la función php cambiar los datos</small>
+                </div>
+                <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                    <code>
+                        function cambiarCorreo() {
+                            if (validacionCorreo) {
+                                const datos = {
+                                    'correo': correo.value,
+                                    'dni': localStorage.getItem("dni")
+                                }
+                                actualizarDatos("../../php/riders/actualizar_datos_riders.php", datos);
+                            }
+                        }                    
+                    </code>
+                </pre>
+            </section>
+            <section class="mb-5">
+                <div class="mb-3 ">
+                    <p class="fw-bold mb-0">cambiarContrasena()</p>
+                    <small style="font-size: 0.8rem">JSON con los cambios y la dirección de la función php cambiar los datos</small>
+                </div>
+                <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                    <code>
+                        function cambiarContrasena() {
+                            if (validacionContrasenhaNueva) {
+                                const datos = {
+                                    'contrasenaActual': contrasenaActual.value,
+                                    'contrasenaNueva': contrasenaNueva.value,
+                                    'dni': localStorage.getItem("dni")
+                                }
+                                actualizarDatos("../../php/riders/actualizar_datos_riders.php", datos);
+                            }
+                        }                  
+                    </code>
+                </pre>
+            </section>
+    </article>
+
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">gestion_sesiones.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">comprobarSesion()</p>
+                <small style="font-size: 0.8rem">Valida si la sesión es correcta y redirige en caso contrario</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function comprobarSesion(){
+                        const tipoUsuario = localStorage.getItem("tipoUsuario");
+                        if(tipoUsuario !== "rider"){
+                            if(tipoUsuario !== null){
+                                
+                                const redirecciones = {
+                                    'usuario': '../usuarios/inicio.php',
+                                    'proveedor': '../proveedores/inicio.html',
+                                    'administrador': '../administrador/inicio.html',
+                                }
+                    
+                                window.location.href = redirecciones[tipoUsuario];
+                            }else{
+                                window.location.href = '../index.html';
+                            }
+                        }else{
+                            return true;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">manejar_pedidos.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarGestion()</p>
+                <small style="font-size: 0.8rem">Inicia los eventos del sitio</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarGestion() {
+                        verPedido();
+                        mostrarDatos();
+                        document.getElementById("btnActualizar").addEventListener("click", verPedido);
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">mostrarDatos()</p>
+                <small style="font-size: 0.8rem">Muestra los datos del pedido actual</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function mostrarDatos() {
+                        const zonaBtn = document.getElementById("zonaBtn");
+                        const estadoRider = localStorage.getItem("estado");
+                        const msgEstado = document.getElementById("msgEstado");
+                        const datosRider = document.getElementById("datosRider");
+                        datosRider.textContent = `${localStorage.getItem("nombre")}`
+                        msgEstado.textContent = estadoRider;
+                        if (estadoRider == "Disponible") {
+                            const listadoEntregar = document.getElementById("listadoEntregar");
+                            listadoEntregar.innerHTML = "div class='flex flex-col justify-center items-center gap-10 text-lg'>img src='../../assets/svg/rider_ilust.svg'>p class='text-center'>Todavía no hemos encontrado ningún pedido para ti ¡No tardarán en llegar! 😀/p>/div>";
+                            msgEstado.setAttribute("class", "px-3 py-1 mb-2 w-fit flex items-center rounded-full bg-green-600 text-white text-xs");
+                            zonaBtn.innerHTML = `button class="duration-300 hover:bg-indigo-700 w-fit px-3 py-1 bg-indigo-600 font-semibold text-white rounded-md" onclick="actualizarDisponibilidad(\'No Disponible\')"> Cambiar a No Disponible /button>`;
+                        } else if (estadoRider == "Ocupado") {
+                            msgEstado.setAttribute("class", "px-3 py-1 mb-2 w-fit flex items-center rounded-full bg-orange-600 text-white text-xs");
+                            zonaBtn.innerHTML = "";
+                        } else if (estadoRider == "No Disponible") {
+                            const listadoEntregar = document.getElementById("listadoEntregar");
+                            listadoEntregar.innerHTML = "div class='flex flex-col justify-center items-center gap-10 text-lg'>img src='../../assets/svg/rider_ilust.svg'>p class='text-center'>⚠️ Debes estar 'Disponible' para empezar a entregar pedidos/p>/div>";
+                            msgEstado.setAttribute("class", "px-3 py-1 mb-2 w-fit flex items-center rounded-full bg-red-600 text-white text-xs");
+                            zonaBtn.innerHTML = `button class="duration-300 hover:bg-indigo-700 w-fit px-3 py-1 bg-indigo-600 font-semibold text-white rounded-md" onclick="actualizarDisponibilidad(\'Disponible\')"> Cambiar a Disponible /button>`;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">actualizarDisponibilidad()</p>
+                <small style="font-size: 0.8rem">Cambia la disponibilidad del rider</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function actualizarDisponibilidad(estado) {
+                        if (localStorage.getItem("estado") == "Ocupado") {
+                            verPedido();
+                            return false;
+                        }
+                    
+                        const datos = {
+                            dni: localStorage.getItem("dni"),
+                            estado: estado
+                        }
+                    
+                        fetch("../../php/riders/modificar_disponibilidad.php", {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.text())
+                            .then(data => {
+                                if (data == "Actualizado") {
+                                    localStorage.setItem("estado", estado);
+                                    if (estado == "No disponible") {
+                                        const listadoEntregar = document.getElementById("listadoEntregar");
+                                        listadoEntregar.innerHTML = "div class='flex flex-col justify-center items-center gap-10 text-lg'>img src='../../assets/svg/rider_ilust.svg'>p class='text-center'>⚠️ Debes estar 'Disponible' para empezar a entregar pedidos/p>/div>"
+                                    }
+                                    mostrarDatos();
+                                } else {
+                                    console.log(data);
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Error: No se ha podido obtener los datos de todas las tiendas -> ", error);
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">crearComponentePedido()</p>
+                <small style="font-size: 0.8rem">Crea un componente de datos del pedido</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function crearComponentePedido(element) {
+                        console.log(element);
+                        const componente = document.createElement("div");
+                        componente.setAttribute("class", "w-full");
+                    
+                        const superior = document.createElement("div");
+                        superior.setAttribute("class", "w-full");
+                        if (element['estado_ven'] == "En preparación") {
+                            superior.innerHTML = `
+                            hr class='my-5'>
+                            div class='flex flex-wrap justify-between gap-3'>
+                                div class='flex flex-wrap gap-3 items-center'>
+                                    h4 class='font-bold'>Pedido nº${element['num_ven']}/h4>
+                                    small class="w-fit bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full">${element['estado_ven']}/small>
+                                /div>
+                            /div>
+                            div class="flex flex-wrap my-3 text-indigo-700 gap-5 text-sm">
+                                div class="flex gap-2 items-center">img src="../../assets/svg/inicio_registro/proveedor.svg" class="w-4"> ${element['dir_prov']} (${element['razsoc']})/div>
+                                div class="flex gap-2 items-center">img src="../../assets/svg/inicio_registro/usuario.svg" class="w-4"> ${element['dir_ven']} (${element['nom_cli']} ${element['ape_cli']})/div>
+                            /div>
+                            p class='bg-blue-100/25 w-fit p-2 rounded mt-4'>
+                            b>Mensaje:/b> ${element['com_ven']}
+                            /p>
+                        `;
+                        } else if (element['estado_ven'] == "Preparado") {
+                            superior.innerHTML = `
+                            hr class='my-5'>
+                            div class='flex flex-wrap justify-between gap-3'>
+                                div class='flex flex-wrap gap-3 items-center'>
+                                    h4 class='font-bold'>Pedido nº${element['num_ven']}/h4>
+                                    small class="w-fit bg-green-200 text-green-600 py-0.5 px-2.5 rounded-full">${element['estado_ven']}/small>
+                                /div>
+                                button class="lg:w-fit md:w-fit w-full duration-300 hover:bg-indigo-700 px-3 py-2 bg-indigo-600 font-semibold text-white rounded-md" onclick="modificarEstado(${element['num_ven']}, 'En camino')">Confirmar recogida/button>
+                            /div>
+                            div class="flex flex-wrap my-3 text-indigo-700 gap-5 text-sm">
+                                div class="flex gap-2 items-center">img src="../../assets/svg/inicio_registro/proveedor.svg" class="w-4"> ${element['dir_prov']} (${element['razsoc']})/div>
+                                div class="flex gap-2 items-center">img src="../../assets/svg/inicio_registro/usuario.svg" class="w-4"> ${element['dir_ven']} (${element['nom_cli']} ${element['ape_cli']})/div>
+                            /div>
+                            p class='bg-blue-100/25 w-fit p-2 rounded mt-4'>
+                            b>Mensaje:/b> ${element['com_ven']}
+                            /p>
+                        `;
+                        } else if (element['estado_ven'] == "En camino") {
+                            superior.innerHTML = `
+                            hr class='my-5'>
+                            div class='flex flex-wrap justify-between gap-3'>
+                                div class='flex flex-wrap gap-3 items-center'>
+                                    h4 class='font-bold'>Pedido nº${element['num_ven']}/h4>
+                                    small class="w-fit bg-green-200 text-green-600 py-0.5 px-2.5 rounded-full">${element['estado_ven']}/small>
+                                /div>
+                                button class="lg:w-fit md:w-fit w-full duration-300 hover:bg-indigo-700 px-3 py-2 bg-indigo-600 font-semibold text-white rounded-md" onclick="modificarEstado(${element['num_ven']}, 'Completado')">Confirmar entrega/button>
+                            /div>
+                            div class="flex flex-wrap my-3 text-indigo-700 gap-5 text-sm">
+                                div class="flex gap-2 items-center">img src="../../assets/svg/inicio_registro/proveedor.svg" class="w-4"> ${element['dir_prov']} (${element['razsoc']})/div>
+                                div class="flex gap-2 items-center">img src="../../assets/svg/inicio_registro/usuario.svg" class="w-4"> ${element['dir_ven']} (${element['nom_cli']} ${element['ape_cli']})/div>
+                            /div>
+                            p class='bg-blue-100/25 w-fit p-2 rounded mt-4'>
+                            b>Mensaje:/b> ${element['com_ven']}
+                            /p>
+                        `;
+                        }
+                    
+                        componente.appendChild(superior);
+                    
+                        const mapaTienda = document.createElement("div");
+                        mapaTienda.innerHTML = `
+                        input type='hidden' id='coords' value='${element['coordenadas']}'>
+                        input type='hidden' id='cifProv' value='${element['cif_prov']}'>
+                        div id="map" style='width:100% !important; height:350px !important' class="mt-5 leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0" style="position: relative;">/div>
+                        `;
+                        componente.appendChild(mapaTienda);
+                        return componente;
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">mostrarMapa()</p>
+                <small style="font-size: 0.8rem">Muestra el mapa de la tienda y manipula el DOM para obtener el icono del establecimiento</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function mostrarMapa() {
+                        let marker;
+                    
+                        let map = L.map('map').setView([40.314224, -3.7038], 16);
+                    
+                        //Agregar tilelAyer mapa base desde openstreetmap
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '&copy; a href="https://www.openstreetmap.org/copyright">OpenStreetMap for DailyGo/a> contributors'
+                        }).addTo(map);
+                    
+                        
+                    
+                            let coordenadas = coords.value.split(",");
+                            map.flyTo(coordenadas, 16);
+                            
+                            const lat = coordenadas[0];
+                            const lng = coordenadas[1];
+                    
+                    
+                            // Eliminar cualquier marcador anterior
+                            if (marker) {
+                                map.removeLayer(marker);
+                            }
+                    
+                            // Crear un marcador y agregarlo al mapa
+                            marker = L.marker([lat, lng]).addTo(map);
+                    
+                            // Centrar el mapa en la ubicación seleccionada
+                            map.flyTo([lat, lng], 16);
+                    
+                            const chincheta = document.querySelectorAll(".leaflet-marker-pane")[0];
+                            const imagen = chincheta.childNodes[0];
+                            imagen.setAttribute("src", `../../img_bbdd/proveedores/${cifProv.value}.jpg`);
+                            imagen.setAttribute("id", "img_chincheta");
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">registro_rider.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarEventos()</p>
+                <small style="font-size: 0.8rem">Inicia los eventos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarEventos() {
                         try {
-                            localStorage.clear();
-                            window.location.href = "../../src/index.html";
+                            nombre.addEventListener("input", validarNombre);
+                            apellidos.addEventListener("input", validarApellidos);
+                            dni.addEventListener("input", validarDni);
+                            telefono.addEventListener("input", validarTelefono);
+                            correo.addEventListener("input", validarCorreo);
+                            contrasena.addEventListener("input", validarContrasena);
+                            confirmarContrasena.addEventListener(
+                                "input",
+                                validarConfirmarContrasena
+                            );
+                            terminos.addEventListener("click", validarTerminos);
+                    
+                            crearCuenta.addEventListener("click", peticionCrearUsuario);
                         } catch (error) {
                             console.log(
-                                `Se ha producido un error a la hora de cerrar sesión: ${error}`
+                                `Los eventos no están funcionando correctamente: ${error}`
+                            );
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarDni()</p>
+                <small style="font-size: 0.8rem">Valida por expresión regular y su existencia</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarDni() {
+                        try {
+                    
+                            if (validateDNI(dni.value)) {
+                                xhrDNI.onreadystatechange = repuestaExisteDni;
+                                xhrDNI.open("POST", "../php/riders/registro_rider.php", true);
+                                xhrDNI.setRequestHeader(
+                                    "Content-type",
+                                    "application/x-www-form-urlencoded"
+                                );
+                                xhrDNI.send(`dniComprobar=${dni.value}`);
+                    
+                            } else {
+                                dni.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgDni.setAttribute("class", "flex");
+                                msgDniExiste.setAttribute("class", "hidden");
+                    
+                                dniVal = false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar el DNI: ${error}`);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validateDNI()</p>
+                <small style="font-size: 0.8rem">Valida por expresión regular y su existencia</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validateDNI(dni) {
+                        var numero, let, letra;
+                        var expresion_regular_dni = /^[XYZ]?\d{5,8}[A-Z]$/;
+                    
+                        dni = dni.toUpperCase();
+                    
+                        if(expresion_regular_dni.test(dni) === true){
+                            numero = dni.substr(0,dni.length-1);
+                            numero = numero.replace('X', 0);
+                            numero = numero.replace('Y', 1);
+                            numero = numero.replace('Z', 2);
+                            let = dni.substr(dni.length-1, 1);
+                            numero = numero % 23;
+                            letra = 'TRWAGMYFPDXBNJZSQVHLCKET';
+                            letra = letra.substring(numero, numero+1);
+                            if (letra != let) {
+                                //alert('Dni erroneo, la letra del NIF no se corresponde');
+                                return false;
+                            }else{
+                                //alert('Dni correcto');
+                                return true;
+                            }
+                        }else{
+                            //alert('Dni erroneo, formato no válido');
+                            return false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">repuestaExisteDni()</p>
+                <small style="font-size: 0.8rem">Respuesta del server si existe el dato en la BBDD</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function repuestaExisteDni() {
+                        try {
+                            if (xhrDNI.readyState == 4 && xhrDNI.status == 200) {
+                                let respuesta = xhrDNI.responseText;
+                    
+                                if (respuesta === "no existe") {
+                                    dni.setAttribute(
+                                        "class",
+                                        "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                    );
+                                    msgDniExiste.setAttribute("class", "hidden");
+                                    msgDni.setAttribute("class", "hidden");
+                                    dniVal = true;
+                                } else {
+                                    dni.setAttribute(
+                                        "class",
+                                        "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                    );
+                                    msgDniExiste.setAttribute("class", "flex");
+                                    msgDni.setAttribute("class", "hidden");
+                                    dniVal = false;
+                                }
+                            }
+                        } catch (error) {
+                            console.log(
+                                `No se ha obtenido respuesta de la existencia del DNI: ${error}`
+                            );
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarCorreo()</p>
+                <small style="font-size: 0.8rem">Valida la existencia el correo y si cumple los requisitos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarCorreo() {
+                        try {
+                            const expCorreo = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+                    
+                            if (expCorreo.test(correo.value) && correo.value.length<=40) {
+                                xhrCorreo.onreadystatechange = respuestaCorreo;
+                                xhrCorreo.open("POST", "../php/riders/registro_rider.php", true);
+                                xhrCorreo.setRequestHeader(
+                                    "Content-type",
+                                    "application/x-www-form-urlencoded"
+                                );
+                                xhrCorreo.send(`correoComprobar=${correo.value}`);
+                    
+                            } else {
+                                correo.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgCorreo.setAttribute("class", "flex");
+                                msgCorreoExiste.setAttribute("class", "hidden");
+                    
+                                correoVal = false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar el correo: ${error}`);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">respuestaCorreo()</p>
+                <small style="font-size: 0.8rem">Respuesta de la existencia del correo</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function respuestaCorreo() {
+                        try {
+                            if (xhrCorreo.readyState == 4 && xhrCorreo.status == 200) {
+                                let correoRespuesta = xhrCorreo.responseText;
+                    
+                                if (correoRespuesta === "no existe") {
+                                    correo.setAttribute(
+                                        "class",
+                                        "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                    );
+                                    msgCorreoExiste.setAttribute("class", "hidden");
+                                    msgCorreo.setAttribute("class", "hidden");
+                                    correoVal = true;
+                                } else {
+                                    correo.setAttribute(
+                                        "class",
+                                        "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                    );
+                                    msgCorreoExiste.setAttribute("class", "flex");
+                                    msgCorreo.setAttribute("class", "hidden");
+                                    correoVal = false;
+                                }
+                            }
+                        } catch (error) {
+                            console.log(
+                                `No se ha obtenido respuesta de la existencia del correo: ${error}`
+                            );
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarContrasena()</p>
+                <small style="font-size: 0.8rem">Expresión para validar contraseña</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarContrasena() {
+                        try {
+                            const expContrasena =
+                                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$/;
+                    
+                            if (expContrasena.test(contrasena.value)) {
+                                contrasena.setAttribute(
+                                    "class",
+                                    "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgContrasena.setAttribute("class", "hidden");
+                    
+                            } else {
+                                contrasena.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgContrasena.setAttribute("class", "flex");
+                                contrasenaVal = false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar la contraseña: ${error}`);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarConfirmarContrasena()</p>
+                <small style="font-size: 0.8rem">Expresión para validar contraseña</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarConfirmarContrasena() {
+                        try {
+                            const expContrasenaRep =
+                                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$/;
+                    
+                            if (
+                                contrasena.value === confirmarContrasena.value &&
+                                expContrasenaRep.test(confirmarContrasena.value)
+                            ) {
+                                confirmarContrasena.setAttribute(
+                                    "class",
+                                    "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgConfirmarContrasena.setAttribute("class", "hidden");
+                                confirmarContrasenaVal = true;
+                                contrasenaVal = true;
+                            } else {
+                                confirmarContrasena.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgConfirmarContrasena.setAttribute("class", "flex");
+                                confirmarContrasenaVal = false;
+                                contrasenaVal = false;
+                            }
+                        } catch (error) {
+                            console.log(
+                                `No se ha podido validar la confirmación de la contraseña: ${error}`
+                            );
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarNombre()</p>
+                <small style="font-size: 0.8rem">Expresión para validar nombres</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarNombre() {
+                        try {
+                            const expNombre = /^([a-zA-ZáéíóúÁÉÍÓÚñÑüÜñ]{2,20}\s?)+$/;
+                    
+                            if (expNombre.test(nombre.value)) {
+                                nombre.setAttribute(
+                                    "class",
+                                    "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgNombre.setAttribute("class", "hidden");
+                                nombreVal = true;
+                            } else {
+                                nombre.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgNombre.setAttribute("class", "flex");
+                                nombreVal = false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar el nombre: ${error}`);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarApellidos()</p>
+                <small style="font-size: 0.8rem">Expresión para validar apellidos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarApellidos() {
+                        try {
+                            const expApellidos = /^([a-zA-ZáéíóúÁÉÍÓÚñÑüÜñ]{2,}\s?-?\s?){1,4}$/;
+                    
+                            if (expApellidos.test(apellidos.value)) {
+                                apellidos.setAttribute(
+                                    "class",
+                                    "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgApellidos.setAttribute("class", "hidden");
+                                apellidosVal = true;
+                            } else {
+                                apellidos.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgApellidos.setAttribute("class", "flex");
+                                apellidosVal = false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar los apellidos: ${error}`);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarTelefono()</p>
+                <small style="font-size: 0.8rem">Expresión para validar teléfono y su existencia</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarTelefono() {
+                        try {
+                            const expTelefono = /^(6|7|8|9)\d{8}$/;
+                    
+                            if (expTelefono.test(telefono.value)) {
+                                xhrTelefono.onreadystatechange = respuestaExisteTelefono;
+                                xhrTelefono.open("POST", "../php/riders/registro_rider.php", true);
+                                xhrTelefono.setRequestHeader(
+                                    "Content-type",
+                                    "application/x-www-form-urlencoded"
+                                );
+                                xhrTelefono.send(`telefonoComprobar=${telefono.value}`);
+                    
+                            } else {
+                                telefono.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgTelefono.setAttribute("class", "flex");
+                                msgTelefonoExiste.setAttribute("class", "hidden");
+                    
+                                telefonoVal = false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar el teléfono: ${error}`);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">respuestaExisteTelefono()</p>
+                <small style="font-size: 0.8rem">Respuesta de la existencia del teléfono en la BBDD</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function respuestaExisteTelefono() {
+                        try {
+                            if (xhrTelefono.readyState == 4 && xhrTelefono.status == 200) {
+                                let telRespuesta = xhrTelefono.responseText;
+                                console.log(telRespuesta)
+                                if (telRespuesta === "no existe") {
+                                    telefono.setAttribute(
+                                        "class",
+                                        "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                    );
+                                    msgTelefonoExiste.setAttribute("class", "hidden");
+                                    msgTelefono.setAttribute("class", "hidden");
+                                    telefonoVal = true;
+                                } else {
+                                    telefono.setAttribute(
+                                        "class",
+                                        "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                    );
+                                    msgTelefonoExiste.setAttribute("class", "flex");
+                                    msgTelefono.setAttribute("class", "hidden");
+                                    telefonoVal = false;
+                                }
+                            }
+                        } catch (error) {
+                            console.log(
+                                `No se ha podido obtener la respuesta de la existencia del teléfono: ${error}`
+                            );
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarTerminos()</p>
+                <small style="font-size: 0.8rem">Valida si se han aceptado los términos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarTerminos() {
+                        try {
+                            if (terminos.checked) {
+                                msgTerminos.setAttribute("class", "hidden");
+                                terminosCheck = true;
+                            } else {
+                                msgTerminos.setAttribute("class", "flex");
+                                terminosCheck = false
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar los términos: ${error}`);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">peticionCrearUsuario()</p>
+                <small style="font-size: 0.8rem">Petición AJAX para crear rider</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function peticionCrearUsuario() {
+                        try {
+                    
+                            if (
+                                nombreVal == true &&
+                                apellidosVal == true &&
+                                correoVal == true &&
+                                dniVal == true &&
+                                telefonoVal == true &&
+                                contrasenaVal == true &&
+                                confirmarContrasenaVal == true &&
+                                terminosCheck == true
+                            ) {
+                                xhrNuevoUsuario.onreadystatechange = respuestaCrearUsuario;
+                                xhrNuevoUsuario.open("POST", "../php/riders/registro_rider.php", true);
+                                xhrNuevoUsuario.setRequestHeader(
+                                    "Content-type",
+                                    "application/x-www-form-urlencoded"
+                                );
+                                xhrNuevoUsuario.send(
+                                    `nombre=${nombre.value}&apellidos=${apellidos.value}&correo=${correo.value}&contrasena=${contrasena.value}&dni=${dni.value}&telefono=${telefono.value}`
+                                );
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido solicitar crear usuario: ${error}`);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">respuestaCrearUsuario()</p>
+                <small style="font-size: 0.8rem">Respuesta AJAX de la creación del rider y crea las sesiones del rider</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function respuestaCrearUsuario() {
+                        try {
+                            if (xhrNuevoUsuario.readyState == 4 && xhrNuevoUsuario.status == 200) {
+                                let jsonCrearUsuario = xhrNuevoUsuario.responseText;
+                                if (jsonCrearUsuario === "creado") {
+                                    localStorage.setItem("nombre", nombre.value);
+                                    localStorage.setItem("apellidos", apellidos.value);
+                                    localStorage.setItem("correo", correo.value);
+                                    localStorage.setItem("dni", dni.value);
+                                    localStorage.setItem("telefono", apellidos.value);
+                                    localStorage.setItem("tipoUsuario", "rider");
+                                    localStorage.setItem("estado", "No disponible");
+                                    window.location.href = "../src/index.html";
+                                } else {
+                                    const errorCrear = document.getElementById("errorCrear");
+                                    errorCrear.setAttribute("class", "flex");
+                                }
+                            }
+                        } catch (error) {
+                            console.log(
+                                `No se ha podido obtener respuesta de la creación del usuario: ${error}`
                             );
                         }
                     }

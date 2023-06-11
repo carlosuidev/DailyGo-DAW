@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark fixed-top mb-5">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">DailyGo Doc</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+                aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menú</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Global</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="usuarios.html">Usuarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="proveedores.html">Proveedores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="riders.html">Riders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="administrador.html">Administrador</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-5 pb-5">
+    </div>
+
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">actualizar_datos.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarPerfil()</p>
+                <small style="font-size: 0.8rem">Inicia los eventos para actualizar los datos del usuario</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarPerfil() {
+                        mostrarDatos();
+                        nombre.addEventListener("input", validarNombre);
+                        apellidos.addEventListener("input", validarApellidos);
+                        telefono.addEventListener("input", validarTelefono);
+                        correo.addEventListener("input", validarCorreo);
+                        contrasenaNueva.addEventListener("input", validarContrasena);
+                    
+                        btnNombre.addEventListener("click", cambiarNombre);
+                        btnApellidos.addEventListener("click", cambiarApellidos);
+                        btnTelefono.addEventListener("click", cambiarTelefono);
+                        btnCorreo.addEventListener("click", cambiarCorreo);
+                        btnContrasena.addEventListener("click", cambiarContrasena);
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">mostrarDatos()</p>
+                <small style="font-size: 0.8rem">Muestra los datos actuales del usuario en los inputs</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function mostrarDatos() {
+                        nombre.value = localStorage.getItem("nombre");
+                        apellidos.value = localStorage.getItem("apellidos");
+                        telefono.value = localStorage.getItem("telefono");
+                        correo.value = localStorage.getItem("correo");
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarNombre()</p>
+                <small style="font-size: 0.8rem">Valida que el nombre nuevo cumple con los requisitos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarNombre() {
+                        const expNombre = /^([a-zA-ZáéíóúÁÉÍÓÚñÑüÜñ]{2,20}\s?)+$/;
+                        if (expNombre.test(nombre.value)) {
+                            nombre.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgNombre.setAttribute("class", "hidden");
+                            validacionNombre = true;
+                        } else {
+                            nombre.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgNombre.setAttribute("class", "flex");
+                            validacionNombre = false;
+                        }
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarApellidos()</p>
+                <small style="font-size: 0.8rem">Valida que los apellidos nuevos cumplen con los requisitos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarApellidos() {
+                        const expApellidos = /^([a-zA-ZáéíóúÁÉÍÓÚñÑüÜñ]{2,}\s?-?\s?){1,4}$/;
+                        if (expApellidos.test(apellidos.value)) {
+                            apellidos.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgApellidos.setAttribute("class", "hidden");
+                            validacionApellidos = true;
+                        } else {
+                            nombrapellidos.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgApellidos.setAttribute("class", "flex");
+                            validacionApellidos = false;
+                        }
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarTelefono()</p>
+                <small style="font-size: 0.8rem">Valida que el nombre nuevo cumple con los requisitos y no existe en la BBDD</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarTelefono() {
+                        const expTelefono = /^(6|7|8|9)\d{8}$/;
+                        if (expTelefono.test(telefono.value)) {
+                            telefono.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgTelefono.setAttribute("class", "hidden");
+                            msgTelefonoExiste.setAttribute("class", "hidden");
+                            validacionTelefono = true;
+                        } else {
+                            telefono.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgTelefono.setAttribute("class", "flex");
+                            msgTelefonoExiste.setAttribute("class", "hidden");
+                            validacionTelefono = false;
+                        }
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarCorreo()</p>
+                <small style="font-size: 0.8rem">Valida que el correo nuevo cumple con los requisitos y no existe en la BBDD</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarCorreo() {
+                        const expCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
+                        if (expCorreo.test(correo.value)) {
+                            correo.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgCorreo.setAttribute("class", "hidden");
+                            msgCorreoExiste.setAttribute("class", "hidden");
+                            validacionCorreo = true;
+                    
+                        } else {
+                            correo.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgCorreo.setAttribute("class", "flex");
+                            msgCorreoExiste.setAttribute("class", "hidden");
+                            validacionCorreo = false;
+                        }
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarContrasena()</p>
+                <small style="font-size: 0.8rem">Valida que la contraseña nueva cumple con los requisitos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarContrasena() {
+                        const expContrasena =
+                            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$/;
+                        if (expContrasena.test(contrasenaNueva.value)) {
+                            contrasenaNueva.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgContrasenaNueva.setAttribute("class", "hidden");
+                            validacionContrasenhaNueva = true;
+                        } else {
+                            contrasenaNueva.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgContrasenaNueva.setAttribute("class", "flex");
+                            validacionContrasenhaNueva = false;
+                        }
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">actualizarDatos()</p>
+                <small style="font-size: 0.8rem">Petición ajax para actualizar el tipo de dato en la BBDD</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function actualizarDatos(ruta, datos) {
+                        fetch(ruta, {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Error en la solicitud');
+                                }
+                                return response.text();
+                            })
+                            .then(data => {
+                                console.log(data)
+                                switch (data) {
+                                    case "actualizadoNombre":
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        localStorage.setItem("nombre", nombre.value);
+                                        break;
+                                    case "actualizadoApe":
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        localStorage.setItem("apellidos", apellidos.value);
+                                        break;
+                                    case "actualizadoTel":
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        localStorage.setItem("telefono", telefono.value);
+                                        break;
+                                    case "actualizadoMail":
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        localStorage.setItem("correo", correo.value);
+                                        break;
+                                    case "actualizadoContra":
+                                        correctoContrasena.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoContrasena.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        localStorage.setItem("correo", correo.value);
+                                        break;
+                                    case "telExiste":
+                                        telefono.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                                        msgTelefono.setAttribute("class", "hidden");
+                                        msgTelefonoExiste.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                    case "mailExiste":
+                                        correo.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                                        msgCorreo.setAttribute("class", "hidden");
+                                        msgCorreoExiste.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                    case "contraExiste":
+                                        incorrectoContrasena.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            incorrectoContrasena.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                }
+                    
+                            })
+                            .catch(error => {
+                                console.error("Error: ", error);
+                                return false;
+                            });
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarNombre()</p>
+                <small style="font-size: 0.8rem">Envío de datos a la petición para cambiar el nombre</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarNombre() {
+                        if (validacionNombre) {
+                            const datos = {
+                                'nombre': nombre.value,
+                                'id': localStorage.getItem("id")
+                            }
+                            actualizarDatos("../../php/usuarios/actualizar_datos_usuario.php", datos);
+                    
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarApellidos()</p>
+                <small style="font-size: 0.8rem">Envío de datos a la petición para cambiar los apellidos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarApellidos() {
+                        if (validacionApellidos) {
+                            const datos = {
+                                'apellidos': apellidos.value,
+                                'id': localStorage.getItem("id")
+                            }
+                            actualizarDatos("../../php/usuarios/actualizar_datos_usuario.php", datos);
+                    
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarTelefono()</p>
+                <small style="font-size: 0.8rem">Envío de datos a la petición para cambiar el teléfono</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarTelefono() {
+                        if (validacionTelefono) {
+                            const datos = {
+                                'telefono': telefono.value,
+                                'id': localStorage.getItem("id")
+                            }
+                            actualizarDatos("../../php/usuarios/actualizar_datos_usuario.php", datos);
+                    
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarCorreo()</p>
+                <small style="font-size: 0.8rem">Envío de datos a la petición para cambiar el mail</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarCorreo() {
+                        if (validacionCorreo) {
+                            const datos = {
+                                'correo': correo.value,
+                                'id': localStorage.getItem("id")
+                            }
+                            actualizarDatos("../../php/usuarios/actualizar_datos_usuario.php", datos);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarContrasena()</p>
+                <small style="font-size: 0.8rem">Envío de datos a la petición para cambiar la contraseña</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarContrasena() {
+                        if (validacionContrasenhaNueva) {
+                            const datos = {
+                                'contrasenaActual': contrasenaActual.value,
+                                'contrasenaNueva': contrasenaNueva.value,
+                                'id': localStorage.getItem("id")
+                            }
+                            actualizarDatos("../../php/usuarios/actualizar_datos_usuario.php", datos);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">carrito.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarCarrito()</p>
+                <small style="font-size: 0.8rem">Inicia los eventos para usar el carrito</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarCarrito() {
+                        mostrarBarraProductos();
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">mostrarBarraProductos()</p>
+                <small style="font-size: 0.8rem">Muestra la barra de productos con los elementos del carrito</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function mostrarBarraProductos() {
+                        enlacePedido();
+                        listCarrito.innerHTML = "";
+                    
+                        if (typeof localStorage !== "undefined" && localStorage.getItem("miCarrito") && JSON.parse(localStorage.getItem("miCarrito")).length >= 1) {
+                            let carrito = JSON.parse(localStorage.getItem("miCarrito"));
+                            carrito.forEach(producto => {
+                                listCarrito.appendChild(crearComponenteProductoCarrito(producto));
+                            });
+                            calcularImporte();
+                        } else {
+                            listCarrito.innerHTML = "No tienes ningún producto en tu carrito :(";
+                            totalBar.innerHTML = "0.00€";
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">addProducto()</p>
+                <small style="font-size: 0.8rem">Añade un producto en el carrito y comprueba si ya existe o si es de otra tienda</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function addProducto(id, precio, nombre, tienda) {
+                        if (typeof localStorage !== "undefined" && localStorage.getItem("miCarrito")) {
+                            let carrito = JSON.parse(localStorage.getItem("miCarrito"));
+                    
+                            // Si es un item de la misma tienda guardar sino eliminar todo y volver a añadir
+                            if (!validarTienda(carrito, tienda)) {
+                                const posicion = obtenerPosicionProducto(carrito, id);
+                                if (posicion != -1) {
+                                    if (carrito[posicion].cantidad != 99) {
+                                        carrito[posicion].cantidad = carrito[posicion].cantidad + 1;
+                                    } else {
+                                        return true;
+                                    }
+                                } else {
+                                    nuevoProducto = crearNuevoProducto(id, precio, nombre, tienda);
+                                    carrito.push(nuevoProducto);
+                                }
+                            } else {
+                                listCarrito.innerHTML = "";
+                                listCarrito.innerHTML = `
+                                div class="w-fit rounded-lg bg-blue-700 text-yellow-400 text-center p-3 h-full animate__animated animate__fadeIn">
+                                    p class="text-sm">⚠️ Se han retirado los productos de otras tiendas/p>
+                                /div>
+                                `;
+                                setTimeout(function () {
+                                    addProducto(id, precio, nombre, tienda);
+                                    mostrarBarraProductos();
+                                }, 3500);
+                                localStorage.removeItem("miCarrito");
+                    
+                                return true;
+                            }
+                    
+                            localStorage.setItem("miCarrito", JSON.stringify(carrito));
+                            mostrarBarraProductos();
+                        } else {
+                            let arrayObj = [];
+                            nuevoProducto = crearNuevoProducto(id, precio, nombre, tienda);
+                            arrayObj.push(nuevoProducto);
+                            localStorage.setItem("miCarrito", JSON.stringify(arrayObj));
+                        }
+                    
+                        mostrarBarraProductos();
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarTienda()</p>
+                <small style="font-size: 0.8rem">Comprueba la tienda de los elementos del carrito para evitar diferentes tiendas en el mismo pedido</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarTienda(carrito, tienda) {
+                        const pos = carrito.findIndex(function (producto) {
+                            return producto.tienda == tienda;
+                        });
+                    
+                        if (pos == -1) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">crearNuevoProducto()</p>
+                <small style="font-size: 0.8rem">Crea un nuevo objeto con los datos del producto</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function crearNuevoProducto(id, precio, nombre, tienda) {
+                        return { id: id, precio: precio, nombre: nombre, cantidad: 1, tienda: tienda };
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">obtenerPosicionProducto()</p>
+                <small style="font-size: 0.8rem">Busca la posición del producto en el carrito</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function obtenerPosicionProducto(carrito, idProd) {
+                        const pos = carrito.findIndex(function (producto) {
+                            return producto.id == idProd;
+                        });
+                    
+                        return pos;
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">aumentarCantidad()</p>
+                <small style="font-size: 0.8rem">Aumenta la cantida de un producto en el carrito</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function aumentarCantidad(id) {
+                        try {
+                            let carrito = JSON.parse(localStorage.getItem("miCarrito"));
+                    
+                            let posicion = obtenerPosicionProducto(carrito, id);
+                    
+                            if (carrito[posicion].cantidad != 99) {
+                                carrito[posicion].cantidad = carrito[posicion].cantidad + 1;
+                            }
+                    
+                            localStorage.setItem("miCarrito", JSON.stringify(carrito));
+                    
+                            mostrarBarraProductos();
+                    
+                            return true;
+                        } catch (e) {
+                            return false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">reducirCantidad()</p>
+                <small style="font-size: 0.8rem">Reduce la cantidad de un producto o lo elimina en caso de reducir de 1 a 0</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function reducirCantidad(id) {
+                        try {
+                            let carrito = JSON.parse(localStorage.getItem("miCarrito"));
+                    
+                            let posicion = obtenerPosicionProducto(carrito, id);
+                    
+                            if (carrito[posicion].cantidad == 1) {
+                                eliminarProducto(id);
+                                return true;
+                            } else {
+                                carrito[posicion].cantidad = carrito[posicion].cantidad - 1;
+                                localStorage.setItem("miCarrito", JSON.stringify(carrito));
+                            }
+                    
+                            mostrarBarraProductos();
+                    
+                            return true;
+                        } catch (e) {
+                            return false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">eliminarProducto()</p>
+                <small style="font-size: 0.8rem">Elimina un producto del carrito</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function eliminarProducto(id) {
+                        let carrito = JSON.parse(localStorage.getItem("miCarrito"));
+                        carrito.splice(obtenerPosicionProducto(carrito, id), 1);
+                        localStorage.setItem("miCarrito", JSON.stringify(carrito));
+                        mostrarBarraProductos();
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">crearComponenteProductoCarrito()</p>
+                <small style="font-size: 0.8rem">Crea un componente del producto para visualizarlo en la barra</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function crearComponenteProductoCarrito(element) {
+                        const componente = document.createElement("div");
+                        componente.setAttribute("class", "bg-blue-700 px-3 py-2 rounded-lg w-fit");
+                        const producto = document.createElement("p");
+                        producto.textContent = element.nombre;
+                        producto.setAttribute("class", "text-sm text-white font-semibold");
+                        componente.appendChild(producto);
+                    
+                        const divUd = document.createElement("div");
+                        divUd.setAttribute("class", "flex items-center h-fit mt-1 gap-1.5");
+                        const ud = document.createElement("p");
+                        ud.setAttribute("class", "text-xs text-white/60 mr-2");
+                        ud.textContent = element.cantidad;
+                        divUd.appendChild(ud);
+                    
+                        const btnMas = document.createElement("button");
+                        btnMas.setAttribute("class", "mr-1 bg-indigo-700 hover:bg-indigo-800 duration-300 rounded-full h-5 w-5 flex items-center justify-center");
+                        btnMas.setAttribute("onclick", `aumentarCantidad(${element.id})`);
+                        btnMas.textContent = "+";
+                        divUd.appendChild(btnMas);
+                    
+                        const btnMenos = document.createElement("button");
+                        btnMenos.setAttribute("class", "mr-1 bg-indigo-700 hover:bg-indigo-800 duration-300 rounded-full h-5 w-5 flex items-center justify-center");
+                        btnMenos.setAttribute("onclick", `reducirCantidad(${element.id})`);
+                        btnMenos.textContent = "-";
+                        divUd.appendChild(btnMenos);
+                        componente.appendChild(divUd);
+                    
+                        return componente;
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">enlacePedido()</p>
+                <small style="font-size: 0.8rem">Modifica el botón de la barra para redirigir a un sitio dependiendo si hay productos o no</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function enlacePedido() {
+                        const enlace = document.getElementById("enlacePedido");
+                        if (typeof localStorage !== "undefined" && localStorage.getItem("miCarrito")) {
+                            if (JSON.parse(localStorage.getItem("miCarrito")).length) {
+                                enlace.setAttribute("href", "carrito.html");
+                                enlace.textContent = "Pedir ahora";
+                            } else {
+                                enlace.setAttribute("href", "busqueda_tiendas.php");
+                                enlace.textContent = "Buscar tiendas";
+                            }
+                    
+                        } else {
+                            enlace.setAttribute("href", "busqueda_tiendas.php");
+                            enlace.textContent = "Buscar tiendas";
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">calcularImporte()</p>
+                <small style="font-size: 0.8rem">Calcula el importe del pedido incluyendo el envío</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function calcularImporte() {
+                        if (typeof localStorage !== "undefined" && localStorage.getItem("miCarrito") && JSON.parse(localStorage.getItem("miCarrito")).length >= 1) {
+                            let carrito = JSON.parse(localStorage.getItem("miCarrito"));
+                            let total = 0.00;
+                            let cantidad = 0;
+                            carrito.forEach(producto => {
+                                if (producto.cantidad == 1) {
+                                    total += producto.precio;
+                                } else {
+                                    total += (producto.precio * producto.cantidad);
+                                }
+                                cantidad += producto.cantidad;
+                            });
+                            contadorPedidos.innerHTML = cantidad;
+                            // Suma gastos de envío (1.90 + 0.12 cent por cada unidad)
+                            total = total + 1.90 + (0.12 * cantidad);
+                            totalBar.textContent = `${total.toFixed(2)}€`;
+                        } else {
+                            contadorPedidos.innerHTML = 0;
+                            totalBar.textContent = "0.00€";
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">crear_pedido.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarResumenCompra()</p>
+                <small style="font-size: 0.8rem">Inicia los eventos para crear un pedido</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarResumenCompra() {
+                        mostrarProductos();
+                        calcularCostes();
+                    
+                        aplicarCupon.addEventListener("click", aplicarDescuento);
+                        realizarPago.addEventListener("click", procesarPedido);
+                    
+                        // VALIDAR
+                        direccion.addEventListener("input", validarDireccion);
+                        piso.addEventListener("input", validarPiso);
+                        puerta.addEventListener("input", validarPuerta);
+                    
+                        tarjeta.addEventListener("input", validarTarjeta);
+                        cvv.addEventListener("input", validarCVV);
+                        caducidad.addEventListener("input", validarCaducidad);
+                        titular.addEventListener("input", validarTitular);
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">procesarPedido()</p>
+                <small style="font-size: 0.8rem">Envío de petición para crear el pedido y guardarlo en la BBDD</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function procesarPedido() {
+                        validarDireccion();
+                        validarPiso();
+                        validarPuerta();
+                        validarTarjeta();
+                        validarCVV();
+                        validarCaducidad();
+                        validarTitular();
+                    
+                        if (validarDireccion() &&
+                            validarPiso() &&
+                            validarPuerta() &&
+                            validarTarjeta() &&
+                            validarCVV() &&
+                            validarCaducidad() &&
+                            validarTitular()
+                        ) {
+                            const idUsu = localStorage.getItem("id");
+                    
+                            const datos = {
+                                id: idUsu,
+                                carrito: localStorage.getItem("miCarrito"),
+                                direccion: direccion.value,
+                                piso: piso.value,
+                                puerta: puerta.value,
+                                mensaje: mensaje.value
+                            }
+                    
+                            fetch("../../php/usuarios/crear_pedido.php", {
+                                method: "POST",
+                                body: JSON.stringify(datos),
+                                headers: {
+                                    "Content-Type": "application/json"
+                                }
+                            })
+                                .then(response => response.text())
+                                .then(data => {
+                                    if (data == "Creado") {
+                                        localStorage.removeItem("miCarrito");
+                                        window.location.href = "pedidos.html"
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error(error);
+                                });
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">aplicarDescuento()</p>
+                <small style="font-size: 0.8rem">Aplica un descuento según el código usado</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function aplicarDescuento() {
+                        calcularCostes();
+                        switch (codigo.value) {
+                            case "DAILY10":
+                                calcularCostesDescuento(0.10);
+                                break;
+                            case "DAILY20":
+                                calcularCostesDescuento(0.20);
+                                break;
+                            case "ENVIO23":
+                                calcularCostesSinEnvio()
+                                break;
+                            default:
+                                calcularCostes();
+                                break;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">calcularCostesDescuento()</p>
+                <small style="font-size: 0.8rem">Calcula los descuentos para aplicar el nuevo precio</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function calcularCostesDescuento(reduccion) {
+                        if (typeof localStorage !== "undefined" && localStorage.getItem("miCarrito") && JSON.parse(localStorage.getItem("miCarrito")).length >= 1) {
+                            let carrito = JSON.parse(localStorage.getItem("miCarrito"));
+                            let totalValor = 0.00;
+                            let cantidad = 0;
+                            carrito.forEach(producto => {
+                                if (producto.cantidad == 1) {
+                                    totalValor += producto.precio;
+                                } else {
+                                    totalValor += (producto.precio * producto.cantidad);
+                                }
+                                cantidad += producto.cantidad;
+                            });
+                            subtotal.textContent = totalValor.toFixed(2);
+                            // Suma gastos de envío (1.90 + 0.12 cent por cada unidad);
+                            envio.textContent = (1.90 + (0.12 * cantidad)).toFixed(2);
+                            totalValor = totalValor + 1.90 + (0.12 * cantidad) - (totalValor*reduccion);
+                            descuento.textContent = (totalValor*reduccion).toFixed(2);
+                            total.textContent = totalValor.toFixed(2);
+                        } else {
+                            descuento.textContent = 0.00;
+                            subtotal.textContent = 0.00;
+                            total.textContent = 0.00;
+                            envio.textContent = 0.00;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">calcularCostesSinEnvio()</p>
+                <small style="font-size: 0.8rem">Calcula los costes por defecto (sin envío)</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function calcularCostesSinEnvio() {
+                        if (typeof localStorage !== "undefined" && localStorage.getItem("miCarrito") && JSON.parse(localStorage.getItem("miCarrito")).length >= 1) {
+                            let carrito = JSON.parse(localStorage.getItem("miCarrito"));
+                            let totalValor = 0.00;
+                            let cantidad = 0;
+                            carrito.forEach(producto => {
+                                if (producto.cantidad == 1) {
+                                    totalValor += producto.precio;
+                                } else {
+                                    totalValor += (producto.precio * producto.cantidad);
+                                }
+                                cantidad += producto.cantidad;
+                            });
+                            subtotal.textContent = totalValor.toFixed(2);
+                            // Suma gastos de envío (1.90 + 0.12 cent por cada unidad);
+                            envio.textContent = 0.00;
+                            descuento.textContent = 0.00;
+                            total.textContent = totalValor.toFixed(2);
+                        } else {
+                            descuento.textContent = 0.00;
+                            subtotal.textContent = 0.00;
+                            total.textContent = 0.00;
+                            envio.textContent = 0.00;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarDireccion()</p>
+                <small style="font-size: 0.8rem">Valida la dirección del envío</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarDireccion() {
+                        const expDireccion = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s\d.',-]+$/u;
+                        if (expDireccion.test(direccion.value)) {
+                            direccion.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            return true;
+                        } else {
+                            direccion.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            return false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarPiso()</p>
+                <small style="font-size: 0.8rem">Valida el piso</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarPiso() {
+                        const expPiso = /^(?:1\d{2}|200|[1-9]\d?)$/;
+                        if (expPiso.test(piso.value)) {
+                            piso.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            return true;
+                        } else {
+                            piso.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            return false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarPuerta()</p>
+                <small style="font-size: 0.8rem">Valida la puerta</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarPuerta() {
+                        const expPuerta = /^[a-zA-Z]$/;;
+                        if (expPuerta.test(puerta.value)) {
+                            puerta.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            return true;
+                        } else {
+                            puerta.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            return false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarTarjeta()</p>
+                <small style="font-size: 0.8rem">Valida la tarjeta VISA o MasterCard</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarTarjeta() {
+                        const expTarjeta = /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})$/;
+                        if (expTarjeta.test(tarjeta.value)) {
+                            tarjeta.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            return true;
+                        } else {
+                            tarjeta.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            return false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarCVV()</p>
+                <small style="font-size: 0.8rem">Valida el CVV de la tarjeta</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarCVV() {
+                        const expCaducidad = /^\d{3}$/;
+                        if (expCaducidad.test(cvv.value)) {
+                            cvv.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            return true;
+                        } else {
+                            cvv.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            return false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarCaducidad()</p>
+                <small style="font-size: 0.8rem">Valida la caducidad de la tarjeta</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarCaducidad() {
+                        const fechaActual = new Date();
+                        const fechaAyer = new Date(fechaActual);
+                        fechaAyer.setDate(fechaAyer.getDate() - 1);
+                        const fechaFormulario = new Date(caducidad.value);
+                        if (fechaFormulario > fechaAyer) {
+                            caducidad.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            return true;
+                        } else {
+                            caducidad.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            return false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarTitular()</p>
+                <small style="font-size: 0.8rem">Valida el titular de la tarjeta</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarTitular() {
+                        const expTitular = /^([a-zA-ZáéíóúÁÉÍÓÚñÑüÜñ]{2,}\s?-?\s?){1,4}$/;
+                        if (expTitular.test(titular.value)) {
+                            titular.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            return true;
+                        } else {
+                            titular.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            return false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">mostrarProductos()</p>
+                <small style="font-size: 0.8rem">Muestra todos los productos del carrito en una tabla</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function mostrarProductos() {
+                        const listaProductosTabla = document.getElementById("listaProductosTabla");
+                        listaProductosTabla.innerHTML = "";
+                        if (typeof localStorage !== "undefined" && localStorage.getItem("miCarrito") && JSON.parse(localStorage.getItem("miCarrito")).length >= 1) {
+                            let carrito = JSON.parse(localStorage.getItem("miCarrito"));
+                    
+                            carrito.forEach(producto => {
+                                listaProductosTabla.appendChild(crearFila(producto));
+                            });
+                        } else {
+                            listaProductosTabla.innerHTML = "tr>td class='p-4 text-sm'>(Sin productos)/td>/tr>";
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">calcularCostes()</p>
+                <small style="font-size: 0.8rem">Calcula los costes totales</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function calcularCostes() {
+                        if (typeof localStorage !== "undefined" && localStorage.getItem("miCarrito") && JSON.parse(localStorage.getItem("miCarrito")).length >= 1) {
+                            let carrito = JSON.parse(localStorage.getItem("miCarrito"));
+                            let totalValor = 0.00;
+                            let cantidad = 0;
+                            carrito.forEach(producto => {
+                                if (producto.cantidad == 1) {
+                                    totalValor += producto.precio;
+                                } else {
+                                    totalValor += (producto.precio * producto.cantidad);
+                                }
+                                cantidad += producto.cantidad;
+                            });
+                            subtotal.textContent = totalValor.toFixed(2);
+                            // Suma gastos de envío (1.90 + 0.12 cent por cada unidad);
+                            envio.textContent = (1.90 + (0.12 * cantidad)).toFixed(2);
+                            totalValor = totalValor + 1.90 + (0.12 * cantidad) - descuento.textContent;
+                            total.textContent = totalValor.toFixed(2);
+                        } else {
+                            descuento.textContent = 0.00;
+                            subtotal.textContent = 0.00;
+                            total.textContent = 0.00;
+                            envio.textContent = 0.00;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">crearFila()</p>
+                <small style="font-size: 0.8rem">Crea una fila con cada producto del carrito</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function crearFila(element) {
+                        const fila = document.createElement("tr");
+                        fila.setAttribute("class", "hover:bg-blue-100/20 duration-300")
+                    
+                        const tdNombre = document.createElement("td");
+                        tdNombre.setAttribute("class", "p-4 text-sm font-medium");
+                        tdNombre.innerHTML = `
+                            div class='flex items-center gap-2'>
+                                div class='w-12 h-12 rounded border' style='background-image: url("../../img_bbdd/productos/${element.id}.jpg"); background-size: cover; background-position: center bottom;'>
+                                /div>
+                                div>
+                                    p>${element.nombre}/p>
+                                    p class="text-sm font-normal text-blue-300">${element.tienda}/p>
+                                /div>
+                            /div>
+                        `;
+                        fila.appendChild(tdNombre);
+                    
+                        const tdPrecio = document.createElement("td");
+                        tdPrecio.setAttribute("class", "p-4 text-sm");
+                        tdPrecio.textContent = `${element.precio.toFixed(2)}€`;
+                        fila.appendChild(tdPrecio);
+                    
+                        const tdCantidad = document.createElement("td");
+                        tdCantidad.setAttribute("class", "p-4 text-sm text-center");
+                        tdCantidad.innerHTML = `
+                            div class="flex gap-2">
+                                button onclick='aumentarCantidad(${element.id})' class="cursor-pointer duration-300 bg-white border border-blue-200 hover:bg-green-500 w-5 h-5 font-bold rounded-full" onclick="aumentarCantidad(id)">
+                                    p class="relative bottom-0.5">+/p>
+                                /button>
+                                p>${element.cantidad}/p>
+                                button onclick='reducirCantidad(${element.id})' class="cursor-pointer duration-300 bg-white border border-blue-200 hover:bg-red-500 w-5 h-5 font-bold rounded-full" onclick="reducirCantidad(id)">
+                                    p class="relative bottom-0.5">-/p>
+                                /button>
+                            /div>
+                        `;
+                        fila.appendChild(tdCantidad);
+                    
+                        const tdTotal = document.createElement("td");
+                        tdTotal.setAttribute("class", "p-4 text-sm");
+                        tdTotal.textContent = `${(element.precio * element.cantidad).toFixed(2)}€`;
+                        fila.appendChild(tdTotal);
+                    
+                        const tdEliminar = document.createElement("td");
+                        tdEliminar.setAttribute("class", "p-4 text-sm text-center");
+                        tdEliminar.innerHTML = `
+                        button
+                        class="cursor-pointer duration-300 bg-white border border-red-500 text-red-500 hover:text-white hover:bg-red-500 w-5 h-5 rounded-full"
+                        onclick="eliminarProducto(${element.id})">
+                            p class="relative bottom-0.5">x/p>
+                        /button>
+                        `;
+                        fila.appendChild(tdEliminar);
+                    
+                        return fila;
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">crearFila()</p>
+                <small style="font-size: 0.8rem">Crea una fila con cada producto del carrito</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function crearFila(element) {
+                        const fila = document.createElement("tr");
+                        fila.setAttribute("class", "hover:bg-blue-100/20 duration-300")
+                    
+                        const tdNombre = document.createElement("td");
+                        tdNombre.setAttribute("class", "p-4 text-sm font-medium");
+                        tdNombre.innerHTML = `
+                            div class='flex items-center gap-2'>
+                                div class='w-12 h-12 rounded border' style='background-image: url("../../img_bbdd/productos/${element.id}.jpg"); background-size: cover; background-position: center bottom;'>
+                                /div>
+                                div>
+                                    p>${element.nombre}/p>
+                                    p class="text-sm font-normal text-blue-300">${element.tienda}/p>
+                                /div>
+                            /div>
+                        `;
+                        fila.appendChild(tdNombre);
+                    
+                        const tdPrecio = document.createElement("td");
+                        tdPrecio.setAttribute("class", "p-4 text-sm");
+                        tdPrecio.textContent = `${element.precio.toFixed(2)}€`;
+                        fila.appendChild(tdPrecio);
+                    
+                        const tdCantidad = document.createElement("td");
+                        tdCantidad.setAttribute("class", "p-4 text-sm text-center");
+                        tdCantidad.innerHTML = `
+                            div class="flex gap-2">
+                                button onclick='aumentarCantidad(${element.id})' class="cursor-pointer duration-300 bg-white border border-blue-200 hover:bg-green-500 w-5 h-5 font-bold rounded-full" onclick="aumentarCantidad(id)">
+                                    p class="relative bottom-0.5">+/p>
+                                /button>
+                                p>${element.cantidad}/p>
+                                button onclick='reducirCantidad(${element.id})' class="cursor-pointer duration-300 bg-white border border-blue-200 hover:bg-red-500 w-5 h-5 font-bold rounded-full" onclick="reducirCantidad(id)">
+                                    p class="relative bottom-0.5">-/p>
+                                /button>
+                            /div>
+                        `;
+                        fila.appendChild(tdCantidad);
+                    
+                        const tdTotal = document.createElement("td");
+                        tdTotal.setAttribute("class", "p-4 text-sm");
+                        tdTotal.textContent = `${(element.precio * element.cantidad).toFixed(2)}€`;
+                        fila.appendChild(tdTotal);
+                    
+                        const tdEliminar = document.createElement("td");
+                        tdEliminar.setAttribute("class", "p-4 text-sm text-center");
+                        tdEliminar.innerHTML = `
+                        button
+                        class="cursor-pointer duration-300 bg-white border border-red-500 text-red-500 hover:text-white hover:bg-red-500 w-5 h-5 rounded-full"
+                        onclick="eliminarProducto(${element.id})">
+                            p class="relative bottom-0.5">x/p>
+                        /button>
+                        `;
+                        fila.appendChild(tdEliminar);
+                    
+                        return fila;
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">eliminarProducto()</p>
+                <small style="font-size: 0.8rem">Elimina un producto del carrito</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function eliminarProducto(id) {
+                        let carrito = JSON.parse(localStorage.getItem("miCarrito"));
+                        carrito.splice(obtenerPosicionProducto(carrito, id), 1);
+                        localStorage.setItem("miCarrito", JSON.stringify(carrito));
+                        mostrarProductos();
+                        calcularCostes();
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">aumentarCantidad()</p>
+                <small style="font-size: 0.8rem">Aumenta la cantidad de un producto del carrito</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function aumentarCantidad(id) {
+                        let carrito = JSON.parse(localStorage.getItem("miCarrito"));
+                        let pos = obtenerPosicionProducto(carrito, id);
+                        if (carrito[pos].cantidad  99) {
+                            carrito[pos].cantidad = carrito[pos].cantidad + 1;
+                            localStorage.setItem("miCarrito", JSON.stringify(carrito));
+                            mostrarProductos();
+                            calcularCostes();
+                        } else {
+                            return true;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">reducirCantidad()</p>
+                <small style="font-size: 0.8rem">Reduce la cantidad de un producto del carrito o lo elimina si llega a 0</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function reducirCantidad(id) {
+                        let carrito = JSON.parse(localStorage.getItem("miCarrito"));
+                        let pos = obtenerPosicionProducto(carrito, id);
+                        if (carrito[pos].cantidad != 1) {
+                            carrito[pos].cantidad = carrito[pos].cantidad - 1;
+                            localStorage.setItem("miCarrito", JSON.stringify(carrito));
+                            mostrarProductos();
+                            calcularCostes();
+                        } else {
+                            eliminarProducto(id);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">reducirCantidad()</p>
+                <small style="font-size: 0.8rem">Obtiene la posición de un producto del carrito</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function obtenerPosicionProducto(carrito, id) {
+                        const pos = carrito.findIndex(function (producto) {
+                            return producto.id == id;
+                        });
+                    
+                        return pos;
+                    }
+                </code>
+            </pre>
+        </section>
+
+    </article>
+
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">crear_peticion.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">"-"()</p>
+                <small style="font-size: 0.8rem">Envía una petición de ayuda por medio de la Api Fetch</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    btnEnviar.onclick = function () {
+                        try {
+                            validarAsunto();
+                            validarDescripcion();
+                            if (validarAsunto() && validarDescripcion()) {
+                                datos = {
+                                    'id': localStorage.getItem('id'),
+                                    'asunto': asunto.value,
+                                    'descripcion': descripcion.value,
+                                }
+                                fetch("../../php/usuarios/enviar_mensaje_usuario.php", {
+                                    method: "POST",
+                                    body: JSON.stringify(datos),
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    }
+                                })
+                                .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('Error en la solicitud');
+                                        }
+                                        return response.text();
+                                    })
+                                .then(data => {
+                                        const respuestaPeticion = document.getElementById("respuestaPeticion");
+                                        const avisoPeticon = document.createElement("p");
+                                        respuestaPeticion.innerHTML = "";
+                                        console.log(data)
+                                        if (data == "Creada") {
+                                            avisoPeticon.setAttribute("class", "w-full text-center rounded text-green-600 bg-green-200 py-2");
+                                            avisoPeticon.textContent = "Se ha creado correctamente la petición. Revisa el correo para recibir respuesta";
+                                            respuestaPeticion.appendChild(avisoPeticon);
+                                        } else {
+                                            avisoPeticon.setAttribute("class", "w-full text-center rounded text-red-600 bg-red-200 py-2");
+                                            avisoPeticon.textContent = "No se ha podido crear la petición correctamente. Inténtalo de nuevo.";
+                                            respuestaPeticion.appendChild(avisoPeticon);
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error("Error: No se ha podido crear la petición ->", error);
+                                    });
+                            }
+                        } catch (e) {
+                            const respuestaPeticion = document.getElementById("respuestaPeticion");
+                            const avisoPeticon = document.createElement("p");
+                            respuestaPeticion.innerHTML = "";
+                            avisoPeticon.setAttribute("class", "w-full text-center rounded text-red-600 bg-red-200 py-2");
+                            avisoPeticon.textContent = "No se ha podido crear la petición correctamente. Inténtalo de nuevo.";
+                            respuestaPeticion.appendChild(avisoPeticon);
+                            console.log("No se ha podido crear la petición: " + e);
+                        }
+                    
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarAsunto()</p>
+                <small style="font-size: 0.8rem">Valida que el asunto cumple los requisitos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarAsunto() {
+                        try {
+                            const expAsunto = /^[\wñÑÁáÉéÍíÓóÚú.,:;"'¡¿\s]{10,50}$/i;
+                            const msgAsunto = document.getElementById("msgAsunto");
+                            if (expAsunto.test(asunto.value)) {
+                                asunto.setAttribute(
+                                    "class",
+                                    "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgAsunto.setAttribute("class", "hidden");
+                    
+                                return true;
+                            } else {
+                                asunto.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgAsunto.setAttribute("class", "flex");
+                    
+                                return false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar el asunto: ${error}`);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarDescripcion()</p>
+                <small style="font-size: 0.8rem">Valida que la descripción cumple los requisitos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarDescripcion() {
+                        try {
+                            const msgDescripcion = document.getElementById("msgDescripcion");
+                            const expDescripcion = /^[\wñÑÁáÉéÍíÓóÚú.,:;"'¡¿\s]{10,200}$/i;
+                    
+                            if (expDescripcion.test(descripcion.value)) {
+                                descripcion.setAttribute(
+                                    "class",
+                                    "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgDescripcion.setAttribute("class", "hidden");
+                    
+                                return true;
+                            } else {
+                                descripcion.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgDescripcion.setAttribute("class", "flex");
+                    
+                                return false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar la descripción: ${error}`);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>    
+
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">gestion_sesiones.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">comprobarSesion()</p>
+                <small style="font-size: 0.8rem">Comprueba que la sesión es correcta si es usuario y en caso contrario redirige al lugar correcto</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function comprobarSesion(){
+                        const tipoUsuario = localStorage.getItem("tipoUsuario");
+                        if(tipoUsuario !== "usuario"){
+                            if(tipoUsuario !== null){
+                                
+                                const redirecciones = {
+                                    'proveedor': '../proveedores/inicio.html',
+                                    'rider': '../riders/inicio.html',
+                                    'administrador': '../administrador/inicio.html',
+                                }
+                    
+                                window.location.href = redirecciones[tipoUsuario];
+                            }else{
+                                window.location.href = '../index.html';
+                            }
+                        }else{
+                            return true;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

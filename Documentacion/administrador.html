@@ -1,0 +1,2159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<>
+    <nav class="navbar navbar-dark bg-dark fixed-top mb-5">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">DailyGo Doc</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+                aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menú</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Global</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="usuarios.html">Usuarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="proveedores.html">Proveedores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="riders.html">Riders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="administrador.html">Administrador</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-5 pb-5">
+    </div>
+
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">modificar_cliente.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarPerfil()</p>
+                <small style="font-size: 0.8rem">Inicia los eventos para modificar el cliente</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarPerfil() {
+                        nombre.addEventListener("input", validarNombre);
+                        apellidos.addEventListener("input", validarApellidos);
+                        telefono.addEventListener("input", validarTelefono);
+                        mail.addEventListener("input", validarCorreo);
+                    
+                        btnNombre.addEventListener("click", cambiarNombre);
+                        btnApellidos.addEventListener("click", cambiarApellidos);
+                        btnTelefono.addEventListener("click", cambiarTelefono);
+                        btnMail.addEventListener("click", cambiarCorreo);
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarNombre()</p>
+                <small style="font-size: 0.8rem">Valida el nombre nuevo</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarNombre() {
+                        const expNombre = /^([a-zA-ZáéíóúÁÉÍÓÚñÑüÜñ]{2,20}\s?)+$/;
+                        if (expNombre.test(nombre.value)) {
+                            nombre.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgNombre.setAttribute("class", "hidden");
+                            validacionNombre = true;
+                        } else {
+                            nombre.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgNombre.setAttribute("class", "flex");
+                            validacionNombre = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarApellidos()</p>
+                <small style="font-size: 0.8rem">Valida los apellidos nuevo</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarApellidos() {
+                        const expApellidos = /^([a-zA-ZáéíóúÁÉÍÓÚñÑüÜñ]{2,}\s?-?\s?){1,4}$/;
+                        if (expApellidos.test(apellidos.value)) {
+                            apellidos.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgApellidos.setAttribute("class", "hidden");
+                            validacionApellidos = true;
+                        } else {
+                            nombrapellidos.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgApellidos.setAttribute("class", "flex");
+                            validacionApellidos = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarTelefono()</p>
+                <small style="font-size: 0.8rem">Valida el teléfono nuevo y comprueba su existencia en BBDD</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarTelefono() {
+                        const expTelefono = /^(6|7|8|9)\d{8}$/;
+                        if (expTelefono.test(telefono.value)) {
+                            telefono.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgTelefono.setAttribute("class", "hidden");
+                            msgTelefonoExiste.setAttribute("class", "hidden");
+                            validacionTelefono = true;
+                        } else {
+                            telefono.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgTelefono.setAttribute("class", "flex");
+                            msgTelefonoExiste.setAttribute("class", "hidden");
+                            validacionTelefono = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarCorreo()</p>
+                <small style="font-size: 0.8rem">Valida el correo nuevo y comprueba su existencia en BBDD</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarCorreo() {
+                        const expCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                        if (expCorreo.test(mail.value)) {
+                            mail.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgCorreo.setAttribute("class", "hidden");
+                            msgCorreoExiste.setAttribute("class", "hidden");
+                            validacionCorreo = true;
+                    
+                        } else {
+                            mail.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgCorreo.setAttribute("class", "flex");
+                            msgCorreoExiste.setAttribute("class", "hidden");
+                            validacionCorreo = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">actualizarDatos()</p>
+                <small style="font-size: 0.8rem">Petición AJAX con fetch para actualizar cada tipo de dato</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function actualizarDatos(ruta, datos) {
+                        fetch(ruta, {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Error en la solicitud');
+                                }
+                                return response.text();
+                            })
+                            .then(data => {
+                                console.log(data)
+                                switch (data) {
+                                    case "actualizadoNombre":
+                                        msgCorrecto.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            msgCorrecto.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                    case "actualizadoApe":
+                                        msgCorrecto.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            msgCorrecto.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                    case "actualizadoTel":
+                                        msgCorrecto.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            msgCorrecto.setAttribute("class", "hidden");
+                                        }, 3000);
+                    
+                                        break;
+                                    case "actualizadoMail":
+                                        msgCorrecto.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            msgCorrecto.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                    case "telExiste":
+                                        telefono.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                                        msgTelefono.setAttribute("class", "hidden");
+                                        msgTelefonoExiste.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            msgCorrecto.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                    case "mailExiste":
+                                        mail.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                                        msgCorreo.setAttribute("class", "hidden");
+                                        msgCorreoExiste.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            msgCorrecto.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                    
+                                }
+                    
+                            })
+                            .catch(error => {
+                                console.error("Error: ", error);
+                                return false;
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarNombre()</p>
+                <small style="font-size: 0.8rem">Envía los datos del nombre y la url del PHP al Fetch AJAX</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarNombre() {
+                        if (validacionNombre) {
+                            const datos = {
+                                'nombre': nombre.value,
+                                'id': codigo.value
+                            }
+                            actualizarDatos("../../php/usuarios/actualizar_datos_usuario.php", datos);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarApellidos()</p>
+                <small style="font-size: 0.8rem">Envía los datos del apellido y la url del PHP al Fetch AJAX</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarApellidos() {
+                        if (validacionApellidos) {
+                            const datos = {
+                                'apellidos': apellidos.value,
+                                'id': codigo.value
+                            }
+                            actualizarDatos("../../php/usuarios/actualizar_datos_usuario.php", datos);
+                    
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarTelefono()</p>
+                <small style="font-size: 0.8rem">Envía los datos del teléfono y la url del PHP al Fetch AJAX</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarTelefono() {
+                        if (validacionTelefono) {
+                            const datos = {
+                                'telefono': telefono.value,
+                                'id': codigo.value
+                            }
+                            actualizarDatos("../../php/usuarios/actualizar_datos_usuario.php", datos);
+                    
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarTelefono()</p>
+                <small style="font-size: 0.8rem">Envía los datos del teléfono y la url del PHP al Fetch AJAX</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarTelefono() {
+                        if (validacionTelefono) {
+                            const datos = {
+                                'telefono': telefono.value,
+                                'id': id.value
+                            }
+                            actualizarDatos("../../php/riders/actualizar_datos_usuario.php", datos);
+                    
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">modificar_proveedor.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarPerfil()</p>
+                <small style="font-size: 0.8rem">Inicia los eventos para modificar el proveedor</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarPerfil() {
+                        mostrarDatos();
+                        razsoc.addEventListener("input", validarRazsoc);
+                        cat.addEventListener("change", cambiarCategoria);
+                        direccion.addEventListener("input", validarDireccion);
+                        telefono.addEventListener("input", validarTelefono);
+                        correo.addEventListener("input", validarCorreo);
+                    
+                        btnRazsoc.addEventListener("click", cambiarRazsoc);
+                        btnDirec.addEventListener("click", cambiarDireccion);
+                        btnTelefono.addEventListener("click", cambiarTelefono);
+                        btnCorreo.addEventListener("click", cambiarCorreo);
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">mostrarDatos()</p>
+                <small style="font-size: 0.8rem">Muestra los datos del proveedor para modificar</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function mostrarDatos() {
+                        datosCategoria = {
+                            'cat': 'cat',
+                            'cif': cif.value
+                        }
+                        fetch("../../php/proveedores/actualizar_datos_proveedores.php", {
+                            method: "POST",
+                            body: JSON.stringify(datosCategoria),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Error en la solicitud');
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                data.forEach(element => {
+                                    cat.innerHTML += "<option value='" + element.categoria + "'>" + element.categoria + "</option>"
+                                });
+                            })
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarRazsoc()</p>
+                <small style="font-size: 0.8rem">Valida que la razón cumple el formato requerido según la epxresión
+                    regular</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarRazsoc() {
+                        const expRazSoc = /^([a-zA-ZáéíóúÁÉÍÓÚñÑüÜñ']{2,20}\s?)+$/;
+                        if (expRazSoc.test(razsoc.value)) {
+                            razsoc.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgRazsoc.setAttribute("class", "hidden");
+                            validacionRazsoc = true;
+                        } else {
+                            razsoc.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgRazsoc.setAttribute("class", "flex");
+                            validacionRazsoc = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarDireccion()</p>
+                <small style="font-size: 0.8rem">Valida que la dirección cumple el formato requerido según la epxresión
+                    regular</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarDireccion() {
+                        const expDirec = /^([a-zA-ZáéíóúÁÉÍÓÚñÑüÜñ /.,0-9]){2,40}$/;
+                        if (expDirec.test(direccion.value)) {
+                            direccion.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgDireccion.setAttribute("class", "hidden");
+                            validacionDirec = true;
+                        } else {
+                            direccion.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgDireccion.setAttribute("class", "flex");
+                            validacionDirec = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarTelefono()</p>
+                <small style="font-size: 0.8rem">Valida que la teléfono cumple el formato requerido según la epxresión
+                    regular y que no existe en la BBDD</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarTelefono() {
+                        const expTelefono = /^(6|7|8|9)\d{8}$/;
+                        if (expTelefono.test(telefono.value)) {
+                            telefono.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgTelefono.setAttribute("class", "hidden");
+                            msgTelefonoExiste.setAttribute("class", "hidden");
+                            validacionTelefono = true;
+                        } else {
+                            telefono.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgTelefono.setAttribute("class", "flex");
+                            msgTelefonoExiste.setAttribute("class", "hidden");
+                            validacionTelefono = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarCorreo()</p>
+                <small style="font-size: 0.8rem">Valida que la correo cumple el formato requerido según la epxresión
+                    regular y que no existe en la BBDD</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarCorreo() {
+                        const expCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                        if (expCorreo.test(correo.value)) {
+                            correo.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgCorreo.setAttribute("class", "hidden");
+                            msgCorreoExiste.setAttribute("class", "hidden");
+                            validacionCorreo = true;
+                    
+                        } else {
+                            correo.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgCorreo.setAttribute("class", "flex");
+                            msgCorreoExiste.setAttribute("class", "hidden");
+                            validacionCorreo = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">actualizarDatos()</p>
+                <small style="font-size: 0.8rem">Petición AJAX con Fetch para cambiar cada tipo de dato</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function actualizarDatos(ruta, datos) {
+                        fetch(ruta, {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Error en la solicitud');
+                                }
+                                return response.text();
+                            })
+                            .then(data => {
+                                console.log(data)
+                                switch (data) {
+                                    case "catCambiada":
+                                        categoriaRaz.innerHTML = cat.value;
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                    case "actualizadoRazsoc":
+                                        nombreRaz.innerHTML = razsoc.value;
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        localStorage.setItem("razonSocial", razsoc.value);
+                                        break;
+                                    case "actualizadoDir":
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        localStorage.setItem("direccion", direccion.value);
+                                        break;
+                                    case "actualizadoTel":
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        localStorage.setItem("telefono", telefono.value);
+                                        break;
+                                    case "actualizadoMail":
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        localStorage.setItem("correo", correo.value);
+                                        break;
+                                    case "telExiste":
+                                        telefono.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                                        msgTelefono.setAttribute("class", "hidden");
+                                        msgTelefonoExiste.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                    case "mailExiste":
+                                        correo.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                                        msgCorreo.setAttribute("class", "hidden");
+                                        msgCorreoExiste.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                }
+                    
+                            })
+                            .catch(error => {
+                                console.error("Error: ", error);
+                                return false;
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarCategoria()</p>
+                <small style="font-size: 0.8rem">Datos y url para enviar en la petición AJAX</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarCategoria() {
+                        const datos = {
+                            'categoria': cat.value,
+                            'cif': cif.value
+                        }
+                        actualizarDatos("../../php/proveedores/actualizar_datos_proveedores.php", datos);
+                    
+                    
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarRazsoc()</p>
+                <small style="font-size: 0.8rem">Datos y url para enviar en la petición AJAX</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarRazsoc() {
+                        if (validacionRazsoc) {
+                            const datos = {
+                                'razSoc': razsoc.value,
+                                'cif': cif.value
+                            }
+                            actualizarDatos("../../php/proveedores/actualizar_datos_proveedores.php", datos);
+                    
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarDireccion()</p>
+                <small style="font-size: 0.8rem">Datos y url para enviar en la petición AJAX</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarDireccion() {
+                        if (validacionDirec) {
+                            const datos = {
+                                'direccion': direccion.value,
+                                'cif': cif.value
+                            }
+                            actualizarDatos("../../php/proveedores/actualizar_datos_proveedores.php", datos);
+                    
+                        }
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarDireccion()</p>
+                <small style="font-size: 0.8rem">Datos y url para enviar en la petición AJAX</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarTelefono() {
+                        if (validacionTelefono) {
+                            const datos = {
+                                'telefono': telefono.value,
+                                'cif': cif.value
+                            }
+                            actualizarDatos("../../php/proveedores/actualizar_datos_proveedores.php", datos);
+                    
+                        }
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarCorreo()</p>
+                <small style="font-size: 0.8rem">Datos y url para enviar en la petición AJAX</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarCorreo() {
+                        if (validacionCorreo) {
+                            const datos = {
+                                'correo': correo.value,
+                                'cif': cif.value
+                            }
+                            actualizarDatos("../../php/proveedores/actualizar_datos_proveedores.php", datos);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">modificar_rider.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarPerfil()</p>
+                <small style="font-size: 0.8rem">Inicia los eventos para modificar el rider</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarPerfil() {
+                        nombre.addEventListener("input", validarNombre);
+                        apellidos.addEventListener("input", validarApellidos);
+                        telefono.addEventListener("input", validarTelefono);
+                        mail.addEventListener("input", validarCorreo);
+                    
+                        btnNombre.addEventListener("click", cambiarNombre);
+                        btnApellidos.addEventListener("click", cambiarApellidos);
+                        btnTelefono.addEventListener("click", cambiarTelefono);
+                        btnMail.addEventListener("click", cambiarCorreo);
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarNombre()</p>
+                <small style="font-size: 0.8rem">Valida el nombre nuevo</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarNombre() {
+                        const expNombre = /^([a-zA-ZáéíóúÁÉÍÓÚñÑüÜñ]{2,20}\s?)+$/;
+                        if (expNombre.test(nombre.value)) {
+                            nombre.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgNombre.setAttribute("class", "hidden");
+                            validacionNombre = true;
+                        } else {
+                            nombre.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgNombre.setAttribute("class", "flex");
+                            validacionNombre = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarApellidos()</p>
+                <small style="font-size: 0.8rem">Valida los apellidos nuevo</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarApellidos() {
+                        const expApellidos = /^([a-zA-ZáéíóúÁÉÍÓÚñÑüÜñ]{2,}\s?-?\s?){1,4}$/;
+                        if (expApellidos.test(apellidos.value)) {
+                            apellidos.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgApellidos.setAttribute("class", "hidden");
+                            validacionApellidos = true;
+                        } else {
+                            nombrapellidos.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgApellidos.setAttribute("class", "flex");
+                            validacionApellidos = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarTelefono()</p>
+                <small style="font-size: 0.8rem">Valida el teléfono nuevo y comprueba su existencia en BBDD</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarTelefono() {
+                        const expTelefono = /^(6|7|8|9)\d{8}$/;
+                        if (expTelefono.test(telefono.value)) {
+                            telefono.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgTelefono.setAttribute("class", "hidden");
+                            msgTelefonoExiste.setAttribute("class", "hidden");
+                            validacionTelefono = true;
+                        } else {
+                            telefono.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgTelefono.setAttribute("class", "flex");
+                            msgTelefonoExiste.setAttribute("class", "hidden");
+                            validacionTelefono = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarCorreo()</p>
+                <small style="font-size: 0.8rem">Valida el correo nuevo y comprueba su existencia en BBDD</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarCorreo() {
+                        const expCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                        if (expCorreo.test(mail.value)) {
+                            mail.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgCorreo.setAttribute("class", "hidden");
+                            msgCorreoExiste.setAttribute("class", "hidden");
+                            validacionCorreo = true;
+                    
+                        } else {
+                            mail.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgCorreo.setAttribute("class", "flex");
+                            msgCorreoExiste.setAttribute("class", "hidden");
+                            validacionCorreo = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">actualizarDatos()</p>
+                <small style="font-size: 0.8rem">Actualiza los datos por medio de una petición AJAX con Fetch al
+                    servidor. Según el tipo de dato y la url al php.</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function actualizarDatos(ruta, datos) {
+                        fetch(ruta, {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Error en la solicitud');
+                                }
+                                return response.text();
+                            })
+                            .then(data => {
+                                console.log(data)
+                                switch (data) {
+                                    case "actualizadoNombre":
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                    case "actualizadoApe":
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                    case "actualizadoTel":
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                    case "actualizadoMail":
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                    case "actualizadoContra":
+                                        correctoContrasena.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoContrasena.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        localStorage.setItem("correo", correo.value);
+                                        break;
+                                    case "telExiste":
+                                        telefono.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                                        msgTelefono.setAttribute("class", "hidden");
+                                        msgTelefonoExiste.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                    case "mailExiste":
+                                        mail.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                                        msgCorreo.setAttribute("class", "hidden");
+                                        msgCorreoExiste.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                    
+                                }
+                    
+                            })
+                            .catch(error => {
+                                console.error("Error: ", error);
+                                return false;
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarCorreo()</p>
+                <small style="font-size: 0.8rem">Valida el correo nuevo y comprueba su existencia en BBDD</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarCorreo() {
+                        const expCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                        if (expCorreo.test(mail.value)) {
+                            mail.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgCorreo.setAttribute("class", "hidden");
+                            msgCorreoExiste.setAttribute("class", "hidden");
+                            validacionCorreo = true;
+                    
+                        } else {
+                            mail.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgCorreo.setAttribute("class", "flex");
+                            msgCorreoExiste.setAttribute("class", "hidden");
+                            validacionCorreo = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarNombre()</p>
+                <small style="font-size: 0.8rem">Envía los datos del nombre y la url del PHP al Fetch AJAX</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarNombre() {
+                        if (validacionNombre) {
+                            const datos = {
+                                'nombre': nombre.value,
+                                'dni': dni.value
+                            }
+                            actualizarDatos("../../php/usuarios/actualizar_datos_usuario.php", datos);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarApellidos()</p>
+                <small style="font-size: 0.8rem">Envía los datos del apellido y la url del PHP al Fetch AJAX</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarApellidos() {
+                        if (validacionApellidos) {
+                            const datos = {
+                                'apellidos': apellidos.value,
+                                'id': dni.value
+                            }
+                            actualizarDatos("../../php/usuarios/actualizar_datos_rider.php", datos);
+                    
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarTelefono()</p>
+                <small style="font-size: 0.8rem">Envía los datos del teléfono y la url del PHP al Fetch AJAX</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarTelefono() {
+                        if (validacionTelefono) {
+                            const datos = {
+                                'telefono': telefono.value,
+                                'id': dni.value
+                            }
+                            actualizarDatos("../../php/usuarios/actualizar_datos_rider.php", datos);
+                    
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarTelefono()</p>
+                <small style="font-size: 0.8rem">Envía los datos del teléfono y la url del PHP al Fetch AJAX</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarTelefono() {
+                        if (validacionCorreo) {
+                            const datos = {
+                                'correo': mail.value,
+                                'id': dni.value
+                            }
+                            actualizarDatos("../../php/usuarios/actualizar_datos_rider.php", datos);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">cerrar_sesion.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cerrarSesion()</p>
+                <small style="font-size: 0.8rem">Elimina las sesiones del administrador y redirige al index</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cerrarSesion() {
+                        try {
+                            localStorage.clear();
+                            window.location.reload()
+                        } catch (error) {
+                            console.log(
+                                `Se ha producido un error a la hora de cerrar sesión: ${error}`
+                            );
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">gestion_clientes.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarClientes()</p>
+                <small style="font-size: 0.8rem">Inicia los eventos para gestionar el cliente</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarClientes(){
+                        listarClientes();
+                        buscar.addEventListener("input", listarClientes);
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">borrarCliente()</p>
+                <small style="font-size: 0.8rem">Petición AJAX Fetch para eliminar el cliente en la BBDD según su
+                    id</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function borrarCliente(id){
+                        const datos = {
+                            id: id
+                        }
+                    
+                        fetch("../../php/admin/borrar_cliente.php", {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.text())
+                            .then(data => {
+                                if(data == "Borrado"){
+                                    listarClientes();
+                                }else{
+                                    console.log(data.msg);
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Error: No se ha podido crear la petición ->", error);
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">listarClientes()</p>
+                <small style="font-size: 0.8rem">Petición AJAX Fetch para obtener un JSON de todos los clientes en la
+                    BBDD</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function listarClientes(){
+                        const datos = {
+                            buscar: buscar.value
+                        }
+                    
+                        fetch("../../php/admin/listar_clientes.php", {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data);
+                                listadoClientes.innerHTML = "";
+                                if(data.msg == undefined){
+                                    data.forEach(element => {
+                                        listadoClientes.appendChild(crearFila(element));
+                                    });
+                                }
+                                
+                            })
+                            .catch(error => {
+                                console.error("Error: No se ha podido crear la petición ->", error);
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">crearFila()</p>
+                <small style="font-size: 0.8rem">Crea filas para insertar en la tabla con los datos del cliente y
+                    acciones</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function crearFila(element){
+                        const fila = document.createElement("tr");
+                        
+                        const id = document.createElement("td");
+                        id.setAttribute("class", "px-5 py-3 font-bold");
+                        id.textContent = element.COD_CLI;
+                        fila.appendChild(id);
+                    
+                        const nombre = document.createElement("td");
+                        nombre.setAttribute("class", "px-5 py-3 text-sm");
+                        nombre.textContent = element.NOM_CLI+" "+element.APE_CLI;
+                        fila.appendChild(nombre);
+                    
+                        const telefono = document.createElement("td");
+                        telefono.setAttribute("class", "px-5 py-3 text-sm");
+                        telefono.innerHTML = element.TLF_CLI;
+                        fila.appendChild(telefono);
+                    
+                        const mail = document.createElement("td");
+                        mail.setAttribute("class", "px-5 py-3 text-sm");
+                        mail.textContent = element.MAIL_CLI;
+                        fila.appendChild(mail);
+                    
+                        const accion = document.createElement("td");
+                        accion.setAttribute("class", "px-5 text-sm flex gap-2 lg:pt-3 mb:pt-3 pt-8");
+                        accion.innerHTML = `
+                            form action='modificar_cliente.php' method='post'>
+                                input type='hidden' name='id' value='${element.COD_CLI}'>
+                                input type='hidden' name='nombre' value='${element.NOM_CLI}'>
+                                input type='hidden' name='apellidos' value='${element.APE_CLI}'>
+                                input type='hidden' name='telefono' value='${element.TLF_CLI}'>
+                                input type='hidden' name='mail' value='${element.MAIL_CLI}'>
+                                button type='submit' class='text-white duration-300 bg-yellow-500 w-5 h-5 flex justify-center items-center rounded-full hover:bg-yellow-600 text-sm p-1 text-center''>
+                                    img src='../../assets/svg/modificar.svg'>
+                                /button>
+                            /form>
+                            button class='text-white pb-3 duration-300 bg-red-500 w-5 h-5 flex justify-center items-center rounded-full hover:bg-red-600 text-sm p-2 text-center' onclick='borrarCliente(${element.COD_CLI})'>x/button>
+                        `;
+                        fila.appendChild(accion);
+                    
+                        return fila;
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">gestion_consultas.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarConsultas()</p>
+                <small style="font-size: 0.8rem">Inicia los eventos para ver las consultas</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarConsultas(){
+                        listarConsultas();
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">listarConsultas()</p>
+                <small style="font-size: 0.8rem">Petición ajax para obtener un JSON con todas las consultas</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function listarConsultas(){
+                        fetch("../../php/admin/listar_consultas.php", {
+                            method: "POST",
+                            body: null,
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                listadoConsultas.innerHTML = "";
+                                if(data.msg == undefined){
+                                    data.forEach(element => {
+                                        listadoConsultas.appendChild(crearFila(element));
+                                    });
+                                }
+                                
+                            })
+                            .catch(error => {
+                                console.error("Error: No se ha podido crear la petición ->", error);
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">crearFila()</p>
+                <small style="font-size: 0.8rem">Crea una fila para insertar una nueva gestión en la tabla</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function crearFila(element){
+                        const fila = document.createElement("tr");
+                        
+                        const id = document.createElement("td");
+                        id.setAttribute("class", "px-5 py-3 font-bold text-sm");
+                        id.textContent = element.COD_MEN;
+                        fila.appendChild(id);
+                    
+                        const usuario = document.createElement("td");
+                        usuario.setAttribute("class", "px-5 py-3 text-sm");
+                        usuario.textContent = `${element.NOM_CLI} ${element.APE_CLI}`;
+                        fila.appendChild(usuario);
+                    
+                        const asunto = document.createElement("td");
+                        asunto.setAttribute("class", "px-5 py-3 text-sm");
+                        asunto.innerHTML = element.ASU_MEN;
+                        fila.appendChild(asunto);
+                    
+                        const mensaje = document.createElement("td");
+                        mensaje.setAttribute("class", "px-5 py-3 text-sm");
+                        mensaje.textContent = element.MEN_MEN;
+                        fila.appendChild(mensaje);
+                    
+                        const accion = document.createElement("td");
+                        accion.setAttribute("class", "px-5 py-3 text-sm");
+                        accion.innerHTML = `
+                            a href='mailto:${element.MAIL_CLI}?subject=Soporte de técnico DailyGo | Consulta #${element.COD_MEN} | ${element.ASU_MEN}' class='text-white duration-300 bg-indigo-600 flex justify-center items-center rounded hover:bg-indigo-700 text-sm px-2 py-1 text-center'>Responder/a>
+                        `;
+                        fila.appendChild(accion);
+                    
+                        return fila;
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">gestion_pedidos.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarPedidos()</p>
+                <small style="font-size: 0.8rem">Inicia los eventos para ver los pedidos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarPedidos() {
+                        listarPedidos();
+                        ocultarPedido.addEventListener("click", cerrarFicha);
+                        tipo.addEventListener("change", cambiarFiltro);
+                        fecha.addEventListener("change", listarPedidos);
+                        buscar.addEventListener("input", listarPedidos);
+                        limpiarCampos.addEventListener("click", limpiarFiltrado)
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">limpiarFiltrado()</p>
+                <small style="font-size: 0.8rem">Limpia los filtros de búsqueda</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function limpiarFiltrado(){
+                        buscar.value = ""
+                        fecha.value = ""
+                        listarPedidos();
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">verFicha()</p>
+                <small style="font-size: 0.8rem">Muestra la ficha completa del pedido con los parámetros
+                    correspondientes y realiza una petición para ver los artículos del pedido</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function verFicha(id, cliente, rider, proveedor, fecha, direccion, estado, mensaje) {
+    
+                        verProductos.setAttribute("class", "");
+                    
+                        const docPedido = document.getElementById("docPedido");
+                        docPedido.textContent = `Pedido #${id}`;
+                        const docProveedor = document.getElementById("docProveedor");
+                        docProveedor.textContent = proveedor;
+                        const docRider = document.getElementById("docRider");
+                        docRider.textContent = rider;
+                        const docCliente = document.getElementById("docCliente");
+                        docCliente.textContent = cliente;
+                        const docDireccion = document.getElementById("docDireccion");
+                        docDireccion.textContent = `${direccion} | ${fecha}`;
+                        const docMensaje = document.getElementById("docMensaje");
+                        docMensaje.textContent = mensaje;
+                    
+                        const docEstado = document.getElementById("docEstado");
+                        docEstado.textContent = estado;
+                    
+                        if (estado == "Completado" || estado == "Valorado") {
+                            docEstado.setAttribute("class", "text-sm bg-green-200 text-green-600 py-0.5 px-2.5 rounded-full");
+                        } else if (estado == "Cancelado") {
+                            docEstado.setAttribute("class", "text-sm bg-red-200 text-red-600 py-0.5 px-2.5 rounded-full");
+                        } else {
+                            docEstado.setAttribute("class", "text-sm bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full");
+                        }
+                    
+                        const datos = {
+                            id: id
+                        }
+                    
+                        fetch("../../php/admin/ficha_productos.php", {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                const docCarrito = document.getElementById("docCarrito");
+                                docCarrito.innerHTML = "";
+                                data.forEach(element => {
+                                    docCarrito.innerHTML += `
+                                    div class="border p-3 rounded flex items-center gap-3">
+                                    div class="border border-blue-400 rounded-md w-12 h-12" style="background-image: url('../../img_bbdd/productos/${element.COD_PROD}.jpg');
+                                    background-position: center;
+                                    background-size: cover;">
+                                    /div>
+                                    div class="flex flex-col text-sm">
+                                        p>${element.DEN_PROD}/p>
+                                        p class="text-blue-300">${element.CANT_DET} uds./p>
+                                    /div>
+                                /div>
+                                    `;
+                                });
+                            })
+                            .catch(error => {
+                                console.error("Error: No se ha podido crear la petición ->", error);
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cerrarFicha()</p>
+                <small style="font-size: 0.8rem">Cierra la ficha creada</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cerrarFicha() {
+                        verProductos.setAttribute("class", "hidden");
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">borrarPedido()</p>
+                <small style="font-size: 0.8rem">Elimina el pedido de la BBDD</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function borrarPedido(id) {
+                        const datos = {
+                            id: id
+                        }
+                    
+                        fetch("../../php/admin/borrar_pedido.php", {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.text())
+                            .then(data => {
+                                if (data == "Borrado") {
+                                    listarPedidos();
+                                } else {
+                                    console.log(data.msg);
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Error: No se ha podido crear la petición ->", error);
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarFiltro()</p>
+                <small style="font-size: 0.8rem">Cambia el tipo de filtro de búsqueda y el mensaje</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarFiltro() {
+                        if (tipo.value == "cliente") {
+                            buscar.setAttribute("placeholder", "Buscar por correo del cliente");
+                        } else if (tipo.value == "rider") {
+                            buscar.setAttribute("placeholder", "Buscar por correo del rider");
+                        } else if (tipo.value == "proveedor") {
+                            buscar.setAttribute("placeholder", "Buscar por razón social del proveeedor");
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">listarPedidos()</p>
+                <small style="font-size: 0.8rem">Realiza una petición con fetch-ajax para obtener un json de los
+                    pedidos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function listarPedidos() {
+
+                        let valorFecha = "";
+                        if (fecha.value == "") {
+                            valorFecha = "";
+                        } else {
+                            const fechaTipo = new Date(fecha.value);
+                            valorFecha = `${fechaTipo.getDate().toString().padStart(2, '0')}-${(fechaTipo.getMonth() + 1).toString().padStart(2, '0')}-${fechaTipo.getFullYear()}`;
+                        }
+                    
+                        const datos = {
+                            buscar: buscar.value,
+                            tipo: tipo.value,
+                            fecha: valorFecha
+                        }
+                    
+                        console.log(datos);
+                    
+                        fetch("../../php/admin/listar_pedidos.php", {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data)
+                                listadoPedidos.innerHTML = "";
+                                if (data.msg == undefined) {
+                                    data.forEach(element => {
+                                        listadoPedidos.appendChild(crearFila(element));
+                                    });
+                                }
+                    
+                            })
+                            .catch(error => {
+                                console.error("Error: No se ha podido crear la petición ->", error);
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">crearFila()</p>
+                <small style="font-size: 0.8rem">Crea una fila nueva con los datos del pedido</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function crearFila(element) {
+                        const fila = document.createElement("tr");
+                    
+                        const id = document.createElement("td");
+                        id.setAttribute("class", "px-5 py-3 font-bold");
+                        id.textContent = element.NUM_VEN;
+                        fila.appendChild(id);
+                    
+                        const cliente = document.createElement("td");
+                        cliente.setAttribute("class", "px-5 py-3 text-sm");
+                        cliente.innerHTML = `
+                            p>${element.NOM_CLI} ${element.APE_CLI}/p>
+                            p class='text-blue-300'>${element.MAIL_CLI}/p>
+                        `;
+                        fila.appendChild(cliente);
+                    
+                        const rider = document.createElement("td");
+                        rider.setAttribute("class", "px-5 py-3 text-sm");
+                        rider.innerHTML = `
+                            p>${element.NOM_RID} ${element.APE_RID}/p>
+                            p class='text-blue-300'>${element.MAIL_RID}/p>
+                        `;
+                        fila.appendChild(rider);
+                    
+                        const proveedor = document.createElement("td");
+                        proveedor.setAttribute("class", "px-5 py-3 text-sm");
+                        proveedor.textContent = element.RAZSOC;
+                        fila.appendChild(proveedor);
+                    
+                        const fecha = document.createElement("td");
+                        fecha.setAttribute("class", "px-5 py-3 text-sm");
+                        fecha.textContent = element.FECH_VEN;
+                        fila.appendChild(fecha);
+                    
+                        const estado = document.createElement("td");
+                        estado.setAttribute("class", "px-5 py-3 text-sm");
+                        estado.textContent = element.ESTADO_VEN;
+                        fila.appendChild(estado);
+                    
+                        const accion = document.createElement("td");
+                        accion.setAttribute("class", "px-5 py-5 text-sm flex gap-3");
+                        accion.innerHTML = `
+                            button class='text-white pl-1.5 pb-2 duration-300 bg-indigo-600 pt-2 w-5 h-5 flex justify-center items-center rounded-full hover:bg-indigo-6700 text-sm p-1 text-center' onclick="verFicha(${element.NUM_VEN}, '${element.NOM_CLI} ${element.APE_CLI}','${element.NOM_RID} ${element.APE_RID}','${element.RAZSOC}','${element.FECH_VEN}','${element.DIR_VEN}', '${element.ESTADO_VEN}', '${element.COM_VEN}')">
+                            a href='pedidos.html#verProductos'>
+                            svg fill="#ffffff" width="15px" height="15px" viewBox="0 -16 544 544" xmlns="http://www.w3.org/2000/svg" >title>show/title>path d="M272 400Q205 400 151 361 96 322 64 256 96 190 151 151 205 112 272 112 336 112 392 153 448 193 480 256 448 319 392 360 336 400 272 400ZM272 352Q312 352 340 324 368 296 368 256 368 216 340 188 312 160 272 160 232 160 204 188 176 216 176 256 176 296 204 324 232 352 272 352ZM272 312Q249 312 233 296 216 279 216 256 216 233 233 217 249 200 272 200 295 200 312 217 328 233 328 256 328 279 312 296 295 312 272 312Z" />/svg>
+                            /button>
+                            /a>
+                            button class='text-white pb-2 duration-300 bg-red-500 w-5 h-5 flex justify-center items-center rounded-full hover:bg-red-600 text-sm p-1 text-center' onclick='borrarPedido(${element.NUM_VEN})'>x/button>
+                        `;
+                        fila.appendChild(accion);
+                    
+                        return fila;
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">gestion_pedidos.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarProductos()</p>
+                <small style="font-size: 0.8rem">Inicia los eventos para ver los productos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarProductos(){
+                        listarProductos();
+                        buscar.addEventListener("input", listarProductos);
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">borrarProducto()</p>
+                <small style="font-size: 0.8rem">Envía una petición fetch para borrar un pedido</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function borrarProducto(id){
+                        const datos = {
+                            id: id
+                        }
+                    
+                        fetch("../../php/admin/borrar_producto.php", {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.text())
+                            .then(data => {
+                                if(data == "Borrado"){
+                                    listarProductos();
+                                }else{
+                                    console.log(data.msg);
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Error: No se ha podido crear la petición ->", error);
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">listarProductos()</p>
+                <small style="font-size: 0.8rem">Petición AJAX para obtener todos los productos de la BBDD en formato
+                    JSON</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function listarProductos(){
+                        const datos = {
+                            buscar: buscar.value
+                        }
+                    
+                        fetch("../../php/admin/listar_productos.php", {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                listadoProductos.innerHTML = "";
+                                if(data.msg == undefined){
+                                    data.forEach(element => {
+                                        listadoProductos.appendChild(crearFila(element));
+                                    });
+                                }
+                                
+                            })
+                            .catch(error => {
+                                console.error("Error: No se ha podido crear la petición ->", error);
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">crearFila()</p>
+                <small style="font-size: 0.8rem">Crea una fila con los datos del producto y sus acciones</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function crearFila(element){
+                        const fila = document.createElement("tr");
+                        
+                        const id = document.createElement("td");
+                        id.setAttribute("class", "px-5 py-3 font-bold");
+                        id.textContent = element.COD_PROD;
+                        fila.appendChild(id);
+                    
+                        const denom = document.createElement("td");
+                        denom.setAttribute("class", "px-5 py-3 text-sm");
+                        denom.textContent = element.DEN_PROD;
+                        fila.appendChild(denom);
+                    
+                        const proveedor = document.createElement("td");
+                        proveedor.setAttribute("class", "px-5 py-3 text-sm");
+                        proveedor.innerHTML = element.RAZSOC;
+                        fila.appendChild(proveedor);
+                    
+                        const precio = document.createElement("td");
+                        precio.setAttribute("class", "px-5 py-3 text-sm");
+                        precio.textContent = `${element['PU_PROD']} €`;
+                        fila.appendChild(precio);
+                    
+                        const accion = document.createElement("td");
+                        accion.setAttribute("class", "px-5 py-3 text-sm");
+                        accion.innerHTML = `
+                            button class='text-white pb-2 duration-300 bg-red-500 w-5 h-5 flex justify-center items-center rounded-full hover:bg-red-600 text-sm p-1 text-center' onclick='borrarProducto(${element.COD_PROD})'>x/button>
+                        `;
+                        fila.appendChild(accion);
+                    
+                        return fila;
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">gestion_proveedor.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarProveedores()</p>
+                <small style="font-size: 0.8rem">Inicia los eventos para gestionar los proveedores</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarProveedores(){
+                        listarProveedores();
+                        buscar.addEventListener("input", listarProveedores);
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">borrarProveedor()</p>
+                <small style="font-size: 0.8rem">Elimina un proveedor de la BBDD por mediod de una petición ajax</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function borrarProveedor(id){
+                        const datos = {
+                            id: id
+                        }
+                    
+                        fetch("../../php/admin/borrar_proveedor.php", {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.text())
+                            .then(data => {
+                                if(data == "Borrado"){
+                                    listarProveedores();
+                                }else{
+                                    console.log(data.msg);
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Error: No se ha podido crear la petición ->", error);
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">listarProveedores()</p>
+                <small style="font-size: 0.8rem">Petición AJAX para obtener todos los proveedores de la BBDD</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function listarProveedores(){
+                        const datos = {
+                            buscar: buscar.value
+                        }
+                    
+                        fetch("../../php/admin/listar_proveedores.php", {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data);
+                                listadoProveedores.innerHTML = "";
+                                if(data.msg == undefined){
+                                    data.forEach(element => {
+                                        listadoProveedores.appendChild(crearFila(element));
+                                    });
+                                }
+                                
+                            })
+                            .catch(error => {
+                                console.error("Error: No se ha podido crear la petición ->", error);
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">crearFila()</p>
+                <small style="font-size: 0.8rem">Crea una fila con los datos de cada proveedor junto a sus
+                    acciones</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function crearFila(element){
+                        const fila = document.createElement("tr");
+                        
+                        const id = document.createElement("td");
+                        id.setAttribute("class", "px-5 py-3 font-bold");
+                        id.textContent = element.CIF_PROV;
+                        fila.appendChild(id);
+                    
+                        const raz = document.createElement("td");
+                        raz.setAttribute("class", "px-5 py-3 text-sm");
+                        raz.innerHTML = `p>${element.RAZSOC}/p>p class='text-xs text-blue-300'>${element.CATEGORIA}/p>`;
+                        fila.appendChild(raz);
+                    
+                        const direccion = document.createElement("td");
+                        direccion.setAttribute("class", "px-5 py-3 text-sm");
+                        direccion.textContent = element.DIR_PROV;
+                        fila.appendChild(direccion);
+                    
+                        const telefono = document.createElement("td");
+                        telefono.setAttribute("class", "px-5 py-3 text-sm");
+                        telefono.textContent = element.TLF_PROV;
+                        fila.appendChild(telefono);
+                    
+                        const mail = document.createElement("td");
+                        mail.setAttribute("class", "px-5 py-3 text-sm");
+                        mail.textContent = element.MAIL_PROV;
+                        fila.appendChild(mail);
+                    
+                        const accion = document.createElement("td");
+                        accion.setAttribute("class", "px-5 text-sm flex gap-2 pt-5");
+                        accion.innerHTML = `
+                            form action='modificar_proveedor.php' method='post'>
+                                input type='hidden' name='cif' value='${element.CIF_PROV}'>
+                                input type='hidden' name='razon' value='${element.RAZSOC}'>
+                                input type='hidden' name='direccion' value='${element.DIR_PROV}'>
+                                input type='hidden' name='telefono' value='${element.TLF_PROV}'>
+                                input type='hidden' name='mail' value='${element.MAIL_PROV}'>
+                                input type='hidden' name='categoria' value='${element.CATEGORIA}'>
+                                button type='submit' class='text-white duration-300 bg-yellow-500 w-5 h-5 flex justify-center items-center rounded-full hover:bg-yellow-600 text-sm p-1 text-center''>
+                                    img src='../../assets/svg/modificar.svg'>
+                                /button>
+                            /form>
+                            button class='text-white pb-3 duration-300 bg-red-500 w-5 h-5 flex justify-center items-center rounded-full hover:bg-red-600 text-sm p-2 text-center' onclick="borrarProveedor('${element.CIF_PROV}')">x/button>
+                        `;
+                        fila.appendChild(accion);
+                    
+                        return fila;
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">gestion_riders.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarRiders()</p>
+                <small style="font-size: 0.8rem">Inicia los eventos para gestionar los riders</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarRiders(){
+                        listarRiders();
+                        buscar.addEventListener("input", listarRiders);
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">borrarRider()</p>
+                <small style="font-size: 0.8rem">Petición ajax para eliminar un rider de la bbdd según su dni</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function borrarRider(id){
+                        const datos = {
+                            id: id
+                        }
+                    
+                        fetch("../../php/admin/borrar_rider.php", {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.text())
+                            .then(data => {
+                                if(data == "Borrado"){
+                                    listarRiders();
+                                }else{
+                                    console.log(data.msg);
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Error: No se ha podido crear la petición ->", error);
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">listarRiders()</p>
+                <small style="font-size: 0.8rem">Petición ajax para listar los riders de la BBDD en formato json</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function listarRiders(){
+                        const datos = {
+                            buscar: buscar.value
+                        }
+                    
+                        fetch("../../php/admin/listar_riders.php", {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data);
+                                listadoRiders.innerHTML = "";
+                                if(data.msg == undefined){
+                                    data.forEach(element => {
+                                        listadoRiders.appendChild(crearFila(element));
+                                    });
+                                }
+                                
+                            })
+                            .catch(error => {
+                                console.error("Error: No se ha podido crear la petición ->", error);
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">crearFila()</p>
+                <small style="font-size: 0.8rem">Crea una fila con los datos del rider en la tabla</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function crearFila(element){
+                        const fila = document.createElement("tr");
+                        
+                        const id = document.createElement("td");
+                        id.setAttribute("class", "px-5 py-3 font-bold");
+                        id.textContent = element.DNI_RID;
+                        fila.appendChild(id);
+                    
+                        const nombre = document.createElement("td");
+                        nombre.setAttribute("class", "px-5 py-3 text-sm");
+                        nombre.textContent = element.NOM_RID+" "+element.APE_RID;
+                        fila.appendChild(nombre);
+                    
+                        const telefono = document.createElement("td");
+                        telefono.setAttribute("class", "px-5 py-3 text-sm");
+                        telefono.innerHTML = element.TLF_RID;
+                        fila.appendChild(telefono);
+                    
+                        const mail = document.createElement("td");
+                        mail.setAttribute("class", "px-5 py-3 text-sm");
+                        mail.textContent = element.MAIL_RID;
+                        fila.appendChild(mail);
+                    
+                        const accion = document.createElement("td");
+                        accion.setAttribute("class", "px-5 text-sm flex gap-2 lg:pt-3 mb:pt-3 pt-8");
+                        accion.innerHTML = `
+                            form action='modificar_rider.php' method='post'>
+                                input type='hidden' name='dni' value='${element.DNI_RID}'>
+                                input type='hidden' name='nombre' value='${element.NOM_RID}'>
+                                input type='hidden' name='apellidos' value='${element.APE_RID}'>
+                                input type='hidden' name='telefono' value='${element.TLF_RID}'>
+                                input type='hidden' name='mail' value='${element.MAIL_RID}'>
+                                button type='submit' class='text-white duration-300 bg-yellow-500 w-5 h-5 flex justify-center items-center rounded-full hover:bg-yellow-600 text-sm p-1 text-center''>
+                                    img src='../../assets/svg/modificar.svg'>
+                                /button>
+                            /form>
+                            button class='text-white pb-3 duration-300 bg-red-500 w-5 h-5 flex justify-center items-center rounded-full hover:bg-red-600 text-sm p-2 text-center' onclick="borrarRider('${element.DNI_RID}')">x/button>
+                        `;
+                        fila.appendChild(accion);
+                    
+                        return fila;
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">gestion_sesiones.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">comprobarSesion()</p>
+                <small style="font-size: 0.8rem">Valida la sesión del administrador y en caso incorrecto redirecciona al sitio correcto</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function comprobarSesion(){
+                        const tipoUsuario = localStorage.getItem("tipoUsuario");
+                        if(tipoUsuario !== "administrador"){
+                            if(tipoUsuario !== null){
+                                
+                                const redirecciones = {
+                                    'usuario': '../usuarios/inicio.php',
+                                    'rider': '../riders/inicio.html',
+                                    'proveedor': '../proveedores/inicio.html',
+                                }
+                    
+                                window.location.href = redirecciones[tipoUsuario];
+                            }else{
+                                window.location.href = '../index.html';
+                            }
+                        }else{
+                            return true;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">inicio_sesion.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarEventos()</p>
+                <small style="font-size: 0.8rem">Inicia los eventos para iniciar sesión como admin</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarEventos() {
+                        correo.addEventListener("input", validarCorreo);
+                        contrasena.addEventListener("input", validarContrasena);
+                        btnEntrar.addEventListener("click", iniciarSesion);
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarCorreo()</p>
+                <small style="font-size: 0.8rem">Valida que el correo cumple el formato</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarCorreo() {
+                        try {
+                            const expCorreo = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+                    
+                            if (expCorreo.test(correo.value)) {
+                                correo.setAttribute(
+                                    "class",
+                                    "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                    
+                                return true;
+                            } else {
+                                correo.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                    
+                                return false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar el correo electrónico: ${error}`);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarContrasena()</p>
+                <small style="font-size: 0.8rem">Valida que la contraseña cumple el formato</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarContrasena() {
+                        try {
+                            const expContrasena =
+                                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$/;
+                    
+                            if (expContrasena.test(contrasena.value)) {
+                                contrasena.setAttribute(
+                                    "class",
+                                    "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                    
+                                return true;
+                            } else {
+                                contrasena.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                    
+                                return false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar la contraseña: ${error}`);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarSesion()</p>
+                <small style="font-size: 0.8rem">Petición para comprobar que las creedenciales son correctas por medio de un ajax a la BBDD</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarSesion() {
+                        validarCorreo();
+                        validarContrasena();
+                    
+                        if (validarCorreo && validarContrasena) {
+                            if (correo.value == "admin@dailygo.com") {
+                                const datos = {
+                                    correo: correo.value,
+                                    contrasena: contrasena.value
+                                }
+                    
+                                fetch("../php/admin/inicio_sesion.php", {
+                                    method: "POST",
+                                    body: JSON.stringify(datos),
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    }
+                                })
+                                    .then(response => response.text())
+                                    .then(data => {
+                                        console.log(data);
+                                        if (data == "Dentro") {
+                                            localStorage.setItem("tipoUsuario", "administrador");
+                                            window.location.href = "administrador/inicio.html";
+                                        } else {
+                                            verError();
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error("Error: No se ha podido crear la petición ->", error);
+                                    });
+                            } else {
+                                verError();
+                            }
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">verError()</p>
+                <small style="font-size: 0.8rem">Muestra un error en caso de creedenciales incorrectas</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function verError() {
+                        msgIncorrecto.setAttribute("class", "");
+                        let cerrarMsg = setTimeout(function () {
+                            msgIncorrecto.setAttribute("class", "hidden");
+                        }, 3000);
+                    
+                        return true;
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    </body>
+
+</html>

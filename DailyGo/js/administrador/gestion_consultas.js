@@ -3,11 +3,11 @@ document.addEventListener("DOMContentLoaded", iniciarConsultas);
 const listadoConsultas = document.getElementById("listadoConsultas");
 
 function iniciarConsultas(){
-    listarProductos();
+    listarConsultas();
 }
 
 
-function listarProductos(){
+function listarConsultas(){
     fetch("../../php/admin/listar_consultas.php", {
         method: "POST",
         body: null,
