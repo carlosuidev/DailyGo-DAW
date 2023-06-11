@@ -144,7 +144,8 @@
         <section class="mb-5">
             <div class="mb-3 ">
                 <p class="fw-bold mb-0">validarTelefono()</p>
-                <small style="font-size: 0.8rem">Valida que el nombre nuevo cumple con los requisitos y no existe en la BBDD</small>
+                <small style="font-size: 0.8rem">Valida que el nombre nuevo cumple con los requisitos y no existe en la
+                    BBDD</small>
             </div>
             <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
                 <code>
@@ -169,7 +170,8 @@
         <section class="mb-5">
             <div class="mb-3 ">
                 <p class="fw-bold mb-0">validarCorreo()</p>
-                <small style="font-size: 0.8rem">Valida que el correo nuevo cumple con los requisitos y no existe en la BBDD</small>
+                <small style="font-size: 0.8rem">Valida que el correo nuevo cumple con los requisitos y no existe en la
+                    BBDD</small>
             </div>
             <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
                 <code>
@@ -455,7 +457,8 @@
         <section class="mb-5">
             <div class="mb-3 ">
                 <p class="fw-bold mb-0">addProducto()</p>
-                <small style="font-size: 0.8rem">Añade un producto en el carrito y comprueba si ya existe o si es de otra tienda</small>
+                <small style="font-size: 0.8rem">Añade un producto en el carrito y comprueba si ya existe o si es de
+                    otra tienda</small>
             </div>
             <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
                 <code>
@@ -510,7 +513,8 @@
         <section class="mb-5">
             <div class="mb-3 ">
                 <p class="fw-bold mb-0">validarTienda()</p>
-                <small style="font-size: 0.8rem">Comprueba la tienda de los elementos del carrito para evitar diferentes tiendas en el mismo pedido</small>
+                <small style="font-size: 0.8rem">Comprueba la tienda de los elementos del carrito para evitar diferentes
+                    tiendas en el mismo pedido</small>
             </div>
             <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
                 <code>
@@ -594,7 +598,8 @@
         <section class="mb-5">
             <div class="mb-3 ">
                 <p class="fw-bold mb-0">reducirCantidad()</p>
-                <small style="font-size: 0.8rem">Reduce la cantidad de un producto o lo elimina en caso de reducir de 1 a 0</small>
+                <small style="font-size: 0.8rem">Reduce la cantidad de un producto o lo elimina en caso de reducir de 1
+                    a 0</small>
             </div>
             <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
                 <code>
@@ -684,7 +689,8 @@
         <section class="mb-5">
             <div class="mb-3 ">
                 <p class="fw-bold mb-0">enlacePedido()</p>
-                <small style="font-size: 0.8rem">Modifica el botón de la barra para redirigir a un sitio dependiendo si hay productos o no</small>
+                <small style="font-size: 0.8rem">Modifica el botón de la barra para redirigir a un sitio dependiendo si
+                    hay productos o no</small>
             </div>
             <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
                 <code>
@@ -1319,7 +1325,8 @@
         <section class="mb-5">
             <div class="mb-3 ">
                 <p class="fw-bold mb-0">reducirCantidad()</p>
-                <small style="font-size: 0.8rem">Reduce la cantidad de un producto del carrito o lo elimina si llega a 0</small>
+                <small style="font-size: 0.8rem">Reduce la cantidad de un producto del carrito o lo elimina si llega a
+                    0</small>
             </div>
             <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
                 <code>
@@ -1497,14 +1504,15 @@
                 </code>
             </pre>
         </section>
-    </article>    
+    </article>
 
     <article class="container border rounded py-2 mb-3">
         <h4 class="bg-primary text-white rounded p-2 mb-4">gestion_sesiones.js</h4>
         <section class="mb-5">
             <div class="mb-3 ">
                 <p class="fw-bold mb-0">comprobarSesion()</p>
-                <small style="font-size: 0.8rem">Comprueba que la sesión es correcta si es usuario y en caso contrario redirige al lugar correcto</small>
+                <small style="font-size: 0.8rem">Comprueba que la sesión es correcta si es usuario y en caso contrario
+                    redirige al lugar correcto</small>
             </div>
             <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
                 <code>
@@ -1530,8 +1538,1227 @@
                 </code>
             </pre>
         </section>
-    </article>    
+    </article>
 
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">listar_pedidos.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarPedidos()</p>
+                <small style="font-size: 0.8rem">Función con la que se da comienzo al script</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarPedidos() {
+                        fecha.addEventListener("change", listarPedidos);
+                        listarPedidos();
+                        listarPedidosActivos();
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">crearComponentePedido(element)</p>
+                <small style="font-size: 0.8rem">Crea los distintos componentes del pedido</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function crearComponenteFila(element) {
+                        const fila = document.createElement("tr");
+                        fila.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
+                    
+                        const id = document.createElement("td");
+                        id.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
+                        id.setAttribute("scope", "col");
+                        id.textContent = element['num_ven'];
+                        fila.appendChild(id);
+                    
+                        const producto = document.createElement("td");
+                        producto.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
+                        producto.setAttribute("scope", "col");
+                        if(element['cod_prod'] == 0){
+                            producto.innerHTML = "-";
+                        }else{
+                            producto.innerHTML = `
+                            div class='flex items-center gap-2'>
+                                div class="w-12 h-12 rounded border" style="background-image: url('../../img_bbdd/productos/${element['cod_prod']}.jpg'); background-size: cover; background-position: center bottom;">
+                                /div>
+                                div>
+                                    p>${element['den_prod']}/p>
+                                    p class="text-sm font-normal text-blue-300">${element['razsoc']}/p>
+                                /div>
+                            /div>
+                        `;
+                        }
+                        
+                        fila.appendChild(producto);
+                    
+                        const cantidad = document.createElement("td");
+                        cantidad.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
+                        cantidad.setAttribute("scope", "col");
+                        cantidad.textContent = element['cant_det'];
+                        fila.appendChild(cantidad);
+                    
+                        const direccion = document.createElement("td");
+                        direccion.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
+                        direccion.setAttribute("scope", "col");
+                        direccion.textContent = element['DIR_VEN'];
+                        fila.appendChild(direccion);
+                    
+                        const fecha = document.createElement("td");
+                        fecha.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
+                        fecha.setAttribute("scope", "col");
+                        fecha.textContent = element['FECH_VEN'];
+                        fila.appendChild(fecha);
+                    
+                        const estado = document.createElement("td");
+                        estado.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
+                        estado.setAttribute("scope", "col");
+                        estado.textContent = element['ESTADO_VEN'];
+                        fila.appendChild(estado);
+                    
+                        return fila;
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">listarPedidos()</p>
+                <small style="font-size: 0.8rem">Crea la lista de los pedidos pedidos anteriormente</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function listarPedidos() {
+
+                        let valorFecha = "";
+                        if (fecha.value == "") {
+                            valorFecha = "";
+                        } else {
+                            const fechaTipo = new Date(fecha.value);
+                            valorFecha = `${fechaTipo.getDate().toString().padStart(2, '0')}-${(fechaTipo.getMonth() + 1).toString().padStart(2, '0')}-${fechaTipo.getFullYear()}`;
+                        }
+                    
+                        const datos = {
+                            'id': localStorage.getItem("id"),
+                            fecha: valorFecha
+                        }
+                        fetch("../../php/usuarios/listar_pedidos_usuario.php", {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                const historialPedidos = document.getElementById("historialPedidos");
+                                historialPedidos.innerHTML = "";
+                                data.forEach(element => {
+                                    historialPedidos.appendChild(crearComponenteFila(element));
+                                });
+                            })
+                            .catch(error => {
+                                console.error("Error: No se ha podido crear la petición ->", error);
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">listarPedidosActivos()</p>
+                <small style="font-size: 0.8rem">Crea la lista de los pedidos pedidos que estan ahora pedidos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function listarPedidosActivos() {
+                        const datos = {
+                            'id': localStorage.getItem("id")
+                        }
+                        fetch("../../php/usuarios/listar_pedidos_activos_usuario.php", {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                const pedidosActivos = document.getElementById("pedidosActivos");
+                                if (data.msg == 'Sin resultados') {
+                                    pedidosActivos.innerHTML = "<p>No tienes pedidos en activo 🛍️</p>"
+                                } else {
+                                    data.forEach(element => {
+                                        pedidosActivos.appendChild(crearComponentePedido(element));
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Error: No se ha podido crear la petición ->", error);
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">productos_tienda.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarTienda()</p>
+                <small style="font-size: 0.8rem">Función con la que se da comienzo al script</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    
+                    function iniciarTienda() {
+                        mostrarMapa();
+                        determinarValoracion();
+                        mostrarProductos();
+                        ordenPrecio.addEventListener("click", ordenarProductos);
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">determinarValoracion()</p>
+                <small style="font-size: 0.8rem">Crea la valoracion y la imagen que le acompaña</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function determinarValoracion() {
+                        const iconoValoracion = document.getElementById("iconoValoracion");
+                        const valoracion = document.getElementById("valoracion");
+                    
+                        if (valoracion.textContent >= 4) {
+                            iconoValoracion.setAttribute("src", "../../assets/svg/valoracion_top.svg")
+                            valoracion.setAttribute("class", "font-bold text-yellow-500");
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">ordenarProductos()</p>
+                <small style="font-size: 0.8rem">Ordena los productos dependiendo de lo seleccionado</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function ordenarProductos() {
+                        const orden = document.getElementById("orden");
+                        if (orden.value == "precio") {
+                            ordenPrecio.setAttribute("class", "duration-300 rounded-full border px-3 py-1 hover:bg-blue-100/50 cursor-pointer");
+                            orden.value = "";
+                        } else {
+                            ordenPrecio.setAttribute("class", "rounded-full px-3 py-1 bg-blue-900 text-white cursor-pointer");
+                            orden.value = "precio";
+                        }
+                    
+                        mostrarProductos();
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">mostrarProductos()</p>
+                <small style="font-size: 0.8rem">Crea los productos a partir de la base de Datos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function mostrarProductos() {
+                        const cifProv = document.getElementById("cifProv");
+                        const orden = document.getElementById("orden");
+                    
+                        const listadoProductos = document.getElementById("listadoProductos");
+                    
+                        const datos = {
+                            cif: cifProv.value,
+                            orden: orden.value,
+                        }
+                    
+                        fetch("../../php/usuarios/listar_productos_tienda.php", {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                    
+                                listadoProductos.innerHTML = "";
+                    
+                                if (data.length > 0) {
+                                    data.forEach(element => {
+                                        listadoProductos.appendChild(crearComponenteProducto(element));
+                                    });
+                                } else {
+                                    listadoProductos.appendChild(crearComponenteSinResultados());
+                                }
+                    
+                            })
+                            .catch(error => {
+                                listadoProductos.innerHTML = "";
+                                listadoProductos.appendChild(crearComponenteSinResultados());
+                                console.error("Error: No se ha podido obtener los datos de todas las tiendas -> ", error);
+                            });
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">comprobarTop()</p>
+                <small style="font-size: 0.8rem">Comprueba las tiendas top</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function comprobarTop() {
+                        const valoracion = document.getElementById("valoracion");
+                        const iconoValoracion = document.getElementById("iconoValoracion");
+                        if (valoracion.textContent >= 4.0) {
+                            valoracion.setAttribute("class", "text-yellow-500 font-bold");
+                            iconoValoracion.setAttribute("src", "../../assets/svg/valoracion_top.svg");
+                        }
+                    }function comprobarTop() {
+                        const valoracion = document.getElementById("valoracion");
+                        const iconoValoracion = document.getElementById("iconoValoracion");
+                        if (valoracion.textContent >= 4.0) {
+                            valoracion.setAttribute("class", "text-yellow-500 font-bold");
+                            iconoValoracion.setAttribute("src", "../../assets/svg/valoracion_top.svg");
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">crearComponenteProducto(element)</p>
+                <small style="font-size: 0.8rem">Comprueba los componentes de los productos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function crearComponenteProducto(element) {
+                        const componente = document.createElement("div");
+                        componente.setAttribute("class", "col-span-1 lg:col-span-1 md:col-span-1 antialiased text-gray-900");
+                        const imagen = document.createElement("div");
+                        imagen.setAttribute("class", "w-full rounded-lg shadow-sm border");
+                        imagen.style.height = "250px";
+                        imagen.style.backgroundImage = `url('../../img_bbdd/productos/${element['COD_PROD']}.jpg')`;
+                        imagen.style.backgroundSize = "cover";
+                        imagen.style.backgroundPosition = "bottom";
+                    
+                        const data = document.createElement("div");
+                        data.setAttribute("class", "relative px-4 -mt-12");
+                        const fondoData = document.createElement("div");
+                        fondoData.setAttribute("class", "bg-white p-5 rounded-lg shadow-lg hover:shadow-2xl duration-300 flex flex-col justify-between")
+                    
+                        const denominacion = document.createElement("p");
+                        denominacion.setAttribute("class", "font-bold mb-1");
+                        denominacion.textContent = element['DEN_PROD'];
+                        fondoData.appendChild(denominacion);
+                    
+                    
+                        const zonaInferior = document.createElement("div");
+                        zonaInferior.setAttribute("class", "flex justify-between gap-3 items-center mt-1");
+                    
+                        const precio = document.createElement("h4");
+                        precio.setAttribute("class", "font-semibold");
+                        precio.textContent = `${element['PU_PROD']} €`;
+                        zonaInferior.appendChild(precio);
+                    
+                        const boton = document.createElement("button");
+                        boton.setAttribute("class", "duration-300 text-white flex items-center justify-center bg-indigo-700 rounded-md hover:bg-indigo-800 w-10 h-10 text-xl");
+                        //boton.setAttribute("onclick", "addProducto(" + element['COD_PROD'] + "," + element['PU_PROD'] + ",'" + element['DEN_PROD'] + "','" + razSoc.value + ")");
+                        boton.setAttribute("onclick", `addProducto(${element['COD_PROD']}, ${element['PU_PROD']}, '${element['DEN_PROD']}', '${razSoc.value}')`);
+                        const imgBtn = document.createElement("img");
+                        imgBtn.setAttribute("alt", "+");
+                        imgBtn.setAttribute("src", "../../assets/svg/agregar.svg");
+                        boton.appendChild(imgBtn);
+                        zonaInferior.appendChild(boton);
+                    
+                        fondoData.appendChild(denominacion);
+                        fondoData.appendChild(zonaInferior);
+                        data.appendChild(fondoData);
+                        componente.appendChild(imagen);
+                        componente.appendChild(data);
+                    
+                        return componente;
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">crearComponenteSinResultados()</p>
+                <small style="font-size: 0.8rem">Comprueba los componentes de los productos en el caso que no haya
+                    productos en una tienda</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function crearComponenteSinResultados() {
+                        const p = document.createElement("p");
+                        p.textContent = "No se han encontrado productos para esta tienda 😢";
+                        p.setAttribute("class", "col-span-4");
+                        p.style.textAlign = "center";
+                    
+                        return p;
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">mostrarMapa()</p>
+                <small style="font-size: 0.8rem">Crea el mapa con las coordenadas de la tienda</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function mostrarMapa() {
+                        let marker;
+                    
+                        let map = L.map('map').setView([40.314224, -3.7038], 16)
+                    
+                        //Agregar tilelAyer mapa base desde openstreetmap
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: copy; a href="https://www.openstreetmap.org/copyright">OpenStreetMap for DailyGo/a> contributors'
+                        }).addTo(map);
+                    
+                        
+                    
+                            let coordenadas = coords.value.split(",");
+                            map.flyTo(coordenadas, 16);
+                            
+                            const lat = coordenadas[0];
+                            const lng = coordenadas[1];
+                    
+                    
+                            // Eliminar cualquier marcador anterior
+                            if (marker) {
+                                map.removeLayer(marker);
+                            }
+                    
+                            // Crear un marcador y agregarlo al mapa
+                            marker = L.marker([lat, lng]).addTo(map);
+                    
+                            // Centrar el mapa en la ubicación seleccionada
+                            map.flyTo([lat, lng], 16);
+                    
+                            const chincheta = document.querySelectorAll(".leaflet-marker-pane")[0];
+                            const imagen = chincheta.childNodes[0];
+                            imagen.setAttribute("src", `../../img_bbdd/proveedores/${cifProv.value}.jpg`);
+                            imagen.setAttribute("id", "img_chincheta");
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+    </article>
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">registro_usuarios.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarEventos()</p>
+                <small style="font-size: 0.8rem">Función con la que se da comienzo al script</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    
+                    function iniciarEventos() {
+                        try {
+                            nombre.addEventListener("input", validarNombre);
+                            apellidos.addEventListener("input", validarApellidos);
+                            telefono.addEventListener("input", validarTelefono);
+                            correo.addEventListener("input", validarCorreo);
+                            contrasena.addEventListener("input", validarContrasena);
+                            confirmarContrasena.addEventListener("input", validarConfirmarContrasena);
+                            terminos.addEventListener("click", validarTerminos);
+                    
+                            crearCuenta.addEventListener("click", peticionCrearUsuario);
+                        } catch (error) {
+                            console.log(
+                                `Los eventos no están funcionando correctamente: ${error}`
+                            );
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarCorreo()</p>
+                <small style="font-size: 0.8rem">Valida que el correo esté bien</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarCorreo() {
+                        try {
+                            const expCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                    
+                            if (expCorreo.test(correo.value)) {
+                                xhrCorreo.onreadystatechange = respuestaExisteCorreo;
+                                xhrCorreo.open("POST", "../php/usuarios/registro_usuario.php", true);
+                                xhrCorreo.setRequestHeader(
+                                    "Content-type",
+                                    "application/x-www-form-urlencoded"
+                                );
+                                xhrCorreo.send(`correoExistente=${correo.value}`);
+                    
+                                correoValidado = true;
+                            } else {
+                                correo.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgCorreo.setAttribute("class", "flex");
+                                msgCorreoExiste.setAttribute("class", "hidden");
+                    
+                                correoValidado = false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar el correo: ${error}`);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">respuestaExisteCorreo()</p>
+                <small style="font-size: 0.8rem">Comprueba si el correo ya existe en la base de dato</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function respuestaExisteCorreo() {
+                        try {
+                            if (xhrCorreo.readyState == 4 && xhrCorreo.status == 200) {
+                                let respuestaPhp = xhrCorreo.responseText;
+                    
+                                if (respuestaPhp == "no existe") {
+                                    correo.setAttribute(
+                                        "class",
+                                        "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                    );
+                                    msgCorreoExiste.setAttribute("class", "hidden");
+                                    msgCorreo.setAttribute("class", "hidden");
+                                    correoComprobadoBaseDatos = true;
+                                } else {
+                                    correo.setAttribute(
+                                        "class",
+                                        "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                    );
+                                    msgCorreoExiste.setAttribute("class", "flex");
+                                    msgCorreo.setAttribute("class", "hidden");
+                                    correoComprobadoBaseDatos = false;
+                                }
+                            }
+                        } catch (error) {
+                            console.log(
+                                `No se ha obtenido respuesta de la existencia del correo: ${error}`
+                            );
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarContrasena()</p>
+                <small style="font-size: 0.8rem">Valida que la contraseña tenga los minimos necesarios</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarContrasena() {
+                        try {
+                            const expContrasena =
+                                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$/;
+                    
+                            if (expContrasena.test(contrasena.value)) {
+                                contrasena.setAttribute(
+                                    "class",
+                                    "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgContrasena.setAttribute("class", "hidden");
+                                contraValidada = true;
+                            } else {
+                                contrasena.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgContrasena.setAttribute("class", "flex");
+                                contraValidada = false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar la contraseña: ${error}`);
+                        }
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarConfirmarContrasena()</p>
+                <small style="font-size: 0.8rem">Comprueba que la contraseña la ha escrito bien 2 veces</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarConfirmarContrasena() {
+                        try {
+                            const expContrasenaRep =
+                                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$/;
+                    
+                            if (
+                                contrasena.value === confirmarContrasena.value &&
+                                expContrasenaRep.test(confirmarContrasena.value)
+                            ) {
+                                confirmarContrasena.setAttribute(
+                                    "class",
+                                    "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgConfirmarContrasena.setAttribute("class", "hidden");
+                                return true;
+                            } else {
+                                confirmarContrasena.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgConfirmarContrasena.setAttribute("class", "flex");
+                                return false;
+                            }
+                        } catch (error) {
+                            console.log(
+                                `No se ha podido validar la confirmación de la contraseña: ${error}`
+                            );
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarNombre()</p>
+                <small style="font-size: 0.8rem">Comprueba que el nombre sea correcto</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarNombre() {
+                        try {
+                            const expNombre = /^([a-zA-ZáéíóúÁÉÍÓÚñÑüÜñ]{2,20}\s?)+$/;
+                    
+                            if (expNombre.test(nombre.value)) {
+                                nombre.setAttribute(
+                                    "class",
+                                    "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgNombre.setAttribute("class", "hidden");
+                                nombreValidado = true;
+                            } else {
+                                nombre.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgNombre.setAttribute("class", "flex");
+                                nombreValidado = false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar el nombre: ${error}`);
+                        }
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarApellidos()</p>
+                <small style="font-size: 0.8rem">Comprueba que los apellidos sean correctos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarApellidos() {
+                        try {
+                            const expApellidos = /^([a-zA-ZáéíóúÁÉÍÓÚñÑüÜñ]{2,}\s?-?\s?){1,4}$/;
+                    
+                            if (expApellidos.test(apellidos.value)) {
+                                apellidos.setAttribute(
+                                    "class",
+                                    "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgApellidos.setAttribute("class", "hidden");
+                                apellidoValidado = true;
+                            } else {
+                                apellidos.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgApellidos.setAttribute("class", "flex");
+                                apellidoValidado = false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar los apellidos: ${error}`);
+                        }
+                    }
+                    
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarTelefono()</p>
+                <small style="font-size: 0.8rem">Valida que el teléfono sea correcto</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarTelefono() {
+                        try {
+                            const expTelefono = /^(6|7|8|9)\d{8}$/;
+                    
+                            if (expTelefono.test(telefono.value)) {
+                                xhrTelefono.onreadystatechange = respuestaExisteTelefono;
+                                xhrTelefono.open("POST", "../php/usuarios/registro_usuario.php", true);
+                                xhrTelefono.setRequestHeader(
+                                    "Content-type",
+                                    "application/x-www-form-urlencoded"
+                                );
+                                xhrTelefono.send(`telefonoExistente=${telefono.value}`);
+                    
+                                telefonoValidado = true;
+                            } else {
+                                telefono.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgTelefono.setAttribute("class", "flex");
+                                msgTelefonoExiste.setAttribute("class", "hidden");
+                    
+                                telefonoValidado = false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar el teléfono: ${error}`);
+                        }
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">respuestaExisteTelefono()</p>
+                <small style="font-size: 0.8rem">Comprueba que el teléfono no se repita</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function respuestaExisteTelefono() {
+                        try {
+                            if (xhrTelefono.readyState == 4 && xhrTelefono.status == 200) {
+                                let jsonTelefono = xhrTelefono.responseText;
+                                console.log(jsonTelefono)
+                                if (jsonTelefono === "no existe") {
+                                    telefono.setAttribute(
+                                        "class",
+                                        "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                    );
+                                    msgTelefonoExiste.setAttribute("class", "hidden");
+                                    msgTelefono.setAttribute("class", "hidden");
+                                    telefonoComprobadoBaseDatos = true;
+                                } else {
+                                    telefono.setAttribute(
+                                        "class",
+                                        "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                    );
+                                    msgTelefonoExiste.setAttribute("class", "flex");
+                                    msgTelefono.setAttribute("class", "hidden");
+                                    telefonoComprobadoBaseDatos = false;
+                                }
+                            }
+                        } catch (error) {
+                            console.log(
+                                `No se ha podido obtener la respuesta de la existencia del teléfono: ${error}`
+                            );
+                        }
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarTerminos()</p>
+                <small style="font-size: 0.8rem">Comprueba que ha aceptado los terminos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarTerminos() {
+                        try {
+                            if (terminos.checked) {
+                                msgTerminos.setAttribute("class", "hidden");
+                                terminosValidados = true;
+                            } else {
+                                msgTerminos.setAttribute("class", "flex");
+                                terminosValidados = false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar los términos: ${error}`);
+                        }
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">peticionCrearUsuario()</p>
+                <small style="font-size: 0.8rem">Petición al back para crear la cuenta</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function peticionCrearUsuario() {
+                        try {
+                            if (
+                                correoComprobadoBaseDatos == true &&
+                                correoValidado == true &&
+                                contraValidada == true &&
+                                nombreValidado == true &&
+                                apellidoValidado == true &&
+                                telefonoValidado == true &&
+                                telefonoComprobadoBaseDatos == true  &&
+                                terminosValidados == true
+                            ) {
+                                xhrNuevoUsuario.onreadystatechange = respuestaCrearUsuario;
+                                xhrNuevoUsuario.open("POST", "../php/usuarios/registro_usuario.php", true);
+                                xhrNuevoUsuario.setRequestHeader(
+                                    "Content-type",
+                                    "application/x-www-form-urlencoded"
+                                );
+                                xhrNuevoUsuario.send(
+                                    `nombre=${nombre.value}&apellidos=${apellidos.value}&correo=${correo.value}&contrasena=${contrasena.value}&telefono=${telefono.value}`
+                                );
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido solicitar crear usuario: ${error}`);
+                        }
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">respuestaCrearUsuario()</p>
+                <small style="font-size: 0.8rem">Respuesta a la petición al back para crear la cuenta</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function respuestaCrearUsuario() {
+                        try {
+                            if (xhrNuevoUsuario.readyState == 4 && xhrNuevoUsuario.status == 200) {
+                                let respuestaUsuario = xhrNuevoUsuario.responseText;
+                                console.log(respuestaUsuario)
+                                if (respuestaUsuario === "creado") {
+                                    localStorage.setItem("nombre", nombre.value);
+                                    localStorage.setItem("apellidos", apellidos.value);
+                                    localStorage.setItem("correo", correo.value);
+                                    localStorage.setItem("telefono", apellidos.value);
+                                    localStorage.setItem("tipoUsuario", "usuario");
+                                    window.location.href = "../src/index.html";
+                                } else {
+                                    const errorCrear = document.getElementById("errorCrear");
+                                    errorCrear.setAttribute("class", "flex");
+                                }
+                            }
+                        } catch (error) {
+                            console.log(
+                                `No se ha podido obtener respuesta de la creación del usuario: ${error}`
+                            );
+                        }
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+    </article>
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">tiendas.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarTiendas()</p>
+                <small style="font-size: 0.8rem">Función con la que se da comienzo al script</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    
+                    function iniciarTiendas() {
+                        if ((filename() == "inicio.php") || (filename() == "inicio.php#info-ayuda.php")) {
+                            tiendasTop();
+                        }
+                    
+                        try {
+                            CarouselCategorias();
+                            buscarTiendas();
+                            eliminarFiltros.addEventListener("click", quitarFiltros);
+                            nombreTienda.addEventListener("input", buscarTiendas);
+                        } catch (e) {
+                            console.log("Página de Inicio 🏠");
+                        }
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">ordenarTiendas(tipo)</p>
+                <small style="font-size: 0.8rem">Ordena las tiendas nada mas meterse a verlas</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function ordenarTiendas(tipo) {
+                        if (orden.value == "TIEMPO") {
+                            ordenTiempo.setAttribute("class", "duration-300 rounded-full border px-3 py-1 hover:bg-blue-100/50 cursor-pointer");
+                            orden.value = "rand";
+                            buscarTiendas();
+                        } else {
+                            ordenTiempo.setAttribute("class", "duration-300 rounded-full border px-3 py-1 bg-blue-800 text-white hover:bg-blue-900 cursor-pointer");
+                            orden.value = "TIEMPO";
+                            buscarTiendas();
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">quitarFiltros()</p>
+                <small style="font-size: 0.8rem">Quita los filtros para buscar las tiendas</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function quitarFiltros() {
+                        ordenTiempo.setAttribute("class", "duration-300 rounded-full border px-3 py-1 hover:bg-blue-100/50 cursor-pointer");
+                        orden.value = "rand";
+                        categoria.value = "";
+                        tituloResultados.textContent = `Resultados`;
+                        nombreTienda.value = "";
+                        buscarTiendas();
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">buscarTiendas()</p>
+                <small style="font-size: 0.8rem">Busca las tiendas por escritura</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function buscarTiendas() {
+                        const listadoTiendas = document.getElementById("listadoTiendas");
+                    
+                        const datos = {
+                            tienda: nombreTienda.value,
+                            categoria: categoria.value,
+                            orden: orden.value
+                        }
+                    
+                        console.log(datos);
+                    
+                        fetch("../../php/usuarios/listar_tiendas.php", {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                    
+                                listadoTiendas.innerHTML = "";
+                    
+                                if (data.length > 0) {
+                                    data.forEach(element => {
+                                        listadoTiendas.appendChild(crearComponenteTienda(element));
+                                    });
+                                } else {
+                                    listadoTiendas.appendChild(crearComponenteSinResultados())
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Error: No se ha podido obtener los datos de todas las tiendas -> ", error);
+                            });
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">filename()</p>
+                <small style="font-size: 0.8rem">Busca las imagenes</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function filename() {
+                        const rutaAbsoluta = self.location.href;
+                        const posicionUltimaBarra = rutaAbsoluta.lastIndexOf("/");
+                        const rutaRelativa = rutaAbsoluta.substring(posicionUltimaBarra + "/".length, rutaAbsoluta.length);
+                        return rutaRelativa;
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">tiendasTop()</p>
+                <small style="font-size: 0.8rem">Pone las tiendas que estan en el TOP</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function tiendasTop() {
+                        const listadoTiendas = document.getElementById("listadoTiendas");
+                        listadoTiendas.innerHTML = "";
+                    
+                        fetch("../../php/usuarios/tiendas_top.php", {
+                            method: "POST",
+                            body: null,
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.length > 0) {
+                                    data.forEach(element => {
+                                        listadoTiendas.appendChild(crearComponenteTienda(element));
+                                    });
+                                } else {
+                                    listadoTiendas.appendChild(crearComponenteSinResultados());
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Error: No se ha podido obtener los datos de todas las tiendas -> ", error);
+                            });
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">CarouselCategorias()</p>
+                <small style="font-size: 0.8rem">Muestra las distintas categorias en un carrousel</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function CarouselCategorias() {
+                        try {
+                            const swiper = new Swiper(".mySwiper", {
+                                slidesPerView: 3,
+                                spaceBetween: 3,
+                                pagination: {
+                                    el: ".swiper-pagination",
+                                    clickable: true,
+                                },
+                                breakpoints: {
+                                    640: {
+                                        slidesPerView: 7,
+                                        spaceBetween: 5,
+                                    },
+                                    768: {
+                                        slidesPerView: 8,
+                                        spaceBetween: 5,
+                                    },
+                                    1024: {
+                                        slidesPerView: 10,
+                                        spaceBetween: 5,
+                                    },
+                                },
+                            });
+                        } catch (e) {
+                            console.log("No hay swiper en está página")
+                        }
+                    }
+                    
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">filtrarCategoria(nombre)</p>
+                <small style="font-size: 0.8rem">Filtra por nombre</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function filtrarCategoria(nombre) {
+                        tituloResultados.textContent = `Resultados por ${nombre}`;
+                        categoria.value = nombre;
+                        buscarTiendas();
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">crearComponenteTienda(element)</p>
+                <small style="font-size: 0.8rem">Creación de componentes dependiendo de los filtros</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function crearComponenteTienda(element) {
+                        let valorMedia = parseFloat(element.media).toFixed(1);
+                        
+                        const componente = document.createElement("form");
+                        componente.setAttribute("action", "tienda_productos.php");
+                        componente.setAttribute("method", "post");
+                        componente.style.height = "200px";
+                        componente.style.backgroundImage = `linear-gradient(to bottom, rgba(16, 14, 52, 0.2), rgba(16, 14, 52, 0.9)), url('../../img_bbdd/fondos/${element['CIF_PROV']}.jpg')`;
+                        componente.style.backgroundSize = "cover";
+                        componente.style.backgroundPosition = "center";
+                        componente.setAttribute("class", "col-span-4 lg:col-span-1 md:col-span-1 shadow-lg hover:shadow-2xl duration-300 cursor-pointer rounded-lg");
+                    
+                        // VALORES
+                        componente.appendChild(datosHiddens(element, valorMedia));
+                    
+                        const contenedor = document.createElement("button");
+                        contenedor.setAttribute("type", "submit");
+                        contenedor.setAttribute("class", "w-full h-full flex flex-col justify-end rounded-lg");
+                    
+                        const contendorTexto = document.createElement("div");
+                        contendorTexto.setAttribute("class", "w-full h-fit mx-auto text-center rounded-xl");
+                    
+                        const datosTienda = document.createElement("div");
+                        datosTienda.setAttribute("class", "p-5 mb-5");
+                    
+                        const razonSocial = document.createElement("h3");
+                        razonSocial.setAttribute("class", "text-white font-bold truncate");
+                        razonSocial.textContent = `${element['RAZSOC']}`;
+                    
+                        const categoria = document.createElement("small");
+                        categoria.setAttribute("class", "px-2 py-1 bg-indigo-700 rounded-full text-xs text-white");
+                        categoria.textContent = `${element['CATEGORIA']}`;
+                    
+                        datosTienda.appendChild(razonSocial);
+                        datosTienda.appendChild(categoria);
+                    
+                        const datosExtra = document.createElement("div");
+                        datosExtra.setAttribute("class", "flex flex-wrap text-sm justify-center gap-3 bg-white p-2.5 rounded-b-lg");
+                    
+                        const divValoracion = document.createElement("div");
+                        divValoracion.setAttribute("class", "flex flex-wrap items-center gap-1");
+                    
+                        const imgValoracion = document.createElement("img");
+                        imgValoracion.style.width = "16px";
+                        if (valorMedia >= 4) {
+                            imgValoracion.setAttribute("src", "../../assets/svg/valoracion_top.svg");
+                        } else {
+                            imgValoracion.setAttribute("src", "../../assets/svg/valoracion.svg");
+                        }
+                    
+                        imgValoracion.setAttribute("alt", "valoración");
+                    
+                        const valoracion = document.createElement("p");
+                        valoracion.textContent = valorMedia;
+                        if (valorMedia >= 4) {
+                            valoracion.setAttribute("class", "text-yellow-500 font-bold");
+                        }
+                    
+                        divValoracion.appendChild(imgValoracion);
+                        divValoracion.appendChild(valoracion);
+                    
+                        const divTiempo = document.createElement("div");
+                        divTiempo.setAttribute("class", "flex flex-wrap items-center gap-1");
+                    
+                        const imgTiempo = document.createElement("img");
+                        imgTiempo.style.width = "16px";
+                        imgTiempo.setAttribute("src", "../../assets/svg/tiempo.svg");
+                        imgTiempo.setAttribute("alt", "tiempo");
+                    
+                        const tiempo = document.createElement("p");
+                        tiempo.textContent = `${element['TIEMPO']} min`;
+                    
+                        divTiempo.appendChild(imgTiempo);
+                        divTiempo.appendChild(tiempo);
+                    
+                        datosExtra.appendChild(divValoracion);
+                        datosExtra.appendChild(divTiempo);
+                        contendorTexto.appendChild(datosTienda);
+                        contendorTexto.appendChild(datosExtra);
+                        contenedor.appendChild(contendorTexto);
+                        componente.appendChild(contenedor);
+                    
+                        return componente;
+                    }
+                    
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">crearComponenteSinResultados()</p>
+                <small style="font-size: 0.8rem">Creación de componentes si no hay tiendas</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function crearComponenteSinResultados() {
+                        const p = document.createElement("p");
+                        p.textContent = "No se han encontrado resultados 😢 Busca otra tienda ¡Hay miles!";
+                        p.setAttribute("class", "col-span-4");
+                        p.style.textAlign = "center";
+                    
+                        return p;
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">datosHiddens(element, media)</p>
+                <small style="font-size: 0.8rem">Recoge los datos ocultos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function datosHiddens(element, media) {
+                        const div = document.createElement("div");
+                        
+                        const tipos = ["CIF_PROV", "RAZSOC", "DIR_PROV", "TLF_PROV", "MEDIA", "CATEGORIA", "TIEMPO", "COORDENADAS"];
+                    
+                        for (let i = 0; i < tipos.length; i++) {
+                            const nuevo = document.createElement("input");
+                            nuevo.setAttribute("name", tipos[i]);
+                            nuevo.setAttribute("type", "hidden");
+                            if(tipos[i] == "MEDIA"){
+                                nuevo.setAttribute("value", media);
+                            }else{
+                                nuevo.setAttribute("value", element[tipos[i]]);
+                            }
+                            div.appendChild(nuevo);
+                        }
+                        console.log(div);
+                        return div;
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        
+    </article>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>

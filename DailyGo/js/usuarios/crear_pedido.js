@@ -186,7 +186,7 @@ function validarPiso() {
 }
 
 function validarPuerta() {
-    const expPuerta = /^[a-zA-Z]$/;;
+    const expPuerta = /^[a-zA-Z1-9]$/;
     if (expPuerta.test(puerta.value)) {
         puerta.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
         return true;

@@ -183,30 +183,30 @@ function crearComponenteFila(element) {
     return fila;
 }
 
-function listarPedidos() {
-    const datos = {
-        'id': localStorage.getItem("id")
-    }
-    fetch("../../php/usuarios/listar_pedidos_usuario.php", {
-        method: "POST",
-        body: JSON.stringify(datos),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            const historialPedidos = document.getElementById("historialPedidos");
-            data.forEach(element => {
-                if (element['ESTADO_VEN'] == "Completado" || element['ESTADO_VEN'] == "Valorado") {
-                    historialPedidos.appendChild(crearComponenteFila(element));
-                }
-            });
-        })
-        .catch(error => {
-            console.error("Error: No se ha podido crear la petición ->", error);
-        });
-}
+// function listarPedidos() {
+//     const datos = {
+//         'id': localStorage.getItem("id")
+//     }
+//     fetch("../../php/usuarios/listar_pedidos_usuario.php", {
+//         method: "POST",
+//         body: JSON.stringify(datos),
+//         headers: {
+//             "Content-Type": "application/json"
+//         }
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             const historialPedidos = document.getElementById("historialPedidos");
+//             data.forEach(element => {
+//                 if (element['ESTADO_VEN'] == "Completado" || element['ESTADO_VEN'] == "Valorado") {
+//                     historialPedidos.appendChild(crearComponenteFila(element));
+//                 }
+//             });
+//         })
+//         .catch(error => {
+//             console.error("Error: No se ha podido crear la petición ->", error);
+//         });
+// }
 
 function listarPedidos() {
 
@@ -268,6 +268,3 @@ function listarPedidosActivos() {
             console.error("Error: No se ha podido crear la petición ->", error);
         });
 }
-
-
-

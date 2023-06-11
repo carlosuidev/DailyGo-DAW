@@ -46,8 +46,6 @@ function mostrarProductos() {
         orden: orden.value,
     }
 
-    console.log(datos)
-
     fetch("../../php/usuarios/listar_productos_tienda.php", {
         method: "POST",
         body: JSON.stringify(datos),
