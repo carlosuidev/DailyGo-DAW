@@ -1,0 +1,2150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark fixed-top mb-5">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">DailyGo Doc</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+                aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menú</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Global</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="usuarios.html">Usuarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="proveedores.html">Proveedores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="riders.html">Riders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="administrador.html">Administrador</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-5 pb-5">
+    </div>
+
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">actualizar_datos_proveedores.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarPerfil()</p>
+                <small style="font-size: 0.8rem">Inicia las variables y los eventos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarPerfil() {
+                        mostrarDatos();
+                        coordenadas.addEventListener("input", validarCoordenadas);
+                        perfil.addEventListener("change", validarImagenPerfil);
+                        razsoc.addEventListener("input", validarRazsoc);
+                        cat.addEventListener("change", cambiarCategoria);
+                        direccion.addEventListener("input", validarDireccion);
+                        telefono.addEventListener("input", validarTelefono);
+                        correo.addEventListener("input", validarCorreo);
+                        banner.addEventListener("change", validarImagenBanner);
+                        contrasenaNueva.addEventListener("input", validarContrasena);
+                        tiempo.addEventListener("input", validarTiempo)
+                    
+                        btnRazsoc.addEventListener("click", cambiarRazsoc);
+                        btnCoord.addEventListener("click", cambiarCoordenadas);
+                        btnDirec.addEventListener("click", cambiarDireccion);
+                        btnTelefono.addEventListener("click", cambiarTelefono);
+                        btnCorreo.addEventListener("click", cambiarCorreo);
+                        btnContrasena.addEventListener("click", cambiarContrasena);
+                        btnPerfil.addEventListener("click", guardarImagen);
+                        btnBanner.addEventListener("click", guardarImagenBanner);
+                        btnTiempo.addEventListener("click", cambiarTiempo)
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">mostrarDatos()</p>
+                <small style="font-size: 0.8rem">Rellena los inputs con las variables</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function mostrarDatos() {
+                        datosCategoria = {
+                            'cat': 'cat',
+                            'cif': localStorage.getItem("cif")
+                        }
+                        fetch("../../php/proveedores/actualizar_datos_proveedores.php", {
+                            method: "POST",
+                            body: JSON.stringify(datosCategoria),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Error en la solicitud');
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                data.forEach(element => {
+                                    cat.innerHTML += "option value='" + element.categoria + "'>" + element.categoria + "/option>";
+                                });
+                            })
+                    
+                        datosCoord = {
+                            'coord': 'coord',
+                            'cif': localStorage.getItem("cif")
+                        }
+                        fetch("../../php/proveedores/actualizar_datos_proveedores.php", {
+                            method: "POST",
+                            body: JSON.stringify(datosCoord),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Error en la solicitud');
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                data.forEach(element => {
+                                    coordenadas.value = element.coordenadas
+                                });
+                    
+                            })
+                        datosTiempo = {
+                            'time': 'time',
+                            'cif': localStorage.getItem("cif")
+                        }
+                        fetch("../../php/proveedores/actualizar_datos_proveedores.php", {
+                            method: "POST",
+                            body: JSON.stringify(datosTiempo),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Error en la solicitud');
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                console.log(data)
+                    
+                                data.forEach(element => {
+                                    tiempo.value = element.timeto
+                                });
+                    
+                            })
+                    
+                        razsoc.value = localStorage.getItem("razonSocial");
+                        direccion.value = localStorage.getItem("direccion");
+                        telefono.value = localStorage.getItem("telefono");
+                        correo.value = localStorage.getItem("correo");
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarTiempo()</p>
+                <small style="font-size: 0.8rem">Valida que el tiempo esté bien</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarTiempo() {
+
+                        if (tiempo.value >= 10 && tiempo.value = 90) {
+                            tiempo.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgTiempo.setAttribute("class", "hidden");
+                            validacionTiempo = true;
+                        } else {
+                            tiempo.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgTiempo.setAttribute("class", "flex");
+                            validacionTiempo = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarCoordenadas()</p>
+                <small style="font-size: 0.8rem">Valida que las coordenadas esten bien</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarCoordenadas() {
+                        const expCoord = /^[-+]?((([0-9]|[1-9][0-9]|1[0-7][0-9])(\.\d{1,8})?)|180(\.0{1,8})?),[-+]?((([0-9]|[1-9][0-9]|1[0-7][0-9])(\.\d{1,8})?)|180(\.0{1,8})?)$/;
+                        if (expCoord.test(coordenadas.value)) {
+                            coordenadas.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgCoord.setAttribute("class", "hidden");
+                            validacionCoordenadas = true;
+                        } else {
+                            coordenadas.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgCoord.setAttribute("class", "flex");
+                            validacionCoordenadas = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarImagenPerfil()</p>
+                <small style="font-size: 0.8rem">Valida que la imagen de perfil esté bien</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarImagenPerfil() {
+                        const expPerfil = /\.(jpg)/i;
+                        if (expPerfil.test(perfil.value)) {
+                            perfil.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgPerfil.setAttribute("class", "hidden");
+                            validacionPerfil = true;
+                        } else {
+                            perfil.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgPerfil.setAttribute("class", "flex");
+                            validacionPerfil = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarImagenBanner()</p>
+                <small style="font-size: 0.8rem">Valida que la imagen de banner esté bien</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarImagenBanner() {
+                        const expBanner = /\.(jpg)/i;
+                        if (expBanner.test(banner.value)) {
+                            banner.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgBanner.setAttribute("class", "hidden");
+                            validacionBanner = true;
+                        } else {
+                            banner.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgBanner.setAttribute("class", "flex");
+                            validacionBanner = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarRazsoc()</p>
+                <small style="font-size: 0.8rem">Valida la razón social</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarRazsoc() {
+                        const expRazSoc = /^([a-zA-ZáéíóúÁÉÍÓÚñÑüÜñ']{2,20}\s?)+$/;
+                        if (expRazSoc.test(razsoc.value)) {
+                            razsoc.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgRazsoc.setAttribute("class", "hidden");
+                            validacionRazsoc = true;
+                        } else {
+                            razsoc.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgRazsoc.setAttribute("class", "flex");
+                            validacionRazsoc = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarDireccion()</p>
+                <small style="font-size: 0.8rem">Valida que la dirección esté bien</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarDireccion() {
+                        const expDirec = /^([a-zA-ZáéíóúÁÉÍÓÚñÑüÜñ /.,0-9]){2,40}$/;
+                        if (expDirec.test(direccion.value)) {
+                            direccion.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgDireccion.setAttribute("class", "hidden");
+                            validacionDirec = true;
+                        } else {
+                            direccion.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgDireccion.setAttribute("class", "flex");
+                            validacionDirec = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarTelefono()</p>
+                <small style="font-size: 0.8rem">Valida que el teléfono esté bien</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarTelefono() {
+                        const expTelefono = /^(6|7|8|9)\d{8}$/;
+                        if (expTelefono.test(telefono.value)) {
+                            telefono.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgTelefono.setAttribute("class", "hidden");
+                            msgTelefonoExiste.setAttribute("class", "hidden");
+                            validacionTelefono = true;
+                        } else {
+                            telefono.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgTelefono.setAttribute("class", "flex");
+                            msgTelefonoExiste.setAttribute("class", "hidden");
+                            validacionTelefono = false;
+                        }
+                    }                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarCorreo()</p>
+                <small style="font-size: 0.8rem">Valida que el correo esté bien</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarCorreo() {
+                        const expCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
+                        if (expCorreo.test(correo.value)) {
+                            correo.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgCorreo.setAttribute("class", "hidden");
+                            msgCorreoExiste.setAttribute("class", "hidden");
+                            validacionCorreo = true;
+                    
+                        } else {
+                            correo.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgCorreo.setAttribute("class", "flex");
+                            msgCorreoExiste.setAttribute("class", "hidden");
+                            validacionCorreo = false;
+                        }
+                    }                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarContrasena()</p>
+                <small style="font-size: 0.8rem">Valida que la contraseña esté bien</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarCorreo() {
+                        const expCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
+                        if (expCorreo.test(correo.value)) {
+                            correo.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgCorreo.setAttribute("class", "hidden");
+                            msgCorreoExiste.setAttribute("class", "hidden");
+                            validacionCorreo = true;
+                    
+                        } else {
+                            correo.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgCorreo.setAttribute("class", "flex");
+                            msgCorreoExiste.setAttribute("class", "hidden");
+                            validacionCorreo = false;
+                        }
+                    }                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">actualizarDatos(ruta, datos)</p>
+                <small style="font-size: 0.8rem">Actualiza los datos en la base de datos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function actualizarDatos(ruta, datos) {
+                        fetch(ruta, {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Error en la solicitud');
+                                }
+                                return response.text();
+                            })
+                            .then(data => {
+                                console.log(data)
+                                switch (data) {
+                                    case "coordenadasCambiadas":
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                    case "catCambiada":
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                    case "actualizadoRazsoc":
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        localStorage.setItem("razonSocial", razsoc.value);
+                                        break;
+                                    case "actualizadoDir":
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        localStorage.setItem("direccion", direccion.value);
+                                        break;
+                                    case "actualizadoTel":
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        localStorage.setItem("telefono", telefono.value);
+                                        break;
+                                    case "actualizadoMail":
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        localStorage.setItem("correo", correo.value);
+                                        break;
+                                    case "actualizadoContra":
+                                        correctoContrasena.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoContrasena.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                    case "tiempoCambiado":
+                                        correctoDatos.setAttribute("class", "flex");                    
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                    case "telExiste":
+                                        telefono.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                                        msgTelefono.setAttribute("class", "hidden");
+                                        msgTelefonoExiste.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                    case "mailExiste":
+                                        correo.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                                        msgCorreo.setAttribute("class", "hidden");
+                                        msgCorreoExiste.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                    case "contraExiste":
+                                        incorrectoContrasena.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            incorrectoContrasena.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                }
+                    
+                            })
+                            .catch(error => {
+                                console.error("Error: ", error);
+                                return false;
+                            });
+                    }                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarCategoria()</p>
+                <small style="font-size: 0.8rem">Recupera los datos para realizar el cambio de categoria</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarCategoria() {
+                        const datos = {
+                            'categoria': cat.value,
+                            'cif': localStorage.getItem("cif")
+                        }
+                        actualizarDatos("../../php/proveedores/actualizar_datos_proveedores.php", datos);
+                    
+                    }       
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarRazsoc()</p>
+                <small style="font-size: 0.8rem">Recupera los datos para realizar el cambio de razón social</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarRazsoc() {
+                        if (validacionRazsoc) {
+                            const datos = {
+                                'razSoc': razsoc.value,
+                                'cif': localStorage.getItem("cif")
+                            }
+                            actualizarDatos("../../php/proveedores/actualizar_datos_proveedores.php", datos);
+                        }
+                    }       
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarDireccion()</p>
+                <small style="font-size: 0.8rem">Recupera los datos para realizar el cambio de dirección </small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarDireccion() {
+                        if (validacionDirec) {
+                            const datos = {
+                                'direccion': direccion.value,
+                                'cif': localStorage.getItem("cif")
+                            }
+                            actualizarDatos("../../php/proveedores/actualizar_datos_proveedores.php", datos);
+                    
+                        }
+                    }    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarTelefono()</p>
+                <small style="font-size: 0.8rem">Recupera los datos para realizar el cambio de teléfono </small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarTelefono() {
+                        if (validacionTelefono) {
+                            const datos = {
+                                'telefono': telefono.value,
+                                'cif': localStorage.getItem("cif")
+                            }
+                            actualizarDatos("../../php/proveedores/actualizar_datos_proveedores.php", datos);
+                    
+                        }
+                    } 
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarCorreo()</p>
+                <small style="font-size: 0.8rem">Recupera los datos para realizar el cambio de correo </small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarCorreo() {
+                        if (validacionCorreo) {
+                            const datos = {
+                                'correo': correo.value,
+                                'cif': localStorage.getItem("cif")
+                            }
+                            actualizarDatos("../../php/proveedores/actualizar_datos_proveedores.php", datos);
+                        }
+                    } 
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarContrasena()</p>
+                <small style="font-size: 0.8rem">Recupera los datos para realizar el cambio de contraseña</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarCoordenadas() {
+                        if (validacionCoordenadas) {
+                            const datos = {
+                                'coordenadasCambiadas': coordenadas.value,
+                                'cif': localStorage.getItem("cif")
+                            }
+                            actualizarDatos("../../php/proveedores/actualizar_datos_proveedores.php", datos);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarTiempo()</p>
+                <small style="font-size: 0.8rem">Recupera los datos para cambiar el tiempo</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarTiempo() {
+                        if (validarTiempo) {
+                            const datos = {
+                                'tiempoCambiante': tiempo.value,
+                                'cif': localStorage.getItem("cif")
+                            }
+                            actualizarDatos("../../php/proveedores/actualizar_datos_proveedores.php", datos);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">guardarImagen()</p>
+                <small style="font-size: 0.8rem">Recupera los datos para cambiar la foto de perfil</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function guardarImagen() {
+                        if (validacionPerfil) {
+                            console.log("a")
+                            var archivo = perfil.files[0]
+                            var formData = new FormData();
+                            formData.append('imagen', archivo);
+                            formData.append('cif', localStorage.getItem("cif"))
+                            fetch('../../php/proveedores/cambiar_imagen_proveedores.php', {
+                                method: 'POST',
+                                body: formData
+                            })
+                                .then(response => {
+                                    if (response.ok) {
+                                        console.log('Datos enviados con éxito');
+                                        return response.text();
+                                    } else {
+                                        console.log('Error al enviar los datos');
+                                    }
+                                })
+                                .then(data => {
+                                    if (data == 'Imagen guardada correctamente') {
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                    }
+                                })
+                                .catch(error => {
+                                    console.log('Error en la solicitud:', error);
+                                });
+                        }
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">guardarImagenBanner()</p>
+                <small style="font-size: 0.8rem">Recupera los datos para cambiar la foto de banner</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function guardarImagenBanner() {
+                        if (validacionBanner) {
+                            var archivo = banner.files[0]
+                            var formData = new FormData();
+                            formData.append('imagen', archivo);
+                            formData.append('cif', localStorage.getItem("cif"))
+                            fetch('../../php/proveedores/actualizar_banner_proveedores.php', {
+                                method: 'POST',
+                                body: formData
+                            })
+                                .then(response => {
+                                    if (response.ok) {
+                                        console.log('Datos enviados con éxito');
+                                        return response.text();
+                                    } else {
+                                        console.log('Error al enviar los datos');
+                                    }
+                                })
+                                .then(data => {
+                                    console.log(data)
+                                    if (data == 'Imagen guardada correctamente') {
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                    }
+                                })
+                                .catch(error => {
+                                    console.log('Error en la solicitud:', error);
+                                });
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">gestion_sesiones.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">comprobarSesion()</p>
+                <small style="font-size: 0.8rem">Gestiona las sesiones del proveedor</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function comprobarSesion(){
+                        const tipoUsuario = localStorage.getItem("tipoUsuario");
+                        if(tipoUsuario !== "proveedor"){
+                            if(tipoUsuario !== null){
+                                
+                                const redirecciones = {
+                                    'usuario': '../usuarios/inicio.php',
+                                    'rider': '../riders/inicio.html',
+                                    'administrador': '../administrador/inicio.html',
+                                }
+                    
+                                window.location.href = redirecciones[tipoUsuario];
+                            }else{
+                                window.location.href = '../index.html';
+                            }
+                        }else{
+                            return true;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">historial_sesiones.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarHistorial()</p>
+                <small style="font-size: 0.8rem">Carga el historial cuando carga la página</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarHistorial() {
+                        mostrarHistorial();
+                        fecha.addEventListener("change", mostrarHistorial);
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">mostrarHistorial()</p>
+                <small style="font-size: 0.8rem">Muestra el historial de pedidos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function mostrarHistorial() {
+                        let valorFecha = "";
+                        if (fecha.value == "") {
+                            valorFecha = "";
+                        } else {
+                            const fechaTipo = new Date(fecha.value);
+                            valorFecha = `${fechaTipo.getDate().toString().padStart(2, '0')}-${(fechaTipo.getMonth() + 1).toString().padStart(2, '0')}-${fechaTipo.getFullYear()}`;
+                        }
+                    
+                        const datos = {
+                            cif: localStorage.getItem("cif"),
+                            fecha: valorFecha
+                        }
+                    
+                    
+                        fetch("../../php/proveedores/historial_pedidos.php", {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                historialPedidos.innerHTML = "";
+                                if (data.length >= 1 && data.msg != "Sin resultados") {
+                                    data.forEach(element => {
+                                        historialPedidos.appendChild(crearFila(element));
+                                    });
+                    
+                                } else {
+                                    const vacio = {
+                                        num_ven: "Sin resultados",
+                                        cod_prod: "-",
+                                        den_prod: "-",
+                                        cant_det: "-",
+                                        fech_ven: "-",
+                                        nom_rid: "-",
+                                        nom_cli: "-",
+                                        estado_ven: "-"
+                                    };
+                                    historialPedidos.appendChild(crearFila(vacio));
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Error: -> ", error);
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">crearFila(data)</p>
+                <small style="font-size: 0.8rem">Crea una fila con los datos enviados</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function crearFila(data) {
+
+                        console.log(data);
+                        const componente = document.createElement("tr");
+                    
+                        const id = document.createElement("td");
+                        id.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
+                        id.setAttribute("scope", "col");
+                        id.textContent = data['num_ven'];
+                        componente.appendChild(id);
+                    
+                        const producto = document.createElement("td");
+                        producto.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
+                        producto.setAttribute("scope", "col");
+                        if (data['den_prod'] == "-") {
+                            producto.innerHTML = data['den_prod'];
+                        } else {
+                            producto.innerHTML = `
+                            div class='flex items-center gap-2'>
+                                div class='w-10 h-10 rounded-md border'
+                                style='background-image:url(../../img_bbdd/productos/${data['cod_prod']}.jpg); background-size:cover'>/div>
+                                p>${data['den_prod']}/p>
+                            /div>
+                        `;
+                        }
+                    
+                        componente.appendChild(producto);
+                    
+                        const cantidad = document.createElement("td");
+                        cantidad.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
+                        cantidad.setAttribute("scope", "col");
+                        cantidad.textContent = data['cant_det'];
+                        componente.appendChild(cantidad);
+                    
+                        const cliente = document.createElement("td");
+                        cliente.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
+                        cliente.setAttribute("scope", "col");
+                        cliente.textContent = data['nom_cli'];
+                        componente.appendChild(cliente);
+                    
+                        const rider = document.createElement("td");
+                        rider.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
+                        rider.setAttribute("scope", "col");
+                        rider.textContent = data['nom_rid'];
+                        componente.appendChild(rider);
+                    
+                        const fecha = document.createElement("td");
+                        fecha.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
+                        fecha.setAttribute("scope", "col");
+                        fecha.textContent = data['fech_ven'];
+                        componente.appendChild(fecha);
+                    
+                        const estado = document.createElement("td");
+                        estado.setAttribute("class", "p-4 text-sm font-medium text-blue-800");
+                        estado.setAttribute("scope", "col");
+                        estado.textContent = data['estado_ven'];
+                        componente.appendChild(estado);
+                    
+                        return componente;
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">manejar_pedidos.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarProveedor()</p>
+                <small style="font-size: 0.8rem">Muestra la página de la manera que queremos con los datos que queremos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarProveedor() {
+                        personalizarUI();
+                        mostrarPedidos();
+                        btnActualizar.addEventListener("click", () => {
+                            mostrarPedidos();
+                        });
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">personalizarUI()</p>
+                <small style="font-size: 0.8rem">Personaliza la interfaz</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function personalizarUI() {
+                        try {
+                            // Imagen de fondo
+                            const hero = document.getElementById("hero-proveedor");
+                            const cif = localStorage.getItem("cif");
+                            hero.style.backgroundImage = `linear-gradient(to bottom, rgba(16, 14, 52, 0.2), rgba(16, 14, 52, 0.9)), url('../../img_bbdd/fondos/${cif}.jpg')`;
+                            hero.style.backgroundSize = "cover";
+                            hero.style.backgroundPosition = "center";
+                            // Nombre proveedor - razón social
+                            const razonProv = document.getElementById("razonProv");
+                            razonProv.innerHTML = localStorage.getItem("razonSocial");
+                            //Logo
+                            const logo = document.getElementById("logoProveedor");
+                            logo.style.backgroundImage = `url('../../img_bbdd/proveedores/${cif}.jpg')`;
+                            logo.style.backgroundSize = "cover";
+                            logo.style.backgroundPosition = "center";
+                        } catch (e) {
+                            console.log("Sin imágenes");
+                        }
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">actualizarEstado()</p>
+                <small style="font-size: 0.8rem">Cambia el estado de disponible a no disponible</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function actualizarEstado(idPedido, estado) {
+                        const datos = {
+                            id: idPedido,
+                            estado: estado
+                        }
+                        fetch("../../php/global/actualizar_pedido.php", {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.text())
+                            .then(data => {
+                                if (data == "Actualizado") {
+                                    mostrarPedidos();
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Error: No se ha podido crear la petición ->", error);
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">crearComponenteSolicitud(element)</p>
+                <small style="font-size: 0.8rem">Crea los componentes de la pagina</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function crearComponenteSolicitud(element) {
+                        const componete = document.createElement("div");
+                        componete.setAttribute("class", "bg-white border rounded-lg p-5");
+                    
+                        const superior = document.createElement("div");
+                        superior.setAttribute("class", "flex gap-3 justify-content-between");
+                    
+                        const div = document.createElement("div");
+                        div.setAttribute("class", "flex gap-2 items-center justify-between flex-wrap");
+                    
+                        const id = document.createElement("h4");
+                        id.textContent = `Pedido nº${element['num_ven']}`;
+                        id.setAttribute("class", "font-bold");
+                        div.appendChild(id);
+                    
+                        const estado = document.createElement("small");
+                        estado.textContent = element['estado_ven'];
+                        switch (element['estado_ven']) {
+                            case "En preparación":
+                                estado.setAttribute("class", "w-fit bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full")
+                                break;
+                            case "Cancelado":
+                                estado.setAttribute("class", "w-fit bg-red-200 text-red-600 py-0.5 px-2.5 rounded-full")
+                                break;
+                            case "Preparado":
+                                estado.setAttribute("class", "w-fit bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full")
+                                break;
+                            case "En reparto":
+                                estado.setAttribute("class", "w-fit bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full");
+                                break;
+                            case "Entregado":
+                                estado.setAttribute("class", "w-fit bg-green-200 text-green-600 py-0.5 px-2.5 rounded-full");
+                                break;
+                            case "Valorado":
+                                estado.setAttribute("class", "w-fit bg-green-200 text-green-600 py-0.5 px-2.5 rounded-full");
+                                break;
+                            default:
+                                estado.setAttribute("class", "w-fit bg-yellow-200 text-yellow-600 py-0.5 px-2.5 rounded-full");
+                                break;
+                        }
+                        div.appendChild(estado);
+                        componete.appendChild(div);
+                    
+                        const extra = document.createElement("div");
+                        let rider = "";
+                        if (element['nom_rid'] == "Temporal") {
+                            rider = "(En espera)";
+                        } else {
+                            rider = element['nom_rid'];
+                        }
+                        extra.setAttribute("class", "flex my-3 text-indigo-700 gap-5 text-sm");
+                        extra.innerHTML = `
+                        div class='flex gap-2 items-center'>img src='../../assets/svg/inicio_registro/rider.svg' class='w-4'> ${rider}/div>
+                        `;
+                        componete.appendChild(extra);
+                    
+                        const listadoProd = document.createElement("div");
+                        listadoProd.setAttribute("class", "flex flex-col gap-3 mt-8");
+                        element['carro'].forEach(prod => {
+                            listadoProd.innerHTML += `
+                                div class='flex flex-wrap items-center justify-between w-full border rounded p-3 gap-5'>
+                                    div class='flex items-center justify-center gap-3'>
+                                        div class="w-12 h-12 rounded border" style="background-image: url('../../img_bbdd/productos/${prod['cod_prod']}.jpg'); background-size: cover; background-position: center bottom;">
+                                        /div>
+                                        p class='font-semibold'>${prod['den_prod']}/p>
+                                    /div>
+                                    p>${prod['cant_det']} uds./p>
+                                div>
+                                `;
+                        });
+                        componete.appendChild(listadoProd);
+                    
+                        const info = document.createElement("div");
+                        info.innerHTML = `
+                        hr class='w-full my-3'>
+                        p class='mb-5 text-sm w-full rounded-md p-3 bg-blue-100/40'>b>Mensaje:/b> ${element['com_ven']}/p>
+                        `
+                        componete.appendChild(info);
+                    
+                        if (element['estado_ven'] == "Creado") {
+                            const btnValorar = document.createElement("div");
+                            btnValorar.setAttribute("class", "w-full flex flex-wrap justify-center items-center mt-5 gap-2");
+                            btnValorar.innerHTML = `
+                            button onclick="modificarEstado(${element['num_ven']}, 'En preparación')" class="w-full duration-300 text-white bg-green-500 rounded-md font-semibold hover:bg-green-600 py-2 px-3 cursor-pointer">Aceptar/button>
+                            button onclick="modificarEstado(${element['num_ven']}, 'Cancelado')" class="w-full duration-300 text-white bg-red-500 rounded-md font-semibold hover:bg-red-600 py-2 px-3 cursor-pointer">Cancelar/button>
+                            `;
+                            componete.appendChild(btnValorar);
+                        } else if (element['estado_ven'] == "En preparación") {
+                            const btnValorar = document.createElement("div");
+                            btnValorar.setAttribute("class", "w-full flex justify-center items-center flex-col");
+                            btnValorar.innerHTML = `
+                            button onclick="modificarEstado(${element['num_ven']}, 'Preparado')" class="w-full duration-300 text-white bg-indigo-700 rounded-md font-semibold hover:bg-indigo-800 py-2 px-3 cursor-pointer">Pedido preparado/button>
+                            `;
+                            componete.appendChild(btnValorar);
+                        }
+                    
+                        return componete;
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">mostrarPedidos()</p>
+                <small style="font-size: 0.8rem">Muestra los distintos pedidos que estan a la espera</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function mostrarPedidos() {
+                        const datos = {
+                            cif: localStorage.getItem('cif')
+                        }
+                        fetch("../../php/proveedores/peticiones_pedidos.php", {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                const listadoPeticiones = document.getElementById("listadoPeticiones");
+                                const listadoPendientes = document.getElementById("listadoPendientes");
+                                listadoPeticiones.innerHTML = "";
+                                listadoPendientes.innerHTML = "";
+                                if (data.msg != "Sin resultados") {
+                                    let existePet = false;
+                                    let existePen = false;
+                    
+                                    data.forEach(element => {
+                                        if (element['estado_ven'] == 'Creado') {
+                                            listadoPeticiones.appendChild(crearComponenteSolicitud(element));
+                                            existePet = true;
+                                        } else {
+                                            listadoPendientes.appendChild(crearComponenteSolicitud(element));
+                                            existePen = true;
+                                        }
+                                    });
+                    
+                                    if (!existePet) {
+                                        listadoPeticiones.innerHTML = "(No hay ningún pedido ¡Ya llegarán! 😀)";
+                                    }
+                    
+                                    if (!existePen) {
+                                        listadoPendientes.innerHTML = "(No hay pedidos pendientes por realizar)";
+                                    }
+                                }else{
+                                    listadoPeticiones.innerHTML = "(No hay ningún pedido ¡Ya llegarán! 😀)";
+                                    listadoPendientes.innerHTML = "(No hay pedidos pendientes por realizar)";
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Error: No se ha podido crear la petición ->", error);
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">modificarEstado(idPedido, estado)</p>
+                <small style="font-size: 0.8rem">Modifica el estado del pedido</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function modificarEstado(idPedido, estado) {
+                        const datos = {
+                            id: idPedido,
+                            estado: estado
+                        }
+                        fetch("../../php/global/actualizar_pedido.php", {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => response.text())
+                            .then(data => {
+                                if (data == "Actualizado") {
+                                    mostrarPedidos();
+                                } else {
+                                    mostrarPedidos();
+                                    console.log(data);
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Error: No se ha podido crear la petición ->", error);
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">modificar_productos.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">mostrarDatos()</p>
+                <small style="font-size: 0.8rem">Muestra los productos que ya hay </small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function mostrarDatos() {
+                        btnImagen.addEventListener("click", cambiarImagen)
+                        imagenSubidaUsuario.addEventListener("change", validarImagen);
+                    
+                        nuevaImg.addEventListener("input", validarImagenNueva)
+                        nuevoNombre.addEventListener("input", validarNuevoProducto)
+                        nuevoPrecio.addEventListener("input", validarNuevoProductoPrecioUnitario)
+                        btnCrearProducto.addEventListener("click", anhadirProducto)
+                    
+                        btnNombreProducto.addEventListener("click", cambiarNombreProducto);
+                        nombreProducto.addEventListener("input", validarNombreProducto);
+                    
+                        btnPrecioUnitario.addEventListener("click", cambiarPrecioUnitario)
+                        precioUnitario.addEventListener("input", validarPrecioUnitario);
+                    
+                        btnBorrarProducto.addEventListener("click", borrarProducto);
+                    
+                        productosIniciales.addEventListener("change", modiProducMostrar);
+                        razonProv.innerHTML = localStorage.getItem("razonSocial");
+                        razonSocial.innerHTML = localStorage.getItem("razonSocial");
+                        logo.style.backgroundImage = `url('../../img_bbdd/proveedores/${cif}.jpg')`;
+                        logo.style.backgroundSize = "cover";
+                        logo.style.backgroundPosition = "center";
+                        hero.style.backgroundImage = `linear-gradient(to bottom, rgba(16, 14, 52, 0.2), rgba(16, 14, 52, 0.9)), url('../../img_bbdd/fondos/${cif}.jpg')`;
+                        hero.style.backgroundSize = "cover";
+                        hero.style.backgroundPosition = "center";
+                    
+                        productosInicialesArray = {
+                            'producIni': 'producIni',
+                            'cif': cif
+                        }
+                    
+                        fetch("../../php/proveedores/modificar_productos.php", {
+                            method: "POST",
+                            body: JSON.stringify(productosInicialesArray),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Error en la solicitud');
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                productosIniciales.innerHTML += `<option value='-'>(Selecciona un productos)</option>`;
+                                data.forEach(element => {
+                                    productosIniciales.innerHTML += "<option value='" + element.codigo + "'>" + element.nombre + "</option>"
+                                });
+                            })
+                    
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">modiProducMostrar()</p>
+                <small style="font-size: 0.8rem">Al elegir el producto, salen los campos a modificar</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function modiProducMostrar() {
+                        ocultoNombre.setAttribute("class", "");
+                        ocultoImagen.setAttribute("class", "");
+                        ocultoDinero.setAttribute("class", "");
+                        ocultoBorrar.setAttribute("class", "");
+                        productosArray = {
+                            'idProd': productosIniciales.value,
+                            'cif': cif
+                        }
+                        fetch("../../php/proveedores/modificar_productos.php", {
+                            method: "POST",
+                            body: JSON.stringify(productosArray),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Error en la solicitud');
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                data.forEach(element => {
+                                    nombreProducto.value = element.nombre;
+                    
+                                    precioUnitario.value = element.precio;
+                                });
+                            })
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarImagen()</p>
+                <small style="font-size: 0.8rem">Valida la imagen nueva</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarImagen() {
+                        const expImagen = /\.(jpg)/i;
+                        if (expImagen.test(imagenSubidaUsuario.value)) {
+                            imagenSubidaUsuario.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgImagen.setAttribute("class", "hidden");
+                            validarImagenTrue = true;
+                        } else {
+                            imagenSubidaUsuario.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgImagen.setAttribute("class", "flex");
+                            validarImagenTrue = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarImagenNueva()</p>
+                <small style="font-size: 0.8rem">Valida la imagen del nuevo producto</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarImagenNueva() {
+                        const expImagen = /\.(jpg)/i;
+                        if (expImagen.test(nuevaImg.value)) {
+                            nuevaImg.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgImagenNueva.setAttribute("class", "hidden");
+                            validacionImagenNueva = true;
+                        } else {
+                            nuevaImg.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgImagenNueva.setAttribute("class", "flex");
+                            validacionImagenNueva = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarNuevoProducto()</p>
+                <small style="font-size: 0.8rem">Valida el nombre del nuevo producto</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarNuevoProducto() {
+                        const expProducto = /^[\wñÑÁáÉéÍíÓóÚú.,:;"'¡¿\s]{2,200}$/i;
+                        if (expProducto.test(nuevoNombre.value)) {
+                            nuevoNombre.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgNombreNuevoProducto.setAttribute("class", "hidden");
+                            validarNombreNuevo = true;
+                        } else {
+                            nuevoNombre.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgNombreNuevoProducto.setAttribute("class", "flex");
+                            validarNombreNuevo = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarNombreProducto()</p>
+                <small style="font-size: 0.8rem">Valida el nombre del producto a modificar</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarNombreProducto() {
+                        const expProducto = /^[\wñÑÁáÉéÍíÓóÚú.,:;"'¡¿\s]{2,200}$/i;
+                        if (expProducto.test(nombreProducto.value)) {
+                            nombreProducto.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgNombreProducto.setAttribute("class", "hidden");
+                            validarNombre = true;
+                        } else {
+                            nombreProducto.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgNombreProducto.setAttribute("class", "flex");
+                            validarNombre = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarPrecioUnitario()</p>
+                <small style="font-size: 0.8rem">Valida el precio unitario del producto a modificar</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarPrecioUnitario() {
+                        const expPrecio = /^(\d{1,3})(\.\d{1,2})?$/i;
+                        if (expPrecio.test(precioUnitario.value)) {
+                            precioUnitario.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgPrecioUnitario.setAttribute("class", "hidden");
+                            precioUnitarioValidado = true;
+                        } else {
+                            precioUnitario.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgPrecioUnitario.setAttribute("class", "flex");
+                            precioUnitarioValidado = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarNuevoProductoPrecioUnitario()</p>
+                <small style="font-size: 0.8rem">Valida el precio unitario del nuevo producto</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarNuevoProductoPrecioUnitario() {
+                        const expPrecio = /^(\d{1,3})(\.\d{1,2})?$/i;
+                        if (expPrecio.test(nuevoPrecio.value)) {
+                            nuevoPrecio.setAttribute("class", "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgNuevoProductoPrecio.setAttribute("class", "hidden");
+                            validarPrecioNuevo = true;
+                        } else {
+                            nuevoPrecio.setAttribute("class", "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300");
+                            msgNuevoProductoPrecio.setAttribute("class", "flex");
+                            validarPrecioNuevo = false;
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">actualizarDatos(ruta, datos)</p>
+                <small style="font-size: 0.8rem">Actualiza los datos en la base de datos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function actualizarDatos(ruta, datos) {
+                        if (productosIniciales.value == "-") {
+                            return false;
+                        }
+                    
+                        fetch(ruta, {
+                            method: "POST",
+                            body: JSON.stringify(datos),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Error en la solicitud');
+                                }
+                                return response.text();
+                            })
+                            .then(data => {
+                                switch (data) {
+                                    case "NombreActualizado":
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                    
+                                        break;
+                                    case "precioActualizado":
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                        break;
+                                }
+                    
+                            })
+                            .catch(error => {
+                                console.error("Error: ", error);
+                                return false;
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarNombreProducto()</p>
+                <small style="font-size: 0.8rem">Recupera los datos para realizar el cambio de nombre en la base de datos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarNombreProducto() {
+                        if (validarNombre) {
+                            const datos = {
+                                'nombreProducto': nombreProducto.value,
+                                'id': productosIniciales.value
+                            }
+                            actualizarDatos("../../php/proveedores/modificar_productos.php", datos);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarPrecioUnitario()</p>
+                <small style="font-size: 0.8rem">Recupera los datos para realizar el cambio de precio en la base de datos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarPrecioUnitario() {
+                        if (precioUnitarioValidado) {
+                            const datos = {
+                                'precioNuevo': precioUnitario.value,
+                                'id': productosIniciales.value
+                            }
+                            actualizarDatos("../../php/proveedores/modificar_productos.php", datos);
+                    
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">cambiarImagen()</p>
+                <small style="font-size: 0.8rem">Recupera los datos para realizar el cambio de imagen en la base de datos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function cambiarImagen() {
+                        if (productosIniciales.value == "-") {
+                            return false;
+                        }
+                    
+                        if (validarImagenTrue) {
+                            var archivo = imagenSubidaUsuario.files[0];
+                            var formData = new FormData();
+                            formData.append('imagen', archivo);
+                            formData.append('id', productosIniciales.value)
+                            fetch('../../php/proveedores/cambiar_imagen_producto.php', {
+                                method: 'POST',
+                                body: formData
+                            })
+                                .then(response => {
+                                    if (response.ok) {
+                                        console.log('Datos enviados con éxito');
+                                        return response.text();
+                                    } else {
+                                        console.log('Error al enviar los datos');
+                                    }
+                                })
+                                .then(data => {
+                                    if (data == 'Imagen guardada correctamente') {
+                                        correctoDatos.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatos.setAttribute("class", "hidden");
+                                        }, 3000);
+                                    }
+                                })
+                                .catch(error => {
+                                    console.log('Error en la solicitud:', error);
+                                });
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">borrarProducto()</p>
+                <small style="font-size: 0.8rem">Borra el producto seleccionado</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function borrarProducto() {
+
+                        if (productosIniciales.value == "-") {
+                            return false;
+                        }
+                    
+                        const data = {
+                            'idBorrar': productosIniciales.value,
+                        }
+                    
+                        fetch('../../php/proveedores/modificar_productos.php', {
+                            method: 'POST',
+                            body: JSON.stringify(data),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    return response.text();
+                                } else {
+                                    console.log('Error al enviar los datos');
+                                }
+                            })
+                            .then(data => {
+                                console.log(data)
+                                if (data == 'ProductoBorradoImagenBorrada') {
+                                    correctoDatos.setAttribute("class", "flex");
+                                    setTimeout(function () {
+                                        correctoDatos.setAttribute("class", "hidden");
+                                        location.reload();
+                                    }, 3000);
+                                }
+                            })
+                            .catch(error => {
+                                console.log('Error en la solicitud:', error);
+                            });
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">anhadirProducto()</p>
+                <small style="font-size: 0.8rem">Envia los datos del producto para crearlo</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function anhadirProducto() {
+                        if (validacionImagenNueva == true && validarNombreNuevo == true && validarPrecioNuevo == true) {
+                            var archivo = nuevaImg.files[0];
+                            var formData = new FormData();
+                            formData.append('imagen', archivo);
+                            formData.append('nombre', nuevoNombre.value)
+                            formData.append('precio', nuevoPrecio.value)
+                            formData.append('cif', cif)
+                            fetch('../../php/proveedores/nuevo_producto.php', {
+                                method: 'POST',
+                                body: formData
+                            })
+                                .then(response => {
+                                    if (response.ok) {
+                                        console.log('Datos enviados con éxito');
+                                        return response.text();
+                                    } else {
+                                        console.log('Error al enviar los datos');
+                                    }
+                                })
+                                .then(data => {
+                    
+                                    if (data == 'InsertCorrecto') {
+                                        correctoDatosInsert.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            correctoDatosInsert.setAttribute("class", "hidden");
+                                            location.reload();
+                                        }, 1000);
+                                    }else{
+                                        incorrectoDatosInsert.setAttribute("class", "flex");
+                                        setTimeout(function () {
+                                            incorrectoDatosInsert.setAttribute("class", "hidden");
+                                        }, 3000);
+                                    }
+                                })
+                                .catch(error => {
+                                    console.log('Error en la solicitud:', error);
+                                });
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+    <article class="container border rounded py-2 mb-3">
+        <h4 class="bg-primary text-white rounded p-2 mb-4">registro_proveedor.js</h4>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">iniciarEventos()</p>
+                <small style="font-size: 0.8rem">Inicializa todos los eventos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function iniciarEventos() {
+                        try {
+                            razonSocial.addEventListener("input", validarRazonSocial);
+                            nif.addEventListener("input", validarNif);
+                            direccion.addEventListener("input", validarDireccion);
+                            telefono.addEventListener("input", validarTelefono);
+                            correo.addEventListener("input", validarCorreo);
+                            contrasena.addEventListener("input", validarContrasena);
+                            confirmarContrasena.addEventListener(
+                                "input",
+                                validarConfirmarContrasena
+                            );
+                            terminos.addEventListener("click", validarTerminos);
+                    
+                            crearCuenta.addEventListener("click", peticionCrearUsuario);
+                        } catch (error) {
+                            console.log(
+                                `Los eventos no están funcionando correctamente: ${error}`
+                            );
+                        }
+                    }                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarDireccion()</p>
+                <small style="font-size: 0.8rem">Valida la dirección</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarDireccion() {
+                        try {
+                            const expDireccion = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s\d.',-]+$/u;
+                    
+                            if (expDireccion.test(direccion.value)) {
+                                direccion.setAttribute(
+                                    "class",
+                                    "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgDireccion.setAttribute("class", "hidden");
+                                direccionValidada = true;
+                            } else {
+                                direccion.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgDireccion.setAttribute("class", "flex");
+                                direccionValidada = false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar la dirección: ${error}`);
+                        }
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarRazonSocial()</p>
+                <small style="font-size: 0.8rem">Valida la razón social</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarRazonSocial() {
+                        try {
+                            const expRazonSocial = /^[a-zA-ZñÑ\s\d.,()/-]{2,100}$/i;
+                            if (expRazonSocial.test(razonSocial.value)) {
+                                razonSocial.setAttribute(
+                                    "class",
+                                    "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgRazonSocial.setAttribute("class", "hidden");
+                                razonSocialValidada = true;
+                            } else {
+                                razonSocial.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgRazonSocial.setAttribute("class", "flex");
+                                razonSocialValidada = false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar la Razón social: ${error}`);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarNif()</p>
+                <small style="font-size: 0.8rem">Valida NIF</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarNif() {
+                        try {
+                            const expNif = /^[A-Z]-\d{8}$/i;
+                    
+                            if (expNif.test(nif.value)) {
+                                xhrNif.onreadystatechange = respuestaExisteNif;
+                                xhrNif.open("POST", "../php/proveedores/registro_proveedor.php", true);
+                                xhrNif.setRequestHeader(
+                                    "Content-type",
+                                    "application/x-www-form-urlencoded"
+                                );
+                                xhrNif.send(`nifExistente=${nif.value}`);
+                                nifValidado = true;
+                             } else {
+                                nif.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgNif.setAttribute("class", "flex");
+                                msgNifExiste.setAttribute("class", "hidden");
+                    
+                                nifValidado = false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar el NIF: ${error}`);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">respuestaExisteNif()</p>
+                <small style="font-size: 0.8rem">Valida si existe en Nif</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function respuestaExisteNif() {
+                        try {
+                            if (xhrNif.readyState == 4 && xhrNif.status == 200) {
+                                let jsonNIF = xhrNif.responseText;
+                                console.log(jsonNIF)
+                                if (jsonNIF == "no existe") {
+                                    nif.setAttribute(
+                                        "class",
+                                        "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                    );
+                                    msgNifExiste.setAttribute("class", "hidden");
+                                    msgNif.setAttribute("class", "hidden");
+                                    nifExistenteBaseDatos = true;
+                                } else {
+                                    nif.setAttribute(
+                                        "class",
+                                        "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                    );
+                                    msgNifExiste.setAttribute("class", "flex");
+                                    msgNif.setAttribute("class", "hidden");
+                                    nifExistenteBaseDatos = false;
+                                }
+                            }
+                        } catch (error) {
+                            console.log(
+                                `No se ha obtenido respuesta de la existencia del NIF: ${error}`
+                            );
+                        }
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarCorreo()</p>
+                <small style="font-size: 0.8rem">Valida el correo</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarCorreo() {
+                        try {
+                            const expCorreo = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+                    
+                            if (expCorreo.test(correo.value) && correo.value.length <= 40) {
+                                xhrCorreo.onreadystatechange = respuestaExisteCorreo;
+                                xhrCorreo.open("POST", "../php/proveedores/registro_proveedor.php", true);
+                                xhrCorreo.setRequestHeader(
+                                    "Content-type",
+                                    "application/x-www-form-urlencoded"
+                                );
+                                xhrCorreo.send(`correoExistente=${correo.value}`);
+                    
+                                correoValidado = true;
+                            } else {
+                                correo.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgCorreo.setAttribute("class", "flex");
+                                msgCorreoExiste.setAttribute("class", "hidden");
+                    
+                                correoValidado = false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar el correo: ${error}`);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">respuestaExisteCorreo()</p>
+                <small style="font-size: 0.8rem">Valida si el correo ya existe</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function respuestaExisteCorreo() {
+                        try {
+                            if (xhrCorreo.readyState == 4 && xhrCorreo.status == 200) {
+                                let jsonCorreo = xhrCorreo.responseText;
+                    
+                                if (jsonCorreo === "no existe") {
+                                    correo.setAttribute(
+                                        "class",
+                                        "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                    );
+                                    msgCorreoExiste.setAttribute("class", "hidden");
+                                    msgCorreo.setAttribute("class", "hidden");
+                                    correoExistenteBaseDatos = true;
+                                } else {
+                                    correo.setAttribute(
+                                        "class",
+                                        "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                    );
+                                    msgCorreoExiste.setAttribute("class", "flex");
+                                    msgCorreo.setAttribute("class", "hidden");
+                                    correoExistenteBaseDatos = false;
+                                }
+                            }
+                        } catch (error) {
+                            console.log(
+                                `No se ha obtenido respuesta de la existencia del correo: ${error}`
+                            );
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarContrasena()</p>
+                <small style="font-size: 0.8rem">Valida la contraseña</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarContrasena() {
+                        try {
+                            const expContrasena =
+                                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$/;
+                    
+                            if (expContrasena.test(contrasena.value)) {
+                                contrasena.setAttribute(
+                                    "class",
+                                    "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgContrasena.setAttribute("class", "hidden");
+                                contrasenaValidada = true;
+                            } else {
+                                contrasena.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgContrasena.setAttribute("class", "flex");
+                                contrasenaValidada = false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar la contraseña: ${error}`);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarConfirmarContrasena()</p>
+                <small style="font-size: 0.8rem">Valida que la contraseña la ha escrito 2 veces</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarConfirmarContrasena() {
+                        try {
+                            const expContrasenaRep =
+                                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$/;
+                    
+                            if (
+                                contrasena.value === confirmarContrasena.value &&
+                                expContrasenaRep.test(confirmarContrasena.value)
+                            ) {
+                                confirmarContrasena.setAttribute(
+                                    "class",
+                                    "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgConfirmarContrasena.setAttribute("class", "hidden");
+                                confirmarContrasenaValidada = true;
+                            } else {
+                                confirmarContrasena.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgConfirmarContrasena.setAttribute("class", "flex");
+                                confirmarContrasenaValidada = false;
+                            }
+                        } catch (error) {
+                            console.log(
+                                `No se ha podido validar la confirmación de la contraseña: ${error}`
+                            );
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarTelefono()</p>
+                <small style="font-size: 0.8rem">Valida el teléfono</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarTelefono() {
+                        try {
+                            const expTelefono = /^(6|7|8|9)\d{8}$/;
+                    
+                            if (expTelefono.test(telefono.value)) {
+                                xhrTelefono.onreadystatechange = respuestaExisteTelefono;
+                                xhrTelefono.open("POST", "../php/proveedores/registro_proveedor.php", true);
+                                xhrTelefono.setRequestHeader(
+                                    "Content-type",
+                                    "application/x-www-form-urlencoded"
+                                );
+                                xhrTelefono.send(`telefonoExistente=${telefono.value}`);
+                    
+                                telefonoValidado = true;
+                            } else {
+                                telefono.setAttribute(
+                                    "class",
+                                    "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                );
+                                msgTelefono.setAttribute("class", "flex");
+                                msgTelefonoExiste.setAttribute("class", "hidden");
+                    
+                                telefonoValidado = false;
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar el teléfono: ${error}`);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">respuestaExisteTelefono()</p>
+                <small style="font-size: 0.8rem">Comprueba si el teléfono esta ya en la base de datos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function respuestaExisteTelefono() {
+                        try {
+                            if (xhrTelefono.readyState == 4 && xhrTelefono.status == 200) {
+                                let jsonTelefono = xhrTelefono.responseText;
+                    
+                                if (jsonTelefono === "no existe") {
+                                    telefono.setAttribute(
+                                        "class",
+                                        "rounded-md border border-green-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                    );
+                                    msgTelefonoExiste.setAttribute("class", "hidden");
+                                    msgTelefono.setAttribute("class", "hidden");
+                                    telefonoExistenteBaseDatos = true;
+                                } else {
+                                    telefono.setAttribute(
+                                        "class",
+                                        "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+                                    );
+                                    msgTelefonoExiste.setAttribute("class", "flex");
+                                    msgTelefono.setAttribute("class", "hidden");
+                                    telefonoExistenteBaseDatos = false;
+                                }
+                            }
+                        } catch (error) {
+                            console.log(
+                                `No se ha podido obtener la respuesta de la existencia del teléfono: ${error}`
+                            );
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">validarTerminos()</p>
+                <small style="font-size: 0.8rem">Comprueba si ha clicado la validacion de terminos</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function validarTerminos() {
+                        try {
+                            if (terminos.checked) {
+                                terminosValidados = true
+                                msgTerminos.setAttribute("class", "hidden");
+                            } else {
+                                terminosValidados = false
+                                msgTerminos.setAttribute("class", "flex");
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido validar los términos: ${error}`);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">peticionCrearUsuario()</p>
+                <small style="font-size: 0.8rem">Petición para crear el usuario</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function peticionCrearUsuario() {
+                        try {
+                    
+                            if (
+                                nifValidado == true &&
+                                nifExistenteBaseDatos == true &&
+                                razonSocialValidada == true &&
+                                direccionValidada == true &&
+                                telefonoValidado == true &&
+                                telefonoExistenteBaseDatos == true &&
+                                correoValidado == true &&
+                                correoExistenteBaseDatos == true &&
+                                contrasenaValidada == true &&
+                                confirmarContrasenaValidada == true &&
+                                terminosValidados == true
+                            ) {
+                                xhrNuevoUsuario.onreadystatechange = respuestaCrearUsuario;
+                                xhrNuevoUsuario.open("POST", "../php/proveedores/registro_proveedor.php", true);
+                                xhrNuevoUsuario.setRequestHeader(
+                                    "Content-type",
+                                    "application/x-www-form-urlencoded"
+                                );
+                                xhrNuevoUsuario.send(
+                                    `razonSocial=${razonSocial.value}&nif=${nif.value}&direccion=${direccion.value}&correo=${correo.value}&contrasena=${contrasena.value}&telefono=${telefono.value}`
+                                );
+                            }
+                        } catch (error) {
+                            console.log(`No se ha podido solicitar crear usuario: ${error}`);
+                        }
+                    }
+                    
+                </code>
+            </pre>
+        </section>
+        <section class="mb-5">
+            <div class="mb-3 ">
+                <p class="fw-bold mb-0">respuestaCrearUsuario()</p>
+                <small style="font-size: 0.8rem">Respuesta a la petición</small>
+            </div>
+            <pre class="bg-dark rounded text-light" style="font-size: 0.7rem;">
+                <code>
+                    function respuestaCrearUsuario() {
+                        try {
+                            if (xhrNuevoUsuario.readyState == 4 && xhrNuevoUsuario.status == 200) {
+                                let jsonCrearUsuario = xhrNuevoUsuario.responseText;
+                                console.log(jsonCrearUsuario)
+                                if (jsonCrearUsuario === "creado") {
+                                    localStorage.setItem("razonSocial", razonSocial.value);
+                                    localStorage.setItem("nif", nif.value);
+                                    localStorage.setItem("correo", correo.value);
+                                    localStorage.setItem("telefono", apellidos.value);
+                                    localStorage.setItem("direccion", direccion.value);
+                                    localStorage.setItem("tipoUsuario", "proveedor");
+                                    window.location.href = "../src/index.html";
+                                } else {
+                                    const errorCrear = document.getElementById("errorCrear");
+                                    errorCrear.setAttribute("class", "flex");
+                                }
+                            }
+                        } catch (error) {
+                            console.log(
+                                `No se ha podido obtener respuesta de la creación del usuario: ${error}`
+                            );
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+    </article>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+</html>

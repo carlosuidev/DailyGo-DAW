@@ -388,7 +388,6 @@ function cambiarCategoria() {
     }
     actualizarDatos("../../php/proveedores/actualizar_datos_proveedores.php", datos);
 
-
 }
 
 function cambiarRazsoc() {

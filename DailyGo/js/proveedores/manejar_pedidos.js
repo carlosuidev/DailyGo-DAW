@@ -230,4 +230,3 @@ function modificarEstado(idPedido, estado) {
             console.error("Error: No se ha podido crear la petición ->", error);
         });
 }
-
