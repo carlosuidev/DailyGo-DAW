@@ -19,17 +19,17 @@ const confirmarContrasena = document.getElementById("confirmarContrasena");
 const terminos = document.getElementById("terminos");
 
 // DATOS FORMULARIO
-let nifValidado
-let nifExistenteBaseDatos
-let razonSocialValidada
-let direccionValidada
-let telefonoValidado
-let telefonoExistenteBaseDatos
-let correoValidado
-let correoExistenteBaseDatos
-let contrasenaValidada
-let confirmarContrasenaValidada
-let terminosValidados
+let nifValidado = ''
+let nifExistenteBaseDatos = ''
+let razonSocialValidada = ''
+let direccionValidada = ''
+let telefonoValidado = ''
+let telefonoExistenteBaseDatos = ''
+let correoValidado = ''
+let correoExistenteBaseDatos = ''
+let contrasenaValidada = ''
+let confirmarContrasenaValidada = ''
+let terminosValidados = ''
 
 // ALERTAS FORMULARIO
 const msgCorreo = document.getElementById("msgCorreo");
@@ -391,6 +391,49 @@ function peticionCrearUsuario() {
             xhrNuevoUsuario.send(
                 `razonSocial=${razonSocial.value}&nif=${nif.value}&direccion=${direccion.value}&correo=${correo.value}&contrasena=${contrasena.value}&telefono=${telefono.value}`
             );
+        } if (nifValidado == '') {
+            nif.setAttribute(
+                "class",
+                "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+            );
+            msgNif.setAttribute("class", "flex");
+            msgNifExiste.setAttribute("class", "hidden");
+        }
+        if (razonSocialValidada == '') {
+            razonSocial.setAttribute(
+                "class",
+                "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+            );
+            msgRazonSocial.setAttribute("class", "flex");
+        }
+        if (direccionValidada == '') {
+            direccion.setAttribute(
+                "class",
+                "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+            );
+            msgDireccion.setAttribute("class", "flex");
+        } if (telefonoValidado == '') {
+            telefono.setAttribute(
+                "class",
+                "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+            );
+            msgTelefono.setAttribute("class", "flex");
+            msgTelefonoExiste.setAttribute("class", "hidden");
+        } if (correoValidado == '') {
+            correo.setAttribute(
+                "class",
+                "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+            );
+            msgCorreo.setAttribute("class", "flex");
+            msgCorreoExiste.setAttribute("class", "hidden");
+        } if (contrasenaValidada == '') {
+            contrasena.setAttribute(
+                "class",
+                "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+            );
+            msgContrasena.setAttribute("class", "flex");
+        } if (terminosValidados == '') {
+            msgTerminos.setAttribute("class", "flex");
         }
     } catch (error) {
         console.log(`No se ha podido solicitar crear usuario: ${error}`);
@@ -414,7 +457,7 @@ function respuestaCrearUsuario() {
                 const errorCrear = document.getElementById("errorCrear");
                 errorCrear.setAttribute("class", "flex");
             }
-        }
+        } 
     } catch (error) {
         console.log(
             `No se ha podido obtener respuesta de la creación del usuario: ${error}`

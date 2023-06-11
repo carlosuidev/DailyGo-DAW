@@ -58,7 +58,7 @@ btnEnviar.onclick = function () {
 
 function validarAsunto() {
     try {
-        const expAsunto = /^[\wñÑÁáÉéÍíÓóÚú.,:;"'¡¿\s]{10,50}$/i;
+        const expAsunto = /^[\wñÑÁáÉéÍíÓóÚú.,:;"'¡¿\s]{5,50}$/i;
         const msgAsunto = document.getElementById("msgAsunto");
         if (expAsunto.test(asunto.value)) {
             asunto.setAttribute(

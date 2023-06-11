@@ -13,14 +13,14 @@ const confirmarContrasena = document.getElementById("confirmarContrasena");
 const terminos = document.getElementById("terminos");
 
 //RESPUESTAS 
-let correoComprobadoBaseDatos
-let correoValidado
-let contraValidada
-let nombreValidado
-let apellidoValidado
-let telefonoValidado
-let telefonoComprobadoBaseDatos
-let terminosValidados
+let correoComprobadoBaseDatos = ''
+let correoValidado = ''
+let contraValidada = ''
+let nombreValidado = ''
+let apellidoValidado = ''
+let telefonoValidado = ''
+let telefonoComprobadoBaseDatos = ''
+let terminosValidados = ''
 
 // ALERTAS FORMULARIO
 const msgCorreo = document.getElementById("msgCorreo");
@@ -302,7 +302,7 @@ function peticionCrearUsuario() {
             nombreValidado == true &&
             apellidoValidado == true &&
             telefonoValidado == true &&
-            telefonoComprobadoBaseDatos == true  &&
+            telefonoComprobadoBaseDatos == true &&
             terminosValidados == true
         ) {
             xhrNuevoUsuario.onreadystatechange = respuestaCrearUsuario;
@@ -314,6 +314,39 @@ function peticionCrearUsuario() {
             xhrNuevoUsuario.send(
                 `nombre=${nombre.value}&apellidos=${apellidos.value}&correo=${correo.value}&contrasena=${contrasena.value}&telefono=${telefono.value}`
             );
+        }
+        if (correoValidado == '') {
+            msgCorreo.setAttribute("class", "flex");
+            msgCorreoExiste.setAttribute("class", "hidden");
+        }
+        if (contraValidada == '') {
+            contrasena.setAttribute(
+                "class",
+                "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+            );
+            msgContrasena.setAttribute("class", "flex");
+        }
+        if (nombreValidado == '') {
+            nombre.setAttribute(
+                "class",
+                "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+            );
+            msgNombre.setAttribute("class", "flex");
+        } if (apellidoValidado == '') {
+            apellidos.setAttribute(
+                "class",
+                "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+            );
+            msgApellidos.setAttribute("class", "flex");
+        } if (telefonoValidado == '') {
+            telefono.setAttribute(
+                "class",
+                "rounded-md border border-red-500 p-2 bg-blue-100/10 focus:bg-blue-100/30 duration-300"
+            );
+            msgTelefono.setAttribute("class", "flex");
+            msgTelefonoExiste.setAttribute("class", "hidden");
+        } if (terminosValidados == '') {
+            msgTerminos.setAttribute("class", "flex");
         }
     } catch (error) {
         console.log(`No se ha podido solicitar crear usuario: ${error}`);
